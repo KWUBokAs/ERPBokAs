@@ -13,5 +13,10 @@ namespace WindowsFormsApp1 {
         public Form1() {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e) {
+            Console.Write("Hello, World!");
+            this.label1.Text = "Hello, World!";
+        }
     }
 }
