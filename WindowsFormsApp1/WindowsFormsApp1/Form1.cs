@@ -18,5 +18,12 @@ namespace WindowsFormsApp1 {
             Console.Write("Hello, World!");
             this.label1.Text = "Hello, World!";
         }
+
+        private void bookSearchPage_Click(object sender, EventArgs e)
+        {
+            this.Visible = false;
+            Form showForm = new bookSearchPage();
+            showForm.ShowDialog();
+        }
     }
 }
