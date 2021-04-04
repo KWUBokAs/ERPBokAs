@@ -22,13 +22,35 @@ namespace WindowsFormsApp1.MEMBER
         private string e_mail;
         private string phoneNumber;//-는 제거한 순수한 휴대폰 번호
         private PERM permission;
-        public BaseMember(string id, string name, string e_mail, string phoneNum, PERM permission)
+        
+        protected BaseMember(string id, string name, string e_mail, string phoneNum, PERM permission)
         {
             ID = id;
             Name = name;
             Email = e_mail;
             PhoneNumber = phoneNum;
             this.permission = permission;
+        }
+        //로그인 함수(static)에 의하여 생성자를 호출하도록하겠다. 다시말해 로그인을 성공해야 member를 생성해주겠다
+        protected BaseMember(string id = null)
+        {
+            ID = id;
+        }
+        public static BaseMember Login(string id=null, string pw=null)
+        {
+            if (id == null)
+            {
+                return new BaseMember("Anonymous", "Anonymous", "none", "00000000000", PERM.ANONY_USR);
+            }
+            else
+            {
+                return ReadDatabase(id, pw);
+            }
+        }
+        private static BaseMember ReadDatabase(string id, string pw)
+        {
+            //차후에 DB와 연동하여 member를 생성하는 함수로 만들겠음
+            return new BaseMember(id, id, "none", "00000000000", PERM.BOOK_ADMIN | PERM.MEET_ADMIN | PERM.READ_ADMIN);
         }
         public string ID
         {
@@ -57,13 +79,17 @@ namespace WindowsFormsApp1.MEMBER
         {
             get { return ((permission & PERM.ANONY_USR) == PERM.ANONY_USR); }
         }
+        public PERM Permission
+        {
+            get { return permission; }
+        }
         /// <summary>
         /// get : book_admin 이라면 1 / 일반사용자면 0을 반환한다.
         /// </summary>
         protected bool PermBook
         {
             get { return ((permission & PERM.BOOK_ADMIN) == PERM.BOOK_ADMIN); }
-            private set { if (value) permission = (PERM)((int)permission + (int)PERM.BOOK_ADMIN); }
+            set { if (value) permission = (PERM)((int)permission + (int)PERM.BOOK_ADMIN); }
         }
         /// <summary>
         /// get : meeting room admin 이라면 1 / 일반사용자면 0을 반환한다.
@@ -71,7 +97,7 @@ namespace WindowsFormsApp1.MEMBER
         protected bool PermMeetingRoom
         {
             get { return ((permission & PERM.MEET_ADMIN) == PERM.MEET_ADMIN); }
-            private set { if (value) permission = (PERM)((int)permission + (int)PERM.MEET_ADMIN); }
+            set { if (value) permission = (PERM)((int)permission + (int)PERM.MEET_ADMIN); }
         }
         /// <summary>
         /// get : readding room admin 이라면 1 / 일반사용자면 0을 반환한다.
@@ -79,7 +105,7 @@ namespace WindowsFormsApp1.MEMBER
         protected bool PermReadingRoom
         {
             get { return ((permission & PERM.READ_ADMIN) == PERM.READ_ADMIN); }
-            private set { if (value) permission = (PERM)((int)permission + (int)PERM.READ_ADMIN); }
+            set { if (value) permission = (PERM)((int)permission + (int)PERM.READ_ADMIN); }
         }
 
         // 테스트 함수
