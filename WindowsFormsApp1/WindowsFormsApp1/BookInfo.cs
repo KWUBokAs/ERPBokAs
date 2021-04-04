@@ -6,32 +6,33 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApp1
 {
-    class BookInfo
+    class BookInfo : BOOK.BaseBook
     {
         public BookInfo(string _title = "", string _author = "", string _creator = "", string _publisher = "", string _location = "", string _requestNumber = "")
+            :base(_title, _requestNumber,null)
         {
             //this.publicationDate = _publicationDate;
-            this.title = _title;
+            //this.title = _title;
             this.author = _author;
             this.creator = _creator;
             this.publisher = _publisher;
             this.location = _location;
-            this.requestNumber = _requestNumber;
+            //this.requestNumber = _requestNumber;
         }
 
-        public string Title
-        {
-            get { return this.title; }
-        }
+       // public string Title
+       // {
+       //     get { return this.title; }
+       // }
         // 일단 표시만 가능하도록
         // 검색하면 출력하는 부분
-        private string title;
+        //private string title;
         private string author;
         private string creator;
         private string publisher;
         private DateTime publicationDate;
         private string location;
-        private string requestNumber;
+        //private string requestNumber;
         // loanStatus
         // 책 이미지 => 어떻게 처리하지?
         // 여기까지
@@ -43,7 +44,7 @@ namespace WindowsFormsApp1
 
         public bool findBook(string input) // 나중에수정
         {
-            return this.title.Contains(input);
+            return this.Title.Contains(input);
         }
     }
 }

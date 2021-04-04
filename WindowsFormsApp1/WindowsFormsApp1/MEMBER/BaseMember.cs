@@ -17,12 +17,9 @@ namespace WindowsFormsApp1.MEMBER
     };
     class BaseMember
     {
-        private string id;//회원 ID = 학번
-        private string name;//회원이름
-        private string e_mail;
-        private string phoneNumber;//-는 제거한 순수한 휴대폰 번호
-        private PERM permission;
-        
+        /// <summary>
+        /// constructor
+        /// </summary>
         protected BaseMember(string id, string name, string e_mail, string phoneNum, PERM permission)
         {
             ID = id;
@@ -47,11 +44,17 @@ namespace WindowsFormsApp1.MEMBER
                 return ReadDatabase(id, pw);
             }
         }
+        /// <summary>
+        /// 
+        /// </summary>
         private static BaseMember ReadDatabase(string id, string pw)
         {
             //차후에 DB와 연동하여 member를 생성하는 함수로 만들겠음
             return new BaseMember(id, id, "none", "00000000000", PERM.BOOK_ADMIN | PERM.MEET_ADMIN | PERM.READ_ADMIN);
         }
+        /// <summary>
+        /// properties
+        /// </summary>
         public string ID
         {
             get { return id; }
@@ -83,30 +86,30 @@ namespace WindowsFormsApp1.MEMBER
         {
             get { return permission; }
         }
-        /// <summary>
-        /// get : book_admin 이라면 1 / 일반사용자면 0을 반환한다.
-        /// </summary>
         protected bool PermBook
         {
             get { return ((permission & PERM.BOOK_ADMIN) == PERM.BOOK_ADMIN); }
             set { if (value) permission = (PERM)((int)permission + (int)PERM.BOOK_ADMIN); }
         }
-        /// <summary>
-        /// get : meeting room admin 이라면 1 / 일반사용자면 0을 반환한다.
-        /// </summary>
         protected bool PermMeetingRoom
         {
             get { return ((permission & PERM.MEET_ADMIN) == PERM.MEET_ADMIN); }
             set { if (value) permission = (PERM)((int)permission + (int)PERM.MEET_ADMIN); }
         }
-        /// <summary>
-        /// get : readding room admin 이라면 1 / 일반사용자면 0을 반환한다.
-        /// </summary>
         protected bool PermReadingRoom
         {
             get { return ((permission & PERM.READ_ADMIN) == PERM.READ_ADMIN); }
             set { if (value) permission = (PERM)((int)permission + (int)PERM.READ_ADMIN); }
         }
+
+        /// <summary>
+        /// field
+        /// </summary>
+        private string id;//회원 ID = 학번
+        private string name;//회원이름
+        private string e_mail;
+        private string phoneNumber;//-는 제거한 순수한 휴대폰 번호
+        private PERM permission;
 
         // 테스트 함수
         public virtual void PrintData()
