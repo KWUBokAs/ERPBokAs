@@ -31,6 +31,7 @@ namespace WindowsFormsApp1
         {
             this.bookSearchBox = new System.Windows.Forms.TextBox();
             this.lvwBookInfo = new System.Windows.Forms.ListView();
+            this.btnMainPage = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // bookSearchBox
@@ -58,11 +59,22 @@ namespace WindowsFormsApp1
             this.lvwBookInfo.Columns.Add("자료위치");
             this.lvwBookInfo.Columns.Add("청구번호");
             // 
+            // btnMainPage
+            // 
+            this.btnMainPage.Location = new System.Drawing.Point(597, 109);
+            this.btnMainPage.Name = "btnMainPage";
+            this.btnMainPage.Size = new System.Drawing.Size(106, 55);
+            this.btnMainPage.TabIndex = 2;
+            this.btnMainPage.Text = "메인페이지로";
+            this.btnMainPage.UseVisualStyleBackColor = true;
+            this.btnMainPage.Click += mainPage_Click;
+            // 
             // bookSearchPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnMainPage);
             this.Controls.Add(this.lvwBookInfo);
             this.Controls.Add(this.bookSearchBox);
             this.Name = "bookSearchPage";
@@ -76,5 +88,6 @@ namespace WindowsFormsApp1
 
         private System.Windows.Forms.TextBox bookSearchBox;
         private System.Windows.Forms.ListView lvwBookInfo;
+        private System.Windows.Forms.Button btnMainPage;
     }
 }

@@ -48,5 +48,11 @@ namespace WindowsFormsApp1
                     Console.WriteLine("Title : {0}", b.Title);
             }
         }
+        private void mainPage_Click(object sender, EventArgs e)
+        {
+            this.Visible = false;
+            Form showForm = new Form1();
+            showForm.ShowDialog();
+        }
     }
 }
