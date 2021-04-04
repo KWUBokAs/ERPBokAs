@@ -25,5 +25,11 @@ namespace WindowsFormsApp1 {
             Form showForm = new bookSearchPage();
             showForm.ShowDialog();
         }
+        private void superUserPage_Click(object sender, EventArgs e)
+        {
+            this.Visible = false;
+            Form showForm = new superUserPage();
+            showForm.ShowDialog();
+        }
     }
 }

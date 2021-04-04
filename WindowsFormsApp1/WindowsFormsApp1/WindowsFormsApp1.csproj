@@ -59,6 +59,12 @@
     <Compile Include="bookSearch.Designer.cs">
       <DependentUpon>bookSearch.cs</DependentUpon>
     </Compile>
+    <Compile Include="superUserPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="superUserPage.Designer.cs">
+      <DependentUpon>superUserPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -66,6 +72,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="bookSearch.resx">
       <DependentUpon>bookSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="superUserPage.resx">
+      <DependentUpon>superUserPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
