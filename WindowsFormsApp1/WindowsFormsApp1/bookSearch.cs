@@ -12,8 +12,8 @@ namespace WindowsFormsApp1
 {
     public partial class bookSearchPage : Form
     {
-        List<BookInfo> bookInfoList = new List<BookInfo>();
-        List<BookInfo> searchRes = new List<BookInfo>();
+        List<BOOK.BookInfo> bookInfoList = new List<BOOK.BookInfo>();
+        List<BOOK.BookInfo> searchRes = new List<BOOK.BookInfo>();
         public bookSearchPage()
         {
             InitializeComponent();
@@ -22,13 +22,13 @@ namespace WindowsFormsApp1
             // getBookInfo를 대신한 Hard Coding
 
             for (int i = 0; i < 30; i++)
-                bookInfoList.Add(new BookInfo(i.ToString()));
+                bookInfoList.Add(new BOOK.BookInfo(i.ToString()));
         }
         // 리스트 형식을 return 해서 copy to 하던가
         // 배열 형식을 return해서 for문 돌면서 Add()하던가
-        private BookInfo[] getBookInfo()
+        private BOOK.BookInfo[] getBookInfo()
         {
-            BookInfo[] bookInfoList = null; // 백엔드에 요청
+            BOOK.BookInfo[] bookInfoList = null; // 백엔드에 요청
             return bookInfoList;
         }
         // 검색창에 텍스트를 칠때마다 실행
@@ -43,7 +43,7 @@ namespace WindowsFormsApp1
             {
                 this.lvwBookInfo.Clear();
                 var lvwItem = new ListViewItem(new string[lvwBookInfo.Columns.Count]);
-                foreach (BookInfo b in searchRes)
+                foreach (BOOK.BookInfo b in searchRes)
                     // list view에 띄워야하는데 너무 귀찮아서 일단 콘솔출력, 올바르게 검색한것만 나옴
                     Console.WriteLine("Title : {0}", b.Title);
             }

@@ -96,7 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BACK\SQLObject.cs" />
-    <Compile Include="BookInfo.cs" />
+    <Compile Include="BOOK\BookInfo.cs" />
     <Compile Include="BOOK\BaseBook.cs" />
     <Compile Include="BOOK\RentBook.cs" />
     <Compile Include="Form1.cs">
@@ -148,8 +148,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="BACK\" />
-    <Folder Include="BOOK\" />
     <Folder Include="CHAIR\" />
     <Folder Include="MEMBER\.vs\MEMBER\v16\" />
     <Folder Include="ROOM\" />
