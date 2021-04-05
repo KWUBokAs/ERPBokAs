@@ -96,17 +96,30 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BACK\SQLObject.cs" />
+    <Compile Include="BookInfo.cs" />
+    <Compile Include="BOOK\BaseBook.cs" />
+    <Compile Include="BOOK\RentBook.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="bookSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="bookSearch.Designer.cs">
+      <DependentUpon>bookSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MEMBER\.vs\BookMember.cs" />
     <Compile Include="MEMBER\BaseMember.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="bookSearch.resx">
+      <DependentUpon>bookSearch.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -135,6 +148,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="BACK\" />
     <Folder Include="BOOK\" />
     <Folder Include="CHAIR\" />
     <Folder Include="MEMBER\.vs\MEMBER\v16\" />
