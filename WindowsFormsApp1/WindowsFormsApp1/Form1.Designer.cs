@@ -25,8 +25,6 @@
         private void InitializeComponent() {
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnBookSearchPage = new System.Windows.Forms.Button();
-            this.btnSuperUserPage = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -48,33 +46,11 @@
             this.label1.TabIndex = 1;
             this.label1.Text = " ";
             // 
-            // btnBookSearchPage
-            // 
-            this.btnBookSearchPage.Location = new System.Drawing.Point(137, 98);
-            this.btnBookSearchPage.Name = "btnBookSearchPage";
-            this.btnBookSearchPage.Size = new System.Drawing.Size(115, 23);
-            this.btnBookSearchPage.TabIndex = 2;
-            this.btnBookSearchPage.Text = "검색페이지로";
-            this.btnBookSearchPage.UseVisualStyleBackColor = true;
-            this.btnBookSearchPage.Click += new System.EventHandler(this.bookSearchPage_Click);
-            // 
-            // btnSuperUserPage
-            // 
-            this.btnSuperUserPage.Location = new System.Drawing.Point(138, 155);
-            this.btnSuperUserPage.Name = "btnSuperUserPage";
-            this.btnSuperUserPage.Size = new System.Drawing.Size(113, 19);
-            this.btnSuperUserPage.TabIndex = 3;
-            this.btnSuperUserPage.Text = "사서페이지로";
-            this.btnSuperUserPage.UseVisualStyleBackColor = true;
-            this.btnSuperUserPage.Click += superUserPage_Click;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.btnSuperUserPage);
-            this.Controls.Add(this.btnBookSearchPage);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
             this.Name = "Form1";
@@ -88,8 +64,6 @@
 
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnBookSearchPage;
-        private System.Windows.Forms.Button btnSuperUserPage;
     }
 }
 
