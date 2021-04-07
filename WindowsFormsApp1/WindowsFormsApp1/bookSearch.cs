@@ -1,58 +1,43 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
+using System.Data.Sql; // 어떤것 사용?
 
 namespace WindowsFormsApp1
 {
-    public partial class bookSearchPage : Form
+    class BookSearch
     {
-        List<BookInfo> bookInfoList = new List<BookInfo>();
-        List<BookInfo> searchRes = new List<BookInfo>();
-        public bookSearchPage()
-        {
-            InitializeComponent();
-            // page 처음 들어왔을 때만 백엔드에서 모든 책의 정보를 가져옴
-            // bookInfoList = getBookInfo();
-            // getBookInfo를 대신한 Hard Coding
+        //필요한가..?
+        //private List<BookInfo> bookInfoList = new List<BookInfo>();
+        //private BookInfo searchInfo;
 
-            for (int i = 0; i < 30; i++)
-                bookInfoList.Add(new BookInfo(i.ToString()));
-        }
-        // 리스트 형식을 return 해서 copy to 하던가
-        // 배열 형식을 return해서 for문 돌면서 Add()하던가
-        private BookInfo[] getBookInfo()
+        //public BookSearch(BookInfo _searchInfo)
+        //{
+        //    this.searchInfo = _searchInfo;
+        //}
+
+
+        // 각 화면에서 [버튼 클릭]이벤트가 발생했을 때, 검색이 필요하면 한번 실행
+        public List<BookInfo> Search(BookInfo bi)
         {
-            BookInfo[] bookInfoList = null; // 백엔드에 요청
+            List<BookInfo> bookInfoList = new List<BookInfo>();
+            // 실행시 DB에 BookInfo에 입력된 정보를 기반으로 검색
+            // DB get
+            // ex) getManyBookInfo => 이 방식이 아닌가? 웹만 해봤다보니...
+            //SqlConnection conn = new SqlConnection();
+            //conn.ConnectionString = "~~";
+            //SqlCommand cmd = new SqlCommand()
+            //cmd.Connection = conn
+
+            //cmd.CommandText = "~~"; --> 이 부분이 bookInfo에 있는 정보 확인해야하는 부분
+            //필수적인 정보가 없다면 여기서 return; 해주고
+            //필수적인 정보가 있다면 있는 정보만으로 query문을 만들어서 보냄
+            //받아온 json 정보를 List<BookInfo>에 넣어서 리턴 
+            //if문 사용
+
             return bookInfoList;
-        }
-        // 검색창에 텍스트를 칠때마다 실행
-        private void searchBoxChanged(object sender, EventArgs e)
-        {
-            string input = this.bookSearchBox.Text;
-            // 페이지 들어올때 가져왔던 BookInfo 배열 중에서 검색 내용과 일치하는것들을 찾음
-            searchRes.Clear();
-            searchRes = bookInfoList.FindAll(b => b.findBook(input));
-
-            if (searchRes != null)
-            {
-                this.lvwBookInfo.Clear();
-                var lvwItem = new ListViewItem(new string[lvwBookInfo.Columns.Count]);
-                foreach (BookInfo b in searchRes)
-                    // list view에 띄워야하는데 너무 귀찮아서 일단 콘솔출력, 올바르게 검색한것만 나옴
-                    Console.WriteLine("Title : {0}", b.Title);
-            }
-        }
-        private void mainPage_Click(object sender, EventArgs e)
-        {
-            this.Visible = false;
-            Form showForm = new Form1();
-            showForm.ShowDialog();
         }
     }
 }
