@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
 using MySql.Data.MySqlClient;
-
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json.Schema;
 
 namespace WindowsFormsApp1.BACK {
     class SQLObject {
         public Dictionary<String, String> param { get; protected set; }
-        
+        public JObject jobject;
         public string query { get; protected set; }
         public SQLObject() {
             param = new Dictionary<string, string>();
@@ -25,8 +28,12 @@ namespace WindowsFormsApp1.BACK {
                     con.Open();
                     MySqlCommand cmd = new MySqlCommand(query, con);
                     MySqlDataReader table = cmd.ExecuteReader();
+                    
                     while (table.Read()) {
-                        Console.WriteLine("{0} {1}", table["NAME"], table["SCORE"]);
+                        Console.WriteLine("Reader [0]: " + table[0].ToString());
+                        Console.WriteLine("Reader [1]: " + table[1].ToString());
+                        Console.WriteLine("Reader [2]: " + table[2].ToString());
+                        Console.WriteLine("Reader [3]: " + table[3].ToString());
                     }
                     table.Close();
                 }
@@ -65,7 +72,8 @@ namespace WindowsFormsApp1.BACK {
     class DeleteSQL : SQLObject {
 
     }
-    class SQLCon {
+
+    class SQLJson {
 
     }
 }
