@@ -25,12 +25,5 @@ namespace WindowsFormsApp1 {
             this.label2.Text = "Done!";
 
         }
-
-        private void bookSearchPage_Click(object sender, EventArgs e)
-        {
-            this.Visible = false;
-            Form showForm = new bookSearchPage();
-            showForm.ShowDialog();
-        }
     }
 }

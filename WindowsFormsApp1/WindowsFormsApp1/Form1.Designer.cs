@@ -27,7 +27,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.bookSearchPage = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -68,23 +67,11 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "label2";
             // 
-            // bookSearchPage
-            // 
-            this.bookSearchPage.Location = new System.Drawing.Point(371, 29);
-            this.bookSearchPage.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.bookSearchPage.Name = "bookSearchPage";
-            this.bookSearchPage.Size = new System.Drawing.Size(131, 29);
-            this.bookSearchPage.TabIndex = 2;
-            this.bookSearchPage.Text = "검색페이지로";
-            this.bookSearchPage.UseVisualStyleBackColor = true;
-            this.bookSearchPage.Click += new System.EventHandler(this.bookSearchPage_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(914, 562);
-            this.Controls.Add(this.bookSearchPage);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.label1);
@@ -101,7 +88,6 @@
 
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button bookSearchPage;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Label label2;
     }
