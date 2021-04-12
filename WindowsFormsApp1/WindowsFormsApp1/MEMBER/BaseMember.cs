@@ -6,21 +6,21 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApp1.MEMBER
 {
-    [Flags]
-    public enum PERM : short
+    public class BaseMember : IMember
     {
-        ANONY_USR=0,
-        NOMAL_USR=1,
-        BOOK_ADMIN=2,
-        READ_ADMIN=4,
-        MEET_ADMIN=8
-    };
-    class BaseMember
-    {
+        [Flags]
+        public enum PERM : short
+        {
+            ANONY_USR = 0,
+            NOMAL_USR = 1,
+            BOOK_ADMIN = 2,
+            READ_ADMIN = 4,
+            MEET_ADMIN = 8
+        };
         /// <summary>
-        /// constructor
+        /// 싱글톤 constructor
         /// </summary>
-        protected BaseMember(string id, string name, string e_mail, string phoneNum, PERM permission)
+        private BaseMember(string id = "Anonymous", string name = "Anonymous", string e_mail = null, string phoneNum = null, PERM permission = PERM.ANONY_USR)
         {
             ID = id;
             Name = name;
@@ -28,29 +28,25 @@ namespace WindowsFormsApp1.MEMBER
             PhoneNumber = phoneNum;
             this.permission = permission;
         }
-        //로그인 함수(static)에 의하여 생성자를 호출하도록하겠다. 다시말해 로그인을 성공해야 member를 생성해주겠다
-        protected BaseMember(string id = null)
+        public void Logout()
         {
-            ID = id;
+            ID = "Anonymous";
+            Name = "Anonymous";
+            Email = null;
+            PhoneNumber = null;
+            this.permission = PERM.ANONY_USR;
         }
-        public static BaseMember Login(string id=null, string pw=null)
+        public void ReadDatabase()
         {
-            if (id == null)
-            {
-                return new BaseMember("Anonymous", "Anonymous", "none", "00000000000", PERM.ANONY_USR);
-            }
-            else
-            {
-                return ReadDatabase(id, pw);
-            }
+            throw new NotImplementedException();
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        private static BaseMember ReadDatabase(string id, string pw)
+        public BaseMember GetBaseMember()
         {
-            //차후에 DB와 연동하여 member를 생성하는 함수로 만들겠음
-            return new BaseMember(id, id, "none", "00000000000", PERM.BOOK_ADMIN | PERM.MEET_ADMIN | PERM.READ_ADMIN);
+            if(baseMember == null)
+            {
+                baseMember = new BaseMember();
+            }
+            return baseMember;
         }
         /// <summary>
         /// properties
@@ -78,7 +74,7 @@ namespace WindowsFormsApp1.MEMBER
         /// <summary>
         /// get : 로그인한 경우 1 / 로그아웃인 경우 0
         /// </summary>
-        protected bool IsLogin
+        public bool IsLogin
         {
             get { return ((permission & PERM.ANONY_USR) == PERM.ANONY_USR); }
         }
@@ -86,20 +82,20 @@ namespace WindowsFormsApp1.MEMBER
         {
             get { return permission; }
         }
-        protected bool PermBook
+        public bool PermBook
         {
             get { return ((permission & PERM.BOOK_ADMIN) == PERM.BOOK_ADMIN); }
-            set { if (value) permission = (PERM)((int)permission + (int)PERM.BOOK_ADMIN); }
+            private set { if (value) permission = (PERM)((int)permission + (int)PERM.BOOK_ADMIN); }
         }
-        protected bool PermMeetingRoom
+        public bool PermMeetingRoom
         {
             get { return ((permission & PERM.MEET_ADMIN) == PERM.MEET_ADMIN); }
-            set { if (value) permission = (PERM)((int)permission + (int)PERM.MEET_ADMIN); }
+            private set { if (value) permission = (PERM)((int)permission + (int)PERM.MEET_ADMIN); }
         }
-        protected bool PermReadingRoom
+        public bool PermReadingRoom
         {
             get { return ((permission & PERM.READ_ADMIN) == PERM.READ_ADMIN); }
-            set { if (value) permission = (PERM)((int)permission + (int)PERM.READ_ADMIN); }
+            private set { if (value) permission = (PERM)((int)permission + (int)PERM.READ_ADMIN); }
         }
 
         /// <summary>
@@ -110,6 +106,7 @@ namespace WindowsFormsApp1.MEMBER
         private string e_mail;
         private string phoneNumber;//-는 제거한 순수한 휴대폰 번호
         private PERM permission;
+        private static BaseMember baseMember= null;
 
         // 테스트 함수
         public virtual void PrintData()
@@ -133,5 +130,7 @@ namespace WindowsFormsApp1.MEMBER
             if (PermMeetingRoom) Console.WriteLine("관리사용자");
             else Console.WriteLine("일반사용자");
         }
+
+        
     }
 }
