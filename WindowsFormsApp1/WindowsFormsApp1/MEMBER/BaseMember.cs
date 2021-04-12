@@ -40,7 +40,7 @@ namespace WindowsFormsApp1.MEMBER
         {
             throw new NotImplementedException();
         }
-        public BaseMember GetBaseMember()
+        public static BaseMember GetBaseMember()
         {
             if(baseMember == null)
             {
