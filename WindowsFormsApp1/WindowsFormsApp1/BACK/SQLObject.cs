@@ -15,26 +15,29 @@ namespace WindowsFormsApp1.BACK {
     class SQLObject {
         // value가 string이 아닌 자료형이면 어떻게 받을까요?
         public Dictionary<String, String> param { get; protected set; }
-        public JObject jobject;
+        public JArray jArray;
         public string query { get; protected set; }
         public SQLObject() {
             param = new Dictionary<string, string>();
+            jArray = new JArray();
         }
         public virtual void Go() {
             ReplaceParam();
             if (String.IsNullOrEmpty(query))
                 return;
-            using(MySqlConnection con = new MySqlConnection("Server=mam675.synology.me;Port=3307;Database=HotelDangDang;Uid=kwUSS;Pwd=klas.kw.ac.kr;")) {
+            using(MySqlConnection con = new MySqlConnection("Server=mam675.synology.me;Port=3307;Database=kwUSS;Uid=kwUSS;Pwd=klas.kw.ac.kr;")) {
                 try {
                     con.Open();
                     MySqlCommand cmd = new MySqlCommand(query, con);
                     MySqlDataReader table = cmd.ExecuteReader();
-                    
+                    Console.WriteLine("Read Complete");
                     while (table.Read()) {
-                        Console.WriteLine("Reader [0]: " + table[0].ToString());
-                        Console.WriteLine("Reader [1]: " + table[1].ToString());
-                        Console.WriteLine("Reader [2]: " + table[2].ToString());
-                        Console.WriteLine("Reader [3]: " + table[3].ToString());
+                        JObject mObj = new JObject();
+                        for (int i =0; i<table.FieldCount; i++) {
+                            Console.WriteLine(table.GetName(i)+": "+table[i].ToString());
+                            mObj.Add(table.GetName(i).ToString(), table[i].ToString());
+                        }
+                        jArray.Add(mObj);
                     }
                     table.Close();
                 }
@@ -42,6 +45,8 @@ namespace WindowsFormsApp1.BACK {
                     Console.WriteLine("Fail Error: " + e.ToString());
                 }
             }
+            Console.WriteLine("JSON COMPELTE");
+            Console.WriteLine("JSON TO STRING: "+jArray.ToString());
         }
         public void AddParam(string key, string value) {
             param.Add(key, value);

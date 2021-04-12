@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFormsApp1.BACK;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 namespace WindowsFormsApp1 {
     public partial class Form1 : Form {
         SQLObject mysqlObj;
@@ -22,6 +24,9 @@ namespace WindowsFormsApp1 {
                 return;
             mysqlObj.setQuery(this.richTextBox1.Text);
             mysqlObj.Go();
+            DataTable dataTable = JsonConvert.DeserializeObject<DataTable>(mysqlObj.jArray.ToString());
+            dataTable.TableName = "Test Table";
+            dataGridView1.DataSource = dataTable;
             this.label2.Text = "Done!";
 
         }
