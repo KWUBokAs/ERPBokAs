@@ -113,6 +113,8 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="MEMBER\BaseMember.cs" />
+    <Compile Include="MEMBER\IMember.cs" />
+    <Compile Include="MEMBER\MemberList.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
