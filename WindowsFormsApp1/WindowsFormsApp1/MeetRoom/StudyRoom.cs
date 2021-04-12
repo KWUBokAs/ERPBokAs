@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 
 namespace WindowsFormapp1.ROOM
-{   class Studyroom//열람실에 대한 클래스(외부클래스)
+{
+    class Studyroom//열람실에 대한 클래스(외부클래스)
     {
         List<Rooms> listSr = new List<Rooms>();
 
@@ -53,5 +54,23 @@ namespace WindowsFormapp1.ROOM
             { return used; }
         }
 
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Studyroom study = new Studyroom();
+            for (int i = 1; i < 150; i++)//150개 좌석을 입력
+            {
+                study.SetRoom(i, true);
+                //true > 여석 / false > 사용중
+            }
+            Console.WriteLine(study.GetRoomInfo(1));
+            Console.WriteLine(study.GetRoomInfo(2));
+
+            study.SetRoom(2, false);
+            Console.WriteLine(study.GetRoomInfo(2));
+            Console.WriteLine("현재 여석의 수는 {0}입니다.", study.CountRoom(true));
+        }
     }
 }
