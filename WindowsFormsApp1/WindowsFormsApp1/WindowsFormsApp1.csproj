@@ -112,6 +112,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="MeetRoom\StudyRoom.cs" />
     <Compile Include="MEMBER\BaseMember.cs" />
     <Compile Include="MEMBER\IMember.cs" />
     <Compile Include="MEMBER\MemberList.cs" />
