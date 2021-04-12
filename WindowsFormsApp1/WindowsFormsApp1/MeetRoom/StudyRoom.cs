@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace WindowsFormapp1.ROOM
-{   //아
+namespace WindowsFormapp1.ROOM{
+{
     class Studyroom//열람실에 대한 클래스(외부클래스)
     {
         List<Rooms> listSr = new List<Rooms>();
