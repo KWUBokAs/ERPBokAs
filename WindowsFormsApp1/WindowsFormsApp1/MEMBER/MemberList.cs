@@ -36,26 +36,5 @@ namespace WindowsFormsApp1.MEMBER
                 if (item != null) item.ReadDatabase();
             }
         }
-        /*
-        public IMember this[ClassIndex index]
-        {
-            get
-            {
-                if ((int)index < (int)ClassIndex.BASE || (int)index >= (int)ClassIndex.OUT_OF_INDEX)
-                {
-                    new Exception();
-                    return null;
-                }
-                return base[(int)index];
-            }
-            set
-            {
-                if ((int)index < (int)ClassIndex.BASE || (int)index >= (int)ClassIndex.OUT_OF_INDEX)
-                {
-                    new Exception();
-                }
-                base[(int)index] = value;
-            }
-        }*/
     }
 }
