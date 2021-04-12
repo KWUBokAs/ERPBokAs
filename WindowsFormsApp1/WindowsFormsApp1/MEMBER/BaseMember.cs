@@ -76,26 +76,26 @@ namespace WindowsFormsApp1.MEMBER
         /// </summary>
         public bool IsLogin
         {
-            get { return ((permission & PERM.ANONY_USR) == PERM.ANONY_USR); }
+            get { return ((permission & PERM.NOMAL_USR) == PERM.NOMAL_USR); }
         }
         public PERM Permission
         {
             get { return permission; }
         }
-        public bool PermBook
+        public bool IsBookAdmin
         {
             get { return ((permission & PERM.BOOK_ADMIN) == PERM.BOOK_ADMIN); }
-            private set { if (value) permission = (PERM)((int)permission + (int)PERM.BOOK_ADMIN); }
+            private set { if (value) permission = permission|PERM.BOOK_ADMIN; }
         }
-        public bool PermMeetingRoom
+        public bool IsMeetingRoomAdmin
         {
             get { return ((permission & PERM.MEET_ADMIN) == PERM.MEET_ADMIN); }
-            private set { if (value) permission = (PERM)((int)permission + (int)PERM.MEET_ADMIN); }
+            private set { if (value) permission = permission | PERM.MEET_ADMIN; }
         }
-        public bool PermReadingRoom
+        public bool IsReadingRoomAdmin
         {
             get { return ((permission & PERM.READ_ADMIN) == PERM.READ_ADMIN); }
-            private set { if (value) permission = (PERM)((int)permission + (int)PERM.READ_ADMIN); }
+            private set { if (value) permission = permission|PERM.READ_ADMIN; }
         }
 
         /// <summary>
@@ -121,13 +121,13 @@ namespace WindowsFormsApp1.MEMBER
         private void PrintPermission()
         {
             Console.Write("도서권한\t: ");
-            if (PermBook) Console.WriteLine("사서사용자");
+            if (IsBookAdmin) Console.WriteLine("사서사용자");
             else Console.WriteLine("일반사용자");
             Console.Write("열람실권한\t: ");
-            if (PermReadingRoom) Console.WriteLine("관리사용자");
+            if (IsReadingRoomAdmin) Console.WriteLine("관리사용자");
             else Console.WriteLine("일반사용자");
             Console.Write("회의실권한\t: ");
-            if (PermMeetingRoom) Console.WriteLine("관리사용자");
+            if (IsMeetingRoomAdmin) Console.WriteLine("관리사용자");
             else Console.WriteLine("일반사용자");
         }
 
