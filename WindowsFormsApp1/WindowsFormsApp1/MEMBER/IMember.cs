@@ -8,5 +8,7 @@ namespace WindowsFormsApp1.MEMBER
 {
     interface IMember
     {
+        void Logout();
+        void ReadDatabase();
     }
 }
