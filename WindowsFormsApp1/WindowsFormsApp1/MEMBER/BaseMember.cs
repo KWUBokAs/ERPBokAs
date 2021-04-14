@@ -15,7 +15,9 @@ namespace WindowsFormsApp1.MEMBER
             NOMAL_USR = 1,
             BOOK_ADMIN = 2,
             READ_ADMIN = 4,
-            MEET_ADMIN = 8
+            MEET_ADMIN = 8,
+            MEMBER_ADMIN = 16,
+            ALL_ADMIN = MEMBER_ADMIN| MEET_ADMIN| READ_ADMIN| BOOK_ADMIN | NOMAL_USR,
         };
         /// <summary>
         /// 싱글톤 constructor

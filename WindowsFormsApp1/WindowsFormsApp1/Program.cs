@@ -11,6 +11,8 @@ namespace WindowsFormsApp1 {
         /// </summary>
         [STAThread]
         static void Main() {
+            //BACK.InsertSQL sql = new BACK.InsertSQL();
+            //sql.IsertMember(1,"admin", "admin1234", 2016726048, "01033574714", "vbmrkk@naver.com");
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());

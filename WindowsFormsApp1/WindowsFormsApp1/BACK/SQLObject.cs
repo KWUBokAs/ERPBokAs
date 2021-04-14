@@ -65,6 +65,23 @@ namespace WindowsFormsApp1.BACK {
                 query = query.Replace("#" + pair.Key + "#", pair.Value);
             }
         }
+        public string GetParamString()
+        {
+            string str="(";
+            foreach(var item in param)
+            {
+                str = str + item.Key +", ";
+            }
+            str = str.Substring(0, str.Length - 2);
+            str = str + ") VALUES(";
+            foreach (var item in param)
+            {
+                str = str +"@"+item.Key + ", ";
+            }
+            str = str.Substring(0, str.Length - 2);
+            str = str + ");";
+            return str;
+        }
     }
     class UpdateSQL : SQLObject {
         public UpdateSQL() : base() { }
@@ -159,6 +176,7 @@ namespace WindowsFormsApp1.BACK {
                     // table명 매개 인자 수정
                     setQuery("insert into CHIKORITA values(@NAME, @SCORE)");
                     MySqlCommand cmd = new MySqlCommand(query, con);
+                    cmd.CommandText = query;
                     // bi를 이용하여 정보 검색
                     cmd.Parameters.AddWithValue("@NAME", "ll");
                     cmd.Parameters.AddWithValue("@SCORE", 11);
@@ -171,13 +189,87 @@ namespace WindowsFormsApp1.BACK {
                 }
             }
         }
+        /// <summary>
+        /// 회원을 DB에 삽입한다.
+        /// test로 만든 member 가입 함수 이기 때문에 숨겨야한다.
+        /// 기본적으로 모든 값은 정상적인 값을 주어야한다. 겹칠 것도 확인한 상태에서 넣어주어야한다.
+        /// </summary>
+        /// <param name="mem_id">IN_Databae : int</param>
+        /// <param name="user_id">IN_Databae : varchar</param>
+        /// <param name="pw">IN_Databae : varchar</param>
+        /// <param name="name">IN_Databae : int</param>
+        /// <param name="callNUm">IN_Databae : varchar</param>
+        /// <param name="email">IN_Databae : varchar</param>
+        /// <param name="perm">IN_Databae : varchar / 기본값 : NOMAL_USR</param>
+        /// <param name="summary">IN_Databae : text</param>
+        public void IsertMember(int mem_id, string user_id, string pw, int name, string callNUm, string email, MEMBER.BaseMember.PERM perm= MEMBER.BaseMember.PERM.NOMAL_USR, string summary = null)
+        {
+            string logtime = null;
+
+            param.Clear();
+            AddParam("MEM_ID", mem_id.ToString());
+            AddParam("USER_ID", user_id);
+            AddParam("PW", pw);
+            AddParam("NAME", name.ToString()) ;
+            AddParam("CALLNUM", callNUm);
+            AddParam("EMAIL", email);
+            AddParam("MANAGE_YN", "Y");
+            AddParam("BAD_YN", "N");
+            AddParam("SUMMARY", summary);
+            AddParam("LOGTIME", logtime);
+
+            setQuery("INSERT INTO USER " + GetParamString());
+            Console.WriteLine(query);
+            if (String.IsNullOrEmpty(query))
+                return;
+            using (MySqlConnection con = new MySqlConnection("Server=mam675.synology.me;Port=3307;Database=kwUSS;Uid=kwUSS;Pwd=klas.kw.ac.kr;"))
+            {
+                try
+                {
+                    con.Open();
+                    // table명 매개 인자 수정
+                    MySqlCommand cmd = new MySqlCommand(query, con);
+                    cmd.Parameters.Add(new MySqlParameter("@MEM_ID", MySqlDbType.Int32));
+                    cmd.Parameters.Add(new MySqlParameter("@USER_ID", MySqlDbType.VarChar));
+                    cmd.Parameters.Add(new MySqlParameter("@PW", MySqlDbType.VarChar));
+                    cmd.Parameters.Add(new MySqlParameter("@NAME", MySqlDbType.Int32));
+                    cmd.Parameters.Add(new MySqlParameter("@CALLNUM", MySqlDbType.VarChar));
+                    cmd.Parameters.Add(new MySqlParameter("@EMAIL", MySqlDbType.VarChar));
+                    cmd.Parameters.Add(new MySqlParameter("@MANAGE_YN", MySqlDbType.VarChar));
+                    cmd.Parameters.Add(new MySqlParameter("@BAD_YN", MySqlDbType.VarChar));
+                    cmd.Parameters.Add(new MySqlParameter("@SUMMARY", MySqlDbType.Text));
+                    cmd.Parameters.Add(new MySqlParameter("@LOGTIME", MySqlDbType.DateTime));
+
+                    cmd.Prepare();
+                    cmd.Parameters["USER_ID"].Value = mem_id;
+                    cmd.Parameters["PW"].Value = pw;
+                    cmd.Parameters["NAME"].Value = name;
+                    cmd.Parameters["CALLNUM"].Value = callNUm;
+                    cmd.Parameters["EMAIL"].Value = email;
+                    cmd.Parameters["MANAGE_YN"].Value = 'Y';
+                    cmd.Parameters["BAD_YN"].Value = 'N';
+                    cmd.Parameters["SUMMARY"].Value = summary;
+                    cmd.Parameters["LOGTIME"].Value = logtime;
+
+                    Console.WriteLine(cmd.CommandText);
+                    // Query 실행
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Fail Error: " + e.ToString());
+                }
+            }
+
+            return;
+        }
     }
     class DeleteSQL : SQLObject {
         public DeleteSQL() : base() { }
 
         public bool DeleteBook(BOOK.BookInfo bi)
         {
-            using (MySqlConnection con = new MySqlConnection("Server=mam675.synology.me;Port=3307;Database=HotelDangDang;Uid=kwUSS;Pwd=klas.kw.ac.kr;"))
+            using (MySqlConnection con = new MySqlConnection("Server=mam675.synology.me;Port=3307;Database=kwUSS;Uid=kwUSS;Pwd=klas.kw.ac.kr;"))
             {
                 try
                 {
