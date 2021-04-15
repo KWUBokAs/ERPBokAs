@@ -6,13 +6,16 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApp1.MEMBER
 {
-    class MemberManager : IMember
+    class MemberManager
     {
         private MemberManager()
         {
             List<IMember> list = new List<IMember>();
-            list[(int)MemberList.ClassIndex.BASE] = BaseMember.GetBaseMember();
             canReadDatabase = false;
+            //추가되어야하는 기능을 담고있는 class를 이곳에 추가해 주세요.
+            //MemberList의 enum classIndex를 참고하여 추가해 주세요.
+            list[(int)MemberList.ClassIndex.BASE] = BaseMember.GetBaseMember();
+            
         }
         public static MemberManager GetMemberManager()
         {
