@@ -53,8 +53,8 @@ namespace WindowsFormapp1.ROOM
             public bool GetUsed()
             { return used; }
         }
-
     }
+    /*
     class Program
     {
         static void Main(string[] args)
@@ -73,4 +73,5 @@ namespace WindowsFormapp1.ROOM
             Console.WriteLine("현재 여석의 수는 {0}입니다.", study.CountRoom(true));
         }
     }
+    */
 }

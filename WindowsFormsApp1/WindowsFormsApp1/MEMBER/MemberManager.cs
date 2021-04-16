@@ -34,10 +34,10 @@ namespace WindowsFormsApp1.MEMBER
         /// 로그인이 되어 있는 상태라면
         /// 각 member들을 ReadDatabase해준다.
         /// </summary>
-        public void ReadDatabase()
+        public void LogIn()
         {
            if(canReadDatabase)
-                memberList.ReadDatabase();
+                memberList.LogIn();
         }
         //field 정의
         private static MemberManager mm = null;
