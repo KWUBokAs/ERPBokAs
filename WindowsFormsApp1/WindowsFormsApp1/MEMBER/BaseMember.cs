@@ -38,7 +38,7 @@ namespace WindowsFormsApp1.MEMBER
             PhoneNumber = null;
             this.permission = PERM.ANONY_USR;
         }
-        public void ReadDatabase()
+        public void LogIn()
         {
             throw new NotImplementedException();
         }

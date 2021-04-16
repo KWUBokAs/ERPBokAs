@@ -29,11 +29,11 @@ namespace WindowsFormsApp1.MEMBER
             }
         }
 
-        public void ReadDatabase()
+        public void LogIn()
         {
             foreach (var item in this)
             {
-                if (item != null) item.ReadDatabase();
+                if (item != null) item.LogIn();
             }
         }
     }
