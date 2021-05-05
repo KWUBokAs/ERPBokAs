@@ -35,9 +35,10 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(36, 238);
+            this.button1.Location = new System.Drawing.Point(41, 298);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(223, 113);
+            this.button1.Size = new System.Drawing.Size(255, 141);
             this.button1.TabIndex = 0;
             this.button1.Text = "Hello, World!";
             this.button1.UseVisualStyleBackColor = true;
@@ -46,26 +47,27 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(290, 70);
+            this.label1.Location = new System.Drawing.Point(331, 88);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(9, 12);
+            this.label1.Size = new System.Drawing.Size(12, 15);
             this.label1.TabIndex = 1;
             this.label1.Text = " ";
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(36, 23);
+            this.richTextBox1.Location = new System.Drawing.Point(41, 29);
+            this.richTextBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(248, 135);
+            this.richTextBox1.Size = new System.Drawing.Size(283, 168);
             this.richTextBox1.TabIndex = 2;
             this.richTextBox1.Text = "";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(543, 70);
+            this.label2.Location = new System.Drawing.Point(621, 88);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(38, 12);
+            this.label2.Size = new System.Drawing.Size(45, 15);
             this.label2.TabIndex = 3;
             this.label2.Text = "label2";
             // 
@@ -76,22 +78,25 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(438, 221);
+            this.dataGridView1.Location = new System.Drawing.Point(501, 276);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(240, 150);
+            this.dataGridView1.Size = new System.Drawing.Size(274, 188);
             this.dataGridView1.TabIndex = 4;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(914, 562);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();

@@ -24,6 +24,7 @@ namespace WindowsFormsApp1 {
                 return;
             mysqlObj.setQuery(this.richTextBox1.Text);
             mysqlObj.Go();
+            mysqlObj.Dispose();
             DataTable dataTable = JsonConvert.DeserializeObject<DataTable>(mysqlObj.jArray.ToString());
             dataTable.TableName = "Test Table";
             dataGridView1.DataSource = dataTable;

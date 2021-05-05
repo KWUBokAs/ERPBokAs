@@ -10,33 +10,69 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json.Schema;
+using System.Windows.Forms;
+using System.Threading;
 
 namespace WindowsFormsApp1.BACK {
-
     
-    class SQLObject {
+    class SQLObject : IDisposable{
         // value가 string이 아닌 자료형이면 어떻게 받을까요?
         public Dictionary<String, String> param { get; protected set; }
         public JArray jArray;
         public string query { get; protected set; }
+
+        public Form parent { get; private set; }
+
+        public bool isStop { get; private set; }
+
+        public DataTable resultTable;
+        public Form loadingForm;
+
         public SQLObject() {
             param = new Dictionary<string, string>();
             jArray = new JArray();
+            parent = Form.ActiveForm;
+            isStop = true;
+            resultTable = new DataTable();
         }
-        public virtual void Go() {
+        public void setisStop(bool a) {
+            this.isStop = a;
+        }
+
+        public void StopFormAndModal() {
+            if (!isStop)
+                return;
+            if (loadingForm != null)
+                return;
+            loadingForm = new LoadingForm();
+            Form.ActiveForm.Opacity = .50;
+            loadingForm.Show();
+        }
+        public void ModalEnd() {
+            if (!isStop)
+                return;
+            if (loadingForm == null)
+                return;
+            loadingForm.Close();
+            Form.ActiveForm.Opacity = 1;
+        }
+        public virtual DataTable Go() {
             ReplaceParam();
             if (String.IsNullOrEmpty(query))
-                return;
-            
-            using(MySqlConnection con = new MySqlConnection("Server=mam675.synology.me;Port=3307;Database=kwUSS;Uid=kwUSS;Pwd=klas.kw.ac.kr;")) {
+                return null;
+            StopFormAndModal();
+            using (MySqlConnection con = new MySqlConnection("Server=mam675.synology.me;Port=3307;Database=kwUSS;Uid=kwUSS;Pwd=klas.kw.ac.kr;")) {
                 try {
+                    resultTable.Clear();
                     con.Open();
                     Console.WriteLine("QUERY: "+query);
                     MySqlCommand cmd = new MySqlCommand(query, con);
                     MySqlDataReader table = cmd.ExecuteReader();
                     Console.WriteLine("Read Complete");
+                    
                     while (table.Read()) {
                         JObject mObj = new JObject();
+                        
                         for (int i =0; i<table.FieldCount; i++) {
                             Console.WriteLine(table.GetName(i)+": "+table[i].ToString());
                             mObj.Add(table.GetName(i).ToString(), table[i].ToString());
@@ -44,13 +80,19 @@ namespace WindowsFormsApp1.BACK {
                         jArray.Add(mObj);
                     }
                     table.Close();
+                    resultTable = JsonConvert.DeserializeObject<DataTable>(jArray.ToString());
                 }
                 catch (Exception e) {
                     Console.WriteLine("Fail Error: " + e.Message);
+                    
+                }
+                finally {
+                    ModalEnd();
                 }
             }
             Console.WriteLine("JSON COMPELTE");
             Console.WriteLine("JSON TO STRING: "+jArray.ToString());
+            return null;
         }
         public void AddParam(string key, string value) {
             param.Add(key, value);
@@ -69,6 +111,9 @@ namespace WindowsFormsApp1.BACK {
                 query = query.Replace("#" + pair.Key + "#", "'"+pair.Value+"'");
                 query = query.Replace("@" + pair.Key, "'" + pair.Value + "'");
             }
+        }
+        public void Dispose() {
+            //강제 소멸
         }
     }
     class UpdateSQL : SQLObject {
