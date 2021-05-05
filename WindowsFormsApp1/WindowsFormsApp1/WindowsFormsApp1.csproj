@@ -121,8 +121,6 @@
     <Compile Include="MEMBER\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="MEMBER\MemberList.cs" />
-    <Compile Include="MEMBER\MemberManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">

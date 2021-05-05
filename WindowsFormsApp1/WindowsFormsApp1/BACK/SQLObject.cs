@@ -157,6 +157,75 @@ namespace WindowsFormsApp1.BACK {
             }
             return null;
         }
+
+        public MEMBER.BaseMember.LOGINTYPE CheckUser(string id, string pw)
+        {
+            using (MySqlConnection con = new MySqlConnection("Server=mam675.synology.me;Port=3307;Database=HotelDangDang;Uid=kwUSS;Pwd=klas.kw.ac.kr;"))
+            {
+                try
+                {
+                    con.Open();
+                    // table명 매개 인자 수정
+                    setQuery("select USER_ID, PW from USER where NAME=@NAME");
+                    MySqlCommand cmd = new MySqlCommand(query, con);
+                    // bi를 이용하여 정보 검색
+                    cmd.Parameters.AddWithValue("@NAME", id);
+                    // Query 실행
+                    MySqlDataReader rdr = cmd.ExecuteReader();
+                    if (!rdr.Read())
+                    {
+                        return MEMBER.BaseMember.LOGINTYPE.ID_NOT_EXIST;
+                    }
+                    Console.WriteLine("ID[{0}] : {1}", rdr[0], rdr[1]);
+                    if(pw != rdr[1].ToString())
+                    {
+                        return MEMBER.BaseMember.LOGINTYPE.PW_INCONSIST;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Fail Error: " + e.ToString());
+                }
+            }
+            return MEMBER.BaseMember.LOGINTYPE.SUCCESS;
+        }
+        /// <summary>
+        /// baseMember의 id가 설정이 되어 있다면 사용할 수 있습니다.
+        /// </summary>
+        /// <returns>false:id가 설정되어 있지 않을 때 / true:성공했을때</returns>
+        public bool ParseBaseMemberData()
+        {
+            MEMBER.BaseMember member = MEMBER.BaseMember.GetInstance();
+            if (member.ID == "Anonymous") return false;
+            using (MySqlConnection con = new MySqlConnection("Server=mam675.synology.me;Port=3307;Database=HotelDangDang;Uid=kwUSS;Pwd=klas.kw.ac.kr;"))
+            {
+                try
+                {
+                    con.Open();
+                    // table명 매개 인자 수정
+                    setQuery("select * from CHIKORITA where NAME=@NAME");
+                    MySqlCommand cmd = new MySqlCommand(query, con);
+                    // bi를 이용하여 정보 검색
+                    cmd.Parameters.AddWithValue("@NAME", "ll");
+                    // Query 실행
+                    MySqlDataReader rdr = cmd.ExecuteReader();
+                    rdr.Read();
+                    Console.WriteLine("{0}: {1}", rdr[0], rdr[1]);
+                    //while (rdr.Read())
+                    //{
+                    //    bookInfos.Add();
+                    //}
+                    rdr.Close();
+
+                    return bookInfos;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Fail Error: " + e.ToString());
+                }
+            }
+            return null;
+        }
     }
     class InsertSQL : SQLObject {
         public InsertSQL():base(){  }

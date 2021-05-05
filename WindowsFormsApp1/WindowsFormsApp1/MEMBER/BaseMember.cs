@@ -8,6 +8,14 @@ namespace WindowsFormsApp1.MEMBER
 {
     public class BaseMember : IMember
     {
+        public enum LOGINTYPE : short
+        {
+            SUCCESS,
+            ID_NOT_INPUT,
+            PW_NOT_INPUT,
+            ID_NOT_EXIST,
+            PW_INCONSIST,
+        };
         [Flags]
         public enum PERM : short
         {
@@ -38,11 +46,11 @@ namespace WindowsFormsApp1.MEMBER
             PhoneNumber = null;
             this.permission = PERM.ANONY_USR;
         }
-        public void LogIn()
+        public bool ReadDatabase()
         {
-            throw new NotImplementedException();
+            BACK.SelectSQL selectSQL = new BACK.SelectSQL
         }
-        public static BaseMember GetBaseMember()
+        public static BaseMember GetInstance()
         {
             if(baseMember == null)
             {
@@ -50,6 +58,28 @@ namespace WindowsFormsApp1.MEMBER
             }
             return baseMember;
         }
+        /// <summary>
+        /// 로그인을 시도해서 시도한 user가 존재하는지 확인 할수 있다.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="pw"></param>
+        /// <returns>logintype를 잘 확인 하시면 어떤 값이 돌아올지 알 것입니다.</returns>
+        public LOGINTYPE TryLogin(string id=null, string pw=null)
+        {
+            if(id != null || id == "")
+            {
+                return LOGINTYPE.ID_NOT_INPUT;
+            }
+            else if(pw != null || pw == "")
+            {
+                return LOGINTYPE.PW_NOT_INPUT;
+            }
+            BACK.SelectSQL selectSQL = new BACK.SelectSQL();
+            ID = id;
+            ReadDatabase();
+            return selectSQL.CheckUser(id, pw);
+        }
+
         /// <summary>
         /// properties
         /// </summary>
