@@ -12,6 +12,9 @@ namespace WindowsFormsApp1
 {
     public partial class Form3 : Form
     {
+        Control OR = new OpenRoom();
+        Control MR = new MeetRoom();
+
         public Form3()
         {
             InitializeComponent();
@@ -27,9 +30,12 @@ namespace WindowsFormsApp1
             switch (this.listBox1.SelectedIndex)
             {
                 case 0:
-                    foreach (Control c in this.panel3.Controls)
+                    foreach (Control c in this.panel3.Controls) {
                         c.Visible = false;
-                    
+                        
+                    }
+
+
                     if (this.panel3.Controls.Find("SearchPage", false).Length == 1)
                     {
                         this.panel3.Controls.Find("SearchPage", false)[0].Visible = true;
@@ -84,6 +90,35 @@ namespace WindowsFormsApp1
         private void pictureBox3_MouseLeave(object sender, EventArgs e)
         {
             pictureBox3.Image = WindowsFormsApp1.Properties.Resources.회의실;
+        }
+        
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            foreach (Control c in panel3.Controls)
+            {
+                if (panel3.Controls.GetType() == typeof(SearchPage) || panel3.Controls.GetType() == typeof(RegistrationPage))
+                    c.Visible = false;
+            }
+            if (panel3.Controls.Contains(OR)) { 
+                panel3.Controls.Remove(OR);
+            }
+            else
+                panel3.Controls.Add(OR);
+        }
+
+        
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {   foreach (Control c in panel3.Controls) {
+                if (panel3.Controls.GetType() == typeof(SearchPage) || panel3.Controls.GetType() == typeof(RegistrationPage))
+                    c.Visible = false;
+                        }
+            if (panel3.Controls.Contains(MR)) { 
+                panel3.Controls.Remove(MR);
+            }
+            else
+                panel3.Controls.Add(MR);
         }
     }
 }
