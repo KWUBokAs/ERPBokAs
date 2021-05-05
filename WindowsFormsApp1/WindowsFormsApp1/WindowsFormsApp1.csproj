@@ -199,5 +199,14 @@
   <ItemGroup>
     <None Include="Resources\회의실.PNG" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\도서 호버.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\열람실 호버.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\회의실 호버.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

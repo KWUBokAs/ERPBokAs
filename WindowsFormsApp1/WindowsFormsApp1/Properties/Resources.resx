@@ -127,4 +127,13 @@
   <data name="회의실" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\회의실.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="도서 호버" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\도서 호버.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="열람실 호버" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\열람실 호버.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="회의실 호버" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\회의실 호버.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
