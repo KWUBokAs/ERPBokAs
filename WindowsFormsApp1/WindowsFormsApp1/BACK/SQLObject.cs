@@ -12,6 +12,8 @@ using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json.Schema;
 
 namespace WindowsFormsApp1.BACK {
+
+    
     class SQLObject {
         // value가 string이 아닌 자료형이면 어떻게 받을까요?
         public Dictionary<String, String> param { get; protected set; }
@@ -25,9 +27,11 @@ namespace WindowsFormsApp1.BACK {
             ReplaceParam();
             if (String.IsNullOrEmpty(query))
                 return;
+            
             using(MySqlConnection con = new MySqlConnection("Server=mam675.synology.me;Port=3307;Database=kwUSS;Uid=kwUSS;Pwd=klas.kw.ac.kr;")) {
                 try {
                     con.Open();
+                    Console.WriteLine("QUERY: "+query);
                     MySqlCommand cmd = new MySqlCommand(query, con);
                     MySqlDataReader table = cmd.ExecuteReader();
                     Console.WriteLine("Read Complete");
@@ -42,7 +46,7 @@ namespace WindowsFormsApp1.BACK {
                     table.Close();
                 }
                 catch (Exception e) {
-                    Console.WriteLine("Fail Error: " + e.ToString());
+                    Console.WriteLine("Fail Error: " + e.Message);
                 }
             }
             Console.WriteLine("JSON COMPELTE");
@@ -62,7 +66,8 @@ namespace WindowsFormsApp1.BACK {
             if (param.Count <= 0)
                 return;
             foreach(KeyValuePair<string,string> pair in param) {
-                query = query.Replace("#" + pair.Key + "#", pair.Value);
+                query = query.Replace("#" + pair.Key + "#", "'"+pair.Value+"'");
+                query = query.Replace("@" + pair.Key, "'" + pair.Value + "'");
             }
         }
     }
