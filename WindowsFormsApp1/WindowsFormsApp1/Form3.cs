@@ -28,14 +28,18 @@ namespace WindowsFormsApp1
 
         private void listBox1_Click(object sender, EventArgs e)
         {
+            if (panel3.Controls.Contains(OR))
+                panel3.Controls.Remove(OR);
+            if (panel3.Controls.Contains(MR))
+                panel3.Controls.Remove(MR);
             switch (this.listBox1.SelectedIndex)
             {
-                case 0://검색
-                    foreach (Control c in this.panel3.Controls) {
-                        c.Visible = false;
-                        
+                case 0:
+                    foreach (Control c in this.panel3.Controls)
+                    {
+                        if (c.GetType() == typeof(SearchPage) || c.GetType() == typeof(RegistrationPage) || c.GetType() == typeof(ListBox))
+                            c.Visible = false;
                     }
-
 
                     if (this.panel3.Controls.Find("SearchPage", false).Length == 1)
                     {
@@ -47,7 +51,10 @@ namespace WindowsFormsApp1
 
                 case 2://등록
                     foreach (Control c in this.panel3.Controls)
-                        c.Visible = false;
+                    {
+                        if (c.GetType() == typeof(SearchPage) || c.GetType() == typeof(RegistrationPage) || c.GetType() == typeof(ListBox))
+                            c.Visible = false;
+                    }
 
                     if (this.panel3.Controls.Find("RegistrationPage", false).Length == 1)
                     {
@@ -98,7 +105,7 @@ namespace WindowsFormsApp1
         {
             foreach (Control c in panel3.Controls)
             {
-                if (panel3.Controls.GetType() == typeof(SearchPage) || panel3.Controls.GetType() == typeof(RegistrationPage))
+                if (c.GetType() == typeof(SearchPage) || c.GetType() == typeof(RegistrationPage))
                     c.Visible = false;
             }
             if (panel3.Controls.Contains(OR)) { 
@@ -106,20 +113,32 @@ namespace WindowsFormsApp1
             }
             else
                 panel3.Controls.Add(OR);
+
+            if (panel3.Controls.Contains(MR))
+            {
+                panel3.Controls.Remove(MR);
+            }
         }
 
         
 
         private void pictureBox3_Click(object sender, EventArgs e)
-        {   foreach (Control c in panel3.Controls) {
-                if (panel3.Controls.GetType() == typeof(SearchPage) || panel3.Controls.GetType() == typeof(RegistrationPage))
+        {   
+            foreach (Control c in panel3.Controls) 
+            {
+                if (c.GetType() == typeof(SearchPage) || c.GetType() == typeof(RegistrationPage))
                     c.Visible = false;
-                        }
+            }
             if (panel3.Controls.Contains(MR)) { 
                 panel3.Controls.Remove(MR);
             }
             else
                 panel3.Controls.Add(MR);
+
+            if (panel3.Controls.Contains(OR))
+            {
+                panel3.Controls.Remove(OR);
+            }
         }
 
         private void Form3_Load(object sender, EventArgs e)

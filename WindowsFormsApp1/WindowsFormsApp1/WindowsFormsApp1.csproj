@@ -109,6 +109,12 @@
       <DependentUpon>LoadingForm.cs</DependentUpon>
     </Compile>
     <Compile Include="BACK\SQLObject.cs" />
+    <Compile Include="BookInfoDetail.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BookInfoDetail.Designer.cs">
+      <DependentUpon>BookInfoDetail.cs</DependentUpon>
+    </Compile>
     <Compile Include="BOOK\BookInfo.cs" />
     <Compile Include="BOOK\BaseBook.cs" />
     <Compile Include="BOOK\BookSearch.cs" />
@@ -177,6 +183,9 @@
     </Compile>
     <EmbeddedResource Include="BACK\LoadingForm.resx">
       <DependentUpon>LoadingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BookInfoDetail.resx">
+      <DependentUpon>BookInfoDetail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
