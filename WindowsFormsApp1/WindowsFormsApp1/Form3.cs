@@ -27,6 +27,10 @@ namespace WindowsFormsApp1
 
         private void listBox1_Click(object sender, EventArgs e)
         {
+            if (panel3.Controls.Contains(OR))
+                panel3.Controls.Remove(OR);
+            if (panel3.Controls.Contains(MR))
+                panel3.Controls.Remove(MR);
             switch (this.listBox1.SelectedIndex)
             {
                 case 0:
@@ -100,7 +104,7 @@ namespace WindowsFormsApp1
         {
             foreach (Control c in panel3.Controls)
             {
-                if (panel3.Controls.GetType() == typeof(SearchPage) || panel3.Controls.GetType() == typeof(RegistrationPage))
+                if (c.GetType() == typeof(SearchPage) || c.GetType() == typeof(RegistrationPage))
                     c.Visible = false;
             }
             if (panel3.Controls.Contains(OR)) { 
@@ -108,20 +112,32 @@ namespace WindowsFormsApp1
             }
             else
                 panel3.Controls.Add(OR);
+
+            if (panel3.Controls.Contains(MR))
+            {
+                panel3.Controls.Remove(MR);
+            }
         }
 
         
 
         private void pictureBox3_Click(object sender, EventArgs e)
-        {   foreach (Control c in panel3.Controls) {
-                if (panel3.Controls.GetType() == typeof(SearchPage) || panel3.Controls.GetType() == typeof(RegistrationPage))
+        {   
+            foreach (Control c in panel3.Controls) 
+            {
+                if (c.GetType() == typeof(SearchPage) || c.GetType() == typeof(RegistrationPage))
                     c.Visible = false;
-                        }
+            }
             if (panel3.Controls.Contains(MR)) { 
                 panel3.Controls.Remove(MR);
             }
             else
                 panel3.Controls.Add(MR);
+
+            if (panel3.Controls.Contains(OR))
+            {
+                panel3.Controls.Remove(OR);
+            }
         }
     }
 }
