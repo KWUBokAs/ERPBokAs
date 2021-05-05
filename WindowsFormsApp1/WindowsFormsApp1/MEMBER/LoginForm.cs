@@ -16,13 +16,35 @@ namespace WindowsFormsApp1.MEMBER
         {
             InitializeComponent();
             lab_LoginStatus.Text = "";
+            txtId.Text = "admin";
+            txtPassward.Text = "admin123";
             txtId.Focus();
+
+            lvwMember.View = View.Details;
+            lvwMember.Columns.Add("");
+            lvwMember.Columns.Add("ID");
+            lvwMember.Columns.Add("이름");
+            lvwMember.Columns.Add("E-Mail");
+            lvwMember.Columns.Add("전화번호");
+            lvwMember.Columns.Add("권한");
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            CheckLogin();
+        }
+
+        private void txtPassward_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                CheckLogin();
+            }
+        }
+        private void CheckLogin()
+        {
             BaseMember member = BaseMember.GetInstance();
-            switch(member.TryLogin(txtId.Text, txtPassward.Text))
+            switch (member.TryLogin(txtId.Text, txtPassward.Text))
             {
                 case BaseMember.LOGINTYPE.ID_NOT_EXIST://아이디가 존재하지 않을 때
                     lab_LoginStatus.Text = "ID가 존재하지 않습니다.";
@@ -44,11 +66,11 @@ namespace WindowsFormsApp1.MEMBER
                     else
                     {
                         lab_LoginStatus.Text = "성공!";
-                        this.gridView.DataSource = member.GetDataTable();
+                        lvwMember.Items.Add(member.GetListViewItem());
                     }
                     break;
             }
-            if(member.IsLogin)
+            if (member.IsLogin)
             {
                 //Close();
             }

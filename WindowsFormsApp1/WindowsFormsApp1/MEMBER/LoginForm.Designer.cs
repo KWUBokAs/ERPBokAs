@@ -33,9 +33,8 @@
             this.txtId = new System.Windows.Forms.TextBox();
             this.txtPassward = new System.Windows.Forms.TextBox();
             this.btnLogin = new System.Windows.Forms.Button();
-            this.gridView = new System.Windows.Forms.DataGridView();
             this.lab_LoginStatus = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
+            this.lvwMember = new System.Windows.Forms.ListView();
             this.SuspendLayout();
             // 
             // label1
@@ -69,6 +68,7 @@
             this.txtPassward.Name = "txtPassward";
             this.txtPassward.Size = new System.Drawing.Size(254, 25);
             this.txtPassward.TabIndex = 1;
+            this.txtPassward.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtPassward_KeyUp);
             // 
             // btnLogin
             // 
@@ -80,16 +80,6 @@
             this.btnLogin.UseVisualStyleBackColor = true;
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
-            // gridView
-            // 
-            this.gridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridView.Location = new System.Drawing.Point(39, 213);
-            this.gridView.Name = "gridView";
-            this.gridView.RowHeadersWidth = 51;
-            this.gridView.RowTemplate.Height = 27;
-            this.gridView.Size = new System.Drawing.Size(732, 208);
-            this.gridView.TabIndex = 3;
-            // 
             // lab_LoginStatus
             // 
             this.lab_LoginStatus.AutoSize = true;
@@ -98,13 +88,22 @@
             this.lab_LoginStatus.Size = new System.Drawing.Size(0, 15);
             this.lab_LoginStatus.TabIndex = 4;
             // 
+            // lvwMember
+            // 
+            this.lvwMember.HideSelection = false;
+            this.lvwMember.Location = new System.Drawing.Point(27, 222);
+            this.lvwMember.Name = "lvwMember";
+            this.lvwMember.Size = new System.Drawing.Size(749, 203);
+            this.lvwMember.TabIndex = 5;
+            this.lvwMember.UseCompatibleStateImageBehavior = false;
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.lvwMember);
             this.Controls.Add(this.lab_LoginStatus);
-            this.Controls.Add(this.gridView);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.txtPassward);
             this.Controls.Add(this.txtId);
@@ -112,7 +111,6 @@
             this.Controls.Add(this.label1);
             this.Name = "LoginForm";
             this.Text = "LoginForm";
-            ((System.ComponentModel.ISupportInitialize)(this.gridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -125,7 +123,7 @@
         private System.Windows.Forms.TextBox txtId;
         private System.Windows.Forms.TextBox txtPassward;
         private System.Windows.Forms.Button btnLogin;
-        private System.Windows.Forms.DataGridView gridView;
         private System.Windows.Forms.Label lab_LoginStatus;
+        private System.Windows.Forms.ListView lvwMember;
     }
 }

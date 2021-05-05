@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,7 @@ using WindowsFormsApp1.BACK;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System.Windows.Forms;
+using Newtonsoft.Json.Linq;
 
 namespace WindowsFormsApp1.MEMBER
 {
@@ -62,14 +64,14 @@ namespace WindowsFormsApp1.MEMBER
         {
             if (ID == "Anonymous") return false; //회원로그인이 승인되지 않았을 경우
             SelectSQL selectSQL = new BACK.SelectSQL();
-            selectSQL.setQuery("SELECT USER_ID, NAME, CALLNUM, EMAIL, MANAGER_YN from from USER where USER_ID=@USER_ID");
+            selectSQL.setQuery("SELECT NAME, CALLNUM, EMAIL, MANAGE_YN from USER where USER_ID=@USER_ID");
             selectSQL.AddParam("USER_ID", ID);
             selectSQL.Go();
 
-            this.name = selectSQL.jArray["NAME"].ToString();
-            this.e_mail = selectSQL.jArray["EMAIL"].ToString();
-            this.phoneNumber = selectSQL.jArray["CALLNUM"].ToString();
-            this.permission = (PERM)Convert.ToInt32(selectSQL.jArray["MANAGER_YN"]);
+            this.name = selectSQL.jArray[0].Value<string>("NAME");
+            this.e_mail = selectSQL.jArray[0].Value<string>("EMAIL");
+            this.phoneNumber = selectSQL.jArray[0].Value<string>("CALLNUM");
+            this.permission = (PERM)selectSQL.jArray[0].Value<int>("MANAGE_YN");
 
             return true;
         }
@@ -103,7 +105,8 @@ namespace WindowsFormsApp1.MEMBER
             //1 : 로그인 성공
             SelectSQL selectSQL = new BACK.SelectSQL();
             selectSQL.setQuery("select COUNT(DUSER.USER_ID) AS DCnt" +
-                                    ", COUNT(CUSER.USER_ID) AS Cnt, DUSER.USER_ID " +
+                                    ", COUNT(CUSER.USER_ID) AS Cnt " +
+                                    //", DUSER.USER_ID " +
                               "FROM USER AS DUSER " +
                               "LEFT JOIN USER AS CUSER ON CUSER.USER_ID = DUSER.USER_ID " +
                               "AND CUSER.PW=@PW " +
@@ -112,11 +115,12 @@ namespace WindowsFormsApp1.MEMBER
             selectSQL.AddParam("PW", pw);
             selectSQL.Go();
 
-            if (Convert.ToInt32(selectSQL.jArray["CNT"]) == 0)//ID가 존재하지 않을 때
+            if (selectSQL.jArray[0].Value<int>("DCnt") == 0)//ID가 존재하지 않을 때
             {
                 return LOGINTYPE.ID_NOT_EXIST;
             }
-            if (selectSQL.jArray[1].ToString() != pw)//pw가 입력값과 다를때
+            //이하 구절은 ID가 존재하는 경우중에
+            if (selectSQL.jArray[0].Value<int>("Cnt") == 0)//pw가 입력값과 다를때
             {
                 return LOGINTYPE.PW_INCONSIST;
             }
@@ -125,28 +129,15 @@ namespace WindowsFormsApp1.MEMBER
             //ReadDatabase();
             return LOGINTYPE.SUCCESS;
         }
-        public DataTable GetDataTable()
+        public ListViewItem GetListViewItem()
         {
-            DataTable table = new DataTable();
-            DataColumn colID = new DataColumn("ID", typeof(string));
-            DataColumn colName = new DataColumn("이름", typeof(string));
-            DataColumn colEmail = new DataColumn("E-Mail", typeof(string));
-            DataColumn colCall = new DataColumn("전화번호", typeof(string));
-            DataColumn colPerm = new DataColumn("권한", typeof(string));
-            table.Columns.Add(colID);
-            table.Columns.Add(colName);
-            table.Columns.Add(colEmail);
-            table.Columns.Add(colCall);
-            table.Columns.Add(colPerm);
-
-
-            DataRow row = table.NewRow();
-            row[colID] = this.id;
-            row[colName] = this.name;
-            row[colEmail] = this.e_mail;
-            row[colCall] = this.phoneNumber;
-            row[colPerm] = GetStringPermission();
-            return table;
+            ListViewItem liItem = new ListViewItem();
+            liItem.SubItems.Add(id);
+            liItem.SubItems.Add(name);
+            liItem.SubItems.Add(e_mail);
+            liItem.SubItems.Add(phoneNumber);
+            liItem.SubItems.Add(GetStringPermission());
+            return liItem;
         }
 
         /// <summary>
