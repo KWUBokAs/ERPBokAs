@@ -102,6 +102,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BACK\LoadingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BACK\LoadingForm.Designer.cs">
+      <DependentUpon>LoadingForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="BACK\SQLObject.cs" />
     <Compile Include="BOOK\BookInfo.cs" />
     <Compile Include="BOOK\BaseBook.cs" />
@@ -153,6 +159,9 @@
     <Compile Include="SearchPage.Designer.cs">
       <DependentUpon>SearchPage.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="BACK\LoadingForm.resx">
+      <DependentUpon>LoadingForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -216,6 +225,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\회의실 호버.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\ic_popup_warning.png" />
+    <Content Include="Resources\ic_saveImg.png" />
+    <Content Include="Resources\ic_search_P.gif" />
+    <Content Include="Resources\ic_tool_gla_N.png" />
+    <Content Include="Resources\ic_tool_gla_S.png" />
+    <Content Include="Resources\ic_tool_help_D_re.png" />
+    <Content Include="Resources\ic_tool_help_N.png" />
+    <Content Include="Resources\ic_tool_help_N_re.png" />
+    <Content Include="Resources\ic_toptool_clo_NN2.png" />
+    <Content Include="Resources\ic_toptool_del_NN.png" />
+    <Content Include="Resources\ic_top_smile.png" />
+    <Content Include="Resources\ic_top_unsmile.png" />
+    <Content Include="Resources\loading.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
