@@ -28,8 +28,11 @@ namespace WindowsFormsApp1
             {
                 case 0:
                     foreach (Control c in this.panel3.Controls)
-                        c.Visible = false;
-                    
+                    {
+                        if (c.GetType() == typeof(SearchPage) || c.GetType() == typeof(RegistrationPage) || c.GetType() == typeof(ListBox))
+                            c.Visible = false;
+                    }
+
                     if (this.panel3.Controls.Find("SearchPage", false).Length == 1)
                     {
                         this.panel3.Controls.Find("SearchPage", false)[0].Visible = true;
@@ -40,7 +43,10 @@ namespace WindowsFormsApp1
 
                 case 2:
                     foreach (Control c in this.panel3.Controls)
-                        c.Visible = false;
+                    {
+                        if (c.GetType() == typeof(SearchPage) || c.GetType() == typeof(RegistrationPage) || c.GetType() == typeof(ListBox))
+                            c.Visible = false;
+                    }
 
                     if (this.panel3.Controls.Find("RegistrationPage", false).Length == 1)
                     {
