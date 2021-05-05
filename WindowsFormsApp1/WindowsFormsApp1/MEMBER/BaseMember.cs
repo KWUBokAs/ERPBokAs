@@ -1,13 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Data;
 using System.Threading.Tasks;
+using WindowsFormsApp1.BACK;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using System.Windows.Forms;
+using Newtonsoft.Json.Linq;
 
 namespace WindowsFormsApp1.MEMBER
 {
     public class BaseMember : IMember
     {
+        public enum LOGINTYPE : short
+        {
+            SUCCESS,
+            ID_NOT_INPUT,
+            PW_NOT_INPUT,
+            ID_NOT_EXIST,
+            PW_INCONSIST,
+            DB_CONNECT_FALL,
+        };
         [Flags]
         public enum PERM : short
         {
@@ -15,7 +32,9 @@ namespace WindowsFormsApp1.MEMBER
             NOMAL_USR = 1,
             BOOK_ADMIN = 2,
             READ_ADMIN = 4,
-            MEET_ADMIN = 8
+            MEET_ADMIN = 8,
+            MEMBER_ADMIN = 16,
+            ALL_ADMIN = MEMBER_ADMIN| MEET_ADMIN| READ_ADMIN| BOOK_ADMIN | NOMAL_USR,
         };
         /// <summary>
         /// 싱글톤 constructor
@@ -36,11 +55,27 @@ namespace WindowsFormsApp1.MEMBER
             PhoneNumber = null;
             this.permission = PERM.ANONY_USR;
         }
-        public void LogIn()
+        /// <summary>
+        /// 이름, 전화번호, email, 권한을 DB에서 받아와 세팅해 준다.
+        /// 사용전 TryLogin을 사용하여여
+        /// </summary>
+        /// <returns>ID가 anonymous이면 false / 설정되어 있으면 true</returns>
+        public bool ReadDatabase()
         {
-            throw new NotImplementedException();
+            if (ID == "Anonymous") return false; //회원로그인이 승인되지 않았을 경우
+            SelectSQL selectSQL = new BACK.SelectSQL();
+            selectSQL.setQuery("SELECT NAME, CALLNUM, EMAIL, MANAGE_YN from USER where USER_ID=@USER_ID");
+            selectSQL.AddParam("USER_ID", ID);
+            selectSQL.Go();
+
+            this.name = selectSQL.jArray[0].Value<string>("NAME");
+            this.e_mail = selectSQL.jArray[0].Value<string>("EMAIL");
+            this.phoneNumber = selectSQL.jArray[0].Value<string>("CALLNUM");
+            this.permission = (PERM)selectSQL.jArray[0].Value<int>("MANAGE_YN");
+
+            return true;
         }
-        public static BaseMember GetBaseMember()
+        public static BaseMember GetInstance()
         {
             if(baseMember == null)
             {
@@ -48,6 +83,63 @@ namespace WindowsFormsApp1.MEMBER
             }
             return baseMember;
         }
+        /// <summary>
+        /// 로그인을 시도해서 시도한 user가 존재하는지 확인 할수 있다.
+        /// 실제로 회원 id-pw가 존재하면 ReadData를 할 수 있는 상태로 세팅까지 해준다
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="pw"></param>
+        /// <returns>logintype를 잘 확인 하시면 어떤 값이 돌아올지 알 것입니다.</returns>
+        public LOGINTYPE TryLogin(string id, string pw)
+        {
+            if(id == null || id == "")
+            {
+                return LOGINTYPE.ID_NOT_INPUT;//id를 입력하지 않았을 때
+            }
+            else if(pw == null || pw == "")
+            {
+                return LOGINTYPE.PW_NOT_INPUT;//pw를 입력하지 않았을 때
+            }
+            //-1 : 아이디 없음
+            //0 : pw 틀림
+            //1 : 로그인 성공
+            SelectSQL selectSQL = new BACK.SelectSQL();
+            selectSQL.setQuery("select COUNT(DUSER.USER_ID) AS DCnt" +
+                                    ", COUNT(CUSER.USER_ID) AS Cnt " +
+                                    //", DUSER.USER_ID " +
+                              "FROM USER AS DUSER " +
+                              "LEFT JOIN USER AS CUSER ON CUSER.USER_ID = DUSER.USER_ID " +
+                              "AND CUSER.PW=@PW " +
+                              "WHERE DUSER.USER_ID=@USER_ID");
+            selectSQL.AddParam("USER_ID", id);
+            selectSQL.AddParam("PW", pw);
+            selectSQL.Go();
+
+            if (selectSQL.jArray[0].Value<int>("DCnt") == 0)//ID가 존재하지 않을 때
+            {
+                return LOGINTYPE.ID_NOT_EXIST;
+            }
+            //이하 구절은 ID가 존재하는 경우중에
+            if (selectSQL.jArray[0].Value<int>("Cnt") == 0)//pw가 입력값과 다를때
+            {
+                return LOGINTYPE.PW_INCONSIST;
+            }
+            //정상이여서 로그인 가능할 때
+            ID = id;
+            //ReadDatabase();
+            return LOGINTYPE.SUCCESS;
+        }
+        public ListViewItem GetListViewItem()
+        {
+            ListViewItem liItem = new ListViewItem();
+            liItem.SubItems.Add(id);
+            liItem.SubItems.Add(name);
+            liItem.SubItems.Add(e_mail);
+            liItem.SubItems.Add(phoneNumber);
+            liItem.SubItems.Add(GetStringPermission());
+            return liItem;
+        }
+
         /// <summary>
         /// properties
         /// </summary>
@@ -130,7 +222,28 @@ namespace WindowsFormsApp1.MEMBER
             if (IsMeetingRoomAdmin) Console.WriteLine("관리사용자");
             else Console.WriteLine("일반사용자");
         }
-
-        
+        private string GetStringPermission()
+        {
+            string value ="";
+            switch (permission)
+            {
+                case PERM.ALL_ADMIN:
+                    value = "관리자";
+                    break;
+                case PERM.BOOK_ADMIN:
+                    value = "사서사용자";
+                    break;
+                case PERM.READ_ADMIN:
+                    value = "열람실관리자";
+                    break;
+                case PERM.MEMBER_ADMIN:
+                    value = "회의실관리자";
+                    break;
+                default: 
+                    value = "일반사용자";
+                    break;
+            }
+            return value;
+        }
     }
 }

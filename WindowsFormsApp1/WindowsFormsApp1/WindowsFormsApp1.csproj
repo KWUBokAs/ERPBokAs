@@ -149,13 +149,17 @@
     <Compile Include="MeetRoom\StudyRoom.cs" />
     <Compile Include="MEMBER\BaseMember.cs" />
     <Compile Include="MEMBER\IMember.cs" />
-    <Compile Include="MEMBER\MemberList.cs" />
-    <Compile Include="MEMBER\MemberManager.cs" />
     <Compile Include="OpenRoom.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="OpenRoom.Designer.cs">
       <DependentUpon>OpenRoom.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MEMBER\LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MEMBER\LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
