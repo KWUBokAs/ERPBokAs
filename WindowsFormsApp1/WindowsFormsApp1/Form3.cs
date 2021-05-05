@@ -24,11 +24,36 @@ namespace WindowsFormsApp1
 
         private void listBox1_Click(object sender, EventArgs e)
         {
-            if(this.listBox1.SelectedIndex == 0)
+            switch (this.listBox1.SelectedIndex)
             {
-                this.panel3.Controls.Add(new SearchPage());
+                case 0:
+                    foreach (Control c in this.panel3.Controls)
+                        c.Visible = false;
+                    
+                    if (this.panel3.Controls.Find("SearchPage", false).Length == 1)
+                    {
+                        this.panel3.Controls.Find("SearchPage", false)[0].Visible = true;
+                        break;
+                    }
+                    this.panel3.Controls.Add(new SearchPage());
+                    break;
+
+                case 2:
+                    foreach (Control c in this.panel3.Controls)
+                        c.Visible = false;
+
+                    if (this.panel3.Controls.Find("RegistrationPage", false).Length == 1)
+                    {
+                        this.panel3.Controls.Find("RegistrationPage", false)[0].Visible = true;
+                        break;
+                    }
+                    this.panel3.Controls.Add(new RegistrationPage());
+                    break;
+
+                default:
+                    this.listBox1.SelectedIndex = -1;
+                    break;
             }
-            this.listBox1.Visible = !this.listBox1.Visible;
         }
     }
 }
