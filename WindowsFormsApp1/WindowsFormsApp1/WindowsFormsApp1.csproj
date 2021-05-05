@@ -190,6 +190,9 @@
     <EmbeddedResource Include="MeetRoom.resx">
       <DependentUpon>MeetRoom.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MEMBER\LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="OpenRoom.resx">
       <DependentUpon>OpenRoom.cs</DependentUpon>
     </EmbeddedResource>

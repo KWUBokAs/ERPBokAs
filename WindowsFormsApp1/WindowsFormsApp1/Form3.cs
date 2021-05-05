@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WindowsFormsApp1.MEMBER;
 
 namespace WindowsFormsApp1
 {
@@ -29,7 +30,7 @@ namespace WindowsFormsApp1
         {
             switch (this.listBox1.SelectedIndex)
             {
-                case 0:
+                case 0://검색
                     foreach (Control c in this.panel3.Controls) {
                         c.Visible = false;
                         
@@ -44,7 +45,7 @@ namespace WindowsFormsApp1
                     this.panel3.Controls.Add(new SearchPage());
                     break;
 
-                case 2:
+                case 2://등록
                     foreach (Control c in this.panel3.Controls)
                         c.Visible = false;
 
@@ -119,6 +120,52 @@ namespace WindowsFormsApp1
             }
             else
                 panel3.Controls.Add(MR);
+        }
+
+        private void Form3_Load(object sender, EventArgs e)
+        {
+            ChangeMemberData();
+        }
+        private void ChangeMemberData()
+        {
+            BaseMember member = BaseMember.GetInstance();
+            labMemberID.Text = member.ID;
+            labMemberName.Text = member.Name;
+        }
+
+        private void MemberPanel_Click(object sender, EventArgs e)
+        {
+            this.lbMember.Visible = !this.lbMember.Visible;
+        }
+
+        private void lbMember_Click(object sender, EventArgs e)
+        {
+            switch (this.lbMember.SelectedIndex)
+            {
+                case 0://로그인
+                    if (lbMember.Items[0].Equals("■ 로그아웃"))
+                    {
+                        BaseMember member = BaseMember.GetInstance();
+                        member.Logout();
+                        lbMember.Items[0] = "■ 로그인";
+                    }
+                    else
+                    {
+                        LoginForm logForm = new LoginForm();
+                        DialogResult dResult = logForm.ShowDialog();
+                        if (dResult == DialogResult.OK)
+                        {
+                            lbMember.Items[0] = "■ 로그아웃";
+                        }
+                    }
+                    ChangeMemberData();
+                    break;
+                case 2://이용현황
+                    break;
+                case 4://정보수정
+                    break;
+            }
+            this.lbMember.Visible = !this.lbMember.Visible;
         }
     }
 }

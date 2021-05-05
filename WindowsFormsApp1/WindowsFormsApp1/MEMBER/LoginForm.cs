@@ -16,10 +16,20 @@ namespace WindowsFormsApp1.MEMBER
         {
             InitializeComponent();
             lab_LoginStatus.Text = "";
+            this.AcceptButton = btnLogin;
+        }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            CheckLogin();
+        }
+        private void InitTest()
+        {
+
             txtId.Text = "admin";
             txtPassward.Text = "admin123";
             txtId.Focus();
-
+            /*
             lvwMember.View = View.Details;
             lvwMember.Columns.Add("");
             lvwMember.Columns.Add("ID");
@@ -27,11 +37,7 @@ namespace WindowsFormsApp1.MEMBER
             lvwMember.Columns.Add("E-Mail");
             lvwMember.Columns.Add("전화번호");
             lvwMember.Columns.Add("권한");
-        }
-
-        private void btnLogin_Click(object sender, EventArgs e)
-        {
-            CheckLogin();
+            */
         }
 
         private void txtPassward_KeyUp(object sender, KeyEventArgs e)
@@ -66,13 +72,25 @@ namespace WindowsFormsApp1.MEMBER
                     else
                     {
                         lab_LoginStatus.Text = "성공!";
-                        lvwMember.Items.Add(member.GetListViewItem());
                     }
                     break;
             }
             if (member.IsLogin)
             {
-                //Close();
+                Close();
+            }
+        }
+
+        private void LoginForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            BaseMember member = BaseMember.GetInstance();
+            if (member.IsLogin)
+            {
+                this.DialogResult = DialogResult.OK;
+            }
+            else
+            {
+                this.DialogResult = DialogResult.Cancel;
             }
         }
     }
