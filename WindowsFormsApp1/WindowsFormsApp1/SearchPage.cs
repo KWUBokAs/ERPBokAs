@@ -15,6 +15,7 @@ namespace WindowsFormsApp1
         public SearchPage()
         {
             InitializeComponent();
+            this.listView1.View = View.Details;
         }
     }
 }
