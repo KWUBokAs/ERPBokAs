@@ -42,12 +42,17 @@ namespace WindowsFormsApp1
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.labMemberID = new System.Windows.Forms.Label();
+            this.labMemberName = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.lbMember = new System.Windows.Forms.ListBox();
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel3
@@ -57,6 +62,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel3.BackColor = System.Drawing.SystemColors.Window;
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.lbMember);
             this.panel3.Controls.Add(this.listBox1);
             this.panel3.Location = new System.Drawing.Point(153, 30);
             this.panel3.Name = "panel3";
@@ -125,6 +131,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Left)));
             this.panel2.BackColor = System.Drawing.SystemColors.Window;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.panel4);
             this.panel2.Controls.Add(this.label6);
             this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this.label4);
@@ -140,7 +147,7 @@ namespace WindowsFormsApp1
             // 
             this.label6.AutoSize = true;
             this.label6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label6.Font = new System.Drawing.Font("휴먼모음T", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label6.Font = new System.Drawing.Font("MoeumT R", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label6.Location = new System.Drawing.Point(116, 357);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(41, 21);
@@ -151,7 +158,7 @@ namespace WindowsFormsApp1
             // 
             this.label5.AutoSize = true;
             this.label5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label5.Font = new System.Drawing.Font("휴먼모음T", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label5.Font = new System.Drawing.Font("MoeumT R", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label5.Location = new System.Drawing.Point(116, 231);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(41, 21);
@@ -162,7 +169,7 @@ namespace WindowsFormsApp1
             // 
             this.label4.AutoSize = true;
             this.label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label4.Font = new System.Drawing.Font("휴먼모음T", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label4.Font = new System.Drawing.Font("MoeumT R", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label4.Location = new System.Drawing.Point(116, 105);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(41, 21);
@@ -180,6 +187,7 @@ namespace WindowsFormsApp1
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox3.TabIndex = 2;
             this.pictureBox3.TabStop = false;
+            this.pictureBox3.Click += new System.EventHandler(this.pictureBox3_Click);
             this.pictureBox3.MouseLeave += new System.EventHandler(this.pictureBox3_MouseLeave);
             this.pictureBox3.MouseHover += new System.EventHandler(this.pictureBox3_MouseHover);
             // 
@@ -194,6 +202,7 @@ namespace WindowsFormsApp1
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 1;
             this.pictureBox2.TabStop = false;
+            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
             this.pictureBox2.MouseLeave += new System.EventHandler(this.pictureBox2_MouseLeave);
             this.pictureBox2.MouseHover += new System.EventHandler(this.pictureBox2_MouseHover);
             // 
@@ -214,6 +223,53 @@ namespace WindowsFormsApp1
             this.pictureBox1.MouseLeave += new System.EventHandler(this.pictureBox1_MouseLeave);
             this.pictureBox1.MouseHover += new System.EventHandler(this.pictureBox1_MouseHover);
             // 
+            // labMemberID
+            // 
+            this.labMemberID.AutoSize = true;
+            this.labMemberID.Location = new System.Drawing.Point(23, 30);
+            this.labMemberID.Name = "labMemberID";
+            this.labMemberID.Size = new System.Drawing.Size(45, 15);
+            this.labMemberID.TabIndex = 5;
+            this.labMemberID.Text = "label7";
+            this.labMemberID.Click += new System.EventHandler(this.MemberPanel_Click);
+            // 
+            // labMemberName
+            // 
+            this.labMemberName.AutoSize = true;
+            this.labMemberName.Location = new System.Drawing.Point(23, 71);
+            this.labMemberName.Name = "labMemberName";
+            this.labMemberName.Size = new System.Drawing.Size(45, 15);
+            this.labMemberName.TabIndex = 6;
+            this.labMemberName.Text = "label8";
+            this.labMemberName.Click += new System.EventHandler(this.MemberPanel_Click);
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.labMemberName);
+            this.panel4.Controls.Add(this.labMemberID);
+            this.panel4.Location = new System.Drawing.Point(-1, 381);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(154, 116);
+            this.panel4.TabIndex = 5;
+            this.panel4.Click += new System.EventHandler(this.MemberPanel_Click);
+            // 
+            // lbMember
+            // 
+            this.lbMember.FormattingEnabled = true;
+            this.lbMember.ItemHeight = 15;
+            this.lbMember.Items.AddRange(new object[] {
+            "■ 로그인",
+            "",
+            "■ 이용현황",
+            "",
+            "■ 정보수정"});
+            this.lbMember.Location = new System.Drawing.Point(-1, 381);
+            this.lbMember.Name = "lbMember";
+            this.lbMember.Size = new System.Drawing.Size(148, 94);
+            this.lbMember.TabIndex = 1;
+            this.lbMember.Visible = false;
+            this.lbMember.Click += new System.EventHandler(this.lbMember_Click);
+            // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -224,7 +280,7 @@ namespace WindowsFormsApp1
             this.Controls.Add(this.panel2);
             this.Name = "Form3";
             this.Text = "Form3";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.Form3_Load);
             this.panel3.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -233,6 +289,8 @@ namespace WindowsFormsApp1
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -252,5 +310,9 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label labMemberName;
+        private System.Windows.Forms.Label labMemberID;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.ListBox lbMember;
     }
 }

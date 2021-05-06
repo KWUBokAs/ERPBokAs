@@ -10,12 +10,11 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApp1
 {
-    public partial class SearchPage : UserControl
+    public partial class OpenRoom : UserControl
     {
-        public SearchPage()
+        public OpenRoom()
         {
             InitializeComponent();
-            this.listView1.View = View.Details;
         }
     }
 }

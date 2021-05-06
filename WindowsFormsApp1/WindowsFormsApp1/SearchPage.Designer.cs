@@ -36,6 +36,14 @@ namespace WindowsFormsApp1
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.ISBN = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Text = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Transrator = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Publisher = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Type = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Originnm = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.PublicationDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // textBox1
@@ -95,10 +103,56 @@ namespace WindowsFormsApp1
             this.label3.TabIndex = 7;
             this.label3.Text = "출판사";
             // 
+            // listView1
+            // 
+            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.ISBN,
+            this.Text,
+            this.Transrator,
+            this.Publisher,
+            this.Type,
+            this.Originnm,
+            this.PublicationDate});
+            this.listView1.HideSelection = false;
+            this.listView1.Location = new System.Drawing.Point(29, 189);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(643, 310);
+            this.listView1.TabIndex = 8;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            // 
+            // ISBN
+            // 
+            this.ISBN.Text = "ISBN";
+            // 
+            // Text
+            // 
+            this.Text.Text = "서명";
+            // 
+            // Transrator
+            // 
+            this.Transrator.Text = "역자";
+            // 
+            // Publisher
+            // 
+            this.Publisher.Text = "출판사";
+            // 
+            // Type
+            // 
+            this.Type.Text = "자료형태";
+            // 
+            // Originnm
+            // 
+            this.Originnm.Text = "원저";
+            // 
+            // PublicationDate
+            // 
+            this.PublicationDate.Text = "출간일";
+            // 
             // SearchPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.listView1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -107,7 +161,7 @@ namespace WindowsFormsApp1
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Name = "SearchPage";
-            this.Size = new System.Drawing.Size(670, 426);
+            this.Size = new System.Drawing.Size(721, 559);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -122,5 +176,13 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ColumnHeader ISBN;
+        private System.Windows.Forms.ColumnHeader Text;
+        private System.Windows.Forms.ColumnHeader Transrator;
+        private System.Windows.Forms.ColumnHeader Publisher;
+        private System.Windows.Forms.ColumnHeader Type;
+        private System.Windows.Forms.ColumnHeader Originnm;
+        private System.Windows.Forms.ColumnHeader PublicationDate;
     }
 }
