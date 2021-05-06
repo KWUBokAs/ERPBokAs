@@ -224,6 +224,7 @@ namespace WindowsFormsApp1
             this.Controls.Add(this.panel2);
             this.Name = "Form3";
             this.Text = "Form3";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.panel3.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
