@@ -63,15 +63,16 @@ namespace WindowsFormsApp1.MEMBER
         public bool ReadDatabase()
         {
             if (ID == "Anonymous") return false; //회원로그인이 승인되지 않았을 경우
-            SelectSQL selectSQL = new BACK.SelectSQL();
+            SQLObject selectSQL = new BACK.SQLObject();
             selectSQL.setQuery("SELECT NAME, CALLNUM, EMAIL, MANAGE_YN from USER where USER_ID=@USER_ID");
             selectSQL.AddParam("USER_ID", ID);
             selectSQL.Go();
-
-            this.name = selectSQL.jArray[0].Value<string>("NAME");
-            this.e_mail = selectSQL.jArray[0].Value<string>("EMAIL");
-            this.phoneNumber = selectSQL.jArray[0].Value<string>("CALLNUM");
-            this.permission = (PERM)selectSQL.jArray[0].Value<int>("MANAGE_YN");
+            //selectsql
+            JArray jarray = selectSQL.ToJArray();
+            this.name = jarray[0].Value<string>("NAME");
+            this.e_mail = jarray[0].Value<string>("EMAIL");
+            this.phoneNumber = jarray[0].Value<string>("CALLNUM");
+            this.permission = (PERM)jarray[0].Value<int>("MANAGE_YN");
 
             return true;
         }
@@ -103,7 +104,7 @@ namespace WindowsFormsApp1.MEMBER
             //-1 : 아이디 없음
             //0 : pw 틀림
             //1 : 로그인 성공
-            SelectSQL selectSQL = new BACK.SelectSQL();
+            SQLObject selectSQL = new BACK.SQLObject();
             selectSQL.setQuery("select COUNT(DUSER.USER_ID) AS DCnt" +
                                     ", COUNT(CUSER.USER_ID) AS Cnt " +
                                     //", DUSER.USER_ID " +
@@ -114,13 +115,13 @@ namespace WindowsFormsApp1.MEMBER
             selectSQL.AddParam("USER_ID", id);
             selectSQL.AddParam("PW", pw);
             selectSQL.Go();
-
-            if (selectSQL.jArray[0].Value<int>("DCnt") == 0)//ID가 존재하지 않을 때
+            JArray jarray = selectSQL.ToJArray();
+            if (jarray[0].Value<int>("DCnt") == 0)//ID가 존재하지 않을 때
             {
                 return LOGINTYPE.ID_NOT_EXIST;
             }
             //이하 구절은 ID가 존재하는 경우중에
-            if (selectSQL.jArray[0].Value<int>("Cnt") == 0)//pw가 입력값과 다를때
+            if (jarray[0].Value<int>("Cnt") == 0)//pw가 입력값과 다를때
             {
                 return LOGINTYPE.PW_INCONSIST;
             }

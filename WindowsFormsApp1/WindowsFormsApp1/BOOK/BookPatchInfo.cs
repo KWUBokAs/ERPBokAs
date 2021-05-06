@@ -16,9 +16,9 @@ namespace WindowsFormsApp1.BOOK
         {
             // 실행시 사용자가 선택한 BookInfo의 정보를 받아서 DB에 있는 해당 정보 삭제
             // DB patch
-            UpdateSQL mysqlObj = new UpdateSQL();
-            return mysqlObj.UpdateBook(bbi, abi);
-
+            //UpdateSQL mysqlObj = new UpdateSQL();
+            //return mysqlObj.UpdateBook(bbi, abi);
+            return true;
             // abi중 필수적인 부분이 비어있거나 잘못된 입력이면
             // front든 여기서든 걸러줘야함
             // +) 비어있는 부분은 bbi에서 가져와도 무관

@@ -13,8 +13,9 @@ namespace WindowsFormsApp1.BOOK
         public List<BookInfo> Search(BookInfo bi)
         {
             // 실행시 DB에 BookInfo에 입력된 정보를 기반으로 등록
-            SelectSQL mysqlObj = new SelectSQL();
-            return mysqlObj.SearchBook(bi);
+            //SelectSQL mysqlObj = new SelectSQL();
+            //return mysqlObj.SearchBook(bi);
+            return null;
         }
     }
 }
