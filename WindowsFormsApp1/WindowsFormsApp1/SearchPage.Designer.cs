@@ -29,139 +29,112 @@ namespace WindowsFormsApp1
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.txtName = new System.Windows.Forms.TextBox();
+            this.txtWriter = new System.Windows.Forms.TextBox();
+            this.txtPublisher = new System.Windows.Forms.TextBox();
+            this.btnSearch = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.ISBN = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Text = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Transrator = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Publisher = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Type = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Originnm = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.PublicationDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.dgvBookInfo = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBookInfo)).BeginInit();
             this.SuspendLayout();
             // 
-            // textBox1
+            // txtName
             // 
-            this.textBox1.Location = new System.Drawing.Point(86, 43);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(401, 25);
-            this.textBox1.TabIndex = 0;
+            this.txtName.Location = new System.Drawing.Point(75, 34);
+            this.txtName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(351, 21);
+            this.txtName.TabIndex = 0;
             // 
-            // textBox2
+            // txtWriter
             // 
-            this.textBox2.Location = new System.Drawing.Point(86, 85);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(401, 25);
-            this.textBox2.TabIndex = 1;
+            this.txtWriter.Location = new System.Drawing.Point(75, 68);
+            this.txtWriter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtWriter.Name = "txtWriter";
+            this.txtWriter.Size = new System.Drawing.Size(351, 21);
+            this.txtWriter.TabIndex = 1;
             // 
-            // textBox3
+            // txtPublisher
             // 
-            this.textBox3.Location = new System.Drawing.Point(86, 127);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(401, 25);
-            this.textBox3.TabIndex = 2;
+            this.txtPublisher.Location = new System.Drawing.Point(75, 102);
+            this.txtPublisher.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtPublisher.Name = "txtPublisher";
+            this.txtPublisher.Size = new System.Drawing.Size(351, 21);
+            this.txtPublisher.TabIndex = 2;
             // 
-            // button1
+            // btnSearch
             // 
-            this.button1.Location = new System.Drawing.Point(556, 45);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "검색";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnSearch.Location = new System.Drawing.Point(486, 36);
+            this.btnSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(66, 19);
+            this.btnSearch.TabIndex = 4;
+            this.btnSearch.Text = "검색";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(26, 49);
+            this.label1.Location = new System.Drawing.Point(23, 39);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(37, 15);
+            this.label1.Size = new System.Drawing.Size(29, 12);
             this.label1.TabIndex = 5;
             this.label1.Text = "서명";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(26, 88);
+            this.label2.Location = new System.Drawing.Point(23, 70);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(37, 15);
+            this.label2.Size = new System.Drawing.Size(29, 12);
             this.label2.TabIndex = 6;
             this.label2.Text = "저자";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(26, 130);
+            this.label3.Location = new System.Drawing.Point(23, 104);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(52, 15);
+            this.label3.Size = new System.Drawing.Size(41, 12);
             this.label3.TabIndex = 7;
             this.label3.Text = "출판사";
             // 
-            // listView1
+            // dgvBookInfo
             // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.ISBN,
-            this.Text,
-            this.Transrator,
-            this.Publisher,
-            this.Type,
-            this.Originnm,
-            this.PublicationDate});
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(29, 189);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(643, 310);
-            this.listView1.TabIndex = 8;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            // 
-            // ISBN
-            // 
-            this.ISBN.Text = "ISBN";
-            // 
-            // Text
-            // 
-            this.Text.Text = "서명";
-            // 
-            // Transrator
-            // 
-            this.Transrator.Text = "역자";
-            // 
-            // Publisher
-            // 
-            this.Publisher.Text = "출판사";
-            // 
-            // Type
-            // 
-            this.Type.Text = "자료형태";
-            // 
-            // Originnm
-            // 
-            this.Originnm.Text = "원저";
-            // 
-            // PublicationDate
-            // 
-            this.PublicationDate.Text = "출간일";
+            this.dgvBookInfo.AllowUserToAddRows = false;
+            this.dgvBookInfo.AllowUserToDeleteRows = false;
+            this.dgvBookInfo.AllowUserToResizeColumns = false;
+            this.dgvBookInfo.AllowUserToResizeRows = false;
+            this.dgvBookInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvBookInfo.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dgvBookInfo.Location = new System.Drawing.Point(25, 142);
+            this.dgvBookInfo.MultiSelect = false;
+            this.dgvBookInfo.Name = "dgvBookInfo";
+            this.dgvBookInfo.RowTemplate.Height = 23;
+            this.dgvBookInfo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvBookInfo.Size = new System.Drawing.Size(570, 340);
+            this.dgvBookInfo.TabIndex = 9;
+            this.dgvBookInfo.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBookInfo_CellContentDoubleClick);
             // 
             // SearchPage
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.dgvBookInfo);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.btnSearch);
+            this.Controls.Add(this.txtPublisher);
+            this.Controls.Add(this.txtWriter);
+            this.Controls.Add(this.txtName);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "SearchPage";
-            this.Size = new System.Drawing.Size(721, 559);
+            this.Size = new System.Drawing.Size(618, 499);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBookInfo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -169,20 +142,13 @@ namespace WindowsFormsApp1
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox txtName;
+        private System.Windows.Forms.TextBox txtWriter;
+        private System.Windows.Forms.TextBox txtPublisher;
+        private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.ColumnHeader ISBN;
-        private System.Windows.Forms.ColumnHeader Text;
-        private System.Windows.Forms.ColumnHeader Transrator;
-        private System.Windows.Forms.ColumnHeader Publisher;
-        private System.Windows.Forms.ColumnHeader Type;
-        private System.Windows.Forms.ColumnHeader Originnm;
-        private System.Windows.Forms.ColumnHeader PublicationDate;
+        private System.Windows.Forms.DataGridView dgvBookInfo;
     }
 }
