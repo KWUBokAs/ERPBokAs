@@ -3,15 +3,15 @@ namespace WindowsFormsApp1
 {
     partial class BookInfoDetail
     {
-        /// <summary> 
-        /// 필수 디자이너 변수입니다.
+        /// <summary>
+        /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary> 
-        /// 사용 중인 모든 리소스를 정리합니다.
+        /// <summary>
+        /// Clean up any resources being used.
         /// </summary>
-        /// <param name="disposing">관리되는 리소스를 삭제해야 하면 true이고, 그렇지 않으면 false입니다.</param>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -21,221 +21,233 @@ namespace WindowsFormsApp1
             base.Dispose(disposing);
         }
 
-        #region 구성 요소 디자이너에서 생성한 코드
+        #region Windows Form Designer generated code
 
-        /// <summary> 
-        /// 디자이너 지원에 필요한 메서드입니다. 
-        /// 이 메서드의 내용을 코드 편집기로 수정하지 마세요.
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
+            this.lblIndex = new System.Windows.Forms.Label();
+            this.lblSummary = new System.Windows.Forms.Label();
+            this.lblPrice = new System.Windows.Forms.Label();
+            this.lblPublicationDate = new System.Windows.Forms.Label();
+            this.lblOriginnm = new System.Windows.Forms.Label();
+            this.lblType = new System.Windows.Forms.Label();
+            this.lblPublisher = new System.Windows.Forms.Label();
+            this.lblTransrator = new System.Windows.Forms.Label();
+            this.lblWriter = new System.Windows.Forms.Label();
+            this.lblISBN = new System.Windows.Forms.Label();
+            this.lblName = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.labelName = new System.Windows.Forms.Label();
-            this.labelISBN = new System.Windows.Forms.Label();
-            this.labelWriter = new System.Windows.Forms.Label();
-            this.labelTransrator = new System.Windows.Forms.Label();
-            this.labelPublisher = new System.Windows.Forms.Label();
-            this.labelType = new System.Windows.Forms.Label();
-            this.labelOriginnm = new System.Windows.Forms.Label();
-            this.labelPublicationDate = new System.Windows.Forms.Label();
-            this.labelPrice = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.Callnum = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.RentYN = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ReservYN = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.RegDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Location = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.dgvBooks = new System.Windows.Forms.DataGridView();
+            this.btnRent = new System.Windows.Forms.Button();
+            this.btnReturn = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBooks)).BeginInit();
             this.SuspendLayout();
+            // 
+            // lblIndex
+            // 
+            this.lblIndex.AutoSize = true;
+            this.lblIndex.Location = new System.Drawing.Point(49, 295);
+            this.lblIndex.Name = "lblIndex";
+            this.lblIndex.Size = new System.Drawing.Size(29, 12);
+            this.lblIndex.TabIndex = 24;
+            this.lblIndex.Text = "목차";
+            // 
+            // lblSummary
+            // 
+            this.lblSummary.AutoSize = true;
+            this.lblSummary.Location = new System.Drawing.Point(49, 227);
+            this.lblSummary.Name = "lblSummary";
+            this.lblSummary.Size = new System.Drawing.Size(29, 12);
+            this.lblSummary.TabIndex = 23;
+            this.lblSummary.Text = "요약";
+            // 
+            // lblPrice
+            // 
+            this.lblPrice.AutoSize = true;
+            this.lblPrice.Location = new System.Drawing.Point(488, 147);
+            this.lblPrice.Name = "lblPrice";
+            this.lblPrice.Size = new System.Drawing.Size(41, 12);
+            this.lblPrice.TabIndex = 22;
+            this.lblPrice.Text = "가격 : ";
+            // 
+            // lblPublicationDate
+            // 
+            this.lblPublicationDate.AutoSize = true;
+            this.lblPublicationDate.Location = new System.Drawing.Point(488, 113);
+            this.lblPublicationDate.Name = "lblPublicationDate";
+            this.lblPublicationDate.Size = new System.Drawing.Size(53, 12);
+            this.lblPublicationDate.TabIndex = 21;
+            this.lblPublicationDate.Text = "출간일 : ";
+            // 
+            // lblOriginnm
+            // 
+            this.lblOriginnm.AutoSize = true;
+            this.lblOriginnm.Location = new System.Drawing.Point(488, 77);
+            this.lblOriginnm.Name = "lblOriginnm";
+            this.lblOriginnm.Size = new System.Drawing.Size(41, 12);
+            this.lblOriginnm.TabIndex = 20;
+            this.lblOriginnm.Text = "원저 : ";
+            // 
+            // lblType
+            // 
+            this.lblType.AutoSize = true;
+            this.lblType.Location = new System.Drawing.Point(488, 44);
+            this.lblType.Name = "lblType";
+            this.lblType.Size = new System.Drawing.Size(65, 12);
+            this.lblType.TabIndex = 19;
+            this.lblType.Text = "자료형태 : ";
+            // 
+            // lblPublisher
+            // 
+            this.lblPublisher.AutoSize = true;
+            this.lblPublisher.Location = new System.Drawing.Point(312, 182);
+            this.lblPublisher.Name = "lblPublisher";
+            this.lblPublisher.Size = new System.Drawing.Size(53, 12);
+            this.lblPublisher.TabIndex = 18;
+            this.lblPublisher.Text = "출판사 : ";
+            // 
+            // lblTransrator
+            // 
+            this.lblTransrator.AutoSize = true;
+            this.lblTransrator.Location = new System.Drawing.Point(312, 147);
+            this.lblTransrator.Name = "lblTransrator";
+            this.lblTransrator.Size = new System.Drawing.Size(41, 12);
+            this.lblTransrator.TabIndex = 17;
+            this.lblTransrator.Text = "역자 : ";
+            // 
+            // lblWriter
+            // 
+            this.lblWriter.AutoSize = true;
+            this.lblWriter.Location = new System.Drawing.Point(312, 113);
+            this.lblWriter.Name = "lblWriter";
+            this.lblWriter.Size = new System.Drawing.Size(41, 12);
+            this.lblWriter.TabIndex = 16;
+            this.lblWriter.Text = "저자 : ";
+            // 
+            // lblISBN
+            // 
+            this.lblISBN.AutoSize = true;
+            this.lblISBN.Location = new System.Drawing.Point(312, 77);
+            this.lblISBN.Name = "lblISBN";
+            this.lblISBN.Size = new System.Drawing.Size(45, 12);
+            this.lblISBN.TabIndex = 15;
+            this.lblISBN.Text = "ISBN : ";
+            // 
+            // lblName
+            // 
+            this.lblName.AutoSize = true;
+            this.lblName.Location = new System.Drawing.Point(312, 44);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(41, 12);
+            this.lblName.TabIndex = 14;
+            this.lblName.Text = "서명 : ";
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(30, 19);
+            this.pictureBox1.Location = new System.Drawing.Point(51, 36);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(251, 218);
-            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.Size = new System.Drawing.Size(220, 174);
+            this.pictureBox1.TabIndex = 13;
             this.pictureBox1.TabStop = false;
             // 
-            // labelName
+            // dgvBooks
             // 
-            this.labelName.AutoSize = true;
-            this.labelName.Location = new System.Drawing.Point(328, 29);
-            this.labelName.Name = "labelName";
-            this.labelName.Size = new System.Drawing.Size(52, 15);
-            this.labelName.TabIndex = 1;
-            this.labelName.Text = "서명 : ";
+            this.dgvBooks.AllowUserToAddRows = false;
+            this.dgvBooks.AllowUserToDeleteRows = false;
+            this.dgvBooks.AllowUserToResizeColumns = false;
+            this.dgvBooks.AllowUserToResizeRows = false;
+            this.dgvBooks.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvBooks.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dgvBooks.Location = new System.Drawing.Point(51, 319);
+            this.dgvBooks.MultiSelect = false;
+            this.dgvBooks.Name = "dgvBooks";
+            this.dgvBooks.RowTemplate.Height = 23;
+            this.dgvBooks.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvBooks.Size = new System.Drawing.Size(710, 235);
+            this.dgvBooks.TabIndex = 26;
             // 
-            // labelISBN
+            // btnRent
             // 
-            this.labelISBN.AutoSize = true;
-            this.labelISBN.Location = new System.Drawing.Point(328, 70);
-            this.labelISBN.Name = "labelISBN";
-            this.labelISBN.Size = new System.Drawing.Size(54, 15);
-            this.labelISBN.TabIndex = 2;
-            this.labelISBN.Text = "ISBN : ";
+            this.btnRent.Location = new System.Drawing.Point(51, 583);
+            this.btnRent.Name = "btnRent";
+            this.btnRent.Size = new System.Drawing.Size(75, 23);
+            this.btnRent.TabIndex = 27;
+            this.btnRent.Text = "대출";
+            this.btnRent.UseVisualStyleBackColor = true;
+            this.btnRent.Click += new System.EventHandler(this.btnRent_Click);
             // 
-            // labelWriter
+            // btnReturn
             // 
-            this.labelWriter.AutoSize = true;
-            this.labelWriter.Location = new System.Drawing.Point(328, 115);
-            this.labelWriter.Name = "labelWriter";
-            this.labelWriter.Size = new System.Drawing.Size(52, 15);
-            this.labelWriter.TabIndex = 3;
-            this.labelWriter.Text = "저자 : ";
+            this.btnReturn.Location = new System.Drawing.Point(151, 583);
+            this.btnReturn.Name = "btnReturn";
+            this.btnReturn.Size = new System.Drawing.Size(75, 23);
+            this.btnReturn.TabIndex = 28;
+            this.btnReturn.Text = "반납";
+            this.btnReturn.UseVisualStyleBackColor = true;
+            this.btnReturn.Click += new System.EventHandler(this.btnReturn_Click);
             // 
-            // labelTransrator
+            // btnDelete
             // 
-            this.labelTransrator.AutoSize = true;
-            this.labelTransrator.Location = new System.Drawing.Point(328, 158);
-            this.labelTransrator.Name = "labelTransrator";
-            this.labelTransrator.Size = new System.Drawing.Size(52, 15);
-            this.labelTransrator.TabIndex = 4;
-            this.labelTransrator.Text = "역자 : ";
-            // 
-            // labelPublisher
-            // 
-            this.labelPublisher.AutoSize = true;
-            this.labelPublisher.Location = new System.Drawing.Point(328, 201);
-            this.labelPublisher.Name = "labelPublisher";
-            this.labelPublisher.Size = new System.Drawing.Size(67, 15);
-            this.labelPublisher.TabIndex = 5;
-            this.labelPublisher.Text = "출판사 : ";
-            // 
-            // labelType
-            // 
-            this.labelType.AutoSize = true;
-            this.labelType.Location = new System.Drawing.Point(529, 29);
-            this.labelType.Name = "labelType";
-            this.labelType.Size = new System.Drawing.Size(82, 15);
-            this.labelType.TabIndex = 6;
-            this.labelType.Text = "자료형태 : ";
-            // 
-            // labelOriginnm
-            // 
-            this.labelOriginnm.AutoSize = true;
-            this.labelOriginnm.Location = new System.Drawing.Point(529, 70);
-            this.labelOriginnm.Name = "labelOriginnm";
-            this.labelOriginnm.Size = new System.Drawing.Size(52, 15);
-            this.labelOriginnm.TabIndex = 7;
-            this.labelOriginnm.Text = "원저 : ";
-            // 
-            // labelPublicationDate
-            // 
-            this.labelPublicationDate.AutoSize = true;
-            this.labelPublicationDate.Location = new System.Drawing.Point(529, 115);
-            this.labelPublicationDate.Name = "labelPublicationDate";
-            this.labelPublicationDate.Size = new System.Drawing.Size(67, 15);
-            this.labelPublicationDate.TabIndex = 8;
-            this.labelPublicationDate.Text = "출간일 : ";
-            // 
-            // labelPrice
-            // 
-            this.labelPrice.AutoSize = true;
-            this.labelPrice.Location = new System.Drawing.Point(529, 158);
-            this.labelPrice.Name = "labelPrice";
-            this.labelPrice.Size = new System.Drawing.Size(52, 15);
-            this.labelPrice.TabIndex = 9;
-            this.labelPrice.Text = "가격 : ";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(27, 257);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(37, 15);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "요약";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(27, 343);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(37, 15);
-            this.label2.TabIndex = 11;
-            this.label2.Text = "목차";
-            // 
-            // listView1
-            // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.Callnum,
-            this.RentYN,
-            this.ReservYN,
-            this.RegDate,
-            this.Location});
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(30, 429);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(794, 213);
-            this.listView1.TabIndex = 12;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            // 
-            // Callnum
-            // 
-            this.Callnum.Text = "청구번호";
-            // 
-            // RentYN
-            // 
-            this.RentYN.Text = "대여가능여부";
-            // 
-            // ReservYN
-            // 
-            this.ReservYN.Text = "예약가능여부";
-            // 
-            // RegDate
-            // 
-            this.RegDate.Text = "예약일";
-            // 
-            // Location
-            // 
-            this.Location.Text = "책 위치";
+            this.btnDelete.Location = new System.Drawing.Point(252, 583);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(75, 23);
+            this.btnDelete.TabIndex = 29;
+            this.btnDelete.Text = "삭제";
+            this.btnDelete.UseVisualStyleBackColor = true;
             // 
             // BookInfoDetail
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.listView1);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.labelPrice);
-            this.Controls.Add(this.labelPublicationDate);
-            this.Controls.Add(this.labelOriginnm);
-            this.Controls.Add(this.labelType);
-            this.Controls.Add(this.labelPublisher);
-            this.Controls.Add(this.labelTransrator);
-            this.Controls.Add(this.labelWriter);
-            this.Controls.Add(this.labelISBN);
-            this.Controls.Add(this.labelName);
+            this.ClientSize = new System.Drawing.Size(800, 646);
+            this.Controls.Add(this.btnDelete);
+            this.Controls.Add(this.btnReturn);
+            this.Controls.Add(this.btnRent);
+            this.Controls.Add(this.dgvBooks);
+            this.Controls.Add(this.lblIndex);
+            this.Controls.Add(this.lblSummary);
+            this.Controls.Add(this.lblPrice);
+            this.Controls.Add(this.lblPublicationDate);
+            this.Controls.Add(this.lblOriginnm);
+            this.Controls.Add(this.lblType);
+            this.Controls.Add(this.lblPublisher);
+            this.Controls.Add(this.lblTransrator);
+            this.Controls.Add(this.lblWriter);
+            this.Controls.Add(this.lblISBN);
+            this.Controls.Add(this.lblName);
             this.Controls.Add(this.pictureBox1);
             this.Name = "BookInfoDetail";
-            this.Size = new System.Drawing.Size(873, 677);
+            this.Text = "BookInfoDetail";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBooks)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
+        private System.Windows.Forms.Label lblIndex;
+        private System.Windows.Forms.Label lblSummary;
+        private System.Windows.Forms.Label lblPrice;
+        private System.Windows.Forms.Label lblPublicationDate;
+        private System.Windows.Forms.Label lblOriginnm;
+        private System.Windows.Forms.Label lblType;
+        private System.Windows.Forms.Label lblPublisher;
+        private System.Windows.Forms.Label lblTransrator;
+        private System.Windows.Forms.Label lblWriter;
+        private System.Windows.Forms.Label lblISBN;
+        private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label labelName;
-        private System.Windows.Forms.Label labelISBN;
-        private System.Windows.Forms.Label labelWriter;
-        private System.Windows.Forms.Label labelTransrator;
-        private System.Windows.Forms.Label labelPublisher;
-        private System.Windows.Forms.Label labelType;
-        private System.Windows.Forms.Label labelOriginnm;
-        private System.Windows.Forms.Label labelPublicationDate;
-        private System.Windows.Forms.Label labelPrice;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.ColumnHeader Callnum;
-        private System.Windows.Forms.ColumnHeader RentYN;
-        private System.Windows.Forms.ColumnHeader ReservYN;
-        private System.Windows.Forms.ColumnHeader RegDate;
-        private System.Windows.Forms.ColumnHeader Location;
+        private System.Windows.Forms.DataGridView dgvBooks;
+        private System.Windows.Forms.Button btnRent;
+        private System.Windows.Forms.Button btnReturn;
+        private System.Windows.Forms.Button btnDelete;
     }
 }
