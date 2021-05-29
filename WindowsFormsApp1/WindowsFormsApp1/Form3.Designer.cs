@@ -81,7 +81,7 @@ namespace WindowsFormsApp1
             "■ 정보수정"});
             this.lbMember.Location = new System.Drawing.Point(-1, 381);
             this.lbMember.Name = "lbMember";
-            this.lbMember.Size = new System.Drawing.Size(148, 109);
+            this.lbMember.Size = new System.Drawing.Size(148, 124);
             this.lbMember.TabIndex = 1;
             this.lbMember.Visible = false;
             this.lbMember.Click += new System.EventHandler(this.lbMember_Click);

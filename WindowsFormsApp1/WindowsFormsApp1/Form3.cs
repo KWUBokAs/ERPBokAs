@@ -156,6 +156,7 @@ namespace WindowsFormsApp1
             {
                 member.Logout();
                 SetlbMemberItem();
+                DeletePanel();
             }
             else if (selectItem.Equals("■ 로그인"))
             {
@@ -168,7 +169,12 @@ namespace WindowsFormsApp1
             }
             else if (selectItem.Equals("■ 이용현황"))
             {
-
+                HidePanel();
+                if (this.panel3.Controls.Find("StatusOfUsePanenl", false).Length == 1)
+                {
+                    this.panel3.Controls.Find("StatusOfUsePanenl", false)[0].Visible = true;
+                }
+                else this.panel3.Controls.Add(new StatusOfUsePanenl());
             }
             else if (selectItem.Equals("■ 권한부여"))
             {
@@ -176,7 +182,6 @@ namespace WindowsFormsApp1
             }
             else if (selectItem.Equals("■ 회원생성"))
             {
-
                 HidePanel();
                 if (this.panel3.Controls.Find("MemberDataInputPanel", false).Length == 1)
                 {
@@ -235,8 +240,19 @@ namespace WindowsFormsApp1
         {
             foreach (Control c in this.panel3.Controls)
             {
-                if (c.GetType() == typeof(SearchPage) || c.GetType() == typeof(RegistrationPage) || c.GetType() == typeof(ListBox) || c.GetType() == typeof(MemberDataInputPanel))
+                if (c.GetType() == typeof(SearchPage) || c.GetType() == typeof(RegistrationPage) || c.GetType() == typeof(ListBox) || c.GetType() == typeof(MemberDataInputPanel)
+                    || c.GetType() == typeof(StatusOfUsePanenl))
                     c.Visible = false;
+            }
+        }
+        private void DeletePanel()
+        {
+            foreach(Control c in this.panel3.Controls)
+            {
+                if(c.GetType() == typeof(Panel))
+                {
+                    this.panel3.Controls.Remove(c);
+                }
             }
         }
     }

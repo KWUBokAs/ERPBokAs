@@ -155,6 +155,12 @@
     <Compile Include="MEMBER\MemberDataInputPanel.Designer.cs">
       <DependentUpon>MemberDataInputPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="MEMBER\StatusOfUsePanenl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MEMBER\StatusOfUsePanenl.Designer.cs">
+      <DependentUpon>StatusOfUsePanenl.cs</DependentUpon>
+    </Compile>
     <Compile Include="OpenRoom.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -210,6 +216,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MEMBER\MemberDataInputPanel.resx">
       <DependentUpon>MemberDataInputPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MEMBER\StatusOfUsePanenl.resx">
+      <DependentUpon>StatusOfUsePanenl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OpenRoom.resx">
       <DependentUpon>OpenRoom.cs</DependentUpon>
