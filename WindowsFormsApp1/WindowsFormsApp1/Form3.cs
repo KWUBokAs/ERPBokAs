@@ -144,6 +144,7 @@ namespace WindowsFormsApp1
         private void Form3_Load(object sender, EventArgs e)
         {
             ChangeMemberData();
+            SetlbMemberItem();
         }
         private void ChangeMemberData()
         {
@@ -160,38 +161,78 @@ namespace WindowsFormsApp1
         private void lbMember_Click(object sender, EventArgs e)
         {
             BaseMember member = BaseMember.GetInstance();
-            switch (this.lbMember.SelectedIndex)
+            int index = lbMember.SelectedIndex;
+            string selectItem = lbMember.Items[index].ToString();
+            if (selectItem.Equals("■ 로그아웃"))
             {
-                case 0://로그인
-                    if (lbMember.Items[0].Equals("■ 로그아웃"))
-                    {
-                        member.Logout();
-                        lbMember.Items[0] = "■ 로그인";
-                    }
-                    else
-                    {
-                        LoginForm logForm = new LoginForm();
-                        DialogResult dResult = logForm.ShowDialog();
-                        if (dResult == DialogResult.OK)
-                        {
-                            lbMember.Items[0] = "■ 로그아웃";
-                        }
-                    }
-                    ChangeMemberData();
-                    break;
-                case 2://이용현황
-                    break;
-                case 4://정보수정
-                    BaseMember.PERM perm = member.Permission;
-                    if((perm&BaseMember.PERM.MEMBER_ADMIN) == BaseMember.PERM.MEMBER_ADMIN)//회원관리자인 경우
-                    {
-                        //하지만 이것은 회원가입을 시키는 부분인데 실제 기능에 구현 되는 것이 아니라 파싱을 하기 위함이다.
-                        //그렇기 때문에 이 부분은 사용자가 절대 들어와서는 안되는 곳이다.
-
-                    }
-                    break;
+                member.Logout();
+                SetlbMemberItem();
             }
-            this.lbMember.Visible = !this.lbMember.Visible;
+            else if (selectItem.Equals("■ 로그인"))
+            {
+                LoginForm logForm = new LoginForm();
+                DialogResult dResult = logForm.ShowDialog();
+                if (dResult == DialogResult.OK)
+                {
+                    SetlbMemberItem();
+                }
+            }
+            else if (selectItem.Equals("■ 이용현황"))
+            {
+
+            }
+            else if (selectItem.Equals("■ 권한부여"))
+            {
+
+            }
+            else if (selectItem.Equals("■ 회원생성"))
+            {
+                this.panel3.Controls.Add(new RegistrationPage());
+            }
+            else if (selectItem.Equals("■ 불량자 회원 검색"))
+            {
+
+            }
+            else if (selectItem.Equals("■ 개인정보관리"))
+            {
+
+            }
+            else return;
+            ChangeMemberData();
+            this.lbMember.Visible = false;
+        }
+        /// <summary>
+        /// 회원상태에 따라 lbMember에 item을 만들어줌
+        /// </summary>
+        private void SetlbMemberItem()
+        {
+            BaseMember member = BaseMember.GetInstance();
+            lbMember.Items.Clear();
+            if (member.IsLogin)
+            {
+                lbMember.Items.Add("■ 로그아웃");
+                lbMember.Items.Add("");
+                lbMember.Items.Add("■ 개인정보관리");
+            }
+            else
+            {
+                lbMember.Items.Add("■ 로그인");
+            }
+            if ((member.Permission&BaseMember.PERM.MEMBER_ADMIN) == BaseMember.PERM.MEMBER_ADMIN)
+            {
+                lbMember.Items.Add("■ 권한부여");
+                lbMember.Items.Add("■ 회원생성");
+            }
+            lbMember.Items.Add("");
+            if((member.Permission & BaseMember.PERM.BOOK_ADMIN) == BaseMember.PERM.BOOK_ADMIN)
+            {
+                lbMember.Items.Add("■ 불량자 회원 검색");
+                lbMember.Items.Add("");
+            }
+            else if(member.Permission == BaseMember.PERM.NOMAL_USR)
+            {
+                lbMember.Items.Add("■ 이용현황");
+            }
         }
     }
 }

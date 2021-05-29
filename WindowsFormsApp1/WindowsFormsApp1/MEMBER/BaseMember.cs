@@ -102,32 +102,39 @@ namespace WindowsFormsApp1.MEMBER
             {
                 return LOGINTYPE.PW_NOT_INPUT;//pw를 입력하지 않았을 때
             }
-            //-1 : 아이디 없음
-            //0 : pw 틀림
-            //1 : 로그인 성공
-            SQLObject selectSQL = new BACK.SQLObject();
-            selectSQL.setQuery("select COUNT(DUSER.USER_ID) AS DCnt" +
-                                    ", COUNT(CUSER.USER_ID) AS Cnt " +
-                                    //", DUSER.USER_ID " +
-                              "FROM USER AS DUSER " +
-                              "LEFT JOIN USER AS CUSER ON CUSER.USER_ID = DUSER.USER_ID " +
-                              "AND CUSER.PW=@PW " +
-                              "WHERE DUSER.USER_ID=@USER_ID");
-            selectSQL.AddParam("USER_ID", id);
-            selectSQL.AddParam("PW", pw);
-            selectSQL.Go();
-            JArray jarray = selectSQL.ToJArray();
-            if (jarray[0].Value<int>("DCnt") == 0)//ID가 존재하지 않을 때
+            try
             {
-                return LOGINTYPE.ID_NOT_EXIST;
+                //-1 : 아이디 없음
+                //0 : pw 틀림
+                //1 : 로그인 성공
+                SQLObject selectSQL = new BACK.SQLObject();
+                selectSQL.setQuery("select COUNT(DUSER.USER_ID) AS DCnt" +
+                                        ", COUNT(CUSER.USER_ID) AS Cnt " +
+                                  //", DUSER.USER_ID " +
+                                  "FROM USER AS DUSER " +
+                                  "LEFT JOIN USER AS CUSER ON CUSER.USER_ID = DUSER.USER_ID " +
+                                  "AND CUSER.PW=@PW " +
+                                  "WHERE DUSER.USER_ID=@USER_ID");
+                selectSQL.AddParam("USER_ID", id);
+                selectSQL.AddParam("PW", pw);
+                selectSQL.Go();
+                JArray jarray = selectSQL.ToJArray();
+                if (jarray[0].Value<int>("DCnt") == 0)//ID가 존재하지 않을 때
+                {
+                    return LOGINTYPE.ID_NOT_EXIST;
+                }
+                //이하 구절은 ID가 존재하는 경우중에
+                if (jarray[0].Value<int>("Cnt") == 0)//pw가 입력값과 다를때
+                {
+                    return LOGINTYPE.PW_INCONSIST;
+                }
+                //정상이여서 로그인 가능할 때
+                ID = id;
             }
-            //이하 구절은 ID가 존재하는 경우중에
-            if (jarray[0].Value<int>("Cnt") == 0)//pw가 입력값과 다를때
+            catch
             {
-                return LOGINTYPE.PW_INCONSIST;
-            }
-            //정상이여서 로그인 가능할 때
-            ID = id;
+                return LOGINTYPE.DB_CONNECT_FALL;
+            }            
             //ReadDatabase();
             return LOGINTYPE.SUCCESS;
         }
