@@ -252,6 +252,7 @@
     <Folder Include="ROOM\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Server.json" />
     <None Include="Resources\책.PNG" />
   </ItemGroup>
   <ItemGroup>
