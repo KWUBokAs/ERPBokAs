@@ -159,12 +159,12 @@ namespace WindowsFormsApp1
 
         private void lbMember_Click(object sender, EventArgs e)
         {
+            BaseMember member = BaseMember.GetInstance();
             switch (this.lbMember.SelectedIndex)
             {
                 case 0://로그인
                     if (lbMember.Items[0].Equals("■ 로그아웃"))
                     {
-                        BaseMember member = BaseMember.GetInstance();
                         member.Logout();
                         lbMember.Items[0] = "■ 로그인";
                     }
@@ -182,6 +182,13 @@ namespace WindowsFormsApp1
                 case 2://이용현황
                     break;
                 case 4://정보수정
+                    BaseMember.PERM perm = member.Permission;
+                    if((perm&BaseMember.PERM.MEMBER_ADMIN) == BaseMember.PERM.MEMBER_ADMIN)//회원관리자인 경우
+                    {
+                        //하지만 이것은 회원가입을 시키는 부분인데 실제 기능에 구현 되는 것이 아니라 파싱을 하기 위함이다.
+                        //그렇기 때문에 이 부분은 사용자가 절대 들어와서는 안되는 곳이다.
+
+                    }
                     break;
             }
             this.lbMember.Visible = !this.lbMember.Visible;
