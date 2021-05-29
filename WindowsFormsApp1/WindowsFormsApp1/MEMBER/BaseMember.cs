@@ -11,6 +11,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System.Windows.Forms;
 using Newtonsoft.Json.Linq;
+using System.Security.Cryptography;
 
 namespace WindowsFormsApp1.MEMBER
 {
@@ -101,33 +102,81 @@ namespace WindowsFormsApp1.MEMBER
             {
                 return LOGINTYPE.PW_NOT_INPUT;//pw를 입력하지 않았을 때
             }
-            //-1 : 아이디 없음
-            //0 : pw 틀림
-            //1 : 로그인 성공
-            SQLObject selectSQL = new BACK.SQLObject();
-            selectSQL.setQuery("select COUNT(DUSER.USER_ID) AS DCnt" +
-                                    ", COUNT(CUSER.USER_ID) AS Cnt " +
-                                    //", DUSER.USER_ID " +
-                              "FROM USER AS DUSER " +
-                              "LEFT JOIN USER AS CUSER ON CUSER.USER_ID = DUSER.USER_ID " +
-                              "AND CUSER.PW=@PW " +
-                              "WHERE DUSER.USER_ID=@USER_ID");
-            selectSQL.AddParam("USER_ID", id);
-            selectSQL.AddParam("PW", pw);
-            selectSQL.Go();
-            JArray jarray = selectSQL.ToJArray();
-            if (jarray[0].Value<int>("DCnt") == 0)//ID가 존재하지 않을 때
+            try
             {
-                return LOGINTYPE.ID_NOT_EXIST;
+                //-1 : 아이디 없음
+                //0 : pw 틀림
+                //1 : 로그인 성공
+                SQLObject selectSQL = new BACK.SQLObject();
+                selectSQL.setQuery("select COUNT(DUSER.USER_ID) AS DCnt" +
+                                        ", COUNT(CUSER.USER_ID) AS Cnt " +
+                                  //", DUSER.USER_ID " +
+                                  "FROM USER AS DUSER " +
+                                  "LEFT JOIN USER AS CUSER ON CUSER.USER_ID = DUSER.USER_ID " +
+                                  "AND CUSER.PW=@PW " +
+                                  "WHERE DUSER.USER_ID=@USER_ID");
+                selectSQL.AddParam("USER_ID", id);
+                selectSQL.AddParam("PW", EncodingPassward(pw));
+                selectSQL.Go();
+                JArray jarray = selectSQL.ToJArray();
+                if (jarray[0].Value<int>("DCnt") == 0)//ID가 존재하지 않을 때
+                {
+                    return LOGINTYPE.ID_NOT_EXIST;
+                }
+                //이하 구절은 ID가 존재하는 경우중에
+                if (jarray[0].Value<int>("Cnt") == 0)//pw가 입력값과 다를때
+                {
+                    return LOGINTYPE.PW_INCONSIST;
+                }
+                //정상이여서 로그인 가능할 때
+                ID = id;
             }
-            //이하 구절은 ID가 존재하는 경우중에
-            if (jarray[0].Value<int>("Cnt") == 0)//pw가 입력값과 다를때
+            catch
             {
-                return LOGINTYPE.PW_INCONSIST;
-            }
-            //정상이여서 로그인 가능할 때
-            ID = id;
+                return LOGINTYPE.DB_CONNECT_FALL;
+            }            
             //ReadDatabase();
+            return LOGINTYPE.SUCCESS;
+        }
+        public LOGINTYPE MakeUser(string id, string pw, string name, string phnum, string email, PERM perm, string summery)
+        {
+            if (id == null || id.Length < 4 || pw==null || pw.Length < 4 || name ==null || name.Length < 1 || perm == PERM.ANONY_USR) return LOGINTYPE.ID_NOT_INPUT;//실패
+            try//id가 있는지 없는지 판별하는 부분 있으면 실패를 반환한다.
+            {
+                SQLObject selectSQL = new BACK.SQLObject();
+                selectSQL.setQuery("SELECT COUNT(auser.USER_ID) AS ACNT " +
+                                    "FROM USER AS auser " +
+                                    "WHERE auser.USER_ID=@USER_ID");
+                selectSQL.AddParam("USER_ID", id);
+                selectSQL.Go();
+                JArray idnum = selectSQL.ToJArray();
+                if (idnum[0].Value<int>("ACNT") == 1) return LOGINTYPE.ID_NOT_EXIST;
+            }
+            catch
+            {
+                return LOGINTYPE.DB_CONNECT_FALL;
+            }
+            if (phnum == null || email == null) return LOGINTYPE.PW_NOT_INPUT;
+
+            try
+            {
+                SQLObject selectSQL = new BACK.SQLObject();
+                selectSQL.setQuery("INSERT into `USER`(`USER_ID`, `PW`, `NAME`, `CALLNUM`, `EMAIL`, `MANAGE_YN`, `BAD_YN`, `SUMMARY`) " +
+                                    "VALUES (@USER_ID, @PW, @NAME, @CALLNUM, @EMAIL, @PERM, @BAD_YN, @SUMMARY)");
+                selectSQL.AddParam("USER_ID", id);
+                selectSQL.AddParam("PW", EncodingPassward(pw));
+                selectSQL.AddParam("NAME", name);
+                selectSQL.AddParam("CALLNUM", phnum);
+                selectSQL.AddParam("EMAIL", email);
+                selectSQL.AddParam("PERM", ((short)perm).ToString());
+                selectSQL.AddParam("BAD_YN", "n");
+                selectSQL.AddParam("SUMMARY", summery);
+                selectSQL.Go();
+            }
+            catch
+            {
+                return LOGINTYPE.DB_CONNECT_FALL;
+            }
             return LOGINTYPE.SUCCESS;
         }
         public ListViewItem GetListViewItem()
@@ -140,7 +189,17 @@ namespace WindowsFormsApp1.MEMBER
             liItem.SubItems.Add(GetStringPermission());
             return liItem;
         }
-
+        /// <summary>
+        /// passward를 encoding 한뒤에 반환함
+        /// </summary>
+        /// <param name="passward"></param>
+        /// <returns></returns>
+        private string EncodingPassward(string passward)
+        {
+            SHA256 sha = new SHA256Managed();
+            byte[] hash = sha.ComputeHash(Encoding.ASCII.GetBytes(passward));
+            return Convert.ToBase64String(hash);
+        }
         /// <summary>
         /// properties
         /// </summary>

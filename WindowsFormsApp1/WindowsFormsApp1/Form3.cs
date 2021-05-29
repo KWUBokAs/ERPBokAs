@@ -35,11 +35,7 @@ namespace WindowsFormsApp1
             switch (this.listBox1.SelectedIndex)
             {
                 case 0:
-                    foreach (Control c in this.panel3.Controls)
-                    {
-                        if (c.GetType() == typeof(SearchPage) || c.GetType() == typeof(RegistrationPage) || c.GetType() == typeof(ListBox))
-                            c.Visible = false;
-                    }
+                    HidePanel();
 
                     if (this.panel3.Controls.Find("SearchPage", false).Length == 1)
                     {
@@ -50,11 +46,7 @@ namespace WindowsFormsApp1
                     break;
 
                 case 2://등록
-                    foreach (Control c in this.panel3.Controls)
-                    {
-                        if (c.GetType() == typeof(SearchPage) || c.GetType() == typeof(RegistrationPage) || c.GetType() == typeof(ListBox))
-                            c.Visible = false;
-                    }
+                    HidePanel();
 
                     if (this.panel3.Controls.Find("RegistrationPage", false).Length == 1)
                     {
@@ -103,11 +95,7 @@ namespace WindowsFormsApp1
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
-            foreach (Control c in panel3.Controls)
-            {
-                if (c.GetType() == typeof(SearchPage) || c.GetType() == typeof(RegistrationPage))
-                    c.Visible = false;
-            }
+            HidePanel();
             if (panel3.Controls.Contains(OR)) { 
                 panel3.Controls.Remove(OR);
             }
@@ -123,12 +111,8 @@ namespace WindowsFormsApp1
         
 
         private void pictureBox3_Click(object sender, EventArgs e)
-        {   
-            foreach (Control c in panel3.Controls) 
-            {
-                if (c.GetType() == typeof(SearchPage) || c.GetType() == typeof(RegistrationPage))
-                    c.Visible = false;
-            }
+        {
+            HidePanel();
             if (panel3.Controls.Contains(MR)) { 
                 panel3.Controls.Remove(MR);
             }
@@ -144,6 +128,7 @@ namespace WindowsFormsApp1
         private void Form3_Load(object sender, EventArgs e)
         {
             ChangeMemberData();
+            SetlbMemberItem();
         }
         private void ChangeMemberData()
         {
@@ -159,32 +144,100 @@ namespace WindowsFormsApp1
 
         private void lbMember_Click(object sender, EventArgs e)
         {
-            switch (this.lbMember.SelectedIndex)
+            BaseMember member = BaseMember.GetInstance();
+            int index = lbMember.SelectedIndex;
+            string selectItem = lbMember.Items[index].ToString();
+
+            if (panel3.Controls.Contains(OR))
+                panel3.Controls.Remove(OR);
+            if (panel3.Controls.Contains(MR))
+                panel3.Controls.Remove(MR);
+            if (selectItem.Equals("■ 로그아웃"))
             {
-                case 0://로그인
-                    if (lbMember.Items[0].Equals("■ 로그아웃"))
-                    {
-                        BaseMember member = BaseMember.GetInstance();
-                        member.Logout();
-                        lbMember.Items[0] = "■ 로그인";
-                    }
-                    else
-                    {
-                        LoginForm logForm = new LoginForm();
-                        DialogResult dResult = logForm.ShowDialog();
-                        if (dResult == DialogResult.OK)
-                        {
-                            lbMember.Items[0] = "■ 로그아웃";
-                        }
-                    }
-                    ChangeMemberData();
-                    break;
-                case 2://이용현황
-                    break;
-                case 4://정보수정
-                    break;
+                member.Logout();
+                SetlbMemberItem();
             }
-            this.lbMember.Visible = !this.lbMember.Visible;
+            else if (selectItem.Equals("■ 로그인"))
+            {
+                LoginForm logForm = new LoginForm();
+                DialogResult dResult = logForm.ShowDialog();
+                if (dResult == DialogResult.OK)
+                {
+                    SetlbMemberItem();
+                }
+            }
+            else if (selectItem.Equals("■ 이용현황"))
+            {
+
+            }
+            else if (selectItem.Equals("■ 권한부여"))
+            {
+
+            }
+            else if (selectItem.Equals("■ 회원생성"))
+            {
+
+                HidePanel();
+                if (this.panel3.Controls.Find("MemberDataInputPanel", false).Length == 1)
+                {
+                    this.panel3.Controls.Find("MemberDataInputPanel", false)[0].Visible = true;
+                }
+                else this.panel3.Controls.Add(new MemberDataInputPanel());
+            }
+            else if (selectItem.Equals("■ 불량자 회원 검색"))
+            {
+
+            }
+            else if (selectItem.Equals("■ 개인정보관리"))
+            {
+
+            }
+            else return;
+            ChangeMemberData();
+            this.lbMember.Visible = false;
+        }
+        /// <summary>
+        /// 회원상태에 따라 lbMember에 item을 만들어줌
+        /// </summary>
+        private void SetlbMemberItem()
+        {
+            BaseMember member = BaseMember.GetInstance();
+            lbMember.Items.Clear();
+            if (member.IsLogin)
+            {
+                lbMember.Items.Add("■ 로그아웃");
+                lbMember.Items.Add("");
+                lbMember.Items.Add("■ 개인정보관리");
+            }
+            else
+            {
+                lbMember.Items.Add("■ 로그인");
+            }
+            if ((member.Permission&BaseMember.PERM.MEMBER_ADMIN) == BaseMember.PERM.MEMBER_ADMIN)
+            {
+                lbMember.Items.Add("■ 권한부여");
+                lbMember.Items.Add("■ 회원생성");
+            }
+            lbMember.Items.Add("");
+            
+            if(member.IsBookAdmin)
+            {
+                lbMember.Items.Add("■ 불량자 회원 검색");
+                lbMember.Items.Add("");
+            }
+            else if(member.Permission == BaseMember.PERM.NOMAL_USR)
+            {
+                lbMember.Items.Add("■ 이용현황");
+            }
+        }
+
+        private void HidePanel()
+        {
+            foreach (Control c in this.panel3.Controls)
+            {
+                if (c.GetType() == typeof(SearchPage) || c.GetType() == typeof(RegistrationPage) || c.GetType() == typeof(ListBox) || c.GetType() == typeof(MemberDataInputPanel))
+                    c.Visible = false;
+            }
         }
     }
 }

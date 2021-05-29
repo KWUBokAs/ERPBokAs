@@ -30,29 +30,29 @@ namespace WindowsFormsApp1
         private void InitializeComponent()
         {
             this.panel3 = new System.Windows.Forms.Panel();
+            this.lbMember = new System.Windows.Forms.ListBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.labMemberName = new System.Windows.Forms.Label();
+            this.labMemberID = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.labMemberID = new System.Windows.Forms.Label();
-            this.labMemberName = new System.Windows.Forms.Label();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.lbMember = new System.Windows.Forms.ListBox();
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel3
@@ -68,6 +68,23 @@ namespace WindowsFormsApp1
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(797, 501);
             this.panel3.TabIndex = 4;
+            // 
+            // lbMember
+            // 
+            this.lbMember.FormattingEnabled = true;
+            this.lbMember.ItemHeight = 15;
+            this.lbMember.Items.AddRange(new object[] {
+            "■ 로그인",
+            "",
+            "■ 이용현황",
+            "",
+            "■ 정보수정"});
+            this.lbMember.Location = new System.Drawing.Point(-1, 381);
+            this.lbMember.Name = "lbMember";
+            this.lbMember.Size = new System.Drawing.Size(148, 109);
+            this.lbMember.TabIndex = 1;
+            this.lbMember.Visible = false;
+            this.lbMember.Click += new System.EventHandler(this.lbMember_Click);
             // 
             // listBox1
             // 
@@ -142,6 +159,36 @@ namespace WindowsFormsApp1
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(158, 501);
             this.panel2.TabIndex = 6;
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.labMemberName);
+            this.panel4.Controls.Add(this.labMemberID);
+            this.panel4.Location = new System.Drawing.Point(-1, 381);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(154, 116);
+            this.panel4.TabIndex = 5;
+            this.panel4.Click += new System.EventHandler(this.MemberPanel_Click);
+            // 
+            // labMemberName
+            // 
+            this.labMemberName.AutoSize = true;
+            this.labMemberName.Location = new System.Drawing.Point(23, 71);
+            this.labMemberName.Name = "labMemberName";
+            this.labMemberName.Size = new System.Drawing.Size(45, 15);
+            this.labMemberName.TabIndex = 6;
+            this.labMemberName.Text = "label8";
+            this.labMemberName.Click += new System.EventHandler(this.MemberPanel_Click);
+            // 
+            // labMemberID
+            // 
+            this.labMemberID.AutoSize = true;
+            this.labMemberID.Location = new System.Drawing.Point(23, 30);
+            this.labMemberID.Name = "labMemberID";
+            this.labMemberID.Size = new System.Drawing.Size(45, 15);
+            this.labMemberID.TabIndex = 5;
+            this.labMemberID.Text = "label7";
+            this.labMemberID.Click += new System.EventHandler(this.MemberPanel_Click);
             // 
             // label6
             // 
@@ -223,53 +270,6 @@ namespace WindowsFormsApp1
             this.pictureBox1.MouseLeave += new System.EventHandler(this.pictureBox1_MouseLeave);
             this.pictureBox1.MouseHover += new System.EventHandler(this.pictureBox1_MouseHover);
             // 
-            // labMemberID
-            // 
-            this.labMemberID.AutoSize = true;
-            this.labMemberID.Location = new System.Drawing.Point(23, 30);
-            this.labMemberID.Name = "labMemberID";
-            this.labMemberID.Size = new System.Drawing.Size(45, 15);
-            this.labMemberID.TabIndex = 5;
-            this.labMemberID.Text = "label7";
-            this.labMemberID.Click += new System.EventHandler(this.MemberPanel_Click);
-            // 
-            // labMemberName
-            // 
-            this.labMemberName.AutoSize = true;
-            this.labMemberName.Location = new System.Drawing.Point(23, 71);
-            this.labMemberName.Name = "labMemberName";
-            this.labMemberName.Size = new System.Drawing.Size(45, 15);
-            this.labMemberName.TabIndex = 6;
-            this.labMemberName.Text = "label8";
-            this.labMemberName.Click += new System.EventHandler(this.MemberPanel_Click);
-            // 
-            // panel4
-            // 
-            this.panel4.Controls.Add(this.labMemberName);
-            this.panel4.Controls.Add(this.labMemberID);
-            this.panel4.Location = new System.Drawing.Point(-1, 381);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(154, 116);
-            this.panel4.TabIndex = 5;
-            this.panel4.Click += new System.EventHandler(this.MemberPanel_Click);
-            // 
-            // lbMember
-            // 
-            this.lbMember.FormattingEnabled = true;
-            this.lbMember.ItemHeight = 15;
-            this.lbMember.Items.AddRange(new object[] {
-            "■ 로그인",
-            "",
-            "■ 이용현황",
-            "",
-            "■ 정보수정"});
-            this.lbMember.Location = new System.Drawing.Point(-1, 381);
-            this.lbMember.Name = "lbMember";
-            this.lbMember.Size = new System.Drawing.Size(148, 94);
-            this.lbMember.TabIndex = 1;
-            this.lbMember.Visible = false;
-            this.lbMember.Click += new System.EventHandler(this.lbMember_Click);
-            // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -286,11 +286,11 @@ namespace WindowsFormsApp1
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
             this.ResumeLayout(false);
 
         }
