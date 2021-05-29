@@ -83,6 +83,7 @@
             this.btnAddUser.TabIndex = 30;
             this.btnAddUser.Text = "회원추가";
             this.btnAddUser.UseVisualStyleBackColor = true;
+            this.btnAddUser.Click += new System.EventHandler(this.btnAddUser_Click);
             // 
             // txtSummery
             // 
@@ -112,6 +113,7 @@
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(334, 25);
             this.txtEmail.TabIndex = 27;
+            this.txtEmail.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtEmail_KeyUp);
             // 
             // txtPhoneNumber
             // 
@@ -119,6 +121,8 @@
             this.txtPhoneNumber.Name = "txtPhoneNumber";
             this.txtPhoneNumber.Size = new System.Drawing.Size(334, 25);
             this.txtPhoneNumber.TabIndex = 26;
+            this.txtPhoneNumber.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPhoneNumber_KeyPress);
+            this.txtPhoneNumber.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtPhoneNumber_KeyUp);
             // 
             // txtName
             // 
@@ -126,6 +130,7 @@
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(334, 25);
             this.txtName.TabIndex = 25;
+            this.txtName.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtName_KeyUp);
             // 
             // txtPassward
             // 
@@ -133,6 +138,7 @@
             this.txtPassward.Name = "txtPassward";
             this.txtPassward.Size = new System.Drawing.Size(334, 25);
             this.txtPassward.TabIndex = 24;
+            this.txtPassward.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtPassward_KeyUp);
             // 
             // txtId
             // 
@@ -140,6 +146,7 @@
             this.txtId.Name = "txtId";
             this.txtId.Size = new System.Drawing.Size(334, 25);
             this.txtId.TabIndex = 23;
+            this.txtId.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtId_KeyUp);
             // 
             // label7
             // 
@@ -238,6 +245,7 @@
             this.Controls.Add(this.label1);
             this.Name = "MemberDataInputPanel";
             this.Size = new System.Drawing.Size(797, 501);
+            this.Load += new System.EventHandler(this.MemberDataInputPanel_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -131,9 +131,9 @@ namespace WindowsFormsApp1.MEMBER
             //ReadDatabase();
             return LOGINTYPE.SUCCESS;
         }
-        public bool MakeUser(string id, string pw, string name, string phnum, string email, PERM perm, string summery)
+        public LOGINTYPE MakeUser(string id, string pw, string name, string phnum, string email, PERM perm, string summery)
         {
-            if (id == null || id.Length < 4 || pw==null || pw.Length < 4 || name ==null || name.Length < 1 || perm == PERM.ANONY_USR) return false;//실패
+            if (id == null || id.Length < 4 || pw==null || pw.Length < 4 || name ==null || name.Length < 1 || perm == PERM.ANONY_USR) return LOGINTYPE.ID_NOT_INPUT;//실패
             try//id가 있는지 없는지 판별하는 부분 있으면 실패를 반환한다.
             {
                 SQLObject selectSQL = new BACK.SQLObject();
@@ -143,13 +143,13 @@ namespace WindowsFormsApp1.MEMBER
                 selectSQL.AddParam("USER_ID", id);
                 selectSQL.Go();
                 JArray idnum = selectSQL.ToJArray();
-                if (idnum[0].Value<int>("ACNT") == 1) return false;
+                if (idnum[0].Value<int>("ACNT") == 1) return LOGINTYPE.ID_NOT_EXIST;
             }
             catch
             {
-                return false;
+                return LOGINTYPE.DB_CONNECT_FALL;
             }
-            if (phnum == null || email == null) return false;
+            if (phnum == null || email == null) return LOGINTYPE.PW_NOT_INPUT;
 
             try
             {
@@ -168,9 +168,9 @@ namespace WindowsFormsApp1.MEMBER
             }
             catch
             {
-                return false;
+                return LOGINTYPE.DB_CONNECT_FALL;
             }
-            return true;
+            return LOGINTYPE.SUCCESS;
         }
         public ListViewItem GetListViewItem()
         {
