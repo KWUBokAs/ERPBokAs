@@ -144,7 +144,7 @@ namespace WindowsFormsApp1.MEMBER
             try//id가 있는지 없는지 판별하는 부분 있으면 실패를 반환한다.
             {
                 SQLObject selectSQL = new BACK.SQLObject();
-                selectSQL.setQuery("SELECT COUNT(auser.USER_ID) AS ACNT" +
+                selectSQL.setQuery("SELECT COUNT(auser.USER_ID) AS ACNT " +
                                     "FROM USER AS auser " +
                                     "WHERE auser.USER_ID=@USER_ID");
                 selectSQL.AddParam("USER_ID", id);
@@ -161,15 +161,15 @@ namespace WindowsFormsApp1.MEMBER
             try
             {
                 SQLObject selectSQL = new BACK.SQLObject();
-                selectSQL.setQuery("INSERT into USER " +
-                                    "valuse(USER_ID=@USER_ID, PW=@PW, NAME=@NAME, " +
-                                    "CALLNUM=@CALLNUM, EMAIL=@EMAIL, MANAGE_YN=@PERM, SUMMARY=@SUMMARY)");
+                selectSQL.setQuery("INSERT into `USER`(`USER_ID`, `PW`, `NAME`, `CALLNUM`, `EMAIL`, `MANAGE_YN`, `BAD_YN`, `SUMMARY`) " +
+                                    "VALUES (@USER_ID, @PW, @NAME, @CALLNUM, @EMAIL, @PERM, @BAD_YN, @SUMMARY)");
                 selectSQL.AddParam("USER_ID", id);
                 selectSQL.AddParam("PW", EncodingPassward(pw));
                 selectSQL.AddParam("NAME", name);
                 selectSQL.AddParam("CALLNUM", phnum);
                 selectSQL.AddParam("EMAIL", email);
                 selectSQL.AddParam("PERM", ((short)perm).ToString());
+                selectSQL.AddParam("BAD_YN", "n");
                 selectSQL.AddParam("SUMMARY", summery);
                 selectSQL.Go();
             }

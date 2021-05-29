@@ -90,6 +90,10 @@ namespace WindowsFormsApp1.MEMBER
                     txtPhoneNumber.Text = "";
                     txtSummery.Text = "";
                     testTextBox.Text = "추가 성공";
+                    for(int i=0; i<chklistManage.Items.Count; i++)
+                    {
+                        chklistManage.SetItemChecked(i, false);
+                    }
                     break;
                 default:
                     testTextBox.Text = "최소 문자를 채우지 못한 것이 있습니다.";

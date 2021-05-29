@@ -35,11 +35,7 @@ namespace WindowsFormsApp1
             switch (this.listBox1.SelectedIndex)
             {
                 case 0:
-                    foreach (Control c in this.panel3.Controls)
-                    {
-                        if (c.GetType() == typeof(SearchPage) || c.GetType() == typeof(RegistrationPage) || c.GetType() == typeof(ListBox))
-                            c.Visible = false;
-                    }
+                    HidePanel();
 
                     if (this.panel3.Controls.Find("SearchPage", false).Length == 1)
                     {
@@ -50,11 +46,7 @@ namespace WindowsFormsApp1
                     break;
 
                 case 2://등록
-                    foreach (Control c in this.panel3.Controls)
-                    {
-                        if (c.GetType() == typeof(SearchPage) || c.GetType() == typeof(RegistrationPage) || c.GetType() == typeof(ListBox))
-                            c.Visible = false;
-                    }
+                    HidePanel();
 
                     if (this.panel3.Controls.Find("RegistrationPage", false).Length == 1)
                     {
@@ -103,11 +95,7 @@ namespace WindowsFormsApp1
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
-            foreach (Control c in panel3.Controls)
-            {
-                if (c.GetType() == typeof(SearchPage) || c.GetType() == typeof(RegistrationPage))
-                    c.Visible = false;
-            }
+            HidePanel();
             if (panel3.Controls.Contains(OR)) { 
                 panel3.Controls.Remove(OR);
             }
@@ -123,12 +111,8 @@ namespace WindowsFormsApp1
         
 
         private void pictureBox3_Click(object sender, EventArgs e)
-        {   
-            foreach (Control c in panel3.Controls) 
-            {
-                if (c.GetType() == typeof(SearchPage) || c.GetType() == typeof(RegistrationPage))
-                    c.Visible = false;
-            }
+        {
+            HidePanel();
             if (panel3.Controls.Contains(MR)) { 
                 panel3.Controls.Remove(MR);
             }
@@ -163,6 +147,11 @@ namespace WindowsFormsApp1
             BaseMember member = BaseMember.GetInstance();
             int index = lbMember.SelectedIndex;
             string selectItem = lbMember.Items[index].ToString();
+
+            if (panel3.Controls.Contains(OR))
+                panel3.Controls.Remove(OR);
+            if (panel3.Controls.Contains(MR))
+                panel3.Controls.Remove(MR);
             if (selectItem.Equals("■ 로그아웃"))
             {
                 member.Logout();
@@ -187,7 +176,13 @@ namespace WindowsFormsApp1
             }
             else if (selectItem.Equals("■ 회원생성"))
             {
-                this.panel3.Controls.Add(new RegistrationPage());
+
+                HidePanel();
+                if (this.panel3.Controls.Find("MemberDataInputPanel", false).Length == 1)
+                {
+                    this.panel3.Controls.Find("MemberDataInputPanel", false)[0].Visible = true;
+                }
+                else this.panel3.Controls.Add(new MemberDataInputPanel());
             }
             else if (selectItem.Equals("■ 불량자 회원 검색"))
             {
@@ -224,7 +219,8 @@ namespace WindowsFormsApp1
                 lbMember.Items.Add("■ 회원생성");
             }
             lbMember.Items.Add("");
-            if((member.Permission & BaseMember.PERM.BOOK_ADMIN) == BaseMember.PERM.BOOK_ADMIN)
+            
+            if(member.IsBookAdmin)
             {
                 lbMember.Items.Add("■ 불량자 회원 검색");
                 lbMember.Items.Add("");
@@ -232,6 +228,15 @@ namespace WindowsFormsApp1
             else if(member.Permission == BaseMember.PERM.NOMAL_USR)
             {
                 lbMember.Items.Add("■ 이용현황");
+            }
+        }
+
+        private void HidePanel()
+        {
+            foreach (Control c in this.panel3.Controls)
+            {
+                if (c.GetType() == typeof(SearchPage) || c.GetType() == typeof(RegistrationPage) || c.GetType() == typeof(ListBox) || c.GetType() == typeof(MemberDataInputPanel))
+                    c.Visible = false;
             }
         }
     }

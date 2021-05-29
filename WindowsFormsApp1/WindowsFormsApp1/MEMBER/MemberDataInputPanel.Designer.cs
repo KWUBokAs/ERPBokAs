@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.testTextBox = new System.Windows.Forms.RichTextBox();
             this.btnDeleteUser = new System.Windows.Forms.Button();
             this.btnChangeUser = new System.Windows.Forms.Button();
             this.btnAddUser = new System.Windows.Forms.Button();
-            this.txtSummery = new System.Windows.Forms.ListBox();
             this.chklistManage = new System.Windows.Forms.CheckedListBox();
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.txtPhoneNumber = new System.Windows.Forms.TextBox();
@@ -47,6 +47,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btnSerchUser = new System.Windows.Forms.Button();
+            this.txtSummery = new System.Windows.Forms.RichTextBox();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.SuspendLayout();
             // 
             // testTextBox
@@ -84,15 +86,6 @@
             this.btnAddUser.Text = "회원추가";
             this.btnAddUser.UseVisualStyleBackColor = true;
             this.btnAddUser.Click += new System.EventHandler(this.btnAddUser_Click);
-            // 
-            // txtSummery
-            // 
-            this.txtSummery.FormattingEnabled = true;
-            this.txtSummery.ItemHeight = 15;
-            this.txtSummery.Location = new System.Drawing.Point(167, 343);
-            this.txtSummery.Name = "txtSummery";
-            this.txtSummery.Size = new System.Drawing.Size(552, 139);
-            this.txtSummery.TabIndex = 29;
             // 
             // chklistManage
             // 
@@ -220,16 +213,30 @@
             this.btnSerchUser.Text = "회원검색";
             this.btnSerchUser.UseVisualStyleBackColor = true;
             // 
+            // txtSummery
+            // 
+            this.txtSummery.Location = new System.Drawing.Point(167, 343);
+            this.txtSummery.Name = "txtSummery";
+            this.txtSummery.Size = new System.Drawing.Size(552, 132);
+            this.txtSummery.TabIndex = 34;
+            this.txtSummery.Text = "";
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(211, 32);
+            // 
             // MemberDataInputPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.txtSummery);
             this.Controls.Add(this.testTextBox);
             this.Controls.Add(this.btnDeleteUser);
             this.Controls.Add(this.btnChangeUser);
             this.Controls.Add(this.btnSerchUser);
             this.Controls.Add(this.btnAddUser);
-            this.Controls.Add(this.txtSummery);
             this.Controls.Add(this.chklistManage);
             this.Controls.Add(this.txtEmail);
             this.Controls.Add(this.txtPhoneNumber);
@@ -257,7 +264,6 @@
         private System.Windows.Forms.Button btnDeleteUser;
         private System.Windows.Forms.Button btnChangeUser;
         private System.Windows.Forms.Button btnAddUser;
-        private System.Windows.Forms.ListBox txtSummery;
         private System.Windows.Forms.CheckedListBox chklistManage;
         private System.Windows.Forms.TextBox txtEmail;
         private System.Windows.Forms.TextBox txtPhoneNumber;
@@ -272,5 +278,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnSerchUser;
+        private System.Windows.Forms.RichTextBox txtSummery;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
     }
 }
