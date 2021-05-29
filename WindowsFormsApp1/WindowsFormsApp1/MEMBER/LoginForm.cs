@@ -93,5 +93,10 @@ namespace WindowsFormsApp1.MEMBER
                 this.DialogResult = DialogResult.Cancel;
             }
         }
+
+        private void LoginForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

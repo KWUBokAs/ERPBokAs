@@ -11,6 +11,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System.Windows.Forms;
 using Newtonsoft.Json.Linq;
+using System.Security.Cryptography;
 
 namespace WindowsFormsApp1.MEMBER
 {
@@ -130,6 +131,47 @@ namespace WindowsFormsApp1.MEMBER
             //ReadDatabase();
             return LOGINTYPE.SUCCESS;
         }
+        public bool MakeUser(string id, string pw, string name, string phnum, string email, PERM perm, string summery)
+        {
+            if (id == null || id.Length < 4 || pw==null || pw.Length < 4 || name ==null || name.Length < 1 || perm == PERM.ANONY_USR) return false;//실패
+            try//id가 있는지 없는지 판별하는 부분 있으면 실패를 반환한다.
+            {
+                SQLObject selectSQL = new BACK.SQLObject();
+                selectSQL.setQuery("SELECT COUNT(auser.USER_ID) AS ACNT" +
+                                    "FROM USER AS auser " +
+                                    "WHERE auser.USER_ID=@USER_ID");
+                selectSQL.AddParam("USER_ID", id);
+                selectSQL.Go();
+                JArray idnum = selectSQL.ToJArray();
+                if (idnum[0].Value<int>("ACNT") == 1) return false;
+            }
+            catch
+            {
+                return false;
+            }
+            if (phnum == null || email == null) return false;
+
+            try
+            {
+                SQLObject selectSQL = new BACK.SQLObject();
+                selectSQL.setQuery("INSERT into USER " +
+                                    "valuse(USER_ID=@USER_ID, PW=@PW, NAME=@NAME, " +
+                                    "CALLNUM=@CALLNUM, EMAIL=@EMAIL, MANAGE_YN=@PERM, SUMMARY=@SUMMARY)");
+                selectSQL.AddParam("USER_ID", id);
+                selectSQL.AddParam("PW", EncodingPassward(pw));
+                selectSQL.AddParam("NAME", name);
+                selectSQL.AddParam("CALLNUM", phnum);
+                selectSQL.AddParam("EMAIL", email);
+                selectSQL.AddParam("PERM", ((short)perm).ToString());
+                selectSQL.AddParam("SUMMARY", summery);
+                selectSQL.Go();
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
+        }
         public ListViewItem GetListViewItem()
         {
             ListViewItem liItem = new ListViewItem();
@@ -140,7 +182,17 @@ namespace WindowsFormsApp1.MEMBER
             liItem.SubItems.Add(GetStringPermission());
             return liItem;
         }
-
+        /// <summary>
+        /// passward를 encoding 한뒤에 반환함
+        /// </summary>
+        /// <param name="passward"></param>
+        /// <returns></returns>
+        private string EncodingPassward(string passward)
+        {
+            SHA256 sha = new SHA256Managed();
+            byte[] hash = sha.ComputeHash(Encoding.ASCII.GetBytes(passward));
+            return Convert.ToBase64String(hash);
+        }
         /// <summary>
         /// properties
         /// </summary>
