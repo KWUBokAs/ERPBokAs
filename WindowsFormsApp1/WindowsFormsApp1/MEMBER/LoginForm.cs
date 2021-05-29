@@ -15,8 +15,7 @@ namespace WindowsFormsApp1.MEMBER
         public LoginForm()
         {
             InitializeComponent();
-            lab_LoginStatus.Text = "";
-            this.AcceptButton = btnLogin;
+            
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -96,7 +95,9 @@ namespace WindowsFormsApp1.MEMBER
 
         private void LoginForm_Load(object sender, EventArgs e)
         {
-
+            lab_LoginStatus.Text = "";
+            this.AcceptButton = btnLogin;
+            txtPassward.PasswordChar = '*';
         }
     }
 }

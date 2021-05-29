@@ -116,7 +116,7 @@ namespace WindowsFormsApp1.MEMBER
                                   "AND CUSER.PW=@PW " +
                                   "WHERE DUSER.USER_ID=@USER_ID");
                 selectSQL.AddParam("USER_ID", id);
-                selectSQL.AddParam("PW", pw);
+                selectSQL.AddParam("PW", EncodingPassward(pw));
                 selectSQL.Go();
                 JArray jarray = selectSQL.ToJArray();
                 if (jarray[0].Value<int>("DCnt") == 0)//ID가 존재하지 않을 때
