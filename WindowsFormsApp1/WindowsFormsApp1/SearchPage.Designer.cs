@@ -111,6 +111,7 @@ namespace WindowsFormsApp1
             this.dgvBookInfo.AllowUserToDeleteRows = false;
             this.dgvBookInfo.AllowUserToResizeColumns = false;
             this.dgvBookInfo.AllowUserToResizeRows = false;
+            this.dgvBookInfo.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvBookInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvBookInfo.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvBookInfo.Location = new System.Drawing.Point(25, 142);
