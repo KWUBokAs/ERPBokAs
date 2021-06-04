@@ -56,6 +56,7 @@ namespace WindowsFormsApp1
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.cmbTypes = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -140,6 +141,7 @@ namespace WindowsFormsApp1
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.cmbTypes);
             this.groupBox2.Controls.Add(this.txtIndex);
             this.groupBox2.Controls.Add(this.txtPrice);
             this.groupBox2.Controls.Add(this.textBox11);
@@ -321,6 +323,15 @@ namespace WindowsFormsApp1
             this.label3.TabIndex = 1;
             this.label3.Text = "책 위치";
             // 
+            // cmbTypes
+            // 
+            this.cmbTypes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbTypes.FormattingEnabled = true;
+            this.cmbTypes.Location = new System.Drawing.Point(280, 18);
+            this.cmbTypes.Name = "cmbTypes";
+            this.cmbTypes.Size = new System.Drawing.Size(107, 20);
+            this.cmbTypes.TabIndex = 8;
+            // 
             // RegistrationPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -331,6 +342,7 @@ namespace WindowsFormsApp1
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "RegistrationPage";
             this.Size = new System.Drawing.Size(628, 365);
+            this.Load += new System.EventHandler(this.RegistrationPage_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -367,5 +379,6 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.TextBox textTransrator;
         private System.Windows.Forms.TextBox txtWriter;
         private System.Windows.Forms.TextBox txtLocation;
+        private System.Windows.Forms.ComboBox cmbTypes;
     }
 }
