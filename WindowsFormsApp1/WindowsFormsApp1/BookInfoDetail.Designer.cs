@@ -45,6 +45,7 @@ namespace WindowsFormsApp1
             this.btnRent = new System.Windows.Forms.Button();
             this.btnReturn = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBooks)).BeginInit();
             this.SuspendLayout();
@@ -52,7 +53,7 @@ namespace WindowsFormsApp1
             // lblIndex
             // 
             this.lblIndex.AutoSize = true;
-            this.lblIndex.Location = new System.Drawing.Point(49, 295);
+            this.lblIndex.Location = new System.Drawing.Point(49, 273);
             this.lblIndex.Name = "lblIndex";
             this.lblIndex.Size = new System.Drawing.Size(29, 12);
             this.lblIndex.TabIndex = 24;
@@ -163,6 +164,7 @@ namespace WindowsFormsApp1
             this.dgvBooks.AllowUserToDeleteRows = false;
             this.dgvBooks.AllowUserToResizeColumns = false;
             this.dgvBooks.AllowUserToResizeRows = false;
+            this.dgvBooks.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvBooks.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvBooks.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvBooks.Location = new System.Drawing.Point(51, 319);
@@ -203,11 +205,21 @@ namespace WindowsFormsApp1
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
+            // btnAdd
+            // 
+            this.btnAdd.Location = new System.Drawing.Point(357, 583);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(75, 23);
+            this.btnAdd.TabIndex = 30;
+            this.btnAdd.Text = "추가";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            // 
             // BookInfoDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 646);
+            this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnReturn);
             this.Controls.Add(this.btnRent);
@@ -250,5 +262,6 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Button btnRent;
         private System.Windows.Forms.Button btnReturn;
         private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Button btnAdd;
     }
 }

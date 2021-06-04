@@ -54,7 +54,14 @@ namespace WindowsFormsApp1
         {
             SQLObject selectSQL = new BACK.SQLObject();
             selectSQL.setQuery("SELECT " +
-                                    "*" +
+                                    "CALLNUM AS 청구번호, " +
+                                    "BOOK_ID AS 책_ID, " +
+                                    "ISBN, " +
+                                    "RENT_YN AS 대여가능여부, " +
+                                    "RESERV_YN AS 예약가능여부, " +
+                                    "RENT_ID AS 대여자ID, " +
+                                    "REG_DATE AS 등록일, " +
+                                    "LOCATION AS 위치 " +
                               "FROM " +
                                     "BOOKS " +
                               "WHERE " +
@@ -62,6 +69,19 @@ namespace WindowsFormsApp1
             selectSQL.AddParam("ISBN", ISBN);
             selectSQL.Go();
             JArray jarray = selectSQL.ToJArray();
+            foreach(var e in jarray)
+            {
+                if (e["대여가능여부"].ToString().Equals("True"))
+                    e["대여가능여부"] = "대여중";
+                else if (e["대여가능여부"].ToString().Equals("False"))
+                    e["대여가능여부"] = "대여가능";
+
+                if (e["예약가능여부"].ToString().Equals("True"))
+                    e["예약가능여부"] = "예약중";
+                else if (e["예약가능여부"].ToString().Equals("False"))
+                    e["예약가능여부"] = "예약가능";
+            }
+
             dgvBooks.DataSource = JsonConvert.DeserializeObject(jarray.ToString());
         }
 
