@@ -18,23 +18,35 @@ namespace WindowsFormsApp1
     {
         string ISBN;
         BaseMember member = BaseMember.GetInstance();
-        public BookInfoDetail(string _ISBN, DataGridViewRow bookInfo)
+        public BookInfoDetail(DataGridViewRow bookInfo)
         {
             InitializeComponent();
 
-            ISBN = _ISBN;
+            ISBN = bookInfo.Cells[0].Value.ToString();
 
-            this.lblName.Text += bookInfo.Cells[1].Value.ToString();
             this.lblISBN.Text += bookInfo.Cells[0].Value.ToString();
+            this.lblName.Text += bookInfo.Cells[1].Value.ToString();
             this.lblWriter.Text += bookInfo.Cells[2].Value.ToString();
             this.lblTransrator.Text += bookInfo.Cells[3].Value.ToString();
             this.lblPublisher.Text += bookInfo.Cells[4].Value.ToString();
-            this.lblType.Text += bookInfo.Cells[6].Value.ToString();
-            this.lblOriginnm.Text += bookInfo.Cells[7].Value.ToString();
-            this.lblPublicationDate.Text += bookInfo.Cells[9].Value.ToString();
-            this.lblPrice.Text += bookInfo.Cells[10].Value.ToString();
-            this.lblSummary.Text += "\n"+bookInfo.Cells[8].Value.ToString();
-            this.lblIndex.Text += "\n"+bookInfo.Cells[11].Value.ToString();
+            this.lblType.Text += bookInfo.Cells[5].Value.ToString();
+            this.lblOriginnm.Text += bookInfo.Cells[6].Value.ToString();
+            this.lblPublicationDate.Text += bookInfo.Cells[7].Value.ToString();
+            this.lblPrice.Text += bookInfo.Cells[8].Value.ToString();
+
+            SQLObject selectSQL = new BACK.SQLObject();
+            selectSQL.setQuery("SELECT " +
+                                    "SUMMARY, " +
+                                    "INDEX_LIST " +
+                              "FROM " +
+                                    "BOOKINFO " +
+                              "WHERE " +
+                                    "ISBN=@ISBN ");
+            selectSQL.AddParam("ISBN", ISBN);
+            selectSQL.Go();
+            JArray jarray = selectSQL.ToJArray();
+            this.lblSummary.Text += "\n"+jarray[0].Value<string>("SUMMARY").ToString();
+            this.lblIndex.Text += "\n"+ jarray[0].Value<string>("INDEX_LIST").ToString();
 
             RenewDataGridView();
 
@@ -47,6 +59,7 @@ namespace WindowsFormsApp1
             {
                 this.btnDelete.Visible = false;
                 this.btnReturn.Visible = false;
+                //this.btnAdd.Visible = false;
             }
         }
 
