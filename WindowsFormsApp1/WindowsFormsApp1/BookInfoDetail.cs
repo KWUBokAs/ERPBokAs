@@ -161,6 +161,17 @@ namespace WindowsFormsApp1
             return jarray[0].Value<int>("OPT_VAL");
         }
 
+        void DeleteBOOKS(string CALLNUM)
+        {
+            SQLObject deleteSQL = new SQLObject();
+            deleteSQL.setQuery("DELETE FROM " +
+                                    "BOOKS " +
+                                "WHERE " +
+                                    "CALLNUM=@CALLNUM");
+            deleteSQL.AddParam("CALLNUM", CALLNUM);
+            deleteSQL.Go();
+        }
+
         private void btnRent_Click(object sender, EventArgs e)
         {
             if (this.dgvBooks.CurrentRow == null) return;
@@ -193,6 +204,24 @@ namespace WindowsFormsApp1
             }
             else
                 MessageBox.Show("해당책은 대여중이 아닙니다.", "반납");
+
+            RenewDataGridView();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (this.dgvBooks.CurrentRow == null) return;
+
+            string CALLNUM = this.dgvBooks.CurrentRow.Cells[0].Value.ToString();
+
+            // 대여중이라면
+            if (IsRented(CALLNUM) == true)
+            {
+                MessageBox.Show("해당책은 대여중입니다!\n반납 이후에 삭제해주세요", "삭제");
+                return;
+            }
+
+            DeleteBOOKS(CALLNUM);
 
             RenewDataGridView();
         }

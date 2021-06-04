@@ -201,6 +201,7 @@ namespace WindowsFormsApp1
             this.btnDelete.TabIndex = 29;
             this.btnDelete.Text = "삭제";
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // BookInfoDetail
             // 
