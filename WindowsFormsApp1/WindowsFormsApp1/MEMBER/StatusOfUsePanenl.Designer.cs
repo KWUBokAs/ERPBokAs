@@ -103,6 +103,7 @@
             // 
             this.dgvRentData.AllowUserToAddRows = false;
             this.dgvRentData.AllowUserToDeleteRows = false;
+            this.dgvRentData.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvRentData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvRentData.Location = new System.Drawing.Point(17, 81);
             this.dgvRentData.Name = "dgvRentData";
