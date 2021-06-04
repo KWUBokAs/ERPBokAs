@@ -122,11 +122,13 @@
             this.btnExtend.TabIndex = 3;
             this.btnExtend.Text = "대출연장";
             this.btnExtend.UseVisualStyleBackColor = true;
+            this.btnExtend.Click += new System.EventHandler(this.btnExtend_Click);
             // 
             // StatusOfUsePanenl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.Controls.Add(this.btnExtend);
             this.Controls.Add(this.dgvRentData);
             this.Controls.Add(this.labLatefee);

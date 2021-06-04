@@ -16,6 +16,8 @@ namespace WindowsFormsApp1
         Control OR = new OpenRoom();
         Control MR = new MeetRoom();
 
+        public event EventHandler ListBtnUserData_Event;
+
         public Form3()
         {
             InitializeComponent();
@@ -127,6 +129,7 @@ namespace WindowsFormsApp1
 
         private void Form3_Load(object sender, EventArgs e)
         {
+            timer1_Tick(sender, e);
             ChangeMemberData();
             SetlbMemberItem();
         }
@@ -173,8 +176,12 @@ namespace WindowsFormsApp1
                 if (this.panel3.Controls.Find("StatusOfUsePanenl", false).Length == 1)
                 {
                     this.panel3.Controls.Find("StatusOfUsePanenl", false)[0].Visible = true;
+                    if(ListBtnUserData_Event != null)
+                    {
+                        ListBtnUserData_Event(sender, e);
+                    }
                 }
-                else this.panel3.Controls.Add(new StatusOfUsePanenl());
+                else this.panel3.Controls.Add(new StatusOfUsePanenl(this));
             }
             else if (selectItem.Equals("■ 권한부여"))
             {
@@ -247,13 +254,18 @@ namespace WindowsFormsApp1
         }
         private void DeletePanel()
         {
-            foreach(Control c in this.panel3.Controls)
+            HidePanel();
+            foreach (Control c in this.panel3.Controls)
             {
-                if(c.GetType() == typeof(Panel))
-                {
-                    this.panel3.Controls.Remove(c);
-                }
+                if (c.GetType() == typeof(StatusOfUsePanenl)  || c.GetType() == typeof(RegistrationPage) || c.GetType() == typeof(MemberDataInputPanel)
+                    || c.GetType() == typeof(SearchPage) )
+                    panel3.Controls.Remove(c);
             }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            labTime.Text = System.DateTime.Now.ToString("yy-MM-dd    hh:mm");
         }
     }
 }
