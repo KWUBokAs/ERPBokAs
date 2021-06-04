@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 using WindowsFormsApp1.BACK;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using System.Windows.Forms;
 using Newtonsoft.Json.Linq;
 using System.Security.Cryptography;
+using System.Windows.Forms;
 
 namespace WindowsFormsApp1.MEMBER
 {
@@ -102,12 +102,13 @@ namespace WindowsFormsApp1.MEMBER
             {
                 return LOGINTYPE.PW_NOT_INPUT;//pw를 입력하지 않았을 때
             }
+            SQLObject selectSQL;
             try
             {
                 //-1 : 아이디 없음
                 //0 : pw 틀림
                 //1 : 로그인 성공
-                SQLObject selectSQL = new BACK.SQLObject();
+                selectSQL = new BACK.SQLObject();
                 selectSQL.setQuery("select COUNT(DUSER.USER_ID) AS DCnt" +
                                         ", COUNT(CUSER.USER_ID) AS Cnt " +
                                   //", DUSER.USER_ID " +
@@ -134,7 +135,7 @@ namespace WindowsFormsApp1.MEMBER
             catch
             {
                 return LOGINTYPE.DB_CONNECT_FALL;
-            }            
+            }
             //ReadDatabase();
             return LOGINTYPE.SUCCESS;
         }

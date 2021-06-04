@@ -16,5 +16,14 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
         }
+
+        private void RegistrationPage_Load(object sender, EventArgs e)
+        {
+            string[] types = { "단행본", "e북", "오디오북", "논문" };
+
+            cmbTypes.Items.AddRange(types);
+
+            cmbTypes.SelectedIndex = 0;
+        }
     }
 }

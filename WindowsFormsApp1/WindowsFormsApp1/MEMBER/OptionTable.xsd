@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="OptionTable" targetNamespace="http://tempuri.org/OptionTable.xsd" xmlns:mstns="http://tempuri.org/OptionTable.xsd" xmlns="http://tempuri.org/OptionTable.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="OptionTable" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="OptionTable" msprop:Generator_UserDSName="OptionTable">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="option" msprop:Generator_TableClassName="optionDataTable" msprop:Generator_TableVarName="tableoption" msprop:Generator_TablePropName="option" msprop:Generator_RowDeletingName="optionRowDeleting" msprop:Generator_RowChangingName="optionRowChanging" msprop:Generator_RowEvHandlerName="optionRowChangeEventHandler" msprop:Generator_RowDeletedName="optionRowDeleted" msprop:Generator_UserTableName="option" msprop:Generator_RowChangedName="optionRowChanged" msprop:Generator_RowEvArgName="optionRowChangeEvent" msprop:Generator_RowClassName="optionRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="OPT_CD" msprop:Generator_ColumnVarNameInTable="columnOPT_CD" msprop:Generator_ColumnPropNameInRow="OPT_CD" msprop:Generator_ColumnPropNameInTable="OPT_CDColumn" msprop:Generator_UserColumnName="OPT_CD" type="xs:string" />
+              <xs:element name="OPT_VAL" msprop:Generator_ColumnVarNameInTable="columnOPT_VAL" msprop:Generator_ColumnPropNameInRow="OPT_VAL" msprop:Generator_ColumnPropNameInTable="OPT_VALColumn" msprop:Generator_UserColumnName="OPT_VAL" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:option" />
+      <xs:field xpath="mstns:OPT_CD" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>
