@@ -14,7 +14,7 @@ namespace WindowsFormsApp1
     public partial class Form3 : Form
     {
         Control OR = new OpenRoom();
-        Control MR = new MeetRoom();
+        Control MR = new Meet();
 
         public Form3()
         {
