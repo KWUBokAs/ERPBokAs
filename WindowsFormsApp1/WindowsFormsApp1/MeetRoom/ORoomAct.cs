@@ -14,7 +14,7 @@ namespace WindowsFormsApp1.MeetRoom
     class ORoomAct
     {
         public int SeatCounts;
-        List<seat> Seat = new List<seat>();
+       
 
     }
 }

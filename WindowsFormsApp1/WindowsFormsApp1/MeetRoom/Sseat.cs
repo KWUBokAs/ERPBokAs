@@ -23,9 +23,10 @@ namespace WindowsFormsApp1.MeetRoom
         private void Sseat_Load(object sender, EventArgs e)
         {
             if (!used)
-            {
-
-            }
+                pictureBox1.Image = imageList1.Images[0];
+            else
+                pictureBox1.Image = imageList1.Images[1];
+            lblSN.Text = SeatNum.ToString();
         }
     }
 }
