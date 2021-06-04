@@ -41,13 +41,6 @@ namespace WindowsFormsApp1
             WRITER = multiSpaceToOne.Replace(WRITER, "");
             PUBLISHER = multiSpaceToOne.Replace(PUBLISHER, "");
 
-            // MariaDB의 tinytext에 맞는지 확인
-            Regex tinytext = new Regex(@"^.{1,255}$");
-            if (tinytext.IsMatch(NAME) && tinytext.IsMatch(WRITER) && tinytext.IsMatch(PUBLISHER))
-                Console.WriteLine("Match");
-            else
-                Console.WriteLine("MissMatch");
-
             SQLObject selectSQL = new BACK.SQLObject();
             selectSQL.setQuery("SELECT "+
                                     "*" +
