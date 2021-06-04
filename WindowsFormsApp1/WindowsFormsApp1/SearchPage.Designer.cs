@@ -44,6 +44,7 @@ namespace WindowsFormsApp1
             // 
             this.txtName.Location = new System.Drawing.Point(75, 34);
             this.txtName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtName.MaxLength = 255;
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(351, 21);
             this.txtName.TabIndex = 0;
@@ -52,6 +53,7 @@ namespace WindowsFormsApp1
             // 
             this.txtWriter.Location = new System.Drawing.Point(75, 68);
             this.txtWriter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtWriter.MaxLength = 255;
             this.txtWriter.Name = "txtWriter";
             this.txtWriter.Size = new System.Drawing.Size(351, 21);
             this.txtWriter.TabIndex = 1;
@@ -60,6 +62,7 @@ namespace WindowsFormsApp1
             // 
             this.txtPublisher.Location = new System.Drawing.Point(75, 102);
             this.txtPublisher.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtPublisher.MaxLength = 255;
             this.txtPublisher.Name = "txtPublisher";
             this.txtPublisher.Size = new System.Drawing.Size(351, 21);
             this.txtPublisher.TabIndex = 2;
