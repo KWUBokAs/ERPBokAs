@@ -31,6 +31,7 @@ namespace WindowsFormsApp1
         {
             this.components = new System.ComponentModel.Container();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.splitter1 = new System.Windows.Forms.Splitter();
             this.lbMember = new System.Windows.Forms.ListBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -47,7 +48,6 @@ namespace WindowsFormsApp1
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.splitter1 = new System.Windows.Forms.Splitter();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -72,6 +72,14 @@ namespace WindowsFormsApp1
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(797, 500);
             this.panel3.TabIndex = 4;
+            // 
+            // splitter1
+            // 
+            this.splitter1.Location = new System.Drawing.Point(0, 0);
+            this.splitter1.Name = "splitter1";
+            this.splitter1.Size = new System.Drawing.Size(3, 498);
+            this.splitter1.TabIndex = 2;
+            this.splitter1.TabStop = false;
             // 
             // lbMember
             // 
@@ -275,14 +283,6 @@ namespace WindowsFormsApp1
             this.pictureBox1.MouseLeave += new System.EventHandler(this.pictureBox1_MouseLeave);
             this.pictureBox1.MouseHover += new System.EventHandler(this.pictureBox1_MouseHover);
             // 
-            // splitter1
-            // 
-            this.splitter1.Location = new System.Drawing.Point(0, 0);
-            this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(3, 498);
-            this.splitter1.TabIndex = 2;
-            this.splitter1.TabStop = false;
-            // 
             // timer1
             // 
             this.timer1.Interval = 6000;
@@ -298,6 +298,8 @@ namespace WindowsFormsApp1
             this.Controls.Add(this.panel2);
             this.Name = "Form3";
             this.Text = "Form3";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form3_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form3_FormClosed);
             this.Load += new System.EventHandler(this.Form3_Load);
             this.panel3.ResumeLayout(false);
             this.panel1.ResumeLayout(false);

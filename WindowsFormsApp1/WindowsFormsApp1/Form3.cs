@@ -267,5 +267,17 @@ namespace WindowsFormsApp1
         {
             labTime.Text = System.DateTime.Now.ToString("yy-MM-dd    hh:mm");
         }
+
+        private void Form3_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            BaseMember member = BaseMember.GetInstance();
+            member.Logout();
+        }
+
+        private void Form3_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            BaseMember member = BaseMember.GetInstance();
+            member.Logout();
+        }
     }
 }
