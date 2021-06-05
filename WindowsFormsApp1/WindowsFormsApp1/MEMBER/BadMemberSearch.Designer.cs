@@ -134,6 +134,7 @@
             this.Controls.Add(this.label7);
             this.Name = "BadMemberSearch";
             this.Size = new System.Drawing.Size(797, 500);
+            this.Load += new System.EventHandler(this.BadMemberSearch_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvBadTable)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

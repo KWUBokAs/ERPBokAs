@@ -18,6 +18,7 @@ namespace WindowsFormsApp1
 
         public event EventHandler ListBtnUserUsingData_Event;
         public event EventHandler ListBtnUserData_Event;
+        public event EventHandler ListBtnBadSearch_Event;
         public event EventHandler OpenPasswardChangePanel_Event;
 
         private UserDataPanel userDataPanel;
@@ -210,8 +211,12 @@ namespace WindowsFormsApp1
                 if (this.panel3.Controls.Find("BadMemberSearch", false).Length == 1)
                 {
                     this.panel3.Controls.Find("BadMemberSearch", false)[0].Visible = true;
+                    if(ListBtnBadSearch_Event != null)
+                    {
+                        ListBtnBadSearch_Event(sender, e);
+                    }
                 }
-                else this.panel3.Controls.Add(new BadMemberSearch());
+                else this.panel3.Controls.Add(new BadMemberSearch(this));
             }
             else if (selectItem.Equals("■ 개인정보관리"))
             {
