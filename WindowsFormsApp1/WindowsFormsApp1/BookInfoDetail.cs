@@ -18,23 +18,35 @@ namespace WindowsFormsApp1
     {
         string ISBN;
         BaseMember member = BaseMember.GetInstance();
-        public BookInfoDetail(string _ISBN, DataGridViewRow bookInfo)
+        public BookInfoDetail(DataGridViewRow bookInfo)
         {
             InitializeComponent();
 
-            ISBN = _ISBN;
+            ISBN = bookInfo.Cells[0].Value.ToString();
 
-            this.lblName.Text += bookInfo.Cells[1].Value.ToString();
             this.lblISBN.Text += bookInfo.Cells[0].Value.ToString();
+            this.lblName.Text += bookInfo.Cells[1].Value.ToString();
             this.lblWriter.Text += bookInfo.Cells[2].Value.ToString();
             this.lblTransrator.Text += bookInfo.Cells[3].Value.ToString();
             this.lblPublisher.Text += bookInfo.Cells[4].Value.ToString();
-            this.lblType.Text += bookInfo.Cells[6].Value.ToString();
-            this.lblOriginnm.Text += bookInfo.Cells[7].Value.ToString();
-            this.lblPublicationDate.Text += bookInfo.Cells[9].Value.ToString();
-            this.lblPrice.Text += bookInfo.Cells[10].Value.ToString();
-            this.lblSummary.Text += "\n"+bookInfo.Cells[8].Value.ToString();
-            this.lblIndex.Text += "\n"+bookInfo.Cells[11].Value.ToString();
+            this.lblType.Text += bookInfo.Cells[5].Value.ToString();
+            this.lblOriginnm.Text += bookInfo.Cells[6].Value.ToString();
+            this.lblPublicationDate.Text += bookInfo.Cells[7].Value.ToString();
+            this.lblPrice.Text += bookInfo.Cells[8].Value.ToString();
+
+            SQLObject selectSQL = new BACK.SQLObject();
+            selectSQL.setQuery("SELECT " +
+                                    "SUMMARY, " +
+                                    "INDEX_LIST " +
+                              "FROM " +
+                                    "BOOKINFO " +
+                              "WHERE " +
+                                    "ISBN=@ISBN ");
+            selectSQL.AddParam("ISBN", ISBN);
+            selectSQL.Go();
+            JArray jarray = selectSQL.ToJArray();
+            this.lblSummary.Text += "\n"+jarray[0].Value<string>("SUMMARY").ToString();
+            this.lblIndex.Text += "\n"+ jarray[0].Value<string>("INDEX_LIST").ToString();
 
             RenewDataGridView();
 
@@ -47,6 +59,8 @@ namespace WindowsFormsApp1
             {
                 this.btnDelete.Visible = false;
                 this.btnReturn.Visible = false;
+                this.btnAdd.Visible = false;
+                this.btnEdit.Visible = false;
             }
         }
 
@@ -54,7 +68,14 @@ namespace WindowsFormsApp1
         {
             SQLObject selectSQL = new BACK.SQLObject();
             selectSQL.setQuery("SELECT " +
-                                    "*" +
+                                    "CALLNUM AS 청구번호, " +
+                                    "BOOK_ID AS 책_ID, " +
+                                    "ISBN, " +
+                                    "RENT_YN AS 대여가능여부, " +
+                                    "RESERV_YN AS 예약가능여부, " +
+                                    "RENT_ID AS 대여자ID, " +
+                                    "REG_DATE AS 등록일, " +
+                                    "LOCATION AS 위치 " +
                               "FROM " +
                                     "BOOKS " +
                               "WHERE " +
@@ -62,24 +83,37 @@ namespace WindowsFormsApp1
             selectSQL.AddParam("ISBN", ISBN);
             selectSQL.Go();
             JArray jarray = selectSQL.ToJArray();
+            foreach(var e in jarray)
+            {
+                if (e["대여가능여부"].ToString().Equals("True"))
+                    e["대여가능여부"] = "대여중";
+                else if (e["대여가능여부"].ToString().Equals("False"))
+                    e["대여가능여부"] = "대여가능";
+
+                if (e["예약가능여부"].ToString().Equals("True"))
+                    e["예약가능여부"] = "예약중";
+                else if (e["예약가능여부"].ToString().Equals("False"))
+                    e["예약가능여부"] = "예약가능";
+            }
+
             dgvBooks.DataSource = JsonConvert.DeserializeObject(jarray.ToString());
         }
 
         bool IsRented(string CALLNUM)
         {
-            SQLObject updateSQL = new BACK.SQLObject();
+            SQLObject selectSQL = new BACK.SQLObject();
 
             // 대여중인지 확인
-            updateSQL.setQuery("SELECT " +
+            selectSQL.setQuery("SELECT " +
                                     "RENT_YN " +
                               "FROM " +
                                     "BOOKS " +
                               "WHERE " +
                                     "CALLNUM = @CALLNUM");
-            updateSQL.AddParam("CALLNUM", CALLNUM);
-            updateSQL.Go();
+            selectSQL.AddParam("CALLNUM", CALLNUM);
+            selectSQL.Go();
 
-            JArray jarray = updateSQL.ToJArray();
+            JArray jarray = selectSQL.ToJArray();
 
             return jarray[0].Value<bool>("RENT_YN");
         }
@@ -224,6 +258,25 @@ namespace WindowsFormsApp1
             DeleteBOOKS(CALLNUM);
 
             RenewDataGridView();
+        }
+
+        public void AddBookPage_Closing(object sender, FormClosedEventArgs e) { RenewDataGridView(); }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            int addMode = 0;
+            AddBookPage abp = new AddBookPage(ISBN, addMode, "");
+            abp.FormClosed += AddBookPage_Closing;
+            abp.ShowDialog();
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            int editMode = 1;
+            string BOOK_ID =  this.dgvBooks.CurrentRow.Cells[1].Value.ToString();
+            AddBookPage abp = new AddBookPage(ISBN, editMode, BOOK_ID);
+            abp.FormClosed += AddBookPage_Closing;
+            abp.ShowDialog();
         }
     }
 }

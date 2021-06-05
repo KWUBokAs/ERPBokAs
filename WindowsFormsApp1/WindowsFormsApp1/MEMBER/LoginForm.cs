@@ -15,6 +15,7 @@ namespace WindowsFormsApp1.MEMBER
         public LoginForm()
         {
             InitializeComponent();
+            txtId.Focus();
         }
 
         private void btnLogin_Click(object sender, EventArgs e)

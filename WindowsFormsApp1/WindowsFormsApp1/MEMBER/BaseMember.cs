@@ -49,19 +49,20 @@ namespace WindowsFormsApp1.MEMBER
             Email = e_mail;
             PhoneNumber = phoneNum;
             this.permission = permission;
+            this.badmember = 'n';
         }
         public void Logout()
         {
             if (ID == "Anonymous") return;
             try
             {
-                SQLObject selectSQL = new BACK.SQLObject();
-                selectSQL.setQuery("UPDATE `USER` SET `LOGTIME`=@LOGTIME, `SUMMARY`=@SUMMARY " +
+                SQLObject updateSQL = new BACK.SQLObject();
+                updateSQL.setQuery("UPDATE `USER` SET `LOGTIME`=@LOGTIME, `SUMMARY`=@SUMMARY " +
                                         "Where USER_ID=@USER_ID");
-                selectSQL.AddParam("USER_ID", id);
-                selectSQL.AddParam("LOGTIME", DateTime.Now.ToString("yyyy-MM-dd:HH:mm"));
-                selectSQL.AddParam("SUMMARY", summary);
-                selectSQL.Go();
+                updateSQL.AddParam("USER_ID", id);
+                updateSQL.AddParam("LOGTIME", DateTime.Now.ToString("yyyy-MM-dd:HH:mm:ss"));
+                updateSQL.AddParam("SUMMARY", summary);
+                updateSQL.Go();
             }
             catch
             {
@@ -72,6 +73,7 @@ namespace WindowsFormsApp1.MEMBER
             Email = null;
             PhoneNumber = null;
             this.permission = PERM.ANONY_USR;
+            this.badmember = 'n';
             summary = "";
         }
         /// <summary>
@@ -85,7 +87,7 @@ namespace WindowsFormsApp1.MEMBER
             try
             {
                 SQLObject selectSQL = new BACK.SQLObject();
-                selectSQL.setQuery("SELECT NAME, CALLNUM, EMAIL, MANAGE_YN from USER where USER_ID=@USER_ID");
+                selectSQL.setQuery("SELECT NAME, CALLNUM, EMAIL, MANAGE_YN, BAD_YN from USER where USER_ID=@USER_ID");
                 selectSQL.AddParam("USER_ID", ID);
                 selectSQL.Go();
                 //selectsql
@@ -94,6 +96,7 @@ namespace WindowsFormsApp1.MEMBER
                 this.e_mail = jarray[0].Value<string>("EMAIL");
                 this.phoneNumber = jarray[0].Value<string>("CALLNUM");
                 this.permission = (PERM)jarray[0].Value<int>("MANAGE_YN");
+                this.badmember = jarray[0].Value<char>("BAD_YN");
                 return true;
             }
             catch
@@ -173,12 +176,12 @@ namespace WindowsFormsApp1.MEMBER
                 }
                 try//로그인 시간 추가
                 {
-                    selectSQL = new BACK.SQLObject();
-                    selectSQL.setQuery("UPDATE `USER` SET `SUMMARY`=@SUMMARY " +
+                    SQLObject updateSQL = new BACK.SQLObject();
+                    updateSQL.setQuery("UPDATE `USER` SET `SUMMARY`=@SUMMARY " +
                                         "Where USER_ID=@USER_ID");
-                    selectSQL.AddParam("USER_ID",id);
-                    selectSQL.AddParam("SUMMARY", "로그인중...");
-                    selectSQL.Go();
+                    updateSQL.AddParam("USER_ID",id);
+                    updateSQL.AddParam("SUMMARY", "로그인중...");
+                    updateSQL.Go();
                     //정상이여서 로그인 가능할 때
                     ID = id;
                 }
@@ -192,6 +195,26 @@ namespace WindowsFormsApp1.MEMBER
                 return LOGINTYPE.DB_CONNECT_FALL;
             }
             //ReadDatabase();
+            return LOGINTYPE.SUCCESS;
+        }
+        public LOGINTYPE ChangePassward(string newpw)
+        {
+            if (newpw == null || newpw.Length < 4) return LOGINTYPE.PW_NOT_INPUT;
+            try
+            {
+                SQLObject updateSQL= new BACK.SQLObject();
+                updateSQL.setQuery("UPDATE `USER` " +
+                                    "SET `PW`=@PW " +
+                                    "Where USER_ID=@USER_ID");
+                updateSQL.AddParam("USER_ID", id);
+                updateSQL.AddParam("PW", EncodingPassward(newpw));
+                updateSQL.Go();
+            }
+            catch
+            {
+                return LOGINTYPE.DB_CONNECT_FALL;
+            }
+
             return LOGINTYPE.SUCCESS;
         }
         public LOGINTYPE MakeUser(string id, string pw, string name, string phnum, string email, PERM perm, string summery)
@@ -218,7 +241,7 @@ namespace WindowsFormsApp1.MEMBER
             {
                 SQLObject selectSQL = new BACK.SQLObject();
                 selectSQL.setQuery("INSERT into `USER`(`USER_ID`, `PW`, `NAME`, `CALLNUM`, `EMAIL`, `MANAGE_YN`, `BAD_YN`, `SUMMARY`, `LOGTIME`) " +
-                                    "VALUES (@USER_ID, @PW, @NAME, @CALLNUM, @EMAIL, @PERM, @BAD_YN, @SUMMARY, `@LOGTIME`)");
+                                    "VALUES (@USER_ID, @PW, @NAME, @CALLNUM, @EMAIL, @PERM, @BAD_YN, @SUMMARY, @LOGTIME)");
                 selectSQL.AddParam("USER_ID", id);
                 selectSQL.AddParam("PW", EncodingPassward(pw));
                 selectSQL.AddParam("NAME", name);
@@ -226,7 +249,7 @@ namespace WindowsFormsApp1.MEMBER
                 selectSQL.AddParam("EMAIL", email);
                 selectSQL.AddParam("PERM", ((short)perm).ToString());
                 selectSQL.AddParam("BAD_YN", "n");
-                selectSQL.AddParam("LOGTIME", DateTime.Now.ToString("yyyy-MM-dd:HH:mm"));
+                selectSQL.AddParam("LOGTIME", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                 selectSQL.AddParam("SUMMARY", summery);
                 selectSQL.Go();
             }
@@ -307,6 +330,19 @@ namespace WindowsFormsApp1.MEMBER
             get { return ((permission & PERM.READ_ADMIN) == PERM.READ_ADMIN); }
             private set { if (value) permission = permission|PERM.READ_ADMIN; }
         }
+        /// <summary>
+        /// 불량사용자 즉 연체된 사용자면 true를
+        /// 정상사용자면 false을 반환한다.
+        /// </summary>
+        /// <returns></returns>
+        public bool IsBadMember
+        {
+            get
+            {
+                if (badmember == 'n' || badmember == 'N') return false;
+                else return true;
+            }
+        }
 
         /// <summary>
         /// field
@@ -317,6 +353,7 @@ namespace WindowsFormsApp1.MEMBER
         private string phoneNumber;//-는 제거한 순수한 휴대폰 번호
         private PERM permission;
         private static BaseMember baseMember= null;
+        private char badmember;
         public string summary;
 
         // 테스트 함수

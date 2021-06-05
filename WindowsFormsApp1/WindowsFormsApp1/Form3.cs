@@ -16,7 +16,12 @@ namespace WindowsFormsApp1
         Control OR = new OpenRoom();
         Control MR = new Meet();
 
+        public event EventHandler ListBtnUserUsingData_Event;
         public event EventHandler ListBtnUserData_Event;
+        public event EventHandler OpenPasswardChangePanel_Event;
+
+        private UserDataPanel userDataPanel;
+        private PasswardChangePanel passwardChangePanel;
 
         public Form3()
         {
@@ -176,9 +181,9 @@ namespace WindowsFormsApp1
                 if (this.panel3.Controls.Find("StatusOfUsePanenl", false).Length == 1)
                 {
                     this.panel3.Controls.Find("StatusOfUsePanenl", false)[0].Visible = true;
-                    if(ListBtnUserData_Event != null)
+                    if(ListBtnUserUsingData_Event != null)
                     {
-                        ListBtnUserData_Event(sender, e);
+                        ListBtnUserUsingData_Event(sender, e);
                     }
                 }
                 else this.panel3.Controls.Add(new StatusOfUsePanenl(this));
@@ -202,11 +207,47 @@ namespace WindowsFormsApp1
             }
             else if (selectItem.Equals("■ 개인정보관리"))
             {
-
+                OpenUserData_Event(sender,e);
             }
             else return;
             ChangeMemberData();
             this.lbMember.Visible = false;
+        }
+        private void OpenPasswardChange_Event(object sender, EventArgs e)
+        {
+            HidePanel();
+            if (this.panel3.Controls.Find("PasswardChangePanel", false).Length == 1)
+            {
+                this.panel3.Controls.Find("PasswardChangePanel", false)[0].Visible = true;
+                if(OpenPasswardChangePanel_Event != null)
+                {
+                    OpenPasswardChangePanel_Event(sender, e);
+                }
+            }
+            else
+            {
+                passwardChangePanel = new PasswardChangePanel(this);
+                passwardChangePanel.SavePassward_Event += OpenUserData_Event;
+                this.panel3.Controls.Add(passwardChangePanel);
+            }
+        }
+        private void OpenUserData_Event(object sender, EventArgs e)
+        {
+            HidePanel();
+            if (this.panel3.Controls.Find("UserDataPanel", false).Length == 1)
+            {
+                this.panel3.Controls.Find("UserDataPanel", false)[0].Visible = true;
+                if (ListBtnUserData_Event != null)
+                {
+                    ListBtnUserData_Event(sender, e);
+                }
+            }
+            else
+            {
+                userDataPanel = new UserDataPanel(this);
+                userDataPanel.btnChangePassward_Event += OpenPasswardChange_Event;
+                this.panel3.Controls.Add(userDataPanel);
+            }
         }
         /// <summary>
         /// 회원상태에 따라 lbMember에 item을 만들어줌
@@ -241,6 +282,10 @@ namespace WindowsFormsApp1
             {
                 lbMember.Items.Add("■ 이용현황");
             }
+            for(int i=lbMember.Items.Count; i<7; i++)
+            {
+                lbMember.Items.Add("");
+            }
         }
 
         private void HidePanel()
@@ -248,7 +293,7 @@ namespace WindowsFormsApp1
             foreach (Control c in this.panel3.Controls)
             {
                 if (c.GetType() == typeof(SearchPage) || c.GetType() == typeof(RegistrationPage) || c.GetType() == typeof(ListBox) || c.GetType() == typeof(MemberDataInputPanel)
-                    || c.GetType() == typeof(StatusOfUsePanenl))
+                        || c.GetType() == typeof(StatusOfUsePanenl) || c.GetType() ==  typeof(UserDataPanel) || c.GetType()==typeof(PasswardChangePanel))
                     c.Visible = false;
             }
         }
@@ -257,8 +302,8 @@ namespace WindowsFormsApp1
             HidePanel();
             foreach (Control c in this.panel3.Controls)
             {
-                if (c.GetType() == typeof(StatusOfUsePanenl)  || c.GetType() == typeof(RegistrationPage) || c.GetType() == typeof(MemberDataInputPanel)
-                    || c.GetType() == typeof(SearchPage) )
+                if (c.GetType() == typeof(SearchPage) || c.GetType() == typeof(RegistrationPage) || c.GetType() == typeof(MemberDataInputPanel)
+                       || c.GetType() == typeof(StatusOfUsePanenl) || c.GetType() == typeof(UserDataPanel) || c.GetType() == typeof(PasswardChangePanel))
                     panel3.Controls.Remove(c);
             }
         }

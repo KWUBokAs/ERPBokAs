@@ -71,6 +71,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Management" />
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
@@ -140,6 +141,18 @@
     <Compile Include="Form3.Designer.cs">
       <DependentUpon>Form3.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddBookPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddBookPage.Designer.cs">
+      <DependentUpon>AddBookPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditBookInfoPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditBookInfoPage.Designer.cs">
+      <DependentUpon>EditBookInfoPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Meet.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -172,11 +185,23 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>OptionTable.xsd</DependentUpon>
     </Compile>
+    <Compile Include="MEMBER\PasswardChangePanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MEMBER\PasswardChangePanel.Designer.cs">
+      <DependentUpon>PasswardChangePanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="MEMBER\StatusOfUsePanenl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="MEMBER\StatusOfUsePanenl.Designer.cs">
       <DependentUpon>StatusOfUsePanenl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MEMBER\UserDataPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MEMBER\UserDataPanel.Designer.cs">
+      <DependentUpon>UserDataPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="OpenRoom.cs">
       <SubType>UserControl</SubType>
@@ -192,9 +217,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RegistrationPage.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="RegistrationPage.cs" />
     <Compile Include="RegistrationPage.Designer.cs">
       <DependentUpon>RegistrationPage.cs</DependentUpon>
     </Compile>
@@ -222,6 +245,9 @@
     <EmbeddedResource Include="BookInfoDetail.resx">
       <DependentUpon>BookInfoDetail.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="EditBookInfoPage.resx">
+      <DependentUpon>EditBookInfoPage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -230,6 +256,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form3.resx">
       <DependentUpon>Form3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddBookPage.resx">
+      <DependentUpon>AddBookPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Meet.resx">
       <DependentUpon>Meet.cs</DependentUpon>
@@ -243,8 +272,14 @@
     <EmbeddedResource Include="MEMBER\MemberDataInputPanel.resx">
       <DependentUpon>MemberDataInputPanel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MEMBER\PasswardChangePanel.resx">
+      <DependentUpon>PasswardChangePanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MEMBER\StatusOfUsePanenl.resx">
       <DependentUpon>StatusOfUsePanenl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MEMBER\UserDataPanel.resx">
+      <DependentUpon>UserDataPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OpenRoom.resx">
       <DependentUpon>OpenRoom.cs</DependentUpon>
