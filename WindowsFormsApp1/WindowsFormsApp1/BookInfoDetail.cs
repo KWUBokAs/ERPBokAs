@@ -100,19 +100,19 @@ namespace WindowsFormsApp1
 
         bool IsRented(string CALLNUM)
         {
-            SQLObject updateSQL = new BACK.SQLObject();
+            SQLObject selectSQL = new BACK.SQLObject();
 
             // 대여중인지 확인
-            updateSQL.setQuery("SELECT " +
+            selectSQL.setQuery("SELECT " +
                                     "RENT_YN " +
                               "FROM " +
                                     "BOOKS " +
                               "WHERE " +
                                     "CALLNUM = @CALLNUM");
-            updateSQL.AddParam("CALLNUM", CALLNUM);
-            updateSQL.Go();
+            selectSQL.AddParam("CALLNUM", CALLNUM);
+            selectSQL.Go();
 
-            JArray jarray = updateSQL.ToJArray();
+            JArray jarray = selectSQL.ToJArray();
 
             return jarray[0].Value<bool>("RENT_YN");
         }
@@ -259,13 +259,23 @@ namespace WindowsFormsApp1
             RenewDataGridView();
         }
 
+        public void AddBookPage_Closing(object sender, FormClosedEventArgs e) { RenewDataGridView(); }
+
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            AddBookPage abp = new AddBookPage(ISBN);
+            int addMode = 0;
+            AddBookPage abp = new AddBookPage(ISBN, addMode, "");
             abp.FormClosed += AddBookPage_Closing;
             abp.ShowDialog();
         }
 
-        public void AddBookPage_Closing(object sender, FormClosedEventArgs e) { RenewDataGridView(); }
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            int editMode = 1;
+            string BOOK_ID =  this.dgvBooks.CurrentRow.Cells[1].Value.ToString();
+            AddBookPage abp = new AddBookPage(ISBN, editMode, BOOK_ID);
+            abp.FormClosed += AddBookPage_Closing;
+            abp.ShowDialog();
+        }
     }
 }
