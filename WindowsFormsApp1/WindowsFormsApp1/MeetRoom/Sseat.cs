@@ -19,13 +19,13 @@ namespace WindowsFormsApp1.MeetRoom
         public Point SeatPoint;
         
         
-        public Sseat(int num)
+        public Sseat(int RoomNum,int num)
         {
             InitializeComponent();
             SeatNum = num;
             SeatAct Sa = new SeatAct();
-            SeatPoint = Sa.ReadSeatPoint("OR001", num.ToString());
-            used = Sa.ReadSeatUsed("OR001", num.ToString());
+            SeatPoint = Sa.ReadSeatPoint("OR00" + RoomNum.ToString(), num.ToString());
+            used = Sa.ReadSeatUsed("OR00"+ RoomNum.ToString(), num.ToString());
            
         }
 

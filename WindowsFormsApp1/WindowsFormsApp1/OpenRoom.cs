@@ -38,7 +38,7 @@ namespace WindowsFormsApp1
             
             for(int i = 1 ; i <=o.ReadRoomCount(a); i++)
             {
-                Sseat seat = new Sseat(i);
+                Sseat seat = new Sseat(RoomNum,i);
                 panel2.Controls.Add(seat);
                 seat.Location = seat.GetPoint();
                 

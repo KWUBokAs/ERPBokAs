@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFormsApp1.MEMBER;
+using WindowsFormsApp1.BOOK;
 
 namespace WindowsFormsApp1
 {
@@ -62,6 +63,17 @@ namespace WindowsFormsApp1
                         break;
                     }
                     this.panel3.Controls.Add(new RegistrationPage());
+                    break;
+
+                case 4://바코드
+                    HidePanel();
+
+                    if (this.panel3.Controls.Find("BarCode", false).Length == 1)
+                    {
+                        this.panel3.Controls.Find("BarCode", false)[0].Visible = true;
+                        break;
+                    }
+                    this.panel3.Controls.Add(new BarCode());
                     break;
 
                 default:
@@ -138,6 +150,7 @@ namespace WindowsFormsApp1
             timer1_Tick(sender, e);
             ChangeMemberData();
             SetlbMemberItem();
+            SetBookMenuItem();
             HeadLabelSync();
         }
         private void ChangeMemberData()
@@ -166,6 +179,7 @@ namespace WindowsFormsApp1
             {
                 member.Logout();
                 SetlbMemberItem();
+                SetBookMenuItem();
                 DeletePanel();
                 HeadLabelSync();
             }
@@ -176,6 +190,8 @@ namespace WindowsFormsApp1
                 if (dResult == DialogResult.OK)
                 {
                     SetlbMemberItem();
+                    SetBookMenuItem();
+                    DeletePanel();
                     HeadLabelSync();
                 }
             }
@@ -262,6 +278,22 @@ namespace WindowsFormsApp1
                 this.panel3.Controls.Add(userDataPanel);
             }
         }
+        private void SetBookMenuItem()
+        {
+            BaseMember member = BaseMember.GetInstance();
+            listBox1.Items.Clear();
+
+            listBox1.Items.Add("■ 검색");
+
+            if (member.IsBookAdmin)
+            {
+                listBox1.Items.Add("");
+                listBox1.Items.Add("■ 등록");
+                listBox1.Items.Add("");
+                listBox1.Items.Add("■ 바코드 반납");
+            }
+        }
+
         /// <summary>
         /// 회원상태에 따라 lbMember에 item을 만들어줌
         /// </summary>

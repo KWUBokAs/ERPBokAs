@@ -12,7 +12,7 @@ using WindowsFormsApp1.MEMBER;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 
-namespace WindowsFormsApp1
+namespace WindowsFormsApp1.BOOK
 {
     public partial class BookInfoDetail : Form
     {
@@ -34,6 +34,7 @@ namespace WindowsFormsApp1
             this.lblPublicationDate.Text += bookInfo.Cells[7].Value.ToString();
             this.lblPrice.Text += bookInfo.Cells[8].Value.ToString();
 
+            // DataGridView에 BOOKS 목록 표시
             SQLObject selectSQL = new BACK.SQLObject();
             selectSQL.setQuery("SELECT " +
                                     "SUMMARY, " +
@@ -46,11 +47,11 @@ namespace WindowsFormsApp1
             selectSQL.Go();
             JArray jarray = selectSQL.ToJArray();
             this.lblSummary.Text += "\n"+jarray[0].Value<string>("SUMMARY").ToString();
-            this.lblIndex.Text += "\n"+ jarray[0].Value<string>("INDEX_LIST").ToString();
+            this.lblIndex.Text += "\n" + jarray[0].Value<string>("INDEX_LIST").ToString();
 
             RenewDataGridView();
 
-            if (!member.IsLogin)
+            if (!member.IsLogin || member.IsBadMember)
             {
                 this.btnRent.Visible = false;
             }
@@ -62,6 +63,37 @@ namespace WindowsFormsApp1
                 this.btnAdd.Visible = false;
                 this.btnEdit.Visible = false;
             }
+        }
+
+        private bool CheckRentMore()
+        {
+            SQLObject selectBadSQL = new BACK.SQLObject();
+            selectBadSQL.setQuery("SELECT " +
+                                    "COUNT(*) AS CNT " +
+                              "FROM " +
+                                    "BOOKRENTS " +
+                              "WHERE " +
+                                    "RENT_YN=@RENT_YN AND " +
+                                    "USER_ID=@USER_ID");
+            selectBadSQL.AddParam("RENT_YN", "0");
+            selectBadSQL.AddParam("USER_ID", member.ID);
+            selectBadSQL.Go();
+            JArray jarray = selectBadSQL.ToJArray();
+            int cnt = jarray[0].Value<int>("CNT");
+
+            SQLObject selectMaxSQL = new BACK.SQLObject();
+            selectMaxSQL.setQuery("SELECT " +
+                                    "OPT_VAL " +
+                              "FROM " +
+                                    "OPTIONS " +
+                              "WHERE " +
+                                    "OPT_CD=@OPT_CD");
+            selectMaxSQL.AddParam("OPT_CD", "RM");
+            selectMaxSQL.Go();
+            jarray = selectMaxSQL.ToJArray();
+            int max = jarray[0].Value<int>("OPT_VAL");
+
+            return (max > cnt);
         }
 
         private void RenewDataGridView()
@@ -210,6 +242,13 @@ namespace WindowsFormsApp1
         {
             if (this.dgvBooks.CurrentRow == null) return;
 
+            if(!CheckRentMore())
+            {
+                MessageBox.Show("이 이상 대여할 수 없습니다\n" +
+                    "다른 책을 대여하려면 기존에 대여한 책을 반납해주세요", "대여한도");
+                return;
+            }
+
             string CALLNUM = this.dgvBooks.CurrentRow.Cells[0].Value.ToString();
 
             // 대여 가능하다면 (아직 빌려가지 않은 책이라면)
@@ -217,9 +256,10 @@ namespace WindowsFormsApp1
             {
                 UpdateRENTYN(CALLNUM, "1"); // transaction 생각해서 수정해야할듯
                 InsertBOOKRENT(CALLNUM);
+                MessageBox.Show("대여했습니다", "대여");
             }
             else
-                MessageBox.Show("해당책은 대여중입니다.", "대여");
+                MessageBox.Show("해당책은 대여중입니다", "대여");
 
             RenewDataGridView();
         }
@@ -235,6 +275,7 @@ namespace WindowsFormsApp1
             {
                 UpdateRENTYN(CALLNUM, "0");
                 ReturnBOOKRENT();
+                MessageBox.Show("반납했습니다", "반납");
             }
             else
                 MessageBox.Show("해당책은 대여중이 아닙니다.", "반납");
@@ -256,6 +297,8 @@ namespace WindowsFormsApp1
             }
 
             DeleteBOOKS(CALLNUM);
+
+            MessageBox.Show("삭제했습니다", "삭제");
 
             RenewDataGridView();
         }
