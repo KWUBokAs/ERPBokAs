@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFormsApp1.BACK;
+using WindowsFormsApp1.MEMBER;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System.Text.RegularExpressions;
@@ -20,6 +21,13 @@ namespace WindowsFormsApp1
         public SearchPage()
         {
             InitializeComponent();
+
+            BaseMember member = BaseMember.GetInstance();
+
+            if (!member.IsBookAdmin)
+            {
+                this.btnEdit.Visible = false;
+            }
         }
 
         public void RenewGridView()
