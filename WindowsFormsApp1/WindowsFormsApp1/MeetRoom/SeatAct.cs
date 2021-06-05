@@ -18,15 +18,14 @@ namespace WindowsFormsApp1.MeetRoom
     class SeatAct
     {
       
-        public bool used ;
-        public Point Epoint;
+     
         
-        public SeatAct(bool u)
+        public SeatAct()
         {
-            used = u;
+            
         }
         public Point ReadSeatPoint(string RI, string SI)
-        {
+        {   // 자리 포인트 읽어오기 RI = ROOM_ID / SI = SEAT_ID
             SQLObject selectSQL = new BACK.SQLObject();
             selectSQL.setQuery("SELECT X(SEAT_LOCATION) as Xpos, " +
                                "Y(SEAT_LOCATION) as Ypos " +
@@ -45,6 +44,25 @@ namespace WindowsFormsApp1.MeetRoom
             Point p = new Point(x,y);
 
             return p;
+        }
+        public bool ReadSeatUsed(string RI, string SI)
+        {   // 자리 이용여부 읽어오기 RI = ROOM_ID / SI = SEAT_ID
+            SQLObject selectSQL = new BACK.SQLObject();
+            selectSQL.setQuery("SELECT RENT_YN as Used " +
+                               "FROM OPENROOM_SEAT " +
+                               "WHERE ROOM_ID= @ROOM_ID " +
+                               "AND SEAT_ID=@SEAT_ID");
+            selectSQL.AddParam("ROOM_ID", RI);
+            selectSQL.AddParam("SEAT_ID", SI);
+            selectSQL.Go();
+            
+            JArray jarray = selectSQL.ToJArray();
+            int use = jarray[0].Value<int>("Used");
+
+            if (use == 0 )
+                return false;
+            else
+                return true;
         }
 
     }

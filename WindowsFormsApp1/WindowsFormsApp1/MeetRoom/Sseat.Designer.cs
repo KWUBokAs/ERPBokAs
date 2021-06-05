@@ -40,7 +40,7 @@ namespace WindowsFormsApp1.MeetRoom
             // lblSN
             // 
             this.lblSN.AutoSize = true;
-            this.lblSN.Location = new System.Drawing.Point(12, 15);
+            this.lblSN.Location = new System.Drawing.Point(31, 28);
             this.lblSN.Name = "lblSN";
             this.lblSN.Size = new System.Drawing.Size(67, 15);
             this.lblSN.TabIndex = 0;
@@ -58,8 +58,8 @@ namespace WindowsFormsApp1.MeetRoom
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(270, 262);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox1.Size = new System.Drawing.Size(85, 76);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
@@ -70,7 +70,7 @@ namespace WindowsFormsApp1.MeetRoom
             this.Controls.Add(this.lblSN);
             this.Controls.Add(this.pictureBox1);
             this.Name = "Sseat";
-            this.Size = new System.Drawing.Size(270, 262);
+            this.Size = new System.Drawing.Size(85, 76);
             this.Load += new System.EventHandler(this.Sseat_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

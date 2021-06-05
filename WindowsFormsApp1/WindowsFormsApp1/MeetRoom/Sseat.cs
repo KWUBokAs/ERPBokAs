@@ -23,17 +23,18 @@ namespace WindowsFormsApp1.MeetRoom
         {
             InitializeComponent();
             SeatNum = num;
-            SeatAct Sa = new SeatAct(false);
+            SeatAct Sa = new SeatAct();
             SeatPoint = Sa.ReadSeatPoint("OR001", num.ToString());
-            
+            used = Sa.ReadSeatUsed("OR001", num.ToString());
+           
         }
 
         private void Sseat_Load(object sender, EventArgs e)
         {
             if (!used)
-                pictureBox1.Image = imageList1.Images[0];
-            else
                 pictureBox1.Image = imageList1.Images[1];
+            else
+                pictureBox1.Image = imageList1.Images[0];
             lblSN.Text = SeatNum.ToString();
         }
         public Point GetPoint()
