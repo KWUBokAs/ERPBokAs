@@ -18,6 +18,7 @@ namespace WindowsFormsApp1
 
         public event EventHandler ListBtnUserUsingData_Event;
         public event EventHandler ListBtnUserData_Event;
+        public event EventHandler OpenPasswardChangePanel_Event;
 
         private UserDataPanel userDataPanel;
         private PasswardChangePanel passwardChangePanel;
@@ -206,22 +207,7 @@ namespace WindowsFormsApp1
             }
             else if (selectItem.Equals("■ 개인정보관리"))
             {
-                HidePanel();
-                if (this.panel3.Controls.Find("UserDataPanel", false).Length == 1)
-                {
-                    this.panel3.Controls.Find("UserDataPanel", false)[0].Visible = true;
-                    if (ListBtnUserData_Event != null)
-                    {
-                        ListBtnUserData_Event(sender, e);
-                    }
-                }
-                else
-                {
-                    userDataPanel = new UserDataPanel(this);
-                    userDataPanel.btnChangePassward_Event += OpenPasswardChange_Event;
-                    this.panel3.Controls.Add(userDataPanel);
-                }
-
+                OpenUserData_Event(sender,e);
             }
             else return;
             ChangeMemberData();
@@ -233,12 +219,34 @@ namespace WindowsFormsApp1
             if (this.panel3.Controls.Find("PasswardChangePanel", false).Length == 1)
             {
                 this.panel3.Controls.Find("PasswardChangePanel", false)[0].Visible = true;
+                if(OpenPasswardChangePanel_Event != null)
+                {
+                    OpenPasswardChangePanel_Event(sender, e);
+                }
             }
             else
             {
                 passwardChangePanel = new PasswardChangePanel(this);
-                PasswardChangePanel.Sa += ;
+                passwardChangePanel.SavePassward_Event += OpenUserData_Event;
                 this.panel3.Controls.Add(passwardChangePanel);
+            }
+        }
+        private void OpenUserData_Event(object sender, EventArgs e)
+        {
+            HidePanel();
+            if (this.panel3.Controls.Find("UserDataPanel", false).Length == 1)
+            {
+                this.panel3.Controls.Find("UserDataPanel", false)[0].Visible = true;
+                if (ListBtnUserData_Event != null)
+                {
+                    ListBtnUserData_Event(sender, e);
+                }
+            }
+            else
+            {
+                userDataPanel = new UserDataPanel(this);
+                userDataPanel.btnChangePassward_Event += OpenPasswardChange_Event;
+                this.panel3.Controls.Add(userDataPanel);
             }
         }
         /// <summary>

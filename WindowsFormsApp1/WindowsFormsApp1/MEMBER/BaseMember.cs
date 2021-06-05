@@ -56,13 +56,13 @@ namespace WindowsFormsApp1.MEMBER
             if (ID == "Anonymous") return;
             try
             {
-                SQLObject selectSQL = new BACK.SQLObject();
-                selectSQL.setQuery("UPDATE `USER` SET `LOGTIME`=@LOGTIME, `SUMMARY`=@SUMMARY " +
+                SQLObject updateSQL = new BACK.SQLObject();
+                updateSQL.setQuery("UPDATE `USER` SET `LOGTIME`=@LOGTIME, `SUMMARY`=@SUMMARY " +
                                         "Where USER_ID=@USER_ID");
-                selectSQL.AddParam("USER_ID", id);
-                selectSQL.AddParam("LOGTIME", DateTime.Now.ToString("yyyy-MM-dd:HH:mm"));
-                selectSQL.AddParam("SUMMARY", summary);
-                selectSQL.Go();
+                updateSQL.AddParam("USER_ID", id);
+                updateSQL.AddParam("LOGTIME", DateTime.Now.ToString("yyyy-MM-dd:HH:mm"));
+                updateSQL.AddParam("SUMMARY", summary);
+                updateSQL.Go();
             }
             catch
             {
@@ -176,12 +176,12 @@ namespace WindowsFormsApp1.MEMBER
                 }
                 try//로그인 시간 추가
                 {
-                    selectSQL = new BACK.SQLObject();
-                    selectSQL.setQuery("UPDATE `USER` SET `SUMMARY`=@SUMMARY " +
+                    SQLObject updateSQL = new BACK.SQLObject();
+                    updateSQL.setQuery("UPDATE `USER` SET `SUMMARY`=@SUMMARY " +
                                         "Where USER_ID=@USER_ID");
-                    selectSQL.AddParam("USER_ID",id);
-                    selectSQL.AddParam("SUMMARY", "로그인중...");
-                    selectSQL.Go();
+                    updateSQL.AddParam("USER_ID",id);
+                    updateSQL.AddParam("SUMMARY", "로그인중...");
+                    updateSQL.Go();
                     //정상이여서 로그인 가능할 때
                     ID = id;
                 }
@@ -195,6 +195,26 @@ namespace WindowsFormsApp1.MEMBER
                 return LOGINTYPE.DB_CONNECT_FALL;
             }
             //ReadDatabase();
+            return LOGINTYPE.SUCCESS;
+        }
+        public LOGINTYPE ChangePassward(string newpw)
+        {
+            if (newpw == null || newpw.Length < 4) return LOGINTYPE.PW_NOT_INPUT;
+            try
+            {
+                SQLObject updateSQL= new BACK.SQLObject();
+                updateSQL.setQuery("UPDATE `USER` " +
+                                    "SET `PW`=@PW " +
+                                    "Where USER_ID=@USER_ID");
+                updateSQL.AddParam("USER_ID", id);
+                updateSQL.AddParam("PW", EncodingPassward(newpw));
+                updateSQL.Go();
+            }
+            catch
+            {
+                return LOGINTYPE.DB_CONNECT_FALL;
+            }
+
             return LOGINTYPE.SUCCESS;
         }
         public LOGINTYPE MakeUser(string id, string pw, string name, string phnum, string email, PERM perm, string summery)

@@ -60,6 +60,7 @@
             this.btnSave.TabIndex = 6;
             this.btnSave.Text = "비밀번호 저장";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // tableLayoutPanel1
             // 

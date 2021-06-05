@@ -186,9 +186,10 @@ namespace WindowsFormsApp1
             // labMemberName
             // 
             this.labMemberName.AutoSize = true;
+            this.labMemberName.Font = new System.Drawing.Font("NanumSquare", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.labMemberName.Location = new System.Drawing.Point(23, 71);
             this.labMemberName.Name = "labMemberName";
-            this.labMemberName.Size = new System.Drawing.Size(45, 15);
+            this.labMemberName.Size = new System.Drawing.Size(54, 18);
             this.labMemberName.TabIndex = 6;
             this.labMemberName.Text = "label8";
             this.labMemberName.Click += new System.EventHandler(this.MemberPanel_Click);
@@ -196,9 +197,10 @@ namespace WindowsFormsApp1
             // labMemberID
             // 
             this.labMemberID.AutoSize = true;
+            this.labMemberID.Font = new System.Drawing.Font("NanumSquare", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.labMemberID.Location = new System.Drawing.Point(23, 30);
             this.labMemberID.Name = "labMemberID";
-            this.labMemberID.Size = new System.Drawing.Size(45, 15);
+            this.labMemberID.Size = new System.Drawing.Size(60, 18);
             this.labMemberID.TabIndex = 5;
             this.labMemberID.Text = "label7";
             this.labMemberID.Click += new System.EventHandler(this.MemberPanel_Click);
