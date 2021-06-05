@@ -13,7 +13,7 @@ using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System.Text.RegularExpressions;
 
-namespace WindowsFormsApp1
+namespace WindowsFormsApp1.BOOK
 {
     public partial class SearchPage : UserControl
     {
