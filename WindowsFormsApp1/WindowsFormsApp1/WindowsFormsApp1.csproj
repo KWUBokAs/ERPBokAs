@@ -168,6 +168,12 @@
       <DependentUpon>Sseat.cs</DependentUpon>
     </Compile>
     <Compile Include="MeetRoom\StudyRoom.cs" />
+    <Compile Include="MEMBER\BadMemberSearch.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MEMBER\BadMemberSearch.Designer.cs">
+      <DependentUpon>BadMemberSearch.cs</DependentUpon>
+    </Compile>
     <Compile Include="MEMBER\BaseMember.cs" />
     <Compile Include="MEMBER\IMember.cs" />
     <Compile Include="MEMBER\MemberDataInputPanel.cs">
@@ -265,6 +271,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MeetRoom\Sseat.resx">
       <DependentUpon>Sseat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MEMBER\BadMemberSearch.resx">
+      <DependentUpon>BadMemberSearch.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MEMBER\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>

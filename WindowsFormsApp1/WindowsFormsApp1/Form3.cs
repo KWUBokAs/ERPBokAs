@@ -193,7 +193,7 @@ namespace WindowsFormsApp1
             }
             else if (selectItem.Equals("■ 권한부여"))
             {
-
+                
             }
             else if (selectItem.Equals("■ 회원생성"))
             {
@@ -206,7 +206,12 @@ namespace WindowsFormsApp1
             }
             else if (selectItem.Equals("■ 불량자 회원 검색"))
             {
-
+                HidePanel();
+                if (this.panel3.Controls.Find("BadMemberSearch", false).Length == 1)
+                {
+                    this.panel3.Controls.Find("BadMemberSearch", false)[0].Visible = true;
+                }
+                else this.panel3.Controls.Add(new BadMemberSearch());
             }
             else if (selectItem.Equals("■ 개인정보관리"))
             {
@@ -296,7 +301,8 @@ namespace WindowsFormsApp1
             foreach (Control c in this.panel3.Controls)
             {
                 if (c.GetType() == typeof(SearchPage) || c.GetType() == typeof(RegistrationPage) || c.GetType() == typeof(ListBox) || c.GetType() == typeof(MemberDataInputPanel)
-                        || c.GetType() == typeof(StatusOfUsePanenl) || c.GetType() ==  typeof(UserDataPanel) || c.GetType()==typeof(PasswardChangePanel))
+                        || c.GetType() == typeof(StatusOfUsePanenl) || c.GetType() ==  typeof(UserDataPanel) || c.GetType()==typeof(PasswardChangePanel)
+                        || c.GetType() == typeof(BadMemberSearch))
                     c.Visible = false;
             }
         }
@@ -306,7 +312,8 @@ namespace WindowsFormsApp1
             foreach (Control c in this.panel3.Controls)
             {
                 if (c.GetType() == typeof(SearchPage) || c.GetType() == typeof(RegistrationPage) || c.GetType() == typeof(MemberDataInputPanel)
-                       || c.GetType() == typeof(StatusOfUsePanenl) || c.GetType() == typeof(UserDataPanel) || c.GetType() == typeof(PasswardChangePanel))
+                       || c.GetType() == typeof(StatusOfUsePanenl) || c.GetType() == typeof(UserDataPanel) || c.GetType() == typeof(PasswardChangePanel)
+                       || c.GetType() == typeof(BadMemberSearch))
                     panel3.Controls.Remove(c);
             }
         }
