@@ -29,13 +29,15 @@ namespace WindowsFormsApp1
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.splitter1 = new System.Windows.Forms.Splitter();
             this.lbMember = new System.Windows.Forms.ListBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.labTime = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.labMemberName = new System.Windows.Forms.Label();
@@ -46,6 +48,7 @@ namespace WindowsFormsApp1
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -62,12 +65,21 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel3.BackColor = System.Drawing.SystemColors.Window;
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.splitter1);
             this.panel3.Controls.Add(this.lbMember);
             this.panel3.Controls.Add(this.listBox1);
             this.panel3.Location = new System.Drawing.Point(153, 30);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(797, 501);
+            this.panel3.Size = new System.Drawing.Size(797, 500);
             this.panel3.TabIndex = 4;
+            // 
+            // splitter1
+            // 
+            this.splitter1.Location = new System.Drawing.Point(0, 0);
+            this.splitter1.Name = "splitter1";
+            this.splitter1.Size = new System.Drawing.Size(3, 498);
+            this.splitter1.TabIndex = 2;
+            this.splitter1.TabStop = false;
             // 
             // lbMember
             // 
@@ -108,7 +120,7 @@ namespace WindowsFormsApp1
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.labTime);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
@@ -133,14 +145,15 @@ namespace WindowsFormsApp1
             this.label2.TabIndex = 1;
             this.label2.Text = "label2";
             // 
-            // label1
+            // labTime
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(34, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(45, 15);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "label1";
+            this.labTime.AutoSize = true;
+            this.labTime.Font = new System.Drawing.Font("Dotum", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.labTime.Location = new System.Drawing.Point(11, 5);
+            this.labTime.Name = "labTime";
+            this.labTime.Size = new System.Drawing.Size(63, 20);
+            this.labTime.TabIndex = 0;
+            this.labTime.Text = "label1";
             // 
             // panel2
             // 
@@ -270,6 +283,11 @@ namespace WindowsFormsApp1
             this.pictureBox1.MouseLeave += new System.EventHandler(this.pictureBox1_MouseLeave);
             this.pictureBox1.MouseHover += new System.EventHandler(this.pictureBox1_MouseHover);
             // 
+            // timer1
+            // 
+            this.timer1.Interval = 6000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -280,6 +298,8 @@ namespace WindowsFormsApp1
             this.Controls.Add(this.panel2);
             this.Name = "Form3";
             this.Text = "Form3";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form3_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form3_FormClosed);
             this.Load += new System.EventHandler(this.Form3_Load);
             this.panel3.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
@@ -305,7 +325,7 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labTime;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label6;
@@ -314,5 +334,7 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Label labMemberID;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.ListBox lbMember;
+        private System.Windows.Forms.Splitter splitter1;
+        private System.Windows.Forms.Timer timer1;
     }
 }

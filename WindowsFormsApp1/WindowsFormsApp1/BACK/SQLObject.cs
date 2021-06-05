@@ -119,7 +119,7 @@ namespace WindowsFormsApp1.BACK {
             if (loadingForm != null)
                 return;
             loadingForm = new LoadingForm();
-            Form.ActiveForm.Opacity = .50;
+            Form.ActiveForm.Opacity = 0.50;
             loadingForm.Show();
         }
         public void ModalEnd() {

@@ -17,6 +17,7 @@ namespace WindowsFormsApp1.MEMBER
 {
     public class BaseMember : IMember
     {
+        const int TIMEGAP = 10;//비상으로 꺼졌을 때 복구 갭
         public enum LOGINTYPE : short
         {
             SUCCESS,
@@ -24,6 +25,7 @@ namespace WindowsFormsApp1.MEMBER
             PW_NOT_INPUT,
             ID_NOT_EXIST,
             PW_INCONSIST,
+            ID_STAT_LOGIN,
             DB_CONNECT_FALL,
         };
         [Flags]
@@ -50,11 +52,27 @@ namespace WindowsFormsApp1.MEMBER
         }
         public void Logout()
         {
+            if (ID == "Anonymous") return;
+            try
+            {
+                SQLObject selectSQL = new BACK.SQLObject();
+                selectSQL.setQuery("UPDATE `USER` SET `LOGTIME`=@LOGTIME, `SUMMARY`=@SUMMARY " +
+                                        "Where USER_ID=@USER_ID");
+                selectSQL.AddParam("USER_ID", id);
+                selectSQL.AddParam("LOGTIME", DateTime.Now.ToString("yyyy-MM-dd:HH:mm"));
+                selectSQL.AddParam("SUMMARY", summary);
+                selectSQL.Go();
+            }
+            catch
+            {
+                MessageBox.Show("인터넷이 불안정합니다.");
+            }
             ID = "Anonymous";
             Name = "Anonymous";
             Email = null;
             PhoneNumber = null;
             this.permission = PERM.ANONY_USR;
+            summary = "";
         }
         /// <summary>
         /// 이름, 전화번호, email, 권한을 DB에서 받아와 세팅해 준다.
@@ -64,18 +82,25 @@ namespace WindowsFormsApp1.MEMBER
         public bool ReadDatabase()
         {
             if (ID == "Anonymous") return false; //회원로그인이 승인되지 않았을 경우
-            SQLObject selectSQL = new BACK.SQLObject();
-            selectSQL.setQuery("SELECT NAME, CALLNUM, EMAIL, MANAGE_YN from USER where USER_ID=@USER_ID");
-            selectSQL.AddParam("USER_ID", ID);
-            selectSQL.Go();
-            //selectsql
-            JArray jarray = selectSQL.ToJArray();
-            this.name = jarray[0].Value<string>("NAME");
-            this.e_mail = jarray[0].Value<string>("EMAIL");
-            this.phoneNumber = jarray[0].Value<string>("CALLNUM");
-            this.permission = (PERM)jarray[0].Value<int>("MANAGE_YN");
+            try
+            {
+                SQLObject selectSQL = new BACK.SQLObject();
+                selectSQL.setQuery("SELECT NAME, CALLNUM, EMAIL, MANAGE_YN from USER where USER_ID=@USER_ID");
+                selectSQL.AddParam("USER_ID", ID);
+                selectSQL.Go();
+                //selectsql
+                JArray jarray = selectSQL.ToJArray();
+                this.name = jarray[0].Value<string>("NAME");
+                this.e_mail = jarray[0].Value<string>("EMAIL");
+                this.phoneNumber = jarray[0].Value<string>("CALLNUM");
+                this.permission = (PERM)jarray[0].Value<int>("MANAGE_YN");
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
 
-            return true;
         }
         public static BaseMember GetInstance()
         {
@@ -109,8 +134,10 @@ namespace WindowsFormsApp1.MEMBER
                 //0 : pw 틀림
                 //1 : 로그인 성공
                 selectSQL = new BACK.SQLObject();
-                selectSQL.setQuery("select COUNT(DUSER.USER_ID) AS DCnt" +
-                                        ", COUNT(CUSER.USER_ID) AS Cnt " +
+                selectSQL.setQuery("select COUNT(DUSER.USER_ID) AS DCnt, " +
+                                        "COUNT(CUSER.USER_ID) AS Cnt, " +
+                                        "CUSER.SUMMARY AS SUMMARY, " +
+                                        "CUSER.LOGTIME AS LOGTIME " +
                                   //", DUSER.USER_ID " +
                                   "FROM USER AS DUSER " +
                                   "LEFT JOIN USER AS CUSER ON CUSER.USER_ID = DUSER.USER_ID " +
@@ -129,8 +156,36 @@ namespace WindowsFormsApp1.MEMBER
                 {
                     return LOGINTYPE.PW_INCONSIST;
                 }
-                //정상이여서 로그인 가능할 때
-                ID = id;
+                string temp = jarray[0].Value<string>("SUMMARY");
+                if (temp == "로그인중...")//로그인 중이면
+                {
+                    DateTime last = DateTime.Parse(jarray[0].Value<string>("LOGTIME"));
+                    DateTime now = DateTime.Now;
+                    TimeSpan gap = now - last;
+                    if (gap.Minutes < TIMEGAP)
+                    {
+                        return LOGINTYPE.ID_STAT_LOGIN;
+                    }
+                }
+                else
+                {
+                    summary = temp;
+                }
+                try//로그인 시간 추가
+                {
+                    selectSQL = new BACK.SQLObject();
+                    selectSQL.setQuery("UPDATE `USER` SET `SUMMARY`=@SUMMARY " +
+                                        "Where USER_ID=@USER_ID");
+                    selectSQL.AddParam("USER_ID",id);
+                    selectSQL.AddParam("SUMMARY", "로그인중...");
+                    selectSQL.Go();
+                    //정상이여서 로그인 가능할 때
+                    ID = id;
+                }
+                catch
+                {
+                    return LOGINTYPE.DB_CONNECT_FALL;
+                }
             }
             catch
             {
@@ -162,8 +217,8 @@ namespace WindowsFormsApp1.MEMBER
             try
             {
                 SQLObject selectSQL = new BACK.SQLObject();
-                selectSQL.setQuery("INSERT into `USER`(`USER_ID`, `PW`, `NAME`, `CALLNUM`, `EMAIL`, `MANAGE_YN`, `BAD_YN`, `SUMMARY`) " +
-                                    "VALUES (@USER_ID, @PW, @NAME, @CALLNUM, @EMAIL, @PERM, @BAD_YN, @SUMMARY)");
+                selectSQL.setQuery("INSERT into `USER`(`USER_ID`, `PW`, `NAME`, `CALLNUM`, `EMAIL`, `MANAGE_YN`, `BAD_YN`, `SUMMARY`, `LOGTIME`) " +
+                                    "VALUES (@USER_ID, @PW, @NAME, @CALLNUM, @EMAIL, @PERM, @BAD_YN, @SUMMARY, `@LOGTIME`)");
                 selectSQL.AddParam("USER_ID", id);
                 selectSQL.AddParam("PW", EncodingPassward(pw));
                 selectSQL.AddParam("NAME", name);
@@ -171,6 +226,7 @@ namespace WindowsFormsApp1.MEMBER
                 selectSQL.AddParam("EMAIL", email);
                 selectSQL.AddParam("PERM", ((short)perm).ToString());
                 selectSQL.AddParam("BAD_YN", "n");
+                selectSQL.AddParam("LOGTIME", DateTime.Now.ToString("yyyy-MM-dd:HH:mm"));
                 selectSQL.AddParam("SUMMARY", summery);
                 selectSQL.Go();
             }
@@ -178,6 +234,7 @@ namespace WindowsFormsApp1.MEMBER
             {
                 return LOGINTYPE.DB_CONNECT_FALL;
             }
+
             return LOGINTYPE.SUCCESS;
         }
         public ListViewItem GetListViewItem()
@@ -260,6 +317,7 @@ namespace WindowsFormsApp1.MEMBER
         private string phoneNumber;//-는 제거한 순수한 휴대폰 번호
         private PERM permission;
         private static BaseMember baseMember= null;
+        public string summary;
 
         // 테스트 함수
         public virtual void PrintData()

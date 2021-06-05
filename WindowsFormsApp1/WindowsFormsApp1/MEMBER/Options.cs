@@ -29,6 +29,27 @@ namespace WindowsFormsApp1.MEMBER
             }
             return option;
         }
+        public int GetOverDue(string rent_dt, int rent_cnt)
+        {
+            int date = 0;
+            DateTime dateTime = DateTime.Parse(GetBookReturnDate(rent_dt, rent_cnt)).AddDays(1);
+            DateTime dateNow = DateTime.Now;
+            TimeSpan ts;
+            if (dateTime < dateNow){
+                dateTime.AddDays(-1);
+                ts = (dateNow - dateTime);
+                date = ts.Days;
+            }
+
+            return date;
+        }
+        public string GetBookReturnDate(string rent_dt, int rent_cnt)
+        {
+            string startDate = DateTime.Parse(rent_dt).ToString("yyyy-MM-dd");
+            string date = DateTime.Parse(startDate).AddDays(RD + RDADD * rent_cnt).ToString("yyyy-MM-dd");
+
+            return date;
+        }
         private void ReadDatabase()
         {
             try
@@ -141,6 +162,13 @@ namespace WindowsFormsApp1.MEMBER
                 }
                 return 0;
             }
+        }
+        /// <summary>
+        /// 연장시 추가 대여기간
+        /// </summary>
+        public int RDADD
+        {
+            get { return 7; }
         }
         /// <summary>
         /// 최대 대여권수

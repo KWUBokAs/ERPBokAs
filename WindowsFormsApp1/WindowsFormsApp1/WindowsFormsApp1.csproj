@@ -152,11 +152,19 @@
     <Compile Include="EditBookInfoPage.Designer.cs">
       <DependentUpon>EditBookInfoPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="MeetRoom.cs">
+    <Compile Include="Meet.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="MeetRoom.Designer.cs">
-      <DependentUpon>MeetRoom.cs</DependentUpon>
+    <Compile Include="Meet.Designer.cs">
+      <DependentUpon>Meet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MeetRoom\ORoomAct.cs" />
+    <Compile Include="MeetRoom\SeatAct.cs" />
+    <Compile Include="MeetRoom\Sseat.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MeetRoom\Sseat.Designer.cs">
+      <DependentUpon>Sseat.cs</DependentUpon>
     </Compile>
     <Compile Include="MeetRoom\StudyRoom.cs" />
     <Compile Include="MEMBER\BaseMember.cs" />
@@ -200,6 +208,12 @@
     <Compile Include="RegistrationPage.Designer.cs">
       <DependentUpon>RegistrationPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Seat.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Seat.Designer.cs">
+      <DependentUpon>Seat.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControl1.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -233,8 +247,11 @@
     <EmbeddedResource Include="AddBookPage.resx">
       <DependentUpon>AddBookPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MeetRoom.resx">
-      <DependentUpon>MeetRoom.cs</DependentUpon>
+    <EmbeddedResource Include="Meet.resx">
+      <DependentUpon>Meet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MeetRoom\Sseat.resx">
+      <DependentUpon>Sseat.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MEMBER\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
@@ -329,6 +346,7 @@
     <Content Include="Resources\ic_top_smile.png" />
     <Content Include="Resources\ic_top_unsmile.png" />
     <Content Include="Resources\loading.gif" />
+    <None Include="Resources\sheet_help.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\main.png" />

@@ -63,6 +63,9 @@ namespace WindowsFormsApp1.MEMBER
                 case BaseMember.LOGINTYPE.PW_INCONSIST://pw가 불일치 할때
                     lab_LoginStatus.Text = "PW가 일치하지 않습니다.";
                     break;
+                case BaseMember.LOGINTYPE.ID_STAT_LOGIN://로그인중임
+                    lab_LoginStatus.Text = "로그인중입니다.";
+                    break;
                 case BaseMember.LOGINTYPE.SUCCESS://성공 했을 때
                     if (!member.ReadDatabase())//DB입력이 실패 했을 때
                     {
@@ -72,6 +75,9 @@ namespace WindowsFormsApp1.MEMBER
                     {
                         lab_LoginStatus.Text = "성공!";
                     }
+                    break;
+                default:
+                    lab_LoginStatus.Text = "정체불명에 오류가 식별되었습니다.";
                     break;
             }
             if (member.IsLogin)
