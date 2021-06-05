@@ -60,6 +60,7 @@ namespace WindowsFormsApp1
                 this.btnDelete.Visible = false;
                 this.btnReturn.Visible = false;
                 this.btnAdd.Visible = false;
+                this.btnEdit.Visible = false;
             }
         }
 

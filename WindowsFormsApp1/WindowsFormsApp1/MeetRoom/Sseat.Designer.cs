@@ -58,7 +58,8 @@ namespace WindowsFormsApp1.MeetRoom
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(167, 171);
+            this.pictureBox1.Size = new System.Drawing.Size(270, 262);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
@@ -69,7 +70,7 @@ namespace WindowsFormsApp1.MeetRoom
             this.Controls.Add(this.lblSN);
             this.Controls.Add(this.pictureBox1);
             this.Name = "Sseat";
-            this.Size = new System.Drawing.Size(167, 171);
+            this.Size = new System.Drawing.Size(270, 262);
             this.Load += new System.EventHandler(this.Sseat_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
