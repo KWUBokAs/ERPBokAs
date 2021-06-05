@@ -38,8 +38,8 @@ namespace WindowsFormsApp1
             // Ex) "A       B" => "A B"
             Regex multiSpaceToOne = new Regex(@"\s+");
             NAME = multiSpaceToOne.Replace(NAME, " ");
-            WRITER = multiSpaceToOne.Replace(WRITER, "");
-            PUBLISHER = multiSpaceToOne.Replace(PUBLISHER, "");
+            WRITER = multiSpaceToOne.Replace(WRITER, " ");
+            PUBLISHER = multiSpaceToOne.Replace(PUBLISHER, " ");
 
             SQLObject selectSQL = new BACK.SQLObject();
             selectSQL.setQuery("SELECT "+
