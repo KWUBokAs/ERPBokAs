@@ -19,7 +19,9 @@ namespace WindowsFormsApp1
 {
     public partial class OpenRoom : UserControl
     {
+        string a="OR001";
         List<Control> OR1 = new List<Control>();
+        ORoomAct o = new ORoomAct();
         
         public OpenRoom()
         {
@@ -28,7 +30,21 @@ namespace WindowsFormsApp1
 
         private void OpenRoom_Load(object sender, EventArgs e)
         {
-            Sseat s;
+            
+            int s =o.ReadRoomCount(a);
+            
+            for(int i = 1 ; i <=o.ReadRoomCount(a); i++)
+            {
+                Sseat seat = new Sseat(i);
+                panel2.Controls.Add(seat);
+                seat.Location = seat.GetPoint();
+                
+                
+                OR1.Add(seat);
+            }
+            
+            
+
         }
     }
 }
