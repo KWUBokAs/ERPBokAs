@@ -49,6 +49,7 @@ namespace WindowsFormsApp1.MEMBER
             Email = e_mail;
             PhoneNumber = phoneNum;
             this.permission = permission;
+            this.badmember = 'n';
         }
         public void Logout()
         {
@@ -72,6 +73,7 @@ namespace WindowsFormsApp1.MEMBER
             Email = null;
             PhoneNumber = null;
             this.permission = PERM.ANONY_USR;
+            this.badmember = 'n';
             summary = "";
         }
         /// <summary>
@@ -85,7 +87,7 @@ namespace WindowsFormsApp1.MEMBER
             try
             {
                 SQLObject selectSQL = new BACK.SQLObject();
-                selectSQL.setQuery("SELECT NAME, CALLNUM, EMAIL, MANAGE_YN from USER where USER_ID=@USER_ID");
+                selectSQL.setQuery("SELECT NAME, CALLNUM, EMAIL, MANAGE_YN, BAD_YN from USER where USER_ID=@USER_ID");
                 selectSQL.AddParam("USER_ID", ID);
                 selectSQL.Go();
                 //selectsql
@@ -94,6 +96,7 @@ namespace WindowsFormsApp1.MEMBER
                 this.e_mail = jarray[0].Value<string>("EMAIL");
                 this.phoneNumber = jarray[0].Value<string>("CALLNUM");
                 this.permission = (PERM)jarray[0].Value<int>("MANAGE_YN");
+                this.badmember = jarray[0].Value<char>("BAD_YN");
                 return true;
             }
             catch
@@ -307,6 +310,19 @@ namespace WindowsFormsApp1.MEMBER
             get { return ((permission & PERM.READ_ADMIN) == PERM.READ_ADMIN); }
             private set { if (value) permission = permission|PERM.READ_ADMIN; }
         }
+        /// <summary>
+        /// 불량사용자 즉 연체된 사용자면 true를
+        /// 정상사용자면 false을 반환한다.
+        /// </summary>
+        /// <returns></returns>
+        public bool IsBadMember
+        {
+            get
+            {
+                if (badmember == 'n' || badmember == 'N') return false;
+                else return true;
+            }
+        }
 
         /// <summary>
         /// field
@@ -317,6 +333,7 @@ namespace WindowsFormsApp1.MEMBER
         private string phoneNumber;//-는 제거한 순수한 휴대폰 번호
         private PERM permission;
         private static BaseMember baseMember= null;
+        private char badmember;
         public string summary;
 
         // 테스트 함수

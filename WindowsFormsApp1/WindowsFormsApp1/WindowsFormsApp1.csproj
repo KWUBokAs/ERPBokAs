@@ -173,6 +173,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>OptionTable.xsd</DependentUpon>
     </Compile>
+    <Compile Include="MEMBER\PasswardChangePanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MEMBER\PasswardChangePanel.Designer.cs">
+      <DependentUpon>PasswardChangePanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="MEMBER\StatusOfUsePanenl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -249,6 +255,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MEMBER\MemberDataInputPanel.resx">
       <DependentUpon>MemberDataInputPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MEMBER\PasswardChangePanel.resx">
+      <DependentUpon>PasswardChangePanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MEMBER\StatusOfUsePanenl.resx">
       <DependentUpon>StatusOfUsePanenl.cs</DependentUpon>

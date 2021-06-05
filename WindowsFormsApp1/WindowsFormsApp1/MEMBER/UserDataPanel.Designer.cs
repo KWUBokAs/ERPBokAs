@@ -41,11 +41,14 @@
             this.labEmail = new System.Windows.Forms.Label();
             this.labRent = new System.Windows.Forms.Label();
             this.btnPasswardChange = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
             // 
+            this.tableLayoutPanel1.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.tableLayoutPanel1.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.OutsetDouble;
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 83F));
@@ -59,7 +62,7 @@
             this.tableLayoutPanel1.Controls.Add(this.labPhone, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.labEmail, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.labRent, 1, 4);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 68);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 64);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 5;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
@@ -67,7 +70,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(706, 446);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(791, 320);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // label1
@@ -75,7 +78,7 @@
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("New Gulim", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label1.Location = new System.Drawing.Point(18, 21);
+            this.label1.Location = new System.Drawing.Point(247, -83);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(199, 30);
             this.label1.TabIndex = 0;
@@ -86,7 +89,7 @@
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("NanumSquare", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label2.Location = new System.Drawing.Point(50, 33);
+            this.label2.Location = new System.Drawing.Point(65, 22);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(67, 22);
             this.label2.TabIndex = 0;
@@ -97,7 +100,7 @@
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("NanumSquare", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label3.Location = new System.Drawing.Point(69, 122);
+            this.label3.Location = new System.Drawing.Point(84, 85);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(48, 22);
             this.label3.TabIndex = 1;
@@ -108,7 +111,7 @@
             this.label4.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("NanumSquare", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label4.Location = new System.Drawing.Point(31, 211);
+            this.label4.Location = new System.Drawing.Point(46, 148);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(86, 22);
             this.label4.TabIndex = 2;
@@ -119,7 +122,7 @@
             this.label5.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("NanumSquare", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label5.Location = new System.Drawing.Point(44, 300);
+            this.label5.Location = new System.Drawing.Point(59, 211);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(73, 22);
             this.label5.TabIndex = 3;
@@ -130,7 +133,7 @@
             this.label6.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("NanumSquare", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label6.Location = new System.Drawing.Point(31, 390);
+            this.label6.Location = new System.Drawing.Point(46, 275);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(86, 22);
             this.label6.TabIndex = 4;
@@ -141,7 +144,7 @@
             this.labId.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.labId.AutoSize = true;
             this.labId.Font = new System.Drawing.Font("GulimChe", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.labId.Location = new System.Drawing.Point(123, 34);
+            this.labId.Location = new System.Drawing.Point(141, 23);
             this.labId.Name = "labId";
             this.labId.Size = new System.Drawing.Size(75, 20);
             this.labId.TabIndex = 5;
@@ -152,7 +155,7 @@
             this.labName.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.labName.AutoSize = true;
             this.labName.Font = new System.Drawing.Font("GulimChe", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.labName.Location = new System.Drawing.Point(123, 123);
+            this.labName.Location = new System.Drawing.Point(141, 86);
             this.labName.Name = "labName";
             this.labName.Size = new System.Drawing.Size(75, 20);
             this.labName.TabIndex = 5;
@@ -163,7 +166,7 @@
             this.labPhone.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.labPhone.AutoSize = true;
             this.labPhone.Font = new System.Drawing.Font("GulimChe", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.labPhone.Location = new System.Drawing.Point(123, 212);
+            this.labPhone.Location = new System.Drawing.Point(141, 149);
             this.labPhone.Name = "labPhone";
             this.labPhone.Size = new System.Drawing.Size(75, 20);
             this.labPhone.TabIndex = 5;
@@ -174,7 +177,7 @@
             this.labEmail.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.labEmail.AutoSize = true;
             this.labEmail.Font = new System.Drawing.Font("GulimChe", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.labEmail.Location = new System.Drawing.Point(123, 301);
+            this.labEmail.Location = new System.Drawing.Point(141, 212);
             this.labEmail.Name = "labEmail";
             this.labEmail.Size = new System.Drawing.Size(75, 20);
             this.labEmail.TabIndex = 5;
@@ -185,7 +188,7 @@
             this.labRent.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.labRent.AutoSize = true;
             this.labRent.Font = new System.Drawing.Font("GulimChe", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.labRent.Location = new System.Drawing.Point(123, 391);
+            this.labRent.Location = new System.Drawing.Point(141, 276);
             this.labRent.Name = "labRent";
             this.labRent.Size = new System.Drawing.Size(75, 20);
             this.labRent.TabIndex = 5;
@@ -194,22 +197,36 @@
             // btnPasswardChange
             // 
             this.btnPasswardChange.Font = new System.Drawing.Font("NanumSquare", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.btnPasswardChange.Location = new System.Drawing.Point(292, 529);
+            this.btnPasswardChange.Location = new System.Drawing.Point(292, 407);
             this.btnPasswardChange.Name = "btnPasswardChange";
             this.btnPasswardChange.Size = new System.Drawing.Size(153, 64);
             this.btnPasswardChange.TabIndex = 3;
             this.btnPasswardChange.Text = "비밀번호 변경";
             this.btnPasswardChange.UseVisualStyleBackColor = true;
+            this.btnPasswardChange.Click += new System.EventHandler(this.btnPasswardChange_Click);
+            // 
+            // label7
+            // 
+            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("New Gulim", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label7.Location = new System.Drawing.Point(14, 20);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(199, 30);
+            this.label7.TabIndex = 4;
+            this.label7.Text = "개인정보관리";
             // 
             // UserDataPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.btnPasswardChange);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "UserDataPanel";
-            this.Size = new System.Drawing.Size(706, 624);
+            this.Size = new System.Drawing.Size(797, 500);
+            this.Load += new System.EventHandler(this.UserDataPanel_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
@@ -231,5 +248,6 @@
         private System.Windows.Forms.Label labEmail;
         private System.Windows.Forms.Label labRent;
         private System.Windows.Forms.Button btnPasswardChange;
+        private System.Windows.Forms.Label label7;
     }
 }

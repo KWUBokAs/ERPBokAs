@@ -21,13 +21,14 @@ namespace WindowsFormsApp1.MEMBER
         private int overdueNum=0;
         private int latefee=0;
         const int expendDate = 5;
+        private string userid;
 
         private Form3 parent;
         public StatusOfUsePanenl(Form3 form3)
         {
             parent = form3;
             InitializeComponent();
-
+            userid = "";
             parent.ListBtnUserData_Event += ChangeUserData_Event;
             labLatefee.Text = "";
             labOverDueNum.Text = "";
@@ -40,6 +41,9 @@ namespace WindowsFormsApp1.MEMBER
         }
         private void ChangeUserData_Event(object sender, EventArgs e)
         {
+            BaseMember member = BaseMember.GetInstance();
+            if (userid == member.ID) return;
+            userid = member.ID;
             SetDataGrideView();
         }
         private void SetDataGrideView()
