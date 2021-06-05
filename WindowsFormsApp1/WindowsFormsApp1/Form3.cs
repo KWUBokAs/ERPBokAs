@@ -202,7 +202,16 @@ namespace WindowsFormsApp1
             }
             else if (selectItem.Equals("■ 개인정보관리"))
             {
-
+                HidePanel();
+                if (this.panel3.Controls.Find("UserDataPanel", false).Length == 1)
+                {
+                    this.panel3.Controls.Find("UserDataPanel", false)[0].Visible = true;
+                    if (ListBtnUserData_Event != null)
+                    {
+                        ListBtnUserData_Event(sender, e);
+                    }
+                }
+                else this.panel3.Controls.Add(new UserDataPanel());
             }
             else return;
             ChangeMemberData();
@@ -241,6 +250,10 @@ namespace WindowsFormsApp1
             {
                 lbMember.Items.Add("■ 이용현황");
             }
+            for(int i=lbMember.Items.Count; i<7; i++)
+            {
+                lbMember.Items.Add("");
+            }
         }
 
         private void HidePanel()
@@ -248,7 +261,7 @@ namespace WindowsFormsApp1
             foreach (Control c in this.panel3.Controls)
             {
                 if (c.GetType() == typeof(SearchPage) || c.GetType() == typeof(RegistrationPage) || c.GetType() == typeof(ListBox) || c.GetType() == typeof(MemberDataInputPanel)
-                    || c.GetType() == typeof(StatusOfUsePanenl))
+                    || c.GetType() == typeof(StatusOfUsePanenl) || c.GetType() ==  typeof(UserDataPanel))
                     c.Visible = false;
             }
         }
@@ -258,7 +271,7 @@ namespace WindowsFormsApp1
             foreach (Control c in this.panel3.Controls)
             {
                 if (c.GetType() == typeof(StatusOfUsePanenl)  || c.GetType() == typeof(RegistrationPage) || c.GetType() == typeof(MemberDataInputPanel)
-                    || c.GetType() == typeof(SearchPage) )
+                    || c.GetType() == typeof(SearchPage) || c.GetType() ==  typeof(UserDataPanel))
                     panel3.Controls.Remove(c);
             }
         }

@@ -71,6 +71,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Management" />
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
@@ -178,6 +179,12 @@
     <Compile Include="MEMBER\StatusOfUsePanenl.Designer.cs">
       <DependentUpon>StatusOfUsePanenl.cs</DependentUpon>
     </Compile>
+    <Compile Include="MEMBER\UserDataPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MEMBER\UserDataPanel.Designer.cs">
+      <DependentUpon>UserDataPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="OpenRoom.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -245,6 +252,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MEMBER\StatusOfUsePanenl.resx">
       <DependentUpon>StatusOfUsePanenl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MEMBER\UserDataPanel.resx">
+      <DependentUpon>UserDataPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OpenRoom.resx">
       <DependentUpon>OpenRoom.cs</DependentUpon>
