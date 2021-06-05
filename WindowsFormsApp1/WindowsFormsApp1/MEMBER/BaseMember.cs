@@ -60,7 +60,7 @@ namespace WindowsFormsApp1.MEMBER
                 updateSQL.setQuery("UPDATE `USER` SET `LOGTIME`=@LOGTIME, `SUMMARY`=@SUMMARY " +
                                         "Where USER_ID=@USER_ID");
                 updateSQL.AddParam("USER_ID", id);
-                updateSQL.AddParam("LOGTIME", DateTime.Now.ToString("yyyy-MM-dd:HH:mm"));
+                updateSQL.AddParam("LOGTIME", DateTime.Now.ToString("yyyy-MM-dd:HH:mm:ss"));
                 updateSQL.AddParam("SUMMARY", summary);
                 updateSQL.Go();
             }
@@ -241,7 +241,7 @@ namespace WindowsFormsApp1.MEMBER
             {
                 SQLObject selectSQL = new BACK.SQLObject();
                 selectSQL.setQuery("INSERT into `USER`(`USER_ID`, `PW`, `NAME`, `CALLNUM`, `EMAIL`, `MANAGE_YN`, `BAD_YN`, `SUMMARY`, `LOGTIME`) " +
-                                    "VALUES (@USER_ID, @PW, @NAME, @CALLNUM, @EMAIL, @PERM, @BAD_YN, @SUMMARY, `@LOGTIME`)");
+                                    "VALUES (@USER_ID, @PW, @NAME, @CALLNUM, @EMAIL, @PERM, @BAD_YN, @SUMMARY, @LOGTIME)");
                 selectSQL.AddParam("USER_ID", id);
                 selectSQL.AddParam("PW", EncodingPassward(pw));
                 selectSQL.AddParam("NAME", name);
@@ -249,7 +249,7 @@ namespace WindowsFormsApp1.MEMBER
                 selectSQL.AddParam("EMAIL", email);
                 selectSQL.AddParam("PERM", ((short)perm).ToString());
                 selectSQL.AddParam("BAD_YN", "n");
-                selectSQL.AddParam("LOGTIME", DateTime.Now.ToString("yyyy-MM-dd:HH:mm"));
+                selectSQL.AddParam("LOGTIME", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                 selectSQL.AddParam("SUMMARY", summery);
                 selectSQL.Go();
             }
