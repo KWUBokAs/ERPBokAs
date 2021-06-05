@@ -16,12 +16,13 @@ namespace WindowsFormsApp1
 {
     public partial class SearchPage : UserControl
     {
+        string selectedISBN;
         public SearchPage()
         {
             InitializeComponent();
         }
 
-        private void btnSearch_Click(object sender, EventArgs e)
+        public void RenewGridView()
         {
             string NAME = this.txtName.Text;
             string WRITER = this.txtWriter.Text;
@@ -42,7 +43,7 @@ namespace WindowsFormsApp1
             PUBLISHER = multiSpaceToOne.Replace(PUBLISHER, " ");
 
             SQLObject selectSQL = new BACK.SQLObject();
-            selectSQL.setQuery("SELECT "+
+            selectSQL.setQuery("SELECT " +
                                     "ISBN, " +
                                     "NAME AS 도서명, " +
                                     "WRITER AS 저자, " +
@@ -58,8 +59,8 @@ namespace WindowsFormsApp1
                                     "NAME LIKE @NAME " +
                                     "AND WRITER LIKE @WRITER " +
                                     "AND PUBLISHER LIKE @PUBLISHER");
-            selectSQL.AddParam("NAME","%"+NAME+"%");
-            selectSQL.AddParam("WRITER","%"+WRITER+"%");
+            selectSQL.AddParam("NAME", "%" + NAME + "%");
+            selectSQL.AddParam("WRITER", "%" + WRITER + "%");
             selectSQL.AddParam("PUBLISHER", "%" + PUBLISHER + "%");
             selectSQL.Go();
             JArray jarray = selectSQL.ToJArray();
@@ -77,6 +78,11 @@ namespace WindowsFormsApp1
             dgvBookInfo.DataSource = JsonConvert.DeserializeObject(jarray.ToString());
         }
 
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            RenewGridView();
+        }
+
         private void dgvBookInfo_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (this.dgvBookInfo.CurrentRow == null) return;
@@ -84,5 +90,17 @@ namespace WindowsFormsApp1
             BookInfoDetail bid = new BookInfoDetail(dgvr);
             bid.ShowDialog();
         }
+
+        public void EditBookInfoPage_Closing(object sender, FormClosedEventArgs e) { RenewGridView(); }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            if (this.dgvBookInfo.CurrentRow == null) return;
+            selectedISBN = this.dgvBookInfo.CurrentRow.Cells[0].Value.ToString();
+            EditBookInfoPage ebip = new EditBookInfoPage(selectedISBN);
+            ebip.FormClosed += EditBookInfoPage_Closing;
+            ebip.ShowDialog();
+        }
+        
     }
 }
