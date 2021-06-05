@@ -59,7 +59,7 @@ namespace WindowsFormsApp1
             {
                 this.btnDelete.Visible = false;
                 this.btnReturn.Visible = false;
-                //this.btnAdd.Visible = false;
+                this.btnAdd.Visible = false;
             }
         }
 
@@ -258,5 +258,14 @@ namespace WindowsFormsApp1
 
             RenewDataGridView();
         }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            AddBookPage abp = new AddBookPage(ISBN);
+            abp.FormClosed += AddBookPage_Closing;
+            abp.ShowDialog();
+        }
+
+        public void AddBookPage_Closing(object sender, FormClosedEventArgs e) { RenewDataGridView(); }
     }
 }

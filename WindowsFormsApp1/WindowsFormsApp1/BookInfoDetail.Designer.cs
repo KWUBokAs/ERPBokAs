@@ -213,6 +213,7 @@ namespace WindowsFormsApp1
             this.btnAdd.TabIndex = 30;
             this.btnAdd.Text = "추가";
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // BookInfoDetail
             // 
