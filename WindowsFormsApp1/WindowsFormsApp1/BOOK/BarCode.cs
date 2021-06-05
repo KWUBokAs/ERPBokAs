@@ -11,7 +11,7 @@ using WindowsFormsApp1.BACK;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 
-namespace WindowsFormsApp1
+namespace WindowsFormsApp1.BOOK
 {
     public partial class BarCode : UserControl
     {

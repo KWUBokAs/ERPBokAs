@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFormsApp1.MEMBER;
+using WindowsFormsApp1.BOOK;
 
 namespace WindowsFormsApp1
 {

@@ -12,7 +12,7 @@ using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System.Text.RegularExpressions;
 
-namespace WindowsFormsApp1
+namespace WindowsFormsApp1.BOOK
 {
     // RegistrationPage와 같음 
     // 더 나은 코드를 만드려면 좀 많이 뜯어 고쳐될듯
@@ -171,6 +171,7 @@ namespace WindowsFormsApp1
             updateSQL.AddParam("PREV_ISBN", ISBN);
 
             updateSQL.Go();
+            MessageBox.Show("정보가 수정되었습니다","정보수정");
             this.Close();
         }
 
