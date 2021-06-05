@@ -173,6 +173,7 @@ namespace WindowsFormsApp1
                 if (dResult == DialogResult.OK)
                 {
                     SetlbMemberItem();
+                    DeletePanel();
                 }
             }
             else if (selectItem.Equals("■ 이용현황"))
