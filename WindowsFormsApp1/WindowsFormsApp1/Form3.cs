@@ -9,6 +9,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFormsApp1.MEMBER;
 using WindowsFormsApp1.BOOK;
+using WindowsFormsApp1.BACK;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json.Linq;
+
 
 namespace WindowsFormsApp1
 {
@@ -19,7 +24,7 @@ namespace WindowsFormsApp1
 
         public event EventHandler ListBtnUserUsingData_Event;
         public event EventHandler ListBtnUserData_Event;
-        public event EventHandler ListBtnBadSearch_Event;
+        //public event EventHandler ListBtnBadSearch_Event;
         public event EventHandler OpenPasswardChangePanel_Event;
 
         private UserDataPanel userDataPanel;
@@ -221,16 +226,16 @@ namespace WindowsFormsApp1
                 }
                 else this.panel3.Controls.Add(new MemberDataInputPanel());
             }
-            else if (selectItem.Equals("■ 불량자 회원 검색"))
+            else if (selectItem.Equals("■ 연체도서 반납"))
             {
                 HidePanel();
                 if (this.panel3.Controls.Find("BadMemberSearch", false).Length == 1)
                 {
                     this.panel3.Controls.Find("BadMemberSearch", false)[0].Visible = true;
-                    if(ListBtnBadSearch_Event != null)
-                    {
-                        ListBtnBadSearch_Event(sender, e);
-                    }
+                    //if(ListBtnBadSearch_Event != null)
+                    //{
+                    //    ListBtnBadSearch_Event(sender, e);
+                    //}
                 }
                 else this.panel3.Controls.Add(new BadMemberSearch(this));
             }
@@ -320,7 +325,7 @@ namespace WindowsFormsApp1
             
             if(member.IsBookAdmin)
             {
-                lbMember.Items.Add("■ 불량자 회원 검색");
+                lbMember.Items.Add("■ 연체도서 반납");
                 lbMember.Items.Add("");
             }
             else if(member.Permission == BaseMember.PERM.NOMAL_USR)
@@ -399,6 +404,82 @@ namespace WindowsFormsApp1
                 labLoginState.Text = "로그인을 해주세요.";
                 labPerm.Text = "사용권한 : 비회원 사용자";
             }
+        }
+        private void UpdateOverdueBook()
+        {
+            try
+            {
+                SQLObject updateSQL = new BACK.SQLObject();
+                updateSQL.setQuery("UPDATE `BOOKRENTS` " +
+                                    "SET OVERDUE_YN='1' " +
+                                    "WHERE " +
+                                            "`RETURN_DT`<@NOW_DATE " +
+                                            "AND RENT_YN='0' " +
+                                            "AND OVERDUE_YN='0'");
+                updateSQL.AddParam("NOW_DATE", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                updateSQL.Go();
+            }
+            catch
+            {
+                MessageBox.Show("DB접속이 원활하지 않습니다.");
+            }
+        }
+        private void UpdateBadMember()
+        {
+            JArray jarray=null;
+            try//연체료 납부할 것이 더 있는지 확인인
+            {
+                SQLObject selectSQL = new BACK.SQLObject();
+                selectSQL.setQuery("SELECT USER_ID, COUNT(USER_ID) AS 'CNT' " +
+                                    "FROM `BOOKRENTS` " +
+                                    "WHERE " +
+                                            "OVERDUE_YN='1' " +
+                                            "AND RENT_YN='0' " +
+                                    "GROUP BY USER_ID");
+                selectSQL.Go();
+                jarray = selectSQL.ToJArray();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message + ": DB접속이 불안정합니다.");
+                return;
+            }
+            if (jarray == null || jarray.Count == 0) return;//없을경우
+
+            List<string> userid = new List<string>();
+            foreach(JToken item in jarray)
+            {
+                int cnt = item.Value<int>("CNT");
+                if(cnt > 0)//cnt 1개 이상 있다면
+                {
+                    userid.Add(item.Value<string>("USER_ID"));
+                }
+            }
+            foreach(string USER_ID in userid)
+            {
+                try
+                {
+                    SQLObject updateSQL = new BACK.SQLObject();
+
+                    updateSQL.setQuery("UPDATE `USER` " +
+                                    "SET `BAD_YN`='y' " +
+                                    "WHERE " +
+                                            "USER_ID = @USER_ID");
+                    updateSQL.AddParam("USER_ID", USER_ID);
+                    updateSQL.Go();
+
+                }
+                catch
+                {
+                    MessageBox.Show("DB접속이 원활하지 않습니다.");
+                }
+            }
+        }
+
+        private void labPerm_Click(object sender, EventArgs e)
+        {
+            UpdateOverdueBook();
+            UpdateBadMember();
         }
     }
 }

@@ -29,6 +29,21 @@ namespace WindowsFormsApp1.MEMBER
             }
             return option;
         }
+        public int GetLatefee(string rent_return_date)
+        {
+            int latefee = 0;
+            TimeSpan over_due = DateTime.Now - DateTime.Parse(rent_return_date);
+            if (over_due.Days > 0)//연체됐으면
+            {
+                latefee = RV * over_due.Days;
+            }
+
+            return latefee;
+        }
+
+
+
+        /*
         public int GetOverDue(string rent_dt, int rent_cnt)
         {
             int date = 0;
@@ -49,7 +64,7 @@ namespace WindowsFormsApp1.MEMBER
             string date = DateTime.Parse(startDate).AddDays(RD + RDADD * rent_cnt).ToString("yyyy-MM-dd");
 
             return date;
-        }
+        }*/
         private void ReadDatabase()
         {
             try

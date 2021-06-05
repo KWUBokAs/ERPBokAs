@@ -54,7 +54,7 @@ namespace WindowsFormsApp1.MEMBER
 
             rentNum = 0;
             overdueNum = 0;
-            latefee = 0;
+            this.latefee = 0;
 
             try//id가 있는지 없는지 판별하는 부분 있으면 실패를 반환한다.
             {
@@ -84,23 +84,19 @@ namespace WindowsFormsApp1.MEMBER
                     string temp2 = return_dt.Value.ToString();
                     return_dt.Value = DateTime.Parse(temp2).ToString("yyyy-MM-dd");//날짜 시간 때기
 
-
-
-                    int rent_cnt = Convert.ToInt32(row.Cells[5].Value);
-
-
-                    TimeSpan over_due = DateTime.Now - DateTime.Parse(temp2);
-                    if (over_due.Days > 0)//연체됐으면
+                    int latefee = 0;
+                    latefee = options.GetLatefee(temp2);
+                    if(latefee > 0)
                     {
                         overdueNum++;
-                        latefee +=  options.RV * over_due.Days;
+                        this.latefee += latefee;
                     }
                 }
 
                 rentNum = dgvRentData.Rows.Count;
                 labRentNum.Text = rentNum.ToString()+"권";//대여권수 세팅
                 labOverDueNum.Text = overdueNum.ToString()+"권";
-                labLatefee.Text = latefee.ToString()+"원";
+                labLatefee.Text = this.latefee.ToString()+"원";
             }
             catch (Exception ex)
             {

@@ -136,6 +136,7 @@ namespace WindowsFormsApp1
             this.labPerm.Size = new System.Drawing.Size(61, 19);
             this.labPerm.TabIndex = 2;
             this.labPerm.Text = "label3";
+            this.labPerm.Click += new System.EventHandler(this.labPerm_Click);
             // 
             // labLoginState
             // 

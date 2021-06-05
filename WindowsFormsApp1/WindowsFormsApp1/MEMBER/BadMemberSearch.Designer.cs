@@ -33,9 +33,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtId = new System.Windows.Forms.TextBox();
             this.btnSearch = new System.Windows.Forms.Button();
-            this.btnFree = new System.Windows.Forms.Button();
+            this.btnReturn = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.labSumLatefee = new System.Windows.Forms.Label();
+            this.txtBookNum = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBadTable)).BeginInit();
             this.SuspendLayout();
             // 
@@ -48,7 +50,7 @@
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(221, 30);
             this.label7.TabIndex = 8;
-            this.label7.Text = "불량 회원 검색";
+            this.label7.Text = "연체 도서 반납";
             // 
             // dgvBadTable
             // 
@@ -68,7 +70,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label1.Location = new System.Drawing.Point(678, 30);
+            this.label1.Location = new System.Drawing.Point(681, 30);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(77, 20);
             this.label1.TabIndex = 10;
@@ -84,22 +86,24 @@
             // btnSearch
             // 
             this.btnSearch.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.btnSearch.Location = new System.Drawing.Point(637, 85);
+            this.btnSearch.Location = new System.Drawing.Point(636, 135);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(157, 51);
             this.btnSearch.TabIndex = 12;
             this.btnSearch.Text = "회원 검색";
             this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
-            // btnFree
+            // btnReturn
             // 
-            this.btnFree.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.btnFree.Location = new System.Drawing.Point(636, 142);
-            this.btnFree.Name = "btnFree";
-            this.btnFree.Size = new System.Drawing.Size(157, 51);
-            this.btnFree.TabIndex = 12;
-            this.btnFree.Text = "불량회원 해제";
-            this.btnFree.UseVisualStyleBackColor = true;
+            this.btnReturn.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.btnReturn.Location = new System.Drawing.Point(637, 192);
+            this.btnReturn.Name = "btnReturn";
+            this.btnReturn.Size = new System.Drawing.Size(157, 51);
+            this.btnReturn.TabIndex = 12;
+            this.btnReturn.Text = "반납";
+            this.btnReturn.UseVisualStyleBackColor = true;
+            this.btnReturn.Click += new System.EventHandler(this.btnReturn_Click);
             // 
             // label2
             // 
@@ -120,15 +124,35 @@
             this.labSumLatefee.TabIndex = 14;
             this.labSumLatefee.Text = "0원";
             // 
+            // txtBookNum
+            // 
+            this.txtBookNum.Location = new System.Drawing.Point(636, 104);
+            this.txtBookNum.Name = "txtBookNum";
+            this.txtBookNum.Size = new System.Drawing.Size(157, 25);
+            this.txtBookNum.TabIndex = 11;
+            this.txtBookNum.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBookNum_KeyPress);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label3.Location = new System.Drawing.Point(643, 81);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(143, 20);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "도서 등록번호";
+            // 
             // BadMemberSearch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.labSumLatefee);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.btnFree);
+            this.Controls.Add(this.btnReturn);
             this.Controls.Add(this.btnSearch);
+            this.Controls.Add(this.txtBookNum);
             this.Controls.Add(this.txtId);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgvBadTable);
             this.Controls.Add(this.label7);
@@ -148,8 +172,10 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtId;
         private System.Windows.Forms.Button btnSearch;
-        private System.Windows.Forms.Button btnFree;
+        private System.Windows.Forms.Button btnReturn;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label labSumLatefee;
+        private System.Windows.Forms.TextBox txtBookNum;
+        private System.Windows.Forms.Label label3;
     }
 }
