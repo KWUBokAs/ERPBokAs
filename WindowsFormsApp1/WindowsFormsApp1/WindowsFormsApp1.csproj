@@ -110,6 +110,12 @@
       <DependentUpon>LoadingForm.cs</DependentUpon>
     </Compile>
     <Compile Include="BACK\SQLObject.cs" />
+    <Compile Include="BarCode.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BarCode.Designer.cs">
+      <DependentUpon>BarCode.cs</DependentUpon>
+    </Compile>
     <Compile Include="BookInfoDetail.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -241,6 +247,9 @@
     </Compile>
     <EmbeddedResource Include="BACK\LoadingForm.resx">
       <DependentUpon>LoadingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BarCode.resx">
+      <DependentUpon>BarCode.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="BookInfoDetail.resx">
       <DependentUpon>BookInfoDetail.cs</DependentUpon>

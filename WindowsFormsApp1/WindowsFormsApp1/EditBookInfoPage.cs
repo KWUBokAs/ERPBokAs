@@ -137,11 +137,11 @@ namespace WindowsFormsApp1
                 // BOOKS 테이블의 ISBN들도 변경
                 SQLObject updateBooksSQL = new BACK.SQLObject();
                 updateBooksSQL.setQuery("UPDATE " +
-                                        "BOOKS " +
-                                    "SET " +
-                                        "ISBN=@ISBN " +
+                                            "BOOKS " +
+                                        "SET " +
+                                            "ISBN=@ISBN " +
                                         "WHERE " +
-                                    "ISBN=@PREV_ISBN");
+                                            "ISBN=@PREV_ISBN");
 
                 updateBooksSQL.AddParam("ISBN", list.Find(p => p.key.Equals("ISBN")).value);
                 updateBooksSQL.AddParam("PREV_ISBN", ISBN);
