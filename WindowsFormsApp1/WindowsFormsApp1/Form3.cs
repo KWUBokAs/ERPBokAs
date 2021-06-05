@@ -152,7 +152,7 @@ namespace WindowsFormsApp1
 
         private void Form3_Load(object sender, EventArgs e)
         {
-            timer1_Tick(sender, e);
+            labTime.Text = System.DateTime.Now.ToString("yy-MM-dd  hh:mm");
             ChangeMemberData();
             SetlbMemberItem();
             SetBookMenuItem();
@@ -360,11 +360,23 @@ namespace WindowsFormsApp1
             }
         }
 
+        private bool start = true;
+        private string day;
         private void timer1_Tick(object sender, EventArgs e)
         {
             labTime.Text = System.DateTime.Now.ToString("yy-MM-dd  hh:mm");
+            if (start)
+            {
+                UpdateOverdueBook();
+                UpdateBadMember();
+                start = false;
+                day = DateTime.Now.ToString("yy-MM-dd");
+            }
+            else if (day != DateTime.Now.ToString("yy-MM-dd"))
+            {
+                start = true;
+            }
         }
-
         private void Form3_FormClosing(object sender, FormClosingEventArgs e)
         {
             BaseMember member = BaseMember.GetInstance();
@@ -476,10 +488,7 @@ namespace WindowsFormsApp1
             }
         }
 
-        private void labPerm_Click(object sender, EventArgs e)
-        {
-            UpdateOverdueBook();
-            UpdateBadMember();
-        }
+
+        
     }
 }

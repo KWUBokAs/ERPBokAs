@@ -82,6 +82,7 @@
             this.txtId.Name = "txtId";
             this.txtId.Size = new System.Drawing.Size(157, 25);
             this.txtId.TabIndex = 11;
+            this.txtId.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtId_KeyUp);
             // 
             // btnSearch
             // 
@@ -131,6 +132,7 @@
             this.txtBookNum.Size = new System.Drawing.Size(157, 25);
             this.txtBookNum.TabIndex = 11;
             this.txtBookNum.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBookNum_KeyPress);
+            this.txtBookNum.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtBookNum_KeyUp);
             // 
             // label3
             // 

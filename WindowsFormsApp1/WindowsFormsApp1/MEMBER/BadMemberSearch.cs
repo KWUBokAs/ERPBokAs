@@ -85,6 +85,23 @@ namespace WindowsFormsApp1.MEMBER
             }
             
         }
+
+        private void txtId_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnSearch_Click(sender, e);
+            }
+        }
+
+        private void txtBookNum_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnSearch_Click(sender, e);
+            }
+        }
+
         /// <summary>
         /// bad member에서 해방됐다면 해제해주자
         /// </summary>
@@ -119,7 +136,7 @@ namespace WindowsFormsApp1.MEMBER
                                             "USER_ID = @USER_ID");
                 updateSQL.AddParam("USER_ID", id);
                 updateSQL.Go();
-                MessageBox.Show(id + "(님)은 일반회원이 되셨습니다.");
+                MessageBox.Show(id + "(님)은 일반회원 입니다.");
             }
             catch
             {
