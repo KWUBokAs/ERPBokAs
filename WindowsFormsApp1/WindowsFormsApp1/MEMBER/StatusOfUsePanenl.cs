@@ -21,6 +21,7 @@ namespace WindowsFormsApp1.MEMBER
         private int overdueNum=0;
         private int latefee=0;
         const int expendDate = 5;
+        const int expendDate_number = 7;
         private string userid;
 
         private Form3 parent;
@@ -58,7 +59,7 @@ namespace WindowsFormsApp1.MEMBER
             try//id가 있는지 없는지 판별하는 부분 있으면 실패를 반환한다.
             {
                 SQLObject selectSQL = new BACK.SQLObject();//반납예정일 추가
-                selectSQL.setQuery("SELECT infos.NAME AS '서명', rents.BOOK_ID AS '등록번호', infos.ISBN, rents.RENEW_CNT AS '연장횟수', rents.RENT_DT AS '대여일' ,rents.RENT_DT AS '반납일' " +
+                selectSQL.setQuery("SELECT infos.NAME AS '서명', rents.BOOK_ID AS '등록번호', infos.ISBN, rents.RENT_DT AS '대여일' ,rents.RETURN_DT AS '반납일', rents.RENEW_CNT AS '연장횟수' " +
                                    "FROM BOOKINFO as infos " +
                                    "INNER JOIN BOOKRENTS as rents " +
                                    "ON  rents.RENT_YN = '0' " +
@@ -75,19 +76,24 @@ namespace WindowsFormsApp1.MEMBER
                 for(int i=0; i<dgvRentData.Rows.Count; i++)
                 {
                     var row = dgvRentData.Rows[i];
-                    var rent_dt = row.Cells[4];
+                    var rent_dt = row.Cells[3];
                     string temp1 = rent_dt.Value.ToString();
                     rent_dt.Value = DateTime.Parse(temp1).ToString("yyyy-MM-dd");//날짜 시간 때기
 
-                    int rent_cnt = Convert.ToInt32(row.Cells[3].Value);
-                    string temp2 = options.GetBookReturnDate(temp1,rent_cnt);
-                    row.Cells[5].Value = temp2;
+                    var return_dt = row.Cells[4];
+                    string temp2 = return_dt.Value.ToString();
+                    return_dt.Value = DateTime.Parse(temp2).ToString("yyyy-MM-dd");//날짜 시간 때기
 
-                    int over_due = options.GetOverDue(temp1, rent_cnt);
-                    if (over_due> 0)//연체됐으면
+
+
+                    int rent_cnt = Convert.ToInt32(row.Cells[5].Value);
+
+
+                    TimeSpan over_due = DateTime.Now - DateTime.Parse(temp2);
+                    if (over_due.Days > 0)//연체됐으면
                     {
                         overdueNum++;
-                        latefee +=  options.RV * over_due;
+                        latefee +=  options.RV * over_due.Days;
                     }
                 }
 
@@ -109,9 +115,9 @@ namespace WindowsFormsApp1.MEMBER
             int rowIndex = dgvRentData.CurrentCell.RowIndex;
             row = dgvRentData.Rows[rowIndex];
             string number = row.Cells[1].Value.ToString();//도서 등록번호
-            int rent_cnt = Convert.ToInt32(row.Cells[3].Value);
+            int rent_cnt = Convert.ToInt32(row.Cells[5].Value);
 
-            DateTime last = DateTime.Parse(row.Cells[5].Value.ToString());//반납일
+            DateTime last = DateTime.Parse(row.Cells[4].Value.ToString());//반납일
             DateTime now = DateTime.Now;
             TimeSpan gap = last - now;
             
@@ -144,20 +150,30 @@ namespace WindowsFormsApp1.MEMBER
         private bool UpdateRentCnt(string bookNumber, int rent_cnt)
         {
             Options options = Options.GetInstance();
+            BaseMember member = BaseMember.GetInstance();
             if (options.EC < rent_cnt) return false;//연장횟수 초가
-
+            JArray jarray;//이전 data 저장
+            string BOOK_ID ="";
+            DateTime dateStart =DateTime.Now;
+            DateTime dateEnd = DateTime.Now;
             try
             {
                 SQLObject selectSQL = new BACK.SQLObject();//반납예정일 추가
-                selectSQL.setQuery("SELECT RENEW_CNT " +
+                selectSQL.setQuery("SELECT BOOK_ID, USER_ID, RENT_DT, RETURN_DT, RENEW_CNT " +
                                     "FROM `BOOKRENTS` " +
                                     "WHERE " +
                                             "BOOK_ID = @BOOK_ID AND " +
-                                            "RENT_YN='0'");
-                selectSQL.AddParam("RENEW_CNT", rent_cnt.ToString());
+                                            "RENT_YN='0' AND " +
+                                            "USER_ID = @USER_ID");
+                selectSQL.AddParam("USER_ID", member.ID);
                 selectSQL.AddParam("BOOK_ID", bookNumber);
                 selectSQL.Go();
-                JArray jarray = selectSQL.ToJArray();
+                jarray = selectSQL.ToJArray();
+
+                BOOK_ID = jarray[0].Value<string>("BOOK_ID");
+                dateStart = DateTime.Parse(jarray[0].Value<string>("RENT_DT"));
+                dateEnd = DateTime.Parse(jarray[0].Value<string>("RETURN_DT"));
+
                 int temp = jarray[0].Value<int>("RENEW_CNT");
                 if (rent_cnt - temp == 1) { }//정상적인 값이 들어온 경우
                 else if (rent_cnt < temp) { return false; }//더 낮은 값으로 업데이트하려는 경우
@@ -168,17 +184,36 @@ namespace WindowsFormsApp1.MEMBER
                 MessageBox.Show("DB접속 오류");
                 return false;
             }
+            if (BOOK_ID == "" || dateStart == DateTime.Now || dateStart == dateEnd) return false;//재대로 못받았을 때
             try
             {
-                SQLObject selectSQL = new BACK.SQLObject();//반납예정일 추가
-                selectSQL.setQuery("UPDATE `BOOKRENTS` " +
-                                    "SET `RENEW_CNT`=@RENEW_CNT " +
+                SQLObject updateSQL = new BACK.SQLObject();//이전cnt는 종결될수 있도록해준다.
+                updateSQL.setQuery("UPDATE `BOOKRENTS` " +
+                                    "SET `RENT_YN`='1' " +
                                     "WHERE " +
                                             "BOOK_ID=@BOOK_ID AND " +
-                                            "RENT_YN='0'");
-                selectSQL.AddParam("RENEW_CNT", rent_cnt.ToString());
-                selectSQL.AddParam("BOOK_ID", bookNumber);
-                selectSQL.Go();
+                                            "RENT_YN='0' AND " +
+                                            "USER_ID = @USER_ID");
+                updateSQL.AddParam("BOOK_ID", bookNumber);
+                updateSQL.AddParam("USER_ID", member.ID);
+                updateSQL.Go();
+
+
+                SQLObject insertSQL = new SQLObject();//새로운로그 생성
+                insertSQL.setQuery("INSERT INTO " +
+                                        "`BOOKRENTS` " +
+                                        "(`BOOK_ID`, `USER_ID`, `RENT_DT`, `RETURN_DT`, `RENT_DIV`, `RENT_YN`, `OVERDUE_YN`, `RENEW_CNT`) " +
+                                    "VALUES " +
+                                        "(@BOOK_ID, @USER_ID, @RENT_DT, @RETURN_DT, @RENT_DIV, @RENT_YN, @OVERDUE_YN, @RENEW_CNT)");
+                insertSQL.AddParam("BOOK_ID", BOOK_ID);
+                insertSQL.AddParam("USER_ID", member.ID);
+                insertSQL.AddParam("RENT_DT", dateStart.ToString("yyyy-MM-dd HH:mm:ss"));
+                insertSQL.AddParam("RETURN_DT", dateEnd.AddDays(expendDate_number).ToString("yyyy-MM-dd HH:mm:ss"));
+                insertSQL.AddParam("RENT_DIV", "1");
+                insertSQL.AddParam("RENT_YN", "0");
+                insertSQL.AddParam("OVERDUE_YN", "0");
+                insertSQL.AddParam("RENEW_CNT", rent_cnt.ToString());
+                insertSQL.Go();
             }
             catch
             {

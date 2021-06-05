@@ -76,6 +76,7 @@ namespace WindowsFormsApp1.MEMBER
                         {
                             case BaseMember.LOGINTYPE.SUCCESS:
                                 TextBoxClear_Event(sender, e);
+                                MessageBox.Show("비밀번호 변경에 성공하셨습니다.");
                                 SavePassward_Event(sender, e);
                                 break;
                             default:

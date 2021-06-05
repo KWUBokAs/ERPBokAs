@@ -35,8 +35,8 @@ namespace WindowsFormsApp1
             this.lbMember = new System.Windows.Forms.ListBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.labPerm = new System.Windows.Forms.Label();
+            this.labLoginState = new System.Windows.Forms.Label();
             this.labTime = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -118,8 +118,8 @@ namespace WindowsFormsApp1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.Window;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.labPerm);
+            this.panel1.Controls.Add(this.labLoginState);
             this.panel1.Controls.Add(this.labTime);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -127,23 +127,25 @@ namespace WindowsFormsApp1
             this.panel1.Size = new System.Drawing.Size(950, 30);
             this.panel1.TabIndex = 5;
             // 
-            // label3
+            // labPerm
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(729, 9);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(45, 15);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "label3";
+            this.labPerm.AutoSize = true;
+            this.labPerm.Font = new System.Drawing.Font("Gulim", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.labPerm.Location = new System.Drawing.Point(625, 5);
+            this.labPerm.Name = "labPerm";
+            this.labPerm.Size = new System.Drawing.Size(61, 19);
+            this.labPerm.TabIndex = 2;
+            this.labPerm.Text = "label3";
             // 
-            // label2
+            // labLoginState
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(324, 9);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(45, 15);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "label2";
+            this.labLoginState.AutoSize = true;
+            this.labLoginState.Font = new System.Drawing.Font("Gulim", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.labLoginState.Location = new System.Drawing.Point(227, 5);
+            this.labLoginState.Name = "labLoginState";
+            this.labLoginState.Size = new System.Drawing.Size(61, 19);
+            this.labLoginState.TabIndex = 1;
+            this.labLoginState.Text = "label2";
             // 
             // labTime
             // 
@@ -287,7 +289,8 @@ namespace WindowsFormsApp1
             // 
             // timer1
             // 
-            this.timer1.Interval = 1000;
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 10000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Form3
@@ -325,8 +328,8 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label labPerm;
+        private System.Windows.Forms.Label labLoginState;
         private System.Windows.Forms.Label labTime;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label4;

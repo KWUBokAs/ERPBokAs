@@ -137,6 +137,7 @@ namespace WindowsFormsApp1
             timer1_Tick(sender, e);
             ChangeMemberData();
             SetlbMemberItem();
+            HeadLabelSync();
         }
         private void ChangeMemberData()
         {
@@ -165,6 +166,7 @@ namespace WindowsFormsApp1
                 member.Logout();
                 SetlbMemberItem();
                 DeletePanel();
+                HeadLabelSync();
             }
             else if (selectItem.Equals("■ 로그인"))
             {
@@ -173,6 +175,7 @@ namespace WindowsFormsApp1
                 if (dResult == DialogResult.OK)
                 {
                     SetlbMemberItem();
+                    HeadLabelSync();
                 }
             }
             else if (selectItem.Equals("■ 이용현황"))
@@ -310,7 +313,7 @@ namespace WindowsFormsApp1
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            labTime.Text = System.DateTime.Now.ToString("yy-MM-dd    hh:mm");
+            labTime.Text = System.DateTime.Now.ToString("yy-MM-dd  hh:mm");
         }
 
         private void Form3_FormClosing(object sender, FormClosingEventArgs e)
@@ -323,6 +326,35 @@ namespace WindowsFormsApp1
         {
             BaseMember member = BaseMember.GetInstance();
             member.Logout();
+        }
+        private void HeadLabelSync()
+        {
+            BaseMember member = BaseMember.GetInstance();
+            if (member.IsLogin)
+            {
+                labLoginState.Text = member.Name+"(님)으로 로그인 중입니다.";
+                if (member.IsBookAdmin)
+                {
+                    labPerm.Text = "사용권한 : 사서관리자";
+                }
+                else if (member.IsMeetingRoomAdmin)
+                {
+                    labPerm.Text = "사용권한 : 회의실관리자";
+                }
+                else if (member.IsReadingRoomAdmin)
+                {
+                    labPerm.Text = "사용권한 : 열람실관리자";
+                }
+                else
+                {
+                    labPerm.Text = "사용권한 : 일반사용자";
+                }
+            }
+            else
+            {
+                labLoginState.Text = "로그인을 해주세요.";
+                labPerm.Text = "사용권한 : 비회원 사용자";
+            }
         }
     }
 }
