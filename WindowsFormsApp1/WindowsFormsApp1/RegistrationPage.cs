@@ -14,23 +14,22 @@ using System.Text.RegularExpressions;
 
 namespace WindowsFormsApp1
 {
+    class StringPair
+    {
+        public string key { get; set; }
+        public string value { get; set; }
+
+        public StringPair(string _key, string _value)
+        {
+            this.key = _key;
+            this.value = _value;
+        }
+    }
     public partial class RegistrationPage : UserControl
     {
         public RegistrationPage()
         {
             InitializeComponent();
-        }
-
-        class StringPair
-        {
-            public string key { get; set; }
-            public string value { get; set; }
-
-            public StringPair(string _key, string _value)
-            {
-                this.key = _key;
-                this.value = _value;
-            }
         }
 
         private void RegistrationPage_Load(object sender, EventArgs e)

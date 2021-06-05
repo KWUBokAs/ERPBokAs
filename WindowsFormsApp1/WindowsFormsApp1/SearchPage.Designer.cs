@@ -37,6 +37,7 @@ namespace WindowsFormsApp1
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.dgvBookInfo = new System.Windows.Forms.DataGridView();
+            this.btnEdit = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBookInfo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -111,6 +112,7 @@ namespace WindowsFormsApp1
             this.dgvBookInfo.AllowUserToDeleteRows = false;
             this.dgvBookInfo.AllowUserToResizeColumns = false;
             this.dgvBookInfo.AllowUserToResizeRows = false;
+            this.dgvBookInfo.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvBookInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvBookInfo.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvBookInfo.Location = new System.Drawing.Point(25, 142);
@@ -122,10 +124,22 @@ namespace WindowsFormsApp1
             this.dgvBookInfo.TabIndex = 9;
             this.dgvBookInfo.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBookInfo_CellContentDoubleClick);
             // 
+            // btnEdit
+            // 
+            this.btnEdit.Location = new System.Drawing.Point(486, 80);
+            this.btnEdit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(66, 19);
+            this.btnEdit.TabIndex = 10;
+            this.btnEdit.Text = "정보수정";
+            this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            // 
             // SearchPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.dgvBookInfo);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -153,5 +167,6 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DataGridView dgvBookInfo;
+        private System.Windows.Forms.Button btnEdit;
     }
 }

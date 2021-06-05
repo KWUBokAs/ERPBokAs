@@ -141,6 +141,18 @@
     <Compile Include="Form3.Designer.cs">
       <DependentUpon>Form3.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddBookPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddBookPage.Designer.cs">
+      <DependentUpon>AddBookPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditBookInfoPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditBookInfoPage.Designer.cs">
+      <DependentUpon>EditBookInfoPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Meet.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -205,9 +217,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RegistrationPage.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="RegistrationPage.cs" />
     <Compile Include="RegistrationPage.Designer.cs">
       <DependentUpon>RegistrationPage.cs</DependentUpon>
     </Compile>
@@ -235,6 +245,9 @@
     <EmbeddedResource Include="BookInfoDetail.resx">
       <DependentUpon>BookInfoDetail.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="EditBookInfoPage.resx">
+      <DependentUpon>EditBookInfoPage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -243,6 +256,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form3.resx">
       <DependentUpon>Form3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddBookPage.resx">
+      <DependentUpon>AddBookPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Meet.resx">
       <DependentUpon>Meet.cs</DependentUpon>
