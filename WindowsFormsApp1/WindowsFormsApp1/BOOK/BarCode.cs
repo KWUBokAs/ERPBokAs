@@ -15,6 +15,7 @@ namespace WindowsFormsApp1.BOOK
 {
     public partial class BarCode : UserControl
     {
+        const int BOOKNUMBER_SIZE = 6;
         public BarCode()
         {
             InitializeComponent();
@@ -23,7 +24,8 @@ namespace WindowsFormsApp1.BOOK
         private void txtBarCode_TextChanged(object sender, EventArgs e)
         {
             string BOOK_ID = ((TextBox)sender).Text;
-
+            if (BOOK_ID.Length < BOOKNUMBER_SIZE) return;
+            ((TextBox)sender).Text = "";
             SQLObject selectSQL = new BACK.SQLObject();
             selectSQL.setQuery("SELECT " +
                                     "* " +
@@ -79,7 +81,10 @@ namespace WindowsFormsApp1.BOOK
 
         private void txtBarCode_KeyPress(object sender, KeyPressEventArgs e)
         {
-             e.Handled = true;
+            if (!(char.IsDigit(e.KeyChar) || e.KeyChar == Convert.ToChar(Keys.Back)))
+            {
+                e.Handled = true;
+            }
         }
     }
 }
