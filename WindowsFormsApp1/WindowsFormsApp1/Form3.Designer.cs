@@ -68,7 +68,7 @@ namespace WindowsFormsApp1
             this.panel3.Controls.Add(this.listBox1);
             this.panel3.Location = new System.Drawing.Point(153, 30);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(797, 500);
+            this.panel3.Size = new System.Drawing.Size(797, 507);
             this.panel3.TabIndex = 4;
             // 
             // lbMember
@@ -162,16 +162,17 @@ namespace WindowsFormsApp1
             this.panel2.Controls.Add(this.pictureBox1);
             this.panel2.Location = new System.Drawing.Point(0, 30);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(158, 501);
+            this.panel2.Size = new System.Drawing.Size(158, 508);
             this.panel2.TabIndex = 6;
             // 
             // panel4
             // 
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel4.Controls.Add(this.label2);
             this.panel4.Controls.Add(this.label1);
-            this.panel4.Location = new System.Drawing.Point(-1, 381);
+            this.panel4.Location = new System.Drawing.Point(-1, 378);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(154, 116);
+            this.panel4.Size = new System.Drawing.Size(154, 127);
             this.panel4.TabIndex = 5;
             this.panel4.Click += new System.EventHandler(this.MemberPanel_Click);
             // 
@@ -287,7 +288,7 @@ namespace WindowsFormsApp1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(950, 530);
+            this.ClientSize = new System.Drawing.Size(950, 537);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);

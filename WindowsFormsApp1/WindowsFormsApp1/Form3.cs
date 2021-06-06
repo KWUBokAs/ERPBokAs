@@ -299,7 +299,7 @@ namespace WindowsFormsApp1
                 this.panel3.Controls.Find("StartPanel", false)[0].Visible = true;
             }
             else this.panel3.Controls.Add(new StartPanel());
-            this.Size = new Size(848, 465);
+            this.Size = new Size(848, 468);
         }
         /// <summary>
         /// 회원상태에 따라 lbMember에 item을 만들어줌

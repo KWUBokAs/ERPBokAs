@@ -39,7 +39,7 @@
             this.pictureBox1.Image = global::WindowsFormsApp1.Properties.Resources.startImage;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(797, 500);
+            this.pictureBox1.Size = new System.Drawing.Size(797, 505);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
@@ -49,7 +49,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.pictureBox1);
             this.Name = "StartPanel";
-            this.Size = new System.Drawing.Size(797, 500);
+            this.Size = new System.Drawing.Size(797, 505);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
