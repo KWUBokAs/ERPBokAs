@@ -39,8 +39,6 @@ namespace WindowsFormsApp1
             this.labTime = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.labMemberName = new System.Windows.Forms.Label();
-            this.labMemberID = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -48,6 +46,8 @@ namespace WindowsFormsApp1
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -167,35 +167,13 @@ namespace WindowsFormsApp1
             // 
             // panel4
             // 
-            this.panel4.Controls.Add(this.labMemberName);
-            this.panel4.Controls.Add(this.labMemberID);
+            this.panel4.Controls.Add(this.label2);
+            this.panel4.Controls.Add(this.label1);
             this.panel4.Location = new System.Drawing.Point(-1, 381);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(154, 116);
             this.panel4.TabIndex = 5;
             this.panel4.Click += new System.EventHandler(this.MemberPanel_Click);
-            // 
-            // labMemberName
-            // 
-            this.labMemberName.AutoSize = true;
-            this.labMemberName.Font = new System.Drawing.Font("NanumSquare", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.labMemberName.Location = new System.Drawing.Point(23, 71);
-            this.labMemberName.Name = "labMemberName";
-            this.labMemberName.Size = new System.Drawing.Size(54, 18);
-            this.labMemberName.TabIndex = 6;
-            this.labMemberName.Text = "label8";
-            this.labMemberName.Click += new System.EventHandler(this.MemberPanel_Click);
-            // 
-            // labMemberID
-            // 
-            this.labMemberID.AutoSize = true;
-            this.labMemberID.Font = new System.Drawing.Font("NanumSquare", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.labMemberID.Location = new System.Drawing.Point(23, 30);
-            this.labMemberID.Name = "labMemberID";
-            this.labMemberID.Size = new System.Drawing.Size(60, 18);
-            this.labMemberID.TabIndex = 5;
-            this.labMemberID.Text = "label7";
-            this.labMemberID.Click += new System.EventHandler(this.MemberPanel_Click);
             // 
             // label6
             // 
@@ -283,6 +261,28 @@ namespace WindowsFormsApp1
             this.pictureBox1.MouseLeave += new System.EventHandler(this.pictureBox1_MouseLeave);
             this.pictureBox1.MouseHover += new System.EventHandler(this.pictureBox1_MouseHover);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("NanumSquare", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label1.Location = new System.Drawing.Point(34, 25);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(89, 30);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "회   원";
+            this.label1.Click += new System.EventHandler(this.MemberPanel_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("NanumSquare", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label2.Location = new System.Drawing.Point(34, 68);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(89, 30);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "정   보";
+            this.label2.Click += new System.EventHandler(this.MemberPanel_Click);
+            // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -326,10 +326,10 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label labMemberName;
-        private System.Windows.Forms.Label labMemberID;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.ListBox lbMember;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
     }
 }

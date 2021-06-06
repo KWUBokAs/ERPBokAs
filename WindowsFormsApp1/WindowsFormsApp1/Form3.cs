@@ -154,17 +154,10 @@ namespace WindowsFormsApp1
         private void Form3_Load(object sender, EventArgs e)
         {
             labTime.Text = System.DateTime.Now.ToString("yy-MM-dd  hh:mm");
-            ChangeMemberData();
             SetlbMemberItem();
             SetBookMenuItem();
             HeadLabelSync();
             PopStartPanel();
-        }
-        private void ChangeMemberData()
-        {
-            BaseMember member = BaseMember.GetInstance();
-            labMemberID.Text = member.ID;
-            labMemberName.Text = member.Name;
         }
 
         private void MemberPanel_Click(object sender, EventArgs e)
@@ -246,7 +239,6 @@ namespace WindowsFormsApp1
                 OpenUserData_Event(sender,e);
             }
             else return;
-            ChangeMemberData();
             this.lbMember.Visible = false;
         }
         private void OpenPasswardChange_Event(object sender, EventArgs e)
