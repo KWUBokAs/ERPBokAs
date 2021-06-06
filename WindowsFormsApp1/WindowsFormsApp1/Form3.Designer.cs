@@ -31,7 +31,6 @@ namespace WindowsFormsApp1
         {
             this.components = new System.ComponentModel.Container();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.splitter1 = new System.Windows.Forms.Splitter();
             this.lbMember = new System.Windows.Forms.ListBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -45,10 +44,10 @@ namespace WindowsFormsApp1
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -65,21 +64,12 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel3.BackColor = System.Drawing.SystemColors.Window;
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.splitter1);
             this.panel3.Controls.Add(this.lbMember);
             this.panel3.Controls.Add(this.listBox1);
             this.panel3.Location = new System.Drawing.Point(153, 30);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(797, 500);
             this.panel3.TabIndex = 4;
-            // 
-            // splitter1
-            // 
-            this.splitter1.Location = new System.Drawing.Point(0, 0);
-            this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(3, 498);
-            this.splitter1.TabIndex = 2;
-            this.splitter1.TabStop = false;
             // 
             // lbMember
             // 
@@ -240,6 +230,12 @@ namespace WindowsFormsApp1
             this.label4.TabIndex = 1;
             this.label4.Text = "도서";
             // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 10000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // pictureBox3
             // 
             this.pictureBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -287,12 +283,6 @@ namespace WindowsFormsApp1
             this.pictureBox1.MouseLeave += new System.EventHandler(this.pictureBox1_MouseLeave);
             this.pictureBox1.MouseHover += new System.EventHandler(this.pictureBox1_MouseHover);
             // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 10000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -302,6 +292,7 @@ namespace WindowsFormsApp1
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.Name = "Form3";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form3";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form3_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form3_FormClosed);
@@ -339,7 +330,6 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Label labMemberID;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.ListBox lbMember;
-        private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.Timer timer1;
     }
 }

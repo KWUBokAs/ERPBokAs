@@ -232,6 +232,12 @@
     <Compile Include="Seat.Designer.cs">
       <DependentUpon>Seat.cs</DependentUpon>
     </Compile>
+    <Compile Include="StartPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="StartPanel.Designer.cs">
+      <DependentUpon>StartPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControl1.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -308,6 +314,9 @@
     <EmbeddedResource Include="BOOK\SearchPage.resx">
       <DependentUpon>SearchPage.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="StartPanel.resx">
+      <DependentUpon>StartPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControl1.resx">
       <DependentUpon>UserControl1.cs</DependentUpon>
     </EmbeddedResource>
@@ -373,6 +382,7 @@
     <Content Include="Resources\ic_top_smile.png" />
     <Content Include="Resources\ic_top_unsmile.png" />
     <Content Include="Resources\loading.gif" />
+    <None Include="Resources\startImage.jpg" />
     <None Include="Resources\sheet_help.png" />
   </ItemGroup>
   <ItemGroup>

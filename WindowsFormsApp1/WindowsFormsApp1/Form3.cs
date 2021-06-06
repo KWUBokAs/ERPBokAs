@@ -57,6 +57,7 @@ namespace WindowsFormsApp1
                         break;
                     }
                     this.panel3.Controls.Add(new SearchPage());
+                    this.Size = new Size(848, 565);
                     break;
 
                 case 2://등록
@@ -157,6 +158,7 @@ namespace WindowsFormsApp1
             SetlbMemberItem();
             SetBookMenuItem();
             HeadLabelSync();
+            PopStartPanel();
         }
         private void ChangeMemberData()
         {
@@ -298,7 +300,15 @@ namespace WindowsFormsApp1
                 listBox1.Items.Add("■ 바코드 반납");
             }
         }
-
+        private void PopStartPanel()
+        {
+            if (this.panel3.Controls.Find("StartPanel", false).Length == 1)
+            {
+                this.panel3.Controls.Find("StartPanel", false)[0].Visible = true;
+            }
+            else this.panel3.Controls.Add(new StartPanel());
+            this.Size = new Size(848, 465);
+        }
         /// <summary>
         /// 회원상태에 따라 lbMember에 item을 만들어줌
         /// </summary>
@@ -342,7 +352,7 @@ namespace WindowsFormsApp1
         {
             foreach (Control c in this.panel3.Controls)
             {
-                if (c.GetType() == typeof(SearchPage) || c.GetType() == typeof(RegistrationPage) || c.GetType() == typeof(ListBox) || c.GetType() == typeof(MemberDataInputPanel)
+                if (c.GetType() == typeof(StartPanel) || c.GetType() == typeof(SearchPage) || c.GetType() == typeof(RegistrationPage) || c.GetType() == typeof(ListBox) || c.GetType() == typeof(MemberDataInputPanel)
                         || c.GetType() == typeof(StatusOfUsePanenl) || c.GetType() ==  typeof(UserDataPanel) || c.GetType()==typeof(PasswardChangePanel)
                         || c.GetType() == typeof(BadMemberSearch) || c.GetType()==typeof(BarCode))
                     c.Visible = false;
@@ -358,6 +368,7 @@ namespace WindowsFormsApp1
                        || c.GetType() == typeof(BadMemberSearch) || c.GetType() == typeof(BarCode))
                     panel3.Controls.Remove(c);
             }
+            PopStartPanel();
         }
 
         private bool start = true;
