@@ -68,7 +68,7 @@ namespace WindowsFormsApp1
             this.panel3.Controls.Add(this.listBox1);
             this.panel3.Location = new System.Drawing.Point(153, 30);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(797, 505);
+            this.panel3.Size = new System.Drawing.Size(797, 613);
             this.panel3.TabIndex = 4;
             // 
             // lbMember
@@ -81,9 +81,9 @@ namespace WindowsFormsApp1
             "■ 이용현황",
             "",
             "■ 정보수정"});
-            this.lbMember.Location = new System.Drawing.Point(-1, 381);
+            this.lbMember.Location = new System.Drawing.Point(-1, 378);
             this.lbMember.Name = "lbMember";
-            this.lbMember.Size = new System.Drawing.Size(148, 124);
+            this.lbMember.Size = new System.Drawing.Size(148, 109);
             this.lbMember.TabIndex = 1;
             this.lbMember.Visible = false;
             this.lbMember.Click += new System.EventHandler(this.lbMember_Click);
@@ -162,7 +162,7 @@ namespace WindowsFormsApp1
             this.panel2.Controls.Add(this.pictureBox1);
             this.panel2.Location = new System.Drawing.Point(0, 30);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(158, 506);
+            this.panel2.Size = new System.Drawing.Size(158, 614);
             this.panel2.TabIndex = 6;
             // 
             // panel4
@@ -288,7 +288,7 @@ namespace WindowsFormsApp1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(950, 535);
+            this.ClientSize = new System.Drawing.Size(950, 643);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
