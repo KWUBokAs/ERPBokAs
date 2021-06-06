@@ -81,7 +81,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(791, 176);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(787, 176);
             this.tableLayoutPanel1.TabIndex = 5;
             // 
             // label2
@@ -89,7 +89,7 @@
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("NanumSquare", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label2.Location = new System.Drawing.Point(26, 19);
+            this.label2.Location = new System.Drawing.Point(25, 19);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(130, 22);
             this.label2.TabIndex = 0;
@@ -100,7 +100,7 @@
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("NanumSquare", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label3.Location = new System.Drawing.Point(45, 76);
+            this.label3.Location = new System.Drawing.Point(44, 76);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(111, 22);
             this.label3.TabIndex = 1;
@@ -111,7 +111,7 @@
             this.label4.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("NanumSquare", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label4.Location = new System.Drawing.Point(26, 134);
+            this.label4.Location = new System.Drawing.Point(25, 134);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(130, 22);
             this.label4.TabIndex = 2;
@@ -121,27 +121,27 @@
             // 
             this.txtOrigin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtOrigin.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.txtOrigin.Location = new System.Drawing.Point(165, 15);
+            this.txtOrigin.Location = new System.Drawing.Point(164, 15);
             this.txtOrigin.Name = "txtOrigin";
-            this.txtOrigin.Size = new System.Drawing.Size(620, 30);
+            this.txtOrigin.Size = new System.Drawing.Size(617, 30);
             this.txtOrigin.TabIndex = 3;
             // 
             // txtNew
             // 
             this.txtNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtNew.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.txtNew.Location = new System.Drawing.Point(165, 72);
+            this.txtNew.Location = new System.Drawing.Point(164, 72);
             this.txtNew.Name = "txtNew";
-            this.txtNew.Size = new System.Drawing.Size(620, 30);
+            this.txtNew.Size = new System.Drawing.Size(617, 30);
             this.txtNew.TabIndex = 3;
             // 
             // txtCheck
             // 
             this.txtCheck.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCheck.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.txtCheck.Location = new System.Drawing.Point(165, 130);
+            this.txtCheck.Location = new System.Drawing.Point(164, 130);
             this.txtCheck.Name = "txtCheck";
-            this.txtCheck.Size = new System.Drawing.Size(620, 30);
+            this.txtCheck.Size = new System.Drawing.Size(617, 30);
             this.txtCheck.TabIndex = 3;
             // 
             // PasswardChangePanel

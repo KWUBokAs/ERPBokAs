@@ -68,7 +68,7 @@ namespace WindowsFormsApp1
             this.panel3.Controls.Add(this.listBox1);
             this.panel3.Location = new System.Drawing.Point(153, 30);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(797, 613);
+            this.panel3.Size = new System.Drawing.Size(797, 508);
             this.panel3.TabIndex = 4;
             // 
             // lbMember
@@ -119,9 +119,10 @@ namespace WindowsFormsApp1
             // 
             // labPerm
             // 
+            this.labPerm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labPerm.AutoSize = true;
             this.labPerm.Font = new System.Drawing.Font("Gulim", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.labPerm.Location = new System.Drawing.Point(625, 5);
+            this.labPerm.Location = new System.Drawing.Point(710, 5);
             this.labPerm.Name = "labPerm";
             this.labPerm.Size = new System.Drawing.Size(61, 19);
             this.labPerm.TabIndex = 2;
@@ -131,7 +132,7 @@ namespace WindowsFormsApp1
             // 
             this.labLoginState.AutoSize = true;
             this.labLoginState.Font = new System.Drawing.Font("Gulim", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.labLoginState.Location = new System.Drawing.Point(227, 5);
+            this.labLoginState.Location = new System.Drawing.Point(310, 6);
             this.labLoginState.Name = "labLoginState";
             this.labLoginState.Size = new System.Drawing.Size(61, 19);
             this.labLoginState.TabIndex = 1;
@@ -162,7 +163,7 @@ namespace WindowsFormsApp1
             this.panel2.Controls.Add(this.pictureBox1);
             this.panel2.Location = new System.Drawing.Point(0, 30);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(158, 614);
+            this.panel2.Size = new System.Drawing.Size(158, 509);
             this.panel2.TabIndex = 6;
             // 
             // panel4
@@ -288,13 +289,14 @@ namespace WindowsFormsApp1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(950, 643);
+            this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
+            this.ClientSize = new System.Drawing.Size(950, 538);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.Name = "Form3";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form3";
+            this.Text = "도서관 ERP";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form3_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form3_FormClosed);
             this.Load += new System.EventHandler(this.Form3_Load);

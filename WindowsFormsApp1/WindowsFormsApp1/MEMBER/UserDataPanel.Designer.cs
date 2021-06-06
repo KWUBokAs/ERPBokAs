@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -40,6 +39,7 @@
             this.labPhone = new System.Windows.Forms.Label();
             this.labEmail = new System.Windows.Forms.Label();
             this.labRent = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.btnPasswardChange = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
@@ -70,19 +70,8 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(791, 320);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(787, 320);
             this.tableLayoutPanel1.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("New Gulim", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label1.Location = new System.Drawing.Point(247, -83);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(199, 30);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "개인정보관리";
             // 
             // label2
             // 
@@ -193,6 +182,17 @@
             this.labRent.Size = new System.Drawing.Size(75, 20);
             this.labRent.TabIndex = 5;
             this.labRent.Text = "label7";
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("New Gulim", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label1.Location = new System.Drawing.Point(247, -83);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(199, 30);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "개인정보관리";
             // 
             // btnPasswardChange
             // 
