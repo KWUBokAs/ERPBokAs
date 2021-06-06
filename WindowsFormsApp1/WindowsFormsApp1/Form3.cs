@@ -344,7 +344,7 @@ namespace WindowsFormsApp1
             {
                 if (c.GetType() == typeof(SearchPage) || c.GetType() == typeof(RegistrationPage) || c.GetType() == typeof(ListBox) || c.GetType() == typeof(MemberDataInputPanel)
                         || c.GetType() == typeof(StatusOfUsePanenl) || c.GetType() ==  typeof(UserDataPanel) || c.GetType()==typeof(PasswardChangePanel)
-                        || c.GetType() == typeof(BadMemberSearch))
+                        || c.GetType() == typeof(BadMemberSearch) || c.GetType()==typeof(BarCode))
                     c.Visible = false;
             }
         }
@@ -355,7 +355,7 @@ namespace WindowsFormsApp1
             {
                 if (c.GetType() == typeof(SearchPage) || c.GetType() == typeof(RegistrationPage) || c.GetType() == typeof(MemberDataInputPanel)
                        || c.GetType() == typeof(StatusOfUsePanenl) || c.GetType() == typeof(UserDataPanel) || c.GetType() == typeof(PasswardChangePanel)
-                       || c.GetType() == typeof(BadMemberSearch))
+                       || c.GetType() == typeof(BadMemberSearch) || c.GetType() == typeof(BarCode))
                     panel3.Controls.Remove(c);
             }
         }

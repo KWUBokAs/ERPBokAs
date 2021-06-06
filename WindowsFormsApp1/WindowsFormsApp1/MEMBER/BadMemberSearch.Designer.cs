@@ -91,7 +91,7 @@
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(157, 51);
             this.btnSearch.TabIndex = 12;
-            this.btnSearch.Text = "회원 검색";
+            this.btnSearch.Text = "검색";
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 

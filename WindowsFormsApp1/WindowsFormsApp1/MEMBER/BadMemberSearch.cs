@@ -72,6 +72,8 @@ namespace WindowsFormsApp1.MEMBER
                         row.Cells[NUMBER_LATEFEE].Value = tempFee.ToString() + "원";
                     }
                     dgvBadTable.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+                    txtId.Text = dgvBadTable.Rows[0].Cells[NUMBER_USERID].Value.ToString();
+                    txtBookNum.Text = "";
                 }
                 else//없을때
                 {
@@ -137,6 +139,7 @@ namespace WindowsFormsApp1.MEMBER
                 updateSQL.AddParam("USER_ID", id);
                 updateSQL.Go();
                 MessageBox.Show(id + "(님)은 일반회원 입니다.");
+                txtId.Text = "";
             }
             catch
             {
