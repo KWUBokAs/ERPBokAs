@@ -64,6 +64,21 @@ namespace WindowsFormsApp1.MeetRoom
             else
                 return true;
         }
+        public void UpdateSeat(string RI, string SI, bool u)
+        {
+            int use;
+            if (u) use = 1;
+            else use = 0;
+            SQLObject updateSQL = new BACK.SQLObject();
+            updateSQL.setQuery("UPDATE OPENROOM_SEAT " +
+                                "SET RENT_YN=@RENT_YN " +
+                                "WHERE ROOM_ID=@ROOM_ID " +
+                                "AND SEAT_ID=@SEAT_ID");
+            updateSQL.AddParam("RENT_YN", use.ToString());
+            updateSQL.AddParam("ROOM_ID", RI);
+            updateSQL.AddParam("SEAT_ID", SI);
+            updateSQL.Go();
+        }
 
     }
    

@@ -164,6 +164,12 @@
     </Compile>
     <Compile Include="MeetRoom\ORoomAct.cs" />
     <Compile Include="MeetRoom\SeatAct.cs" />
+    <Compile Include="MeetRoom\SeatReserve.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MeetRoom\SeatReserve.Designer.cs">
+      <DependentUpon>SeatReserve.cs</DependentUpon>
+    </Compile>
     <Compile Include="MeetRoom\Sseat.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -276,6 +282,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Meet.resx">
       <DependentUpon>Meet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MeetRoom\SeatReserve.resx">
+      <DependentUpon>SeatReserve.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MeetRoom\Sseat.resx">
       <DependentUpon>Sseat.cs</DependentUpon>
