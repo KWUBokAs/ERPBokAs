@@ -44,6 +44,7 @@ namespace WindowsFormsApp1.MEMBER
         {
             BaseMember member = BaseMember.GetInstance();
             if (userid == member.ID) return;
+            else if (labRent.Text.Equals("Y") && member.CanRentBook) return;//만약 대여가 불가능한 상태라면
             userid = member.ID;
             SetTable();
         }

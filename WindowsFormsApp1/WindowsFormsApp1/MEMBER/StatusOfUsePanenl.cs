@@ -29,7 +29,7 @@ namespace WindowsFormsApp1.MEMBER
             parent = form3;
             InitializeComponent();
             userid = "";
-            parent.ListBtnUserData_Event += ChangeUserData_Event;
+            parent.ListBtnUserUsingData_Event += ChangeUserData_Event;
             labLatefee.Text = "";
             labOverDueNum.Text = "";
             labRentNum.Text = "";
