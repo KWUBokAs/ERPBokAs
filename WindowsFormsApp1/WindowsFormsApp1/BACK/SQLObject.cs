@@ -119,8 +119,11 @@ namespace WindowsFormsApp1.BACK {
             if (loadingForm != null)
                 return;
             loadingForm = new LoadingForm();
-            Form.ActiveForm.Opacity = 0.50;
-            loadingForm.Show();
+            if (loadingForm.ContainsFocus)
+            {
+                Form.ActiveForm.Opacity = 0.50;
+                loadingForm.Show();
+            }
         }
         public void ModalEnd() {
             if (!isStop)
@@ -128,7 +131,10 @@ namespace WindowsFormsApp1.BACK {
             if (loadingForm == null)
                 return;
             loadingForm.Close();
-            Form.ActiveForm.Opacity = 1;
+            if (loadingForm.ContainsFocus)
+            {
+                Form.ActiveForm.Opacity = 1;
+            }
         }
         public virtual void Go() {
             ReplaceParam();
