@@ -185,6 +185,12 @@
     </Compile>
     <Compile Include="MEMBER\BaseMember.cs" />
     <Compile Include="MEMBER\IMember.cs" />
+    <Compile Include="MEMBER\LogOutQnAForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MEMBER\LogOutQnAForm.Designer.cs">
+      <DependentUpon>LogOutQnAForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MEMBER\MemberDataInputPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -294,6 +300,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MEMBER\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MEMBER\LogOutQnAForm.resx">
+      <DependentUpon>LogOutQnAForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MEMBER\MemberDataInputPanel.resx">
       <DependentUpon>MemberDataInputPanel.cs</DependentUpon>

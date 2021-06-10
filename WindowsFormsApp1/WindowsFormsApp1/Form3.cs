@@ -30,6 +30,8 @@ namespace WindowsFormsApp1
         private UserDataPanel userDataPanel;
         private PasswardChangePanel passwardChangePanel;
 
+        private string day;
+        const int AUTO_LOGOUT_TIME = 5;//자동 로그아웃창을 띄우는 시간
         public Form3()
         {
             InitializeComponent();
@@ -164,7 +166,15 @@ namespace WindowsFormsApp1
         {
             this.lbMember.Visible = !this.lbMember.Visible;
         }
-
+        private void Logout()
+        {
+            BaseMember member = BaseMember.GetInstance();
+            member.Logout();
+            SetlbMemberItem();
+            SetBookMenuItem();
+            DeletePanel();
+            HeadLabelSync();
+        }
         private void lbMember_Click(object sender, EventArgs e)
         {
             BaseMember member = BaseMember.GetInstance();
@@ -177,11 +187,7 @@ namespace WindowsFormsApp1
                 panel3.Controls.Remove(MR);
             if (selectItem.Equals("■ 로그아웃"))
             {
-                member.Logout();
-                SetlbMemberItem();
-                SetBookMenuItem();
-                DeletePanel();
-                HeadLabelSync();
+                Logout();
             }
             else if (selectItem.Equals("■ 로그인"))
             {
@@ -363,22 +369,34 @@ namespace WindowsFormsApp1
             PopStartPanel();
         }
 
-        private bool start = true;
-        private string day;
         private void timer1_Tick(object sender, EventArgs e)
         {
             labTime.Text = System.DateTime.Now.ToString("yy-MM-dd  hh:mm");
-            if (start)
+            if (day != DateTime.Now.ToString("yy-MM-dd"))//날짜 변경시 자동업데이트 
             {
                 UpdateOverdueBook();
                 UpdateBadMember();
-                start = false;
                 day = DateTime.Now.ToString("yy-MM-dd");
             }
-            else if (day != DateTime.Now.ToString("yy-MM-dd"))
+            BaseMember member = BaseMember.GetInstance();
+            if (member.IsLogin)//5분단위로 자동 로그아웃
             {
-                start = true;
+                TimeSpan timeSpan = DateTime.Now - DateTime.Parse(member.LoginTime);
+                if(timeSpan.Minutes >= AUTO_LOGOUT_TIME)//정해진 시간이 경과하면
+                {
+                    LogOutQnAForm logOut = new LogOutQnAForm();
+                    DialogResult dResult = logOut.ShowDialog();
+                    if (dResult == DialogResult.OK)//로그인을 유지하면
+                    {
+                        member.ResetLoginTime();
+                    }
+                    else//유지하지 않으면
+                    {
+                        Logout();
+                    }
+                }
             }
+
         }
         private void Form3_FormClosing(object sender, FormClosingEventArgs e)
         {

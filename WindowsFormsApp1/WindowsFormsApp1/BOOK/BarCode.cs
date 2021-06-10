@@ -43,6 +43,25 @@ namespace WindowsFormsApp1.BOOK
                 return;
             }
 
+            try//연체된 책 검출
+            {
+                SQLObject selectSQL2 = new BACK.SQLObject();
+                selectSQL2.setQuery("SELECT " +
+                                        "* " +
+                                  "FROM " +
+                                        "BOOKRENTS " +
+                                  "WHERE " +
+                                        "BOOK_ID=@BOOK_ID " +
+                                        "AND ");
+                selectSQL2.AddParam("BOOK_ID", BOOK_ID);
+                selectSQL2.Go();
+                JArray jarray2 = selectSQL.ToJArray();
+            }
+            catch 
+            {
+                MessageBox.Show("DB접속이 불안정합니다.");
+                return;
+            }
             if (jarray[0].Value<string>("RENT_YN").Equals("True"))
             {
                 if (MessageBox.Show("책 ID : " + BOOK_ID + " - 해당 도서를 반납하시겠습니까?", "반납", MessageBoxButtons.YesNo) == DialogResult.Yes)

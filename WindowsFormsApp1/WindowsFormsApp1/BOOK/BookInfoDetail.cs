@@ -184,7 +184,7 @@ namespace WindowsFormsApp1.BOOK
             insertSQL.AddParam("BOOK_ID", BOOK_ID);
             insertSQL.AddParam("USER_ID", member.ID);
             insertSQL.AddParam("RENT_DT", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-            insertSQL.AddParam("RETURN_DT", (DateTime.Now.AddDays((double)options.RD)).ToString("yyyy-MM-dd HH:mm:ss"));
+            insertSQL.AddParam("RETURN_DT", (DateTime.Now.AddDays((double)options.RD)).ToString("yyyy-MM-dd 23:59:59"));
             insertSQL.AddParam("RENT_DIV", "1");
             insertSQL.AddParam("RENT_YN", "0");
             insertSQL.AddParam("OVERDUE_YN", "0");

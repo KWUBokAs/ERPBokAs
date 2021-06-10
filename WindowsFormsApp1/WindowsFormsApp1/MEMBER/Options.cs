@@ -32,7 +32,7 @@ namespace WindowsFormsApp1.MEMBER
         public int GetLatefee(string rent_return_date)
         {
             int latefee = 0;
-            TimeSpan over_due = DateTime.Now - DateTime.Parse(rent_return_date);
+            TimeSpan over_due = DateTime.Parse(rent_return_date) - DateTime.Now;
             if (over_due.Days > 0)//연체됐으면
             {
                 latefee = RV * over_due.Days;

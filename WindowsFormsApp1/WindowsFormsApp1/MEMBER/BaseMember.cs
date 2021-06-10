@@ -50,6 +50,7 @@ namespace WindowsFormsApp1.MEMBER
             PhoneNumber = phoneNum;
             this.permission = permission;
             this.badmember = 'n';
+            this.loginTime = "";
         }
         public void Logout()
         {
@@ -75,6 +76,7 @@ namespace WindowsFormsApp1.MEMBER
             this.permission = PERM.ANONY_USR;
             this.badmember = 'n';
             summary = "";
+            loginTime = "";
         }
         /// <summary>
         /// 이름, 전화번호, email, 권한을 DB에서 받아와 세팅해 준다.
@@ -97,6 +99,7 @@ namespace WindowsFormsApp1.MEMBER
                 this.phoneNumber = jarray[0].Value<string>("CALLNUM");
                 this.permission = (PERM)jarray[0].Value<int>("MANAGE_YN");
                 this.badmember = jarray[0].Value<char>("BAD_YN");
+                loginTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                 return true;
             }
             catch
@@ -343,7 +346,22 @@ namespace WindowsFormsApp1.MEMBER
                 else return true;
             }
         }
-
+        /// <summary>
+        /// 로그인이 되었다면 로그인한 시간은
+        /// 로그아웃되었으면 ""반환
+        /// </summary>
+        public string LoginTime
+        {
+            get
+            {
+                if (IsLogin) { return loginTime; }
+                else return "";
+            }
+        }
+        public void ResetLoginTime()
+        {
+            loginTime = loginTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+        }
         /// <summary>
         /// field
         /// </summary>
@@ -355,6 +373,7 @@ namespace WindowsFormsApp1.MEMBER
         private static BaseMember baseMember= null;
         private char badmember;
         public string summary;
+        private string loginTime;
 
         // 테스트 함수
         public virtual void PrintData()
