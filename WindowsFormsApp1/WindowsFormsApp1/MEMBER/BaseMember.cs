@@ -367,27 +367,31 @@ namespace WindowsFormsApp1.MEMBER
             get
             {
                 int num = 100;
-                try
+                if (IsLogin)
                 {
-                    SQLObject select = new BACK.SQLObject();
-                    select.setQuery("SELECT " +
-                                        "COUNT(USER_ID) AS CNT " +
-                                    "FROM " +
-                                        "BOOKRENTS " +
-                                    "WHERE " +
-                                        "USER_ID=@USER_ID " +
-                                        "AND RENT_YN='0' ");
-                    select.AddParam("USER_ID", id);
-                    select.Go();
-                    JArray jarray = select.ToJArray();
-                    if(jarray != null)
+                    try
                     {
-                        num = jarray[0].Value<int>("CNT");
+                        SQLObject select = new BACK.SQLObject();
+                        select.setQuery("SELECT " +
+                                            "COUNT(USER_ID) AS CNT " +
+                                        "FROM " +
+                                            "BOOKRENTS " +
+                                        "WHERE " +
+                                            "USER_ID=@USER_ID " +
+                                            "AND RENT_YN='0' ");
+                        select.AddParam("USER_ID", id);
+                        select.Go();
+                        JArray jarray = select.ToJArray();
+                        if (jarray != null)
+                        {
+                            num = jarray[0].Value<int>("CNT");
+                        }
                     }
-                }
-                catch
-                {
-                    MessageBox.Show("DB접속이 불량합니다.");
+                    catch
+                    {
+                        MessageBox.Show("DB접속이 불량합니다.");
+
+                    }
                 }
                 return num;
             }
@@ -400,9 +404,12 @@ namespace WindowsFormsApp1.MEMBER
         {
             get
             {
-                if (IsBadMember) return false;
-                Options options = Options.GetInstance();
-                if (RentBookCount < options.RM) return true;//최대개수보다 작을 경수
+                if (IsLogin)
+                {
+                    if (IsBadMember) return false;
+                    Options options = Options.GetInstance();
+                    if (RentBookCount < options.RM) return true;//최대개수보다 작을 경수
+                }
                 return false;
             }
         }

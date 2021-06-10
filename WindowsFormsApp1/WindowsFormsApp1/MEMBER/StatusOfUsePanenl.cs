@@ -42,7 +42,8 @@ namespace WindowsFormsApp1.MEMBER
         private void ChangeUserData_Event(object sender, EventArgs e)
         {
             BaseMember member = BaseMember.GetInstance();
-            if (userid == member.ID) return;
+            if (member.RentBookCount == rentNum) return;
+            else if (userid == member.ID) return;
             userid = member.ID;
             SetDataGrideView();
         }
