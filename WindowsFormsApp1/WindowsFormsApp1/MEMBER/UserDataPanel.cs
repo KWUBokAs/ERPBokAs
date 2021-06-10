@@ -37,7 +37,8 @@ namespace WindowsFormsApp1.MEMBER
             string t = member.PhoneNumber;
             labPhone.Text = t.Substring(0,3) + "-"+ t.Substring(3, 4)+ "-"+ t.Substring(7, 4);
             labName.Text = member.Name;
-            labRent.Text = (member.IsBadMember) ? "N(사서에게 문의하세요)" : "Y";
+            string temp = ((member.IsBadMember) ? "연체)" : "최대 대출건수 초과" ) + " => 사서에게 문의하세요.";
+            labRent.Text = (member.CanRentBook) ? "N(사유:" + temp: "Y";
         }
         private void SetTable_Event(object sender, EventArgs e)
         {

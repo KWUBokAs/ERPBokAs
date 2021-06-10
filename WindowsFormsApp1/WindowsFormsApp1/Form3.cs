@@ -372,6 +372,7 @@ namespace WindowsFormsApp1
         private void timer1_Tick(object sender, EventArgs e)
         {
             labTime.Text = System.DateTime.Now.ToString("yy-MM-dd  hh:mm");
+            if (!this.ContainsFocus) return;//포커스가 안가있다면 아무것도 안함
             if (day != DateTime.Now.ToString("yy-MM-dd"))//날짜 변경시 자동업데이트 
             {
                 UpdateOverdueBook();
