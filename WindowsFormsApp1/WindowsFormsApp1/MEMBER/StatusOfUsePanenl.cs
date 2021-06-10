@@ -110,6 +110,12 @@ namespace WindowsFormsApp1.MEMBER
         private void btnExtend_Click(object sender, EventArgs e)
         {
             if (dgvRentData == null || dgvRentData.Rows == null || dgvRentData.Rows.Count == 0) return;//선택한 것이 없을때
+            if(overdueNum > 0)
+            {
+                MessageBox.Show("대출연장이 불가능합니다.(사유:연체)\n" +
+                        "사서에게 문의해주십시오.");
+                return;
+            }
             DataGridViewRow row = null;
             int rowIndex = dgvRentData.CurrentCell.RowIndex;
             row = dgvRentData.Rows[rowIndex];

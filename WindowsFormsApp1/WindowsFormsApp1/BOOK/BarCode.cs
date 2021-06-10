@@ -41,12 +41,7 @@ namespace WindowsFormsApp1.BOOK
                 selectSQL.AddParam("BOOK_ID", BOOK_ID);
                 selectSQL.Go();
                 jarray = selectSQL.ToJArray();
-                if (jarray.Count == 0)
-                {
-                    MessageBox.Show("책 ID : " + BOOK_ID + " 은 대여된 책이 아닙니다.", "반납");
-                    return;
-                }
-                if (jarray[0].Value<string>("OVERDUE_YN").Equals("True"))//연체됐다면
+                if (jarray[0].Value<int>("OVERDUE_YN") == 1)//연체됐다면
                 {
                     MessageBox.Show("책 ID : " + BOOK_ID + " 은 연체된 도서입니다.\n사서에게 문의해 주십쇼.", "반납");
                     return;

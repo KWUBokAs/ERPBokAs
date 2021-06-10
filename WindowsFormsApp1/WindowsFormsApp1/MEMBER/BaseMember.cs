@@ -371,7 +371,7 @@ namespace WindowsFormsApp1.MEMBER
                 {
                     SQLObject select = new BACK.SQLObject();
                     select.setQuery("SELECT " +
-                                        "COUNT(USER) AS CNT " +
+                                        "COUNT(USER_ID) AS CNT " +
                                     "FROM " +
                                         "BOOKRENTS " +
                                     "WHERE " +

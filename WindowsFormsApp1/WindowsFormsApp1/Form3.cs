@@ -378,9 +378,10 @@ namespace WindowsFormsApp1
                 UpdateOverdueBook();
                 UpdateBadMember();
                 day = DateTime.Now.ToString("yy-MM-dd");
+                timer1.Interval = 10000;
             }
             BaseMember member = BaseMember.GetInstance();
-            if (member.IsLogin)//5분단위로 자동 로그아웃
+            if (member.Permission == BaseMember.PERM.NOMAL_USR)//노멀 유저인 경우에만 자동 로그아웃
             {
                 TimeSpan timeSpan = DateTime.Now - DateTime.Parse(member.LoginTime);
                 if(timeSpan.Minutes >= AUTO_LOGOUT_TIME)//정해진 시간이 경과하면
