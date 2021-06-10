@@ -89,12 +89,8 @@ namespace WindowsFormsApp1.MEMBER
                         overdue_yn.Value = (temp3 == 1) ? "연체" : "N";
 
                         TimeSpan over_due = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd")) - DateTime.Parse((return_dt.Value).ToString());
-                        int latefee = 0;
-                        if(temp3 == 1)
-                        {
-                            overdueNum++;
-                            latefee = temp3 * options.RV * over_due.Days;
-                        }
+                        int latefee = temp3 * options.RV * over_due.Days;
+                        overdueNum += temp3;
                         this.latefee += latefee;
                     }
                     catch { }
