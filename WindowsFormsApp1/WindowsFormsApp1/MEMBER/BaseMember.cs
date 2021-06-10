@@ -358,6 +358,54 @@ namespace WindowsFormsApp1.MEMBER
                 else return "";
             }
         }
+        /// <summary>
+        /// 빌린 책의 개수를 반환한다
+        /// 만약 실패하면 100을 반환한다.
+        /// </summary>
+        public int RentBookCount
+        {
+            get
+            {
+                int num = 100;
+                try
+                {
+                    SQLObject select = new BACK.SQLObject();
+                    select.setQuery("SELECT " +
+                                        "COUNT(USER) AS CNT " +
+                                    "FROM " +
+                                        "BOOKRENTS " +
+                                    "WHERE " +
+                                        "USER_ID=@USER_ID " +
+                                        "AND RENT_YN='0' ");
+                    select.AddParam("USER_ID", id);
+                    select.Go();
+                    JArray jarray = select.ToJArray();
+                    if(jarray != null)
+                    {
+                        num = jarray[0].Value<int>("CNT");
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("DB접속이 불량합니다.");
+                }
+                return num;
+            }
+        }
+        /// <summary>
+        /// 도서대여가 가능한 상태이면 true를
+        /// 불가능한 상태이면 false을 반환
+        /// </summary>
+        public bool CanRentBook
+        {
+            get
+            {
+                if (IsBadMember) return false;
+                Options options = Options.GetInstance();
+                if (RentBookCount < options.RM) return true;//최대개수보다 작을 경수
+                return false;
+            }
+        }
         public void ResetLoginTime()
         {
             loginTime = loginTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");

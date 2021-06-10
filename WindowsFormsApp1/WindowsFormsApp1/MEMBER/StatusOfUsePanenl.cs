@@ -20,8 +20,7 @@ namespace WindowsFormsApp1.MEMBER
         private int rentNum=0;
         private int overdueNum=0;
         private int latefee=0;
-        const int expendDate = 5;
-        const int expendDate_number = 7;
+        const int expendDate = 5;//연장가능한 날짜 범위
         private string userid;
 
         private Form3 parent;
@@ -89,12 +88,13 @@ namespace WindowsFormsApp1.MEMBER
                         int temp3 = Convert.ToInt32(overdue_yn.Value.ToString());
                         overdue_yn.Value = (temp3 == 1) ? "연체" : "N";
 
-                        TimeSpan over_due = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd")) - DateTime.Parse(temp2);
-                        Console.Write("입력 현황" + temp3 + " ");
-                        Console.Write(options.RV + " ");
-                        Console.Write(over_due.Days);
+                        TimeSpan over_due = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd")) - DateTime.Parse((return_dt.Value).ToString());
                         int latefee = 0;
-                        if(temp3 == 1) latefee = temp3 * options.RV * over_due.Days;
+                        if(temp3 == 1)
+                        {
+                            overdueNum++;
+                            latefee = temp3 * options.RV * over_due.Days;
+                        }
                         this.latefee += latefee;
                     }
                     catch { }
@@ -152,6 +152,11 @@ namespace WindowsFormsApp1.MEMBER
         /// <param name="rent_cnt"></param>
         private bool UpdateRentCnt(string bookNumber, int rent_cnt)
         {
+            if (overdueNum > 0)
+            {
+                MessageBox.Show("연체되었습니다.\n사서에게 문의해주세요.");
+                return false;//연체된것이 있는면 실패
+            }
             Options options = Options.GetInstance();
             BaseMember member = BaseMember.GetInstance();
             if (options.EC < rent_cnt) return false;//연장횟수 초가
@@ -218,7 +223,7 @@ namespace WindowsFormsApp1.MEMBER
                 insertSQL.AddParam("BOOK_ID", BOOK_ID);
                 insertSQL.AddParam("USER_ID", member.ID);
                 insertSQL.AddParam("RENT_DT", dateStart.ToString("yyyy-MM-dd HH:mm:ss"));
-                insertSQL.AddParam("RETURN_DT", dateEnd.AddDays(expendDate_number).ToString("yyyy-MM-dd HH:mm:ss"));
+                insertSQL.AddParam("RETURN_DT", dateEnd.AddDays(options.RDADD).ToString("yyyy-MM-dd HH:mm:ss"));
                 insertSQL.AddParam("RENT_DIV", "1");
                 insertSQL.AddParam("RENT_YN", "0");
                 insertSQL.AddParam("OVERDUE_YN", "0");

@@ -173,6 +173,8 @@ namespace WindowsFormsApp1.BOOK
 
         void InsertBOOKRENT(string CALLNUM)
         {
+            BaseMember member = BaseMember.GetInstance();
+            if (!member.CanRentBook) return;//대여할 수 없으면 실패
             string BOOK_ID = this.dgvBooks.CurrentRow.Cells[1].Value.ToString();
             Options options = Options.GetInstance();
             SQLObject insertSQL = new SQLObject();
