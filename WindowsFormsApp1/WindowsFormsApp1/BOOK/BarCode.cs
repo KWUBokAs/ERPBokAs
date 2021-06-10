@@ -41,9 +41,14 @@ namespace WindowsFormsApp1.BOOK
                 selectSQL.AddParam("BOOK_ID", BOOK_ID);
                 selectSQL.Go();
                 jarray = selectSQL.ToJArray();
+                if (jarray.Count == 0)
+                {
+                    MessageBox.Show("책 ID : " + BOOK_ID + " 은 저희 도서관에 등록된 도서가 아닙니다", "반납");
+                    return;
+                }
                 if (jarray[0].Value<int>("OVERDUE_YN") == 1)//연체됐다면
                 {
-                    MessageBox.Show("책 ID : " + BOOK_ID + " 은 연체된 도서입니다.\n사서에게 문의해 주십쇼.", "반납");
+                    MessageBox.Show("책 ID : " + BOOK_ID + " 은 연체된 도서입니다.\n사서에게 문의해 주시기 바랍니다..", "반납");
                     return;
                 }
             }
@@ -110,7 +115,7 @@ namespace WindowsFormsApp1.BOOK
 
         private void txtBarCode_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!(char.IsDigit(e.KeyChar) || e.KeyChar == Convert.ToChar(Keys.Back)))
+            if (!(char.IsDigit(e.KeyChar)))
             {
                 e.Handled = true;
             }
