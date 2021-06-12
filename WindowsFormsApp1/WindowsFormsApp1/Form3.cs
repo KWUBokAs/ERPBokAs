@@ -31,7 +31,7 @@ namespace WindowsFormsApp1
         private PasswardChangePanel passwardChangePanel;
 
         private string day;
-        const int AUTO_LOGOUT_TIME = 5;//자동 로그아웃창을 띄우는 시간
+        const int AUTO_LOGOUT_TIME = 2;//자동 로그아웃창을 띄우는 시간
         public Form3()
         {
             InitializeComponent();
