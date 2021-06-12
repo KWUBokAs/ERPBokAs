@@ -29,5 +29,48 @@ namespace WindowsFormsApp1.MeetRoom
 
             return jarray[0].Value<int>("CID");
         }
+        public string ReadEndTime(string UI)
+        {
+            SQLObject selectSQL = new BACK.SQLObject();
+            selectSQL.setQuery("SELECT DEAD_TIME AS DT " +
+                               "FROM OPENROOM_RESERV " +
+                               "WHERE USER_ID=@USER_ID");
+            selectSQL.AddParam("USER_ID", UI);
+            selectSQL.Go();
+            try { 
+            JArray jarray = selectSQL.ToJArray();
+
+            return jarray[0].Value<string>("DT");
+            }
+            catch
+            {
+                return "";
+            }           
+        }
+        public string ReadSeatInf(string UI)
+        {
+            SQLObject selectSQL = new BACK.SQLObject();
+            selectSQL.setQuery("SELECT ROOM_ID as RID, SEAT_ID as SID " +
+                               "FROM OPENROOM_RESERV " +
+                               "WHERE USER_ID=@USER_ID");
+            selectSQL.AddParam("USER_ID", UI);
+            selectSQL.Go();
+
+            try
+            {
+                DataTable DT = selectSQL.ToDataTable();
+
+                string RID = DT.Rows[0]["RID"].ToString().Substring(4, 1);
+                string SID = DT.Rows[0]["SID"].ToString();
+
+                string Inf = "제 " + RID + " 열람실 " + SID + " 번 자리를 사용중입니다.";
+
+                return Inf;
+            }
+            catch
+            {
+                return "";
+            }
+        }
     }
 }

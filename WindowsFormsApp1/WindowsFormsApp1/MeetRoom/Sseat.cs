@@ -20,8 +20,10 @@ namespace WindowsFormsApp1.MeetRoom
         public bool used;
         public Point SeatPoint;
         public int RoomID;
-        
-        
+        public string UserID;
+
+        BaseMember bm = BaseMember.GetInstance();
+
         public Sseat(int RoomNum,int num)
         {
             InitializeComponent();
@@ -30,6 +32,9 @@ namespace WindowsFormsApp1.MeetRoom
             SeatAct Sa = new SeatAct();
             SeatPoint = Sa.ReadSeatPoint("OR00" + RoomNum.ToString(), num.ToString());
             used = Sa.ReadSeatUsed("OR00"+ RoomNum.ToString(), num.ToString());
+            
+            UserID = bm.ID;
+
            
         }
 
@@ -63,6 +68,11 @@ namespace WindowsFormsApp1.MeetRoom
                 }
                 else
                 {
+                    SeatReserve2 Sr = new SeatReserve2();
+                    Sr.Seatnum = SeatNum;
+                    Sr.Roomnum = RoomID;
+                    Sr.UID = UserID;
+                    Sr.Show();
                 }
             }
             // used 를 판별해서 if 자리가 사용중이면 폼 1
@@ -75,8 +85,10 @@ namespace WindowsFormsApp1.MeetRoom
             used = true;
             SeatAct sa = new SeatAct();
             sa.UpdateSeat("OR00" + RoomID.ToString(), SeatNum.ToString(),used);
+            sa.InsertSeatRsv("OR00" + RoomID.ToString(), SeatNum.ToString(),UserID);
             pictureBox1.Image = imageList1.Images[0];
 
         }
+        
     }
 }

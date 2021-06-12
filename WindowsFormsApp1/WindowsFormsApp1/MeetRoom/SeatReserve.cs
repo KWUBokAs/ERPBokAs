@@ -27,7 +27,7 @@ namespace WindowsFormsApp1.MeetRoom
 
         private void SeatReserve_Load(object sender, EventArgs e)
         {
-            lblSeat.Text = SeatNum.ToString();
+            lblSeat.Text = "좌석 번호 :" + SeatNum.ToString();
         }
 
         private void button2_Click(object sender, EventArgs e)

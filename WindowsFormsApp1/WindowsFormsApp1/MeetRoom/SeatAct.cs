@@ -79,7 +79,25 @@ namespace WindowsFormsApp1.MeetRoom
             updateSQL.AddParam("SEAT_ID", SI);
             updateSQL.Go();
         }
-
+        public void InsertSeatRsv(string RI, string SI,string UI)
+        {   //미결...
+            string Deadtime;
+            if ((Int32.Parse(DateTime.Now.ToString("HH:mm:ss").Substring(0, 2)) + 2) < 24)
+                Deadtime = (Int32.Parse(DateTime.Now.ToString("HH:mm:ss").Substring(0, 2)) + 2).ToString() + DateTime.Now.ToString(":mm:ss");
+            else
+                Deadtime = (Int32.Parse(DateTime.Now.ToString("HH:mm:ss").Substring(0, 2)) - 22).ToString() + DateTime.Now.ToString(":mm:ss");
+            SQLObject insertSQL = new BACK.SQLObject();
+            insertSQL.setQuery("INSERT INTO OPENROOM_RESERV " +
+                               "(ROOM_ID, SEAT_ID, OPENRENT_ID, USER_ID, RENT_TIME, DEAD_TIME, RENT_DT, MAGAM_YN, EXTEND) " +
+                               "VALUES (@ROOM_ID,@SEAT_ID,'',@USER_ID,@RENT_TIME,@DEAD_TIME,@RENT_DT,'0','0')");
+            insertSQL.AddParam("ROOM_ID", RI);
+            insertSQL.AddParam("SEAT_ID", SI);
+            insertSQL.AddParam("USER_ID", UI);
+            insertSQL.AddParam("RENT_TIME", DateTime.Now.ToString("HH:mm:ss"));
+            insertSQL.AddParam("DEAD_TIME", Deadtime);
+            insertSQL.AddParam("RENT_DT", DateTime.Now.ToString("yyyy-MM-dd"));
+            insertSQL.Go();
+        }
     }
    
     

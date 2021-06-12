@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json.Linq;
 using WindowsFormsApp1.MeetRoom;
+using WindowsFormsApp1.MEMBER;
 
 
 
@@ -24,6 +25,7 @@ namespace WindowsFormsApp1
 
         List<Control> OR1 = new List<Control>();
         ORoomAct o = new ORoomAct();
+        BaseMember bm = BaseMember.GetInstance();
         
         public OpenRoom()
         {
@@ -32,7 +34,10 @@ namespace WindowsFormsApp1
 
         private void OpenRoom_Load(object sender, EventArgs e)
         {
-            
+            string UID = bm.ID;
+            label1.Text = "열람실 이용 정보 : " + o.ReadSeatInf(UID);
+            label2.Text = "좌석 이용 종료 시간 : " + o.ReadEndTime(UID);
+
             string a = RoomName + RoomNum.ToString();
             int s =o.ReadRoomCount(a);
             
@@ -41,7 +46,6 @@ namespace WindowsFormsApp1
                 Sseat seat = new Sseat(RoomNum,i);
                 panel2.Controls.Add(seat);
                 seat.Location = seat.GetPoint();
-                
                 
                 OR1.Add(seat);
             }
