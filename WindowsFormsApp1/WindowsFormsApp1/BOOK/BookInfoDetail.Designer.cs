@@ -274,7 +274,7 @@ namespace WindowsFormsApp1.BOOK
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.pictureBox1);
             this.Name = "BookInfoDetail";
-            this.Text = "BookInfoDetail";
+            this.Text = "책 세부정보";
             ((System.ComponentModel.ISupportInitialize)(this.dgvBooks)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
