@@ -26,7 +26,40 @@ namespace WindowsFormsApp1.BOOK
             string BOOK_ID = ((TextBox)sender).Text;
             if (BOOK_ID.Length < BOOKNUMBER_SIZE) return;
             ((TextBox)sender).Text = "";
-            SQLObject selectSQL = new BACK.SQLObject();
+            SQLObject selectSQL;
+            JArray jarray;
+            try//연체된 책 검출
+            {
+                selectSQL = new BACK.SQLObject();
+                selectSQL.setQuery("SELECT " +
+                                        "* " +
+                                  "FROM " +
+                                        "BOOKRENTS " +
+                                  "WHERE " +
+                                        "BOOK_ID = @BOOK_ID AND " +
+                                        "RENT_YN='0'");
+                selectSQL.AddParam("BOOK_ID", BOOK_ID);
+                selectSQL.Go();
+                jarray = selectSQL.ToJArray();
+                if (jarray.Count == 0)
+                {
+                    MessageBox.Show("책 ID : " + BOOK_ID + " 은 저희 도서관에 등록된 도서가 아닙니다", "반납");
+                    return;
+                }
+                if (jarray[0].Value<int>("OVERDUE_YN") == 1)//연체됐다면
+                {
+                    MessageBox.Show("책 ID : " + BOOK_ID + " 은 연체된 도서입니다.\n사서에게 문의해 주시기 바랍니다..", "반납");
+                    return;
+                }
+            }
+            catch
+            {
+                MessageBox.Show("DB접속이 불안정합니다.");
+                return;
+            }
+
+
+            selectSQL = new BACK.SQLObject();
             selectSQL.setQuery("SELECT " +
                                     "* " +
                               "FROM " +
@@ -35,14 +68,15 @@ namespace WindowsFormsApp1.BOOK
                                     "BOOK_ID=@BOOK_ID");
             selectSQL.AddParam("BOOK_ID", BOOK_ID);
             selectSQL.Go();
-            JArray jarray = selectSQL.ToJArray();
+            jarray = selectSQL.ToJArray();
 
             if (jarray.Count == 0)
             {
                 MessageBox.Show("책 ID : " + BOOK_ID + " 은 저희 도서관에 등록된 도서가 아닙니다", "반납");
                 return;
             }
-
+            
+            
             if (jarray[0].Value<string>("RENT_YN").Equals("True"))
             {
                 if (MessageBox.Show("책 ID : " + BOOK_ID + " - 해당 도서를 반납하시겠습니까?", "반납", MessageBoxButtons.YesNo) == DialogResult.Yes)
@@ -81,7 +115,7 @@ namespace WindowsFormsApp1.BOOK
 
         private void txtBarCode_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!(char.IsDigit(e.KeyChar) || e.KeyChar == Convert.ToChar(Keys.Back)))
+            if (!(char.IsDigit(e.KeyChar)))
             {
                 e.Handled = true;
             }

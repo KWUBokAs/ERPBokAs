@@ -180,6 +180,18 @@ namespace WindowsFormsApp1.MEMBER
                                             "AND RENT_YN='0'");
                 updateSQL.AddParam("BOOK_ID", bookNumber);
                 updateSQL.Go();
+                updateSQL = new BACK.SQLObject();
+                updateSQL.setQuery("UPDATE " +
+                                        "BOOKS " +
+                                    "SET " +
+                                        "RENT_YN=@RENT_YN, " +
+                                        "RENT_ID=@RENT_ID " +
+                                    "WHERE " +
+                                        "BOOK_ID=@BOOK_ID");
+                updateSQL.AddParam("RENT_YN", "0");
+                updateSQL.AddParam("RENT_ID", "");
+                updateSQL.AddParam("BOOK_ID", bookNumber);
+                updateSQL.Go();
             }
             catch
             {

@@ -55,6 +55,10 @@ namespace WindowsFormsApp1.BOOK
             {
                 this.btnRent.Visible = false;
             }
+            else
+            {
+                this.btnRent.Visible = true;
+            }
 
             if (!member.IsBookAdmin)
             {
@@ -62,6 +66,13 @@ namespace WindowsFormsApp1.BOOK
                 this.btnReturn.Visible = false;
                 this.btnAdd.Visible = false;
                 this.btnEdit.Visible = false;
+            }
+            else
+            {
+                this.btnDelete.Visible = true;
+                this.btnReturn.Visible = true;
+                this.btnAdd.Visible = true;
+                this.btnEdit.Visible = true;
             }
         }
 
@@ -184,7 +195,7 @@ namespace WindowsFormsApp1.BOOK
             insertSQL.AddParam("BOOK_ID", BOOK_ID);
             insertSQL.AddParam("USER_ID", member.ID);
             insertSQL.AddParam("RENT_DT", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-            insertSQL.AddParam("RETURN_DT", (DateTime.Now.AddDays((double)options.RD)).ToString("yyyy-MM-dd HH:mm:ss"));
+            insertSQL.AddParam("RETURN_DT", (DateTime.Now.AddDays((double)options.RD)).ToString("yyyy-MM-dd 23:59:59"));
             insertSQL.AddParam("RENT_DIV", "1");
             insertSQL.AddParam("RENT_YN", "0");
             insertSQL.AddParam("OVERDUE_YN", "0");
@@ -241,8 +252,7 @@ namespace WindowsFormsApp1.BOOK
         private void btnRent_Click(object sender, EventArgs e)
         {
             if (this.dgvBooks.CurrentRow == null) return;
-
-            if(!CheckRentMore())
+            if (!CheckRentMore())
             {
                 MessageBox.Show("이 이상 대여할 수 없습니다\n" +
                     "다른 책을 대여하려면 기존에 대여한 책을 반납해주세요", "대여한도");

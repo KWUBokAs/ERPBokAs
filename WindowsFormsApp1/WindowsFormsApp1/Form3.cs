@@ -30,6 +30,8 @@ namespace WindowsFormsApp1
         private UserDataPanel userDataPanel;
         private PasswardChangePanel passwardChangePanel;
 
+        private string day;
+        const int AUTO_LOGOUT_TIME = 2;//자동 로그아웃창을 띄우는 시간
         public Form3()
         {
             InitializeComponent();
@@ -54,9 +56,8 @@ namespace WindowsFormsApp1
                     if (this.panel3.Controls.Find("SearchPage", false).Length == 1)
                     {
                         this.panel3.Controls.Find("SearchPage", false)[0].Visible = true;
-                        break;
                     }
-                    this.panel3.Controls.Add(new SearchPage());
+                    else this.panel3.Controls.Add(new SearchPage());
                     this.Size = new Size(848, 565);
                     break;
 
@@ -66,9 +67,8 @@ namespace WindowsFormsApp1
                     if (this.panel3.Controls.Find("RegistrationPage", false).Length == 1)
                     {
                         this.panel3.Controls.Find("RegistrationPage", false)[0].Visible = true;
-                        break;
                     }
-                    this.panel3.Controls.Add(new RegistrationPage());
+                    else this.panel3.Controls.Add(new RegistrationPage());
                     break;
 
                 case 4://바코드
@@ -77,9 +77,8 @@ namespace WindowsFormsApp1
                     if (this.panel3.Controls.Find("BarCode", false).Length == 1)
                     {
                         this.panel3.Controls.Find("BarCode", false)[0].Visible = true;
-                        break;
                     }
-                    this.panel3.Controls.Add(new BarCode());
+                    else this.panel3.Controls.Add(new BarCode());
                     break;
 
                 default:
@@ -164,7 +163,15 @@ namespace WindowsFormsApp1
         {
             this.lbMember.Visible = !this.lbMember.Visible;
         }
-
+        private void Logout()
+        {
+            BaseMember member = BaseMember.GetInstance();
+            member.Logout();
+            SetlbMemberItem();
+            SetBookMenuItem();
+            DeletePanel();
+            HeadLabelSync();
+        }
         private void lbMember_Click(object sender, EventArgs e)
         {
             BaseMember member = BaseMember.GetInstance();
@@ -177,11 +184,7 @@ namespace WindowsFormsApp1
                 panel3.Controls.Remove(MR);
             if (selectItem.Equals("■ 로그아웃"))
             {
-                member.Logout();
-                SetlbMemberItem();
-                SetBookMenuItem();
-                DeletePanel();
-                HeadLabelSync();
+                Logout();
             }
             else if (selectItem.Equals("■ 로그인"))
             {
@@ -191,7 +194,7 @@ namespace WindowsFormsApp1
                 {
                     SetlbMemberItem();
                     SetBookMenuItem();
-                    DeletePanel();
+                    //DeletePanel();
                     HeadLabelSync();
                 }
             }
@@ -207,6 +210,8 @@ namespace WindowsFormsApp1
                     }
                 }
                 else this.panel3.Controls.Add(new StatusOfUsePanenl(this));
+
+                this.Size = new Size(848, 468);
             }
             else if (selectItem.Equals("■ 권한부여"))
             {
@@ -220,6 +225,7 @@ namespace WindowsFormsApp1
                     this.panel3.Controls.Find("MemberDataInputPanel", false)[0].Visible = true;
                 }
                 else this.panel3.Controls.Add(new MemberDataInputPanel());
+                this.Size = new Size(848, 468);
             }
             else if (selectItem.Equals("■ 연체도서 반납"))
             {
@@ -233,6 +239,7 @@ namespace WindowsFormsApp1
                     //}
                 }
                 else this.panel3.Controls.Add(new BadMemberSearch(this));
+                this.Size = new Size(848, 468);
             }
             else if (selectItem.Equals("■ 개인정보관리"))
             {
@@ -258,6 +265,8 @@ namespace WindowsFormsApp1
                 passwardChangePanel.SavePassward_Event += OpenUserData_Event;
                 this.panel3.Controls.Add(passwardChangePanel);
             }
+
+            this.Size = new Size(848, 468);
         }
         private void OpenUserData_Event(object sender, EventArgs e)
         {
@@ -276,6 +285,8 @@ namespace WindowsFormsApp1
                 userDataPanel.btnChangePassward_Event += OpenPasswardChange_Event;
                 this.panel3.Controls.Add(userDataPanel);
             }
+
+            this.Size = new Size(848, 468);
         }
         private void SetBookMenuItem()
         {
@@ -363,22 +374,36 @@ namespace WindowsFormsApp1
             PopStartPanel();
         }
 
-        private bool start = true;
-        private string day;
         private void timer1_Tick(object sender, EventArgs e)
         {
             labTime.Text = System.DateTime.Now.ToString("yy-MM-dd  hh:mm");
-            if (start)
+            if (!this.ContainsFocus) return;//포커스가 안가있다면 아무것도 안함
+            if (day != DateTime.Now.ToString("yy-MM-dd"))//날짜 변경시 자동업데이트 
             {
                 UpdateOverdueBook();
                 UpdateBadMember();
-                start = false;
                 day = DateTime.Now.ToString("yy-MM-dd");
+                timer1.Interval = 10000;
             }
-            else if (day != DateTime.Now.ToString("yy-MM-dd"))
+            BaseMember member = BaseMember.GetInstance();
+            if (member.Permission == BaseMember.PERM.NOMAL_USR)//노멀 유저인 경우에만 자동 로그아웃
             {
-                start = true;
+                TimeSpan timeSpan = DateTime.Now - DateTime.Parse(member.LoginTime);
+                if(timeSpan.Minutes >= AUTO_LOGOUT_TIME)//정해진 시간이 경과하면
+                {
+                    LogOutQnAForm logOut = new LogOutQnAForm();
+                    DialogResult dResult = logOut.ShowDialog();
+                    if (dResult == DialogResult.OK)//로그인을 유지하면
+                    {
+                        member.ResetLoginTime();
+                    }
+                    else//유지하지 않으면
+                    {
+                        Logout();
+                    }
+                }
             }
+
         }
         private void Form3_FormClosing(object sender, FormClosingEventArgs e)
         {

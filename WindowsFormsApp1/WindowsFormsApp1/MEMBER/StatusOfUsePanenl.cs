@@ -20,8 +20,7 @@ namespace WindowsFormsApp1.MEMBER
         private int rentNum=0;
         private int overdueNum=0;
         private int latefee=0;
-        const int expendDate = 5;
-        const int expendDate_number = 7;
+        const int expendDate = 5;//연장가능한 날짜 범위
         private string userid;
 
         private Form3 parent;
@@ -30,7 +29,7 @@ namespace WindowsFormsApp1.MEMBER
             parent = form3;
             InitializeComponent();
             userid = "";
-            parent.ListBtnUserData_Event += ChangeUserData_Event;
+            parent.ListBtnUserUsingData_Event += ChangeUserData_Event;
             labLatefee.Text = "";
             labOverDueNum.Text = "";
             labRentNum.Text = "";
@@ -43,7 +42,8 @@ namespace WindowsFormsApp1.MEMBER
         private void ChangeUserData_Event(object sender, EventArgs e)
         {
             BaseMember member = BaseMember.GetInstance();
-            if (userid == member.ID) return;
+            if (member.RentBookCount == rentNum) return;
+            else if (userid == member.ID) return;
             userid = member.ID;
             SetDataGrideView();
         }
@@ -59,7 +59,7 @@ namespace WindowsFormsApp1.MEMBER
             try//id가 있는지 없는지 판별하는 부분 있으면 실패를 반환한다.
             {
                 SQLObject selectSQL = new BACK.SQLObject();//반납예정일 추가
-                selectSQL.setQuery("SELECT infos.NAME AS '서명', rents.BOOK_ID AS '등록번호', infos.ISBN, rents.RENT_DT AS '대여일' ,rents.RETURN_DT AS '반납일', rents.RENEW_CNT AS '연장횟수' " +
+                selectSQL.setQuery("SELECT infos.NAME AS '서명', rents.BOOK_ID AS '등록번호', infos.ISBN, rents.RENT_DT AS '대여일' ,rents.RETURN_DT AS '반납일', rents.RENEW_CNT AS '연장횟수', rents.OVERDUE_YN AS '연체여부' " +
                                    "FROM BOOKINFO as infos " +
                                    "INNER JOIN BOOKRENTS as rents " +
                                    "ON  rents.RENT_YN = '0' " +
@@ -83,14 +83,18 @@ namespace WindowsFormsApp1.MEMBER
                     var return_dt = row.Cells[4];
                     string temp2 = return_dt.Value.ToString();
                     return_dt.Value = DateTime.Parse(temp2).ToString("yyyy-MM-dd");//날짜 시간 때기
-
-                    int latefee = 0;
-                    latefee = options.GetLatefee(temp2);
-                    if(latefee > 0)
+                    try
                     {
-                        overdueNum++;
+                        var overdue_yn = row.Cells[6];
+                        int temp3 = Convert.ToInt32(overdue_yn.Value.ToString());
+                        overdue_yn.Value = (temp3 == 1) ? "연체" : "N";
+
+                        TimeSpan over_due = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd")) - DateTime.Parse((return_dt.Value).ToString());
+                        int latefee = temp3 * options.RV * over_due.Days;
+                        overdueNum += temp3;
                         this.latefee += latefee;
                     }
+                    catch { }
                 }
 
                 rentNum = dgvRentData.Rows.Count;
@@ -107,6 +111,12 @@ namespace WindowsFormsApp1.MEMBER
         private void btnExtend_Click(object sender, EventArgs e)
         {
             if (dgvRentData == null || dgvRentData.Rows == null || dgvRentData.Rows.Count == 0) return;//선택한 것이 없을때
+            if(overdueNum > 0)
+            {
+                MessageBox.Show("대출연장이 불가능합니다.(사유:연체)\n" +
+                        "사서에게 문의해주십시오.");
+                return;
+            }
             DataGridViewRow row = null;
             int rowIndex = dgvRentData.CurrentCell.RowIndex;
             row = dgvRentData.Rows[rowIndex];
@@ -145,6 +155,11 @@ namespace WindowsFormsApp1.MEMBER
         /// <param name="rent_cnt"></param>
         private bool UpdateRentCnt(string bookNumber, int rent_cnt)
         {
+            if (overdueNum > 0)
+            {
+                MessageBox.Show("연체되었습니다.\n사서에게 문의해주세요.");
+                return false;//연체된것이 있는면 실패
+            }
             Options options = Options.GetInstance();
             BaseMember member = BaseMember.GetInstance();
             if (options.EC < rent_cnt) return false;//연장횟수 초가
@@ -160,11 +175,18 @@ namespace WindowsFormsApp1.MEMBER
                                     "WHERE " +
                                             "BOOK_ID = @BOOK_ID AND " +
                                             "RENT_YN='0' AND " +
+                                            "OVERDUE_YN='0' AND " +
                                             "USER_ID = @USER_ID");
                 selectSQL.AddParam("USER_ID", member.ID);
                 selectSQL.AddParam("BOOK_ID", bookNumber);
                 selectSQL.Go();
                 jarray = selectSQL.ToJArray();
+
+                if (jarray.Count == 0)
+                {
+                    MessageBox.Show("연체되었습니다.\n사서에게 문의해주세요.");
+                    return false;
+                }
 
                 BOOK_ID = jarray[0].Value<string>("BOOK_ID");
                 dateStart = DateTime.Parse(jarray[0].Value<string>("RENT_DT"));
@@ -204,7 +226,7 @@ namespace WindowsFormsApp1.MEMBER
                 insertSQL.AddParam("BOOK_ID", BOOK_ID);
                 insertSQL.AddParam("USER_ID", member.ID);
                 insertSQL.AddParam("RENT_DT", dateStart.ToString("yyyy-MM-dd HH:mm:ss"));
-                insertSQL.AddParam("RETURN_DT", dateEnd.AddDays(expendDate_number).ToString("yyyy-MM-dd HH:mm:ss"));
+                insertSQL.AddParam("RETURN_DT", dateEnd.AddDays(options.RDADD).ToString("yyyy-MM-dd HH:mm:ss"));
                 insertSQL.AddParam("RENT_DIV", "1");
                 insertSQL.AddParam("RENT_YN", "0");
                 insertSQL.AddParam("OVERDUE_YN", "0");
