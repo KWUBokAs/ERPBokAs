@@ -344,7 +344,7 @@ namespace WindowsFormsApp1.BOOK
         private void btnAdd_Click(object sender, EventArgs e)
         {
             int addMode = 0;
-            AddBookPage abp = new AddBookPage(ISBN, addMode, "");
+            AddBookPage abp = new AddBookPage(ISBN, addMode, "", "책 추가");
             abp.FormClosed += AddBookPage_Closing;
             abp.ShowDialog();
         }
@@ -356,7 +356,7 @@ namespace WindowsFormsApp1.BOOK
                 return;
 
             string BOOK_ID =  this.dgvBooks.CurrentRow.Cells[1].Value.ToString();
-            AddBookPage abp = new AddBookPage(ISBN, editMode, BOOK_ID);
+            AddBookPage abp = new AddBookPage(ISBN, editMode, BOOK_ID, "책 수정");
             abp.FormClosed += AddBookPage_Closing;
             abp.ShowDialog();
         }
