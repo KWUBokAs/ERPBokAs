@@ -69,6 +69,7 @@ namespace WindowsFormsApp1
                         this.panel3.Controls.Find("RegistrationPage", false)[0].Visible = true;
                     }
                     else this.panel3.Controls.Add(new RegistrationPage());
+                    this.Size = new Size(848, 580);
                     break;
 
                 case 4://바코드

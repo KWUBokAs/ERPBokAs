@@ -16,9 +16,11 @@ namespace WindowsFormsApp1.BOOK
     public partial class AddBookPage : Form
     {
         string ISBN, BOOK_ID, PREV_CALLNUM;
-        public AddBookPage(string _ISBN, int mode, string _BOOK_ID)
+        public AddBookPage(string _ISBN, int mode, string _BOOK_ID, string title)
         {
             InitializeComponent();
+            this.ResetText();
+            this.Text = title;
             ISBN = _ISBN;
             if (mode == 0) this.btnEdit.Visible = false;
             else if (mode == 1)

@@ -46,8 +46,8 @@ namespace WindowsFormsApp1.BOOK
             selectSQL.AddParam("ISBN", ISBN);
             selectSQL.Go();
             JArray jarray = selectSQL.ToJArray();
-            this.lblSummary.Text += "\n"+jarray[0].Value<string>("SUMMARY").ToString();
-            this.lblIndex.Text += "\n" + jarray[0].Value<string>("INDEX_LIST").ToString();
+            this.txtSummary.Text += jarray[0].Value<string>("SUMMARY").ToString();
+            this.txtIndexList.Text += jarray[0].Value<string>("INDEX_LIST").ToString();
 
             RenewDataGridView();
 
@@ -115,7 +115,7 @@ namespace WindowsFormsApp1.BOOK
                                     "BOOK_ID AS 책_ID, " +
                                     "ISBN, " +
                                     "RENT_YN AS 대여가능여부, " +
-                                    "RESERV_YN AS 예약가능여부, " +
+                                    //"RESERV_YN AS 예약가능여부, " +
                                     "RENT_ID AS 대여자ID, " +
                                     "REG_DATE AS 등록일, " +
                                     "LOCATION AS 위치 " +
@@ -133,13 +133,21 @@ namespace WindowsFormsApp1.BOOK
                 else if (e["대여가능여부"].ToString().Equals("False"))
                     e["대여가능여부"] = "대여가능";
 
-                if (e["예약가능여부"].ToString().Equals("True"))
-                    e["예약가능여부"] = "예약중";
-                else if (e["예약가능여부"].ToString().Equals("False"))
-                    e["예약가능여부"] = "예약가능";
+                //if (e["예약가능여부"].ToString().Equals("True"))
+                //    e["예약가능여부"] = "예약중";
+                //else if (e["예약가능여부"].ToString().Equals("False"))
+                //    e["예약가능여부"] = "예약가능";
             }
 
             dgvBooks.DataSource = JsonConvert.DeserializeObject(jarray.ToString());
+            if(dgvBooks != null && dgvBooks.Columns.Count > 0)
+            {
+                dgvBooks.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dgvBooks.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dgvBooks.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dgvBooks.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dgvBooks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            }
         }
 
         bool IsRented(string CALLNUM)
@@ -344,7 +352,7 @@ namespace WindowsFormsApp1.BOOK
         private void btnAdd_Click(object sender, EventArgs e)
         {
             int addMode = 0;
-            AddBookPage abp = new AddBookPage(ISBN, addMode, "");
+            AddBookPage abp = new AddBookPage(ISBN, addMode, "", "책 추가");
             abp.FormClosed += AddBookPage_Closing;
             abp.ShowDialog();
         }
@@ -352,8 +360,11 @@ namespace WindowsFormsApp1.BOOK
         private void btnEdit_Click(object sender, EventArgs e)
         {
             int editMode = 1;
+            if (this.dgvBooks.CurrentRow == null)
+                return;
+
             string BOOK_ID =  this.dgvBooks.CurrentRow.Cells[1].Value.ToString();
-            AddBookPage abp = new AddBookPage(ISBN, editMode, BOOK_ID);
+            AddBookPage abp = new AddBookPage(ISBN, editMode, BOOK_ID, "책 수정");
             abp.FormClosed += AddBookPage_Closing;
             abp.ShowDialog();
         }

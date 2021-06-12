@@ -42,8 +42,7 @@ namespace WindowsFormsApp1.MEMBER
         private void ChangeUserData_Event(object sender, EventArgs e)
         {
             BaseMember member = BaseMember.GetInstance();
-            if (member.RentBookCount == rentNum) return;
-            else if (userid == member.ID) return;
+            if (userid == member.ID && member.RentBookCount == rentNum) return;//user이름이 변경되지 않고, 책을 개수도 변하지 않은 경우
             userid = member.ID;
             SetDataGrideView();
         }
@@ -232,6 +231,7 @@ namespace WindowsFormsApp1.MEMBER
                 insertSQL.AddParam("OVERDUE_YN", "0");
                 insertSQL.AddParam("RENEW_CNT", rent_cnt.ToString());
                 insertSQL.Go();
+                MessageBox.Show(BOOK_ID + "의 반납기간이 연장 되었습니다.");
             }
             catch
             {
