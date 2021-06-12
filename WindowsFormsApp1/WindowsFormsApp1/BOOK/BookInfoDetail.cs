@@ -115,7 +115,7 @@ namespace WindowsFormsApp1.BOOK
                                     "BOOK_ID AS 책_ID, " +
                                     "ISBN, " +
                                     "RENT_YN AS 대여가능여부, " +
-                                    "RESERV_YN AS 예약가능여부, " +
+                                    //"RESERV_YN AS 예약가능여부, " +
                                     "RENT_ID AS 대여자ID, " +
                                     "REG_DATE AS 등록일, " +
                                     "LOCATION AS 위치 " +
@@ -133,13 +133,18 @@ namespace WindowsFormsApp1.BOOK
                 else if (e["대여가능여부"].ToString().Equals("False"))
                     e["대여가능여부"] = "대여가능";
 
-                if (e["예약가능여부"].ToString().Equals("True"))
-                    e["예약가능여부"] = "예약중";
-                else if (e["예약가능여부"].ToString().Equals("False"))
-                    e["예약가능여부"] = "예약가능";
+                //if (e["예약가능여부"].ToString().Equals("True"))
+                //    e["예약가능여부"] = "예약중";
+                //else if (e["예약가능여부"].ToString().Equals("False"))
+                //    e["예약가능여부"] = "예약가능";
             }
 
             dgvBooks.DataSource = JsonConvert.DeserializeObject(jarray.ToString());
+            if(dgvBooks != null && dgvBooks.Columns.Count > 0)
+            {
+                dgvBooks.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dgvBooks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            }
         }
 
         bool IsRented(string CALLNUM)

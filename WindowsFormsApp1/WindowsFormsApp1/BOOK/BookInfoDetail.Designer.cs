@@ -159,7 +159,8 @@ namespace WindowsFormsApp1.BOOK
             this.dgvBooks.AllowUserToResizeColumns = false;
             this.dgvBooks.AllowUserToResizeRows = false;
             this.dgvBooks.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dgvBooks.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvBooks.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText;
+            this.dgvBooks.ColumnHeadersHeight = 29;
             this.dgvBooks.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvBooks.Location = new System.Drawing.Point(58, 495);
             this.dgvBooks.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
