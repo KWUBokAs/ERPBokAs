@@ -16,7 +16,7 @@ namespace WindowsFormsApp1.MEMBER
     /// </summary>
     public partial class LogOutQnAForm : Form
     {
-        const int LIMIT_TIME = 5;
+        const int LIMIT_TIME = 9;
         int time;
         bool continueLogin = false;//ture 유지 false logout
         public LogOutQnAForm()
