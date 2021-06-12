@@ -55,6 +55,10 @@ namespace WindowsFormsApp1.BOOK
             {
                 this.btnRent.Visible = false;
             }
+            else
+            {
+                this.btnRent.Visible = true;
+            }
 
             if (!member.IsBookAdmin)
             {
@@ -62,6 +66,13 @@ namespace WindowsFormsApp1.BOOK
                 this.btnReturn.Visible = false;
                 this.btnAdd.Visible = false;
                 this.btnEdit.Visible = false;
+            }
+            else
+            {
+                this.btnDelete.Visible = true;
+                this.btnReturn.Visible = true;
+                this.btnAdd.Visible = true;
+                this.btnEdit.Visible = true;
             }
         }
 

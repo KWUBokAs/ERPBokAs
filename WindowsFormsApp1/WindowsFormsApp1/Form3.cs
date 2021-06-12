@@ -56,9 +56,8 @@ namespace WindowsFormsApp1
                     if (this.panel3.Controls.Find("SearchPage", false).Length == 1)
                     {
                         this.panel3.Controls.Find("SearchPage", false)[0].Visible = true;
-                        break;
                     }
-                    this.panel3.Controls.Add(new SearchPage());
+                    else this.panel3.Controls.Add(new SearchPage());
                     this.Size = new Size(848, 565);
                     break;
 
@@ -68,9 +67,8 @@ namespace WindowsFormsApp1
                     if (this.panel3.Controls.Find("RegistrationPage", false).Length == 1)
                     {
                         this.panel3.Controls.Find("RegistrationPage", false)[0].Visible = true;
-                        break;
                     }
-                    this.panel3.Controls.Add(new RegistrationPage());
+                    else this.panel3.Controls.Add(new RegistrationPage());
                     break;
 
                 case 4://바코드
@@ -79,9 +77,8 @@ namespace WindowsFormsApp1
                     if (this.panel3.Controls.Find("BarCode", false).Length == 1)
                     {
                         this.panel3.Controls.Find("BarCode", false)[0].Visible = true;
-                        break;
                     }
-                    this.panel3.Controls.Add(new BarCode());
+                    else this.panel3.Controls.Add(new BarCode());
                     break;
 
                 default:
@@ -197,7 +194,7 @@ namespace WindowsFormsApp1
                 {
                     SetlbMemberItem();
                     SetBookMenuItem();
-                    DeletePanel();
+                    //DeletePanel();
                     HeadLabelSync();
                 }
             }
@@ -213,6 +210,8 @@ namespace WindowsFormsApp1
                     }
                 }
                 else this.panel3.Controls.Add(new StatusOfUsePanenl(this));
+
+                this.Size = new Size(848, 468);
             }
             else if (selectItem.Equals("■ 권한부여"))
             {
@@ -226,6 +225,7 @@ namespace WindowsFormsApp1
                     this.panel3.Controls.Find("MemberDataInputPanel", false)[0].Visible = true;
                 }
                 else this.panel3.Controls.Add(new MemberDataInputPanel());
+                this.Size = new Size(848, 468);
             }
             else if (selectItem.Equals("■ 연체도서 반납"))
             {
@@ -239,6 +239,7 @@ namespace WindowsFormsApp1
                     //}
                 }
                 else this.panel3.Controls.Add(new BadMemberSearch(this));
+                this.Size = new Size(848, 468);
             }
             else if (selectItem.Equals("■ 개인정보관리"))
             {
@@ -264,6 +265,8 @@ namespace WindowsFormsApp1
                 passwardChangePanel.SavePassward_Event += OpenUserData_Event;
                 this.panel3.Controls.Add(passwardChangePanel);
             }
+
+            this.Size = new Size(848, 468);
         }
         private void OpenUserData_Event(object sender, EventArgs e)
         {
@@ -282,6 +285,8 @@ namespace WindowsFormsApp1
                 userDataPanel.btnChangePassward_Event += OpenPasswardChange_Event;
                 this.panel3.Controls.Add(userDataPanel);
             }
+
+            this.Size = new Size(848, 468);
         }
         private void SetBookMenuItem()
         {
