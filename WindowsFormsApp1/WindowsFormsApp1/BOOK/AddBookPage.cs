@@ -19,6 +19,7 @@ namespace WindowsFormsApp1.BOOK
         public AddBookPage(string _ISBN, int mode, string _BOOK_ID, string title)
         {
             InitializeComponent();
+            this.ResetText();
             this.Text = title;
             ISBN = _ISBN;
             if (mode == 0) this.btnEdit.Visible = false;
