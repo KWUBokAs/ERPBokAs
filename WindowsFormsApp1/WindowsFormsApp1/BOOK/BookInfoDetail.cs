@@ -249,6 +249,26 @@ namespace WindowsFormsApp1.BOOK
             deleteSQL.Go();
         }
 
+        bool IsOverdued(string BOOK_ID)
+        {
+            SQLObject selectSQL = new BACK.SQLObject();
+            selectSQL.setQuery("SELECT " +
+                                    "* " +
+                              "FROM " +
+                                    "BOOKRENTS " +
+                              "WHERE " +
+                                    "BOOK_ID = @BOOK_ID AND " +
+                                    "RENT_YN='0'");
+            selectSQL.AddParam("BOOK_ID", BOOK_ID);
+            selectSQL.Go();
+            JArray jarray = selectSQL.ToJArray();
+            
+            if (jarray[0].Value<int>("OVERDUE_YN") == 1)//연체됐다면
+                return true;
+
+            return false;
+        }
+
         private void btnRent_Click(object sender, EventArgs e)
         {
             if (this.dgvBooks.CurrentRow == null) return;
@@ -279,10 +299,16 @@ namespace WindowsFormsApp1.BOOK
             if (this.dgvBooks.CurrentRow == null) return;
 
             string CALLNUM = this.dgvBooks.CurrentRow.Cells[0].Value.ToString();
+            string BOOK_ID = this.dgvBooks.CurrentRow.Cells[1].Value.ToString();
 
             // 대여중이라면 (반납 가능하다면)
             if (IsRented(CALLNUM) == true)
             {
+                if(IsOverdued(BOOK_ID) == true)
+                {
+                    MessageBox.Show("책 ID : " + BOOK_ID + " 은 연체된 도서입니다.\n사서에게 문의해 주시기 바랍니다..", "반납");
+                    return;
+                }
                 UpdateRENTYN(CALLNUM, "0");
                 ReturnBOOKRENT();
                 MessageBox.Show("반납했습니다", "반납");
