@@ -46,8 +46,8 @@ namespace WindowsFormsApp1.BOOK
             selectSQL.AddParam("ISBN", ISBN);
             selectSQL.Go();
             JArray jarray = selectSQL.ToJArray();
-            this.lblSummary.Text += "\n"+jarray[0].Value<string>("SUMMARY").ToString();
-            this.lblIndex.Text += "\n" + jarray[0].Value<string>("INDEX_LIST").ToString();
+            this.txtSummary.Text += jarray[0].Value<string>("SUMMARY").ToString();
+            this.txtIndexList.Text += jarray[0].Value<string>("INDEX_LIST").ToString();
 
             RenewDataGridView();
 

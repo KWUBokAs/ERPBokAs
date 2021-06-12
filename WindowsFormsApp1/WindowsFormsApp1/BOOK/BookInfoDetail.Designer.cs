@@ -47,6 +47,8 @@ namespace WindowsFormsApp1.BOOK
             this.btnAdd = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnEdit = new System.Windows.Forms.Button();
+            this.txtIndexList = new System.Windows.Forms.TextBox();
+            this.txtSummary = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBooks)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -54,7 +56,7 @@ namespace WindowsFormsApp1.BOOK
             // lblIndex
             // 
             this.lblIndex.AutoSize = true;
-            this.lblIndex.Location = new System.Drawing.Point(49, 273);
+            this.lblIndex.Location = new System.Drawing.Point(49, 300);
             this.lblIndex.Name = "lblIndex";
             this.lblIndex.Size = new System.Drawing.Size(29, 12);
             this.lblIndex.TabIndex = 24;
@@ -72,7 +74,7 @@ namespace WindowsFormsApp1.BOOK
             // lblPrice
             // 
             this.lblPrice.AutoSize = true;
-            this.lblPrice.Location = new System.Drawing.Point(488, 147);
+            this.lblPrice.Location = new System.Drawing.Point(556, 147);
             this.lblPrice.Name = "lblPrice";
             this.lblPrice.Size = new System.Drawing.Size(41, 12);
             this.lblPrice.TabIndex = 22;
@@ -81,7 +83,7 @@ namespace WindowsFormsApp1.BOOK
             // lblPublicationDate
             // 
             this.lblPublicationDate.AutoSize = true;
-            this.lblPublicationDate.Location = new System.Drawing.Point(488, 113);
+            this.lblPublicationDate.Location = new System.Drawing.Point(556, 113);
             this.lblPublicationDate.Name = "lblPublicationDate";
             this.lblPublicationDate.Size = new System.Drawing.Size(53, 12);
             this.lblPublicationDate.TabIndex = 21;
@@ -90,7 +92,7 @@ namespace WindowsFormsApp1.BOOK
             // lblOriginnm
             // 
             this.lblOriginnm.AutoSize = true;
-            this.lblOriginnm.Location = new System.Drawing.Point(488, 77);
+            this.lblOriginnm.Location = new System.Drawing.Point(556, 77);
             this.lblOriginnm.Name = "lblOriginnm";
             this.lblOriginnm.Size = new System.Drawing.Size(41, 12);
             this.lblOriginnm.TabIndex = 20;
@@ -99,7 +101,7 @@ namespace WindowsFormsApp1.BOOK
             // lblType
             // 
             this.lblType.AutoSize = true;
-            this.lblType.Location = new System.Drawing.Point(488, 44);
+            this.lblType.Location = new System.Drawing.Point(556, 44);
             this.lblType.Name = "lblType";
             this.lblType.Size = new System.Drawing.Size(65, 12);
             this.lblType.TabIndex = 19;
@@ -159,12 +161,12 @@ namespace WindowsFormsApp1.BOOK
             this.dgvBooks.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvBooks.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvBooks.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dgvBooks.Location = new System.Drawing.Point(51, 319);
+            this.dgvBooks.Location = new System.Drawing.Point(51, 396);
             this.dgvBooks.MultiSelect = false;
             this.dgvBooks.Name = "dgvBooks";
             this.dgvBooks.RowTemplate.Height = 23;
             this.dgvBooks.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvBooks.Size = new System.Drawing.Size(710, 235);
+            this.dgvBooks.Size = new System.Drawing.Size(710, 158);
             this.dgvBooks.TabIndex = 26;
             // 
             // btnRent
@@ -218,7 +220,7 @@ namespace WindowsFormsApp1.BOOK
             // 
             // btnEdit
             // 
-            this.btnEdit.Location = new System.Drawing.Point(674, 262);
+            this.btnEdit.Location = new System.Drawing.Point(674, 216);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(87, 23);
             this.btnEdit.TabIndex = 31;
@@ -226,11 +228,33 @@ namespace WindowsFormsApp1.BOOK
             this.btnEdit.UseVisualStyleBackColor = true;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
+            // txtIndexList
+            // 
+            this.txtIndexList.Location = new System.Drawing.Point(51, 315);
+            this.txtIndexList.Multiline = true;
+            this.txtIndexList.Name = "txtIndexList";
+            this.txtIndexList.ReadOnly = true;
+            this.txtIndexList.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtIndexList.Size = new System.Drawing.Size(710, 75);
+            this.txtIndexList.TabIndex = 32;
+            // 
+            // txtSummary
+            // 
+            this.txtSummary.Location = new System.Drawing.Point(51, 242);
+            this.txtSummary.Multiline = true;
+            this.txtSummary.Name = "txtSummary";
+            this.txtSummary.ReadOnly = true;
+            this.txtSummary.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtSummary.Size = new System.Drawing.Size(710, 55);
+            this.txtSummary.TabIndex = 33;
+            // 
             // BookInfoDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 646);
+            this.Controls.Add(this.txtSummary);
+            this.Controls.Add(this.txtIndexList);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.btnDelete);
@@ -277,5 +301,7 @@ namespace WindowsFormsApp1.BOOK
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnEdit;
+        private System.Windows.Forms.TextBox txtIndexList;
+        private System.Windows.Forms.TextBox txtSummary;
     }
 }
