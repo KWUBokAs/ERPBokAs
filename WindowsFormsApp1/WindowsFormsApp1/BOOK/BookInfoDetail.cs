@@ -352,6 +352,9 @@ namespace WindowsFormsApp1.BOOK
         private void btnEdit_Click(object sender, EventArgs e)
         {
             int editMode = 1;
+            if (this.dgvBooks.CurrentRow == null)
+                return;
+
             string BOOK_ID =  this.dgvBooks.CurrentRow.Cells[1].Value.ToString();
             AddBookPage abp = new AddBookPage(ISBN, editMode, BOOK_ID);
             abp.FormClosed += AddBookPage_Closing;
