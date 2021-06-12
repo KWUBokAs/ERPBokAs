@@ -18,6 +18,7 @@ namespace WindowsFormsApp1.BOOK
     {
         const int BOOKNUMBER_SIZE = 6;
         private Form3 parent;
+        private string behave;//대여인지 반납인지
         public BarCode(Form3 form3)
         {
             parent = form3;
@@ -28,6 +29,11 @@ namespace WindowsFormsApp1.BOOK
         private void SetTitle(object sender, EventArgs e)
         {
             labTitle.Text = parent.BarcodePageTitle;
+            if (labTitle.Text == "도서 대여")
+            {
+                behave = "대여";
+            }
+            else behave = "반납";
         }
 
         private void txtBarCode_TextChanged(object sender, EventArgs e)
@@ -47,14 +53,12 @@ namespace WindowsFormsApp1.BOOK
                 selectSQL.AddParam("BOOK_ID", BOOK_ID);
                 selectSQL.Go();
                 JArray jarray = selectSQL.ToJArray();
-
-                bool RENT_YN = jarray[0].Value<bool>("RENT_YN");
-
                 if (jarray.Count == 0)
                 {
-                    MessageBox.Show("책 ID : " + BOOK_ID + " 은 저희 도서관에 등록된 도서가 아닙니다", "반납");
+                    MessageBox.Show("책 ID : " + BOOK_ID + " 은 저희 도서관에 등록된 도서가 아닙니다", behave);
                     return;
                 }
+                bool RENT_YN = jarray[0].Value<bool>("RENT_YN");
                 if (labTitle.Text == "도서 반납")
                 {
                     
@@ -90,8 +94,20 @@ namespace WindowsFormsApp1.BOOK
             {
                 try
                 {                    
-                    if(MessageBox.Show("책 ID : " + BOOK_ID + " - 해당 도서를 반납하시겠습니까?", "반납", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    if(MessageBox.Show("책 ID : " + BOOK_ID + " - 해당 도서를 대여하시겠습니까?", "대여", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
+                        SQLObject updateSQL = new SQLObject();
+                        updateSQL.setQuery("UPDATE " +
+                                                "BOOKS " +
+                                            "SET " +
+                                                "RENT_YN='1', " +
+                                                "RENT_ID=@RENT_ID " +
+                                            "WHERE " +
+                                                "BOOK_ID=@BOOK_ID");
+                        updateSQL.AddParam("BOOK_ID", BOOK_ID);
+                        updateSQL.AddParam("RENT_ID", member.ID);
+                        updateSQL.Go();
+
                         SQLObject insertSQL = new SQLObject();
                         insertSQL.setQuery("INSERT INTO " +
                                                 "`BOOKRENTS` " +
@@ -142,7 +158,7 @@ namespace WindowsFormsApp1.BOOK
                 {
                     if (jarray[0].Value<int>("OVERDUE_YN") == 1)//연체됐다면
                     {
-                        MessageBox.Show("책 ID : " + BOOK_ID + " 은 연체된 도서입니다.\n사서에게 문의해 주시기 바랍니다..", "반납");
+                        MessageBox.Show("책 ID : " + BOOK_ID + " 은 연체된 도서입니다.\n사서에게 문의해 주시기 바랍니다..", "연체 도서");
                         return;
                     }
                 }
