@@ -10,15 +10,24 @@ using System.Windows.Forms;
 using WindowsFormsApp1.BACK;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using WindowsFormsApp1.MEMBER;
 
 namespace WindowsFormsApp1.BOOK
 {
     public partial class BarCode : UserControl
     {
         const int BOOKNUMBER_SIZE = 6;
-        public BarCode()
+        private Form3 parent;
+        public BarCode(Form3 form3)
         {
+            parent = form3;
+            form3.BarcodeClick_Event += SetTitle;
             InitializeComponent();
+            SetTitle(null, null);
+        }
+        private void SetTitle(object sender, EventArgs e)
+        {
+            labTitle.Text = parent.BarcodePageTitle;
         }
 
         private void txtBarCode_TextChanged(object sender, EventArgs e)
@@ -26,6 +35,94 @@ namespace WindowsFormsApp1.BOOK
             string BOOK_ID = ((TextBox)sender).Text;
             if (BOOK_ID.Length < BOOKNUMBER_SIZE) return;
             ((TextBox)sender).Text = "";
+            try
+            {
+                SQLObject selectSQL = new BACK.SQLObject();
+                selectSQL.setQuery("SELECT " +
+                                        "RENT_YN " +
+                                  "FROM " +
+                                        "BOOKS " +
+                                  "WHERE " +
+                                        "BOOK_ID=@BOOK_ID");
+                selectSQL.AddParam("BOOK_ID", BOOK_ID);
+                selectSQL.Go();
+                JArray jarray = selectSQL.ToJArray();
+
+                bool RENT_YN = jarray[0].Value<bool>("RENT_YN");
+
+                if (jarray.Count == 0)
+                {
+                    MessageBox.Show("책 ID : " + BOOK_ID + " 은 저희 도서관에 등록된 도서가 아닙니다", "반납");
+                    return;
+                }
+                if (labTitle.Text == "도서 반납")
+                {
+                    
+                    ReturnBook(BOOK_ID, RENT_YN);
+                }
+                else//도서 대출
+                {
+                    if (RENT_YN)
+                    {
+                        MessageBox.Show("해당책은 대여중입니다", "대여");
+                        return;
+                    }
+                    RentBook(BOOK_ID);
+                }
+            }
+            catch
+            {
+                MessageBox.Show("DB접속이 불안정합니다.", "DB 접속 오류");
+            }
+        }
+        /// <summary>
+        /// 해당책이 대여중인지 아닌지 반환한다.
+        /// true가 대여중 / false 이 대여가능 이라는 소리
+        /// </summary>
+        /// <param name="CALLNUM"></param>
+        /// <returns></returns>
+        
+        private void RentBook(string BOOK_ID)
+        {
+            BaseMember member = BaseMember.GetInstance();
+            Options options = Options.GetInstance();
+            if (member.CanRentBook)//책을 빌릴수 있을 때만 대여한다.
+            {
+                try
+                {                    
+                    if(MessageBox.Show("책 ID : " + BOOK_ID + " - 해당 도서를 반납하시겠습니까?", "반납", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        SQLObject insertSQL = new SQLObject();
+                        insertSQL.setQuery("INSERT INTO " +
+                                                "`BOOKRENTS` " +
+                                                "(`BOOK_ID`, `USER_ID`, `RENT_DT`, `RETURN_DT`, `RENT_DIV`, `RENT_YN`, `OVERDUE_YN`, `RENEW_CNT`) " +
+                                            "VALUES " +
+                                                "(@BOOK_ID, @USER_ID, @RENT_DT, @RETURN_DT, @RENT_DIV, @RENT_YN, @OVERDUE_YN, @RENEW_CNT)");
+                        insertSQL.AddParam("BOOK_ID", BOOK_ID);
+                        insertSQL.AddParam("USER_ID", member.ID);
+                        insertSQL.AddParam("RENT_DT", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                        insertSQL.AddParam("RETURN_DT", (DateTime.Now.AddDays((double)options.RD)).ToString("yyyy-MM-dd 23:59:59"));
+                        insertSQL.AddParam("RENT_DIV", "1");
+                        insertSQL.AddParam("RENT_YN", "0");
+                        insertSQL.AddParam("OVERDUE_YN", "0");
+                        insertSQL.AddParam("RENEW_CNT", "0");
+                        insertSQL.Go();
+                        MessageBox.Show("대여했습니다", "대여");
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("DB접속이 불안정합니다.", "대여");
+                }
+            }
+            else
+            {
+                MessageBox.Show("이 이상 대여할 수 없습니다\n" +
+                    "다른 책을 대여하려면 기존에 대여한 책을 반납해주세요", "대여한도");
+            }
+        }
+        private void ReturnBook(string BOOK_ID, bool Rent_YN)
+        {
             SQLObject selectSQL;
             JArray jarray;
             try//연체된 책 검출
@@ -52,30 +149,10 @@ namespace WindowsFormsApp1.BOOK
             }
             catch
             {
-                MessageBox.Show("DB접속이 불안정합니다.");
+                MessageBox.Show("DB접속이 불안정합니다.", "DB 접속 오류");
                 return;
             }
-
-
-            selectSQL = new BACK.SQLObject();
-            selectSQL.setQuery("SELECT " +
-                                    "* " +
-                              "FROM " +
-                                    "BOOKS " +
-                              "WHERE " +
-                                    "BOOK_ID=@BOOK_ID");
-            selectSQL.AddParam("BOOK_ID", BOOK_ID);
-            selectSQL.Go();
-            jarray = selectSQL.ToJArray();
-
-            if (jarray.Count == 0)
-            {
-                MessageBox.Show("책 ID : " + BOOK_ID + " 은 저희 도서관에 등록된 도서가 아닙니다", "반납");
-                return;
-            }
-            
-            
-            if (jarray[0].Value<string>("RENT_YN").Equals("True"))
+            if (Rent_YN)
             {
                 if (MessageBox.Show("책 ID : " + BOOK_ID + " - 해당 도서를 반납하시겠습니까?", "반납", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
@@ -102,7 +179,7 @@ namespace WindowsFormsApp1.BOOK
                     updateSQL.AddParam("RENT_YN", "1");
                     updateSQL.AddParam("BOOK_ID", BOOK_ID);
                     updateSQL.Go();
-                    MessageBox.Show("책 ID " + BOOK_ID + " 이 반납되었습니다","반납");
+                    MessageBox.Show("책 ID " + BOOK_ID + " 이 반납되었습니다", "반납");
                 }
             }
             else

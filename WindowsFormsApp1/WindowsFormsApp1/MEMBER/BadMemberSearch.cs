@@ -83,7 +83,7 @@ namespace WindowsFormsApp1.MEMBER
             }
             catch
             {
-                MessageBox.Show("DB접속이 불안정합니다.");
+                MessageBox.Show("DB접속이 불안정합니다.", "DB 접속 오류");
             }
             
         }
@@ -127,7 +127,7 @@ namespace WindowsFormsApp1.MEMBER
             }
             catch
             {
-                MessageBox.Show("DB접속이 불안정합니다.");
+                MessageBox.Show("DB접속이 불안정합니다.", "DB 접속 오류");
             }
             try
             {
@@ -138,12 +138,12 @@ namespace WindowsFormsApp1.MEMBER
                                             "USER_ID = @USER_ID");
                 updateSQL.AddParam("USER_ID", id);
                 updateSQL.Go();
-                MessageBox.Show(id + "(님)은 일반회원 입니다.");
+                MessageBox.Show(id + "(님)은 일반회원 입니다.", "연체 도서 반납");
                 txtId.Text = "";
             }
             catch
             {
-                MessageBox.Show("DB접속이 불안정합니다.");
+                MessageBox.Show("DB접속이 불안정합니다.", "DB 접속 오류");
             }
         }
         private void btnSearch_Click(object sender, EventArgs e)
@@ -161,7 +161,7 @@ namespace WindowsFormsApp1.MEMBER
         {
             if (dgvBadTable == null || dgvBadTable.Rows == null || dgvBadTable.Rows.Count == 0)//선택할 것이 없을 때
             {
-                MessageBox.Show("항목을 선택한 후 진행해 주세요.");
+                MessageBox.Show("항목을 선택한 후 진행해 주세요.", "연체 도서 반납");
                 return;
             }
             DataGridViewRow row = null;
@@ -195,7 +195,7 @@ namespace WindowsFormsApp1.MEMBER
             }
             catch
             {
-                MessageBox.Show("DB접속이 불안정합니다.");
+                MessageBox.Show("DB접속이 불안정합니다.", "DB 접속 오류");
                 return;
             }
             SetGrideView();

@@ -25,6 +25,7 @@ namespace WindowsFormsApp1
         public event EventHandler ListBtnUserUsingData_Event;
         public event EventHandler ListBtnUserData_Event;
         //public event EventHandler ListBtnBadSearch_Event;
+        public event EventHandler BarcodeClick_Event;
         public event EventHandler OpenPasswardChangePanel_Event;
 
         private UserDataPanel userDataPanel;
@@ -42,50 +43,79 @@ namespace WindowsFormsApp1
             this.listBox1.Visible = !this.listBox1.Visible;
         }
 
+
+        private string barcodePageOfTitle;
+        public string BarcodePageTitle { get { return barcodePageOfTitle; } }
+        /*
+        ("■ 검색");
+            if (member.Permission == BaseMember.PERM.NOMAL_USR && member.CanRentBook)//일반유저이고 베드맴버가 아닐때 바코드 대여 가능
+            {
+                listBox1.Items.Add("");
+                listBox1.Items.Add("■ 바코드 대여");
+            }
+            if (member.IsBookAdmin)
+            {
+                listBox1.Items.Add("");
+                listBox1.Items.Add("■ 등록");
+                listBox1.Items.Add("");
+                listBox1.Items.Add("■ 바코드 반납");
+        */
         private void listBox1_Click(object sender, EventArgs e)
         {
             if (panel3.Controls.Contains(OR))
                 panel3.Controls.Remove(OR);
             if (panel3.Controls.Contains(MR))
                 panel3.Controls.Remove(MR);
-            switch (this.listBox1.SelectedIndex)
+            int index = listBox1.SelectedIndex;
+            //if (index >= 0 && index < listBox1.Items.Count) return;
+            string selectItem = listBox1.Items[index].ToString();
+            if (selectItem.Equals("■ 검색"))
             {
-                case 0:
-                    HidePanel();
+                HidePanel();
 
-                    if (this.panel3.Controls.Find("SearchPage", false).Length == 1)
-                    {
-                        this.panel3.Controls.Find("SearchPage", false)[0].Visible = true;
-                    }
-                    else this.panel3.Controls.Add(new SearchPage());
-                    this.Size = new Size(848, 565);
-                    break;
-
-                case 2://등록
-                    HidePanel();
-
-                    if (this.panel3.Controls.Find("RegistrationPage", false).Length == 1)
-                    {
-                        this.panel3.Controls.Find("RegistrationPage", false)[0].Visible = true;
-                    }
-                    else this.panel3.Controls.Add(new RegistrationPage());
-                    this.Size = new Size(848, 580);
-                    break;
-
-                case 4://바코드
-                    HidePanel();
-
-                    if (this.panel3.Controls.Find("BarCode", false).Length == 1)
-                    {
-                        this.panel3.Controls.Find("BarCode", false)[0].Visible = true;
-                    }
-                    else this.panel3.Controls.Add(new BarCode());
-                    break;
-
-                default:
-                    this.listBox1.SelectedIndex = -1;
-                    break;
+                if (this.panel3.Controls.Find("SearchPage", false).Length == 1)
+                {
+                    this.panel3.Controls.Find("SearchPage", false)[0].Visible = true;
+                }
+                else this.panel3.Controls.Add(new SearchPage());
+                this.Size = new Size(848, 565);
             }
+            else if (selectItem.Equals("■ 바코드 대여"))
+            {
+                PopBarcodePage("도서 대여");
+            }
+            else if (selectItem.Equals("■ 등록"))
+            {
+                HidePanel();
+
+                if (this.panel3.Controls.Find("RegistrationPage", false).Length == 1)
+                {
+                    this.panel3.Controls.Find("RegistrationPage", false)[0].Visible = true;
+                }
+                else this.panel3.Controls.Add(new RegistrationPage());
+                this.Size = new Size(848, 580);
+            }
+            else if (selectItem.Equals("■ 바코드 반납"))
+            {
+                PopBarcodePage("도서 반납");
+
+            }
+            else return;
+            this.listBox1.Visible = false;
+        }
+        private void PopBarcodePage(string title)
+        {
+            HidePanel();
+            barcodePageOfTitle = title;
+            if (this.panel3.Controls.Find("BarCode", false).Length == 1)
+            {
+                this.panel3.Controls.Find("BarCode", false)[0].Visible = true;
+                if (BarcodeClick_Event != null)
+                {
+                    BarcodeClick_Event(null, null);
+                }
+            }
+            else this.panel3.Controls.Add(new BarCode(this));
         }
 
         private void pictureBox1_MouseHover(object sender, EventArgs e)
@@ -295,7 +325,11 @@ namespace WindowsFormsApp1
             listBox1.Items.Clear();
 
             listBox1.Items.Add("■ 검색");
-
+            if (member.Permission == BaseMember.PERM.NOMAL_USR && member.CanRentBook)//일반유저이고 베드맴버가 아닐때 바코드 대여 가능
+            {
+                listBox1.Items.Add("");
+                listBox1.Items.Add("■ 바코드 대여");
+            }
             if (member.IsBookAdmin)
             {
                 listBox1.Items.Add("");
@@ -303,15 +337,6 @@ namespace WindowsFormsApp1
                 listBox1.Items.Add("");
                 listBox1.Items.Add("■ 바코드 반납");
             }
-        }
-        private void PopStartPanel()
-        {
-            if (this.panel3.Controls.Find("StartPanel", false).Length == 1)
-            {
-                this.panel3.Controls.Find("StartPanel", false)[0].Visible = true;
-            }
-            else this.panel3.Controls.Add(new StartPanel());
-            this.Size = new Size(848, 468);
         }
         /// <summary>
         /// 회원상태에 따라 lbMember에 item을 만들어줌
@@ -352,6 +377,15 @@ namespace WindowsFormsApp1
             }
         }
 
+        private void PopStartPanel()
+        {
+            if (this.panel3.Controls.Find("StartPanel", false).Length == 1)
+            {
+                this.panel3.Controls.Find("StartPanel", false)[0].Visible = true;
+            }
+            else this.panel3.Controls.Add(new StartPanel());
+            this.Size = new Size(848, 468);
+        }
         private void HidePanel()
         {
             foreach (Control c in this.panel3.Controls)
@@ -462,7 +496,7 @@ namespace WindowsFormsApp1
             }
             catch
             {
-                MessageBox.Show("DB접속이 원활하지 않습니다.");
+                MessageBox.Show("DB접속이 원활하지 않습니다.", "DB접속 오류");
             }
         }
         private void UpdateBadMember()
@@ -482,7 +516,7 @@ namespace WindowsFormsApp1
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.Message + ": DB접속이 불안정합니다.");
+                MessageBox.Show(ex.Message + ": DB접속이 불안정합니다.", "DB접속 오류");
                 return;
             }
             if (jarray == null || jarray.Count == 0) return;//없을경우
@@ -512,7 +546,7 @@ namespace WindowsFormsApp1
                 }
                 catch
                 {
-                    MessageBox.Show("DB접속이 원활하지 않습니다.");
+                    MessageBox.Show("DB접속이 원활하지 않습니다.", "DB접속 오류");
                 }
             }
         }
