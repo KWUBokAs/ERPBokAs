@@ -143,6 +143,9 @@ namespace WindowsFormsApp1.BOOK
             if(dgvBooks != null && dgvBooks.Columns.Count > 0)
             {
                 dgvBooks.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dgvBooks.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dgvBooks.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dgvBooks.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                 dgvBooks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             }
         }
