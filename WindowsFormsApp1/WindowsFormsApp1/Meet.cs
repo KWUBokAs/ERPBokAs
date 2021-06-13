@@ -96,6 +96,9 @@ namespace WindowsFormsApp1
                     "WHERE ROOM_ID = #room_id#");
                 iMGSQL.AddParam("room_id", id);
                 iMGSQL.GoImage2(this.pbRoomImg);
+                panel2.Visible = true;
+                dtp.Value = DateTime.Now;
+                LoadDateList(id);
             }
             catch (Exception ex) {
                 Console.WriteLine(ex.Message);
@@ -104,17 +107,168 @@ namespace WindowsFormsApp1
         }
         private void LoadDateList(string id) {
             SQLObject sqlObj = new SQLObject();
-            sqlObj.setQuery("SELECT " +
-                "" +
-                "" +
-                "" +
-                "" +
-                "" +
-                "" +
-                "" +
-                "" +
-                "" +
-                "");
+            #region QueryRegion
+            sqlObj.setQuery("WITH MYTABLE AS (" +
+                            "		SELECT ROOM_ID" +
+                            "			  , MASTER_ID" +
+                            "			  , USERS" +
+                            "			  , RENT_TIME" +
+                            "			  , DEAD_TIME" +
+                            "			  , RENT_DATE" +
+                            "			  , MAGAM_YN" +
+                            "			  , EXTEND" +
+                            "		FROM MEETING_RESERV" +
+                            "		WHERE ROOM_ID = #room_id#" +
+                            ")" +
+                            "" +
+                            "SELECT * FROM (" +
+                            "		SELECT \"9\" AS TIMECHK" +
+                            "				, COUNT(*) AS CHK" +
+                            "				, ROOM_ID" +
+                            "				, MASTER_ID" +
+                            "				, USERS" +
+                            "				, RENT_DATE" +
+                            "				, MAGAM_YN" +
+                            "				, EXTEND" +
+                            "		FROM MYTABLE" +
+                            "		WHERE RENT_TIME = \"09:00:00\"" +
+                            "		" +
+                            "		UNION ALL" +
+                            "		" +
+                            "		SELECT \"10\" AS TIMECHK" +
+                            "				, COUNT(*) AS CHK" +
+                            "				, ROOM_ID" +
+                            "				, MASTER_ID" +
+                            "				, USERS" +
+                            "				, RENT_DATE" +
+                            "				, MAGAM_YN" +
+                            "				, EXTEND" +
+                            "		FROM MYTABLE" +
+                            "		WHERE RENT_TIME = \"10:00:00\"" +
+                            "		" +
+                            "		UNION ALL" +
+                            "		" +
+                            "		SELECT \"11\" AS TIMECHK" +
+                            "				, COUNT(*) AS CHK" +
+                            "				, ROOM_ID" +
+                            "				, MASTER_ID" +
+                            "				, USERS" +
+                            "				, RENT_DATE" +
+                            "				, MAGAM_YN" +
+                            "				, EXTEND" +
+                            "		FROM MYTABLE" +
+                            "		WHERE RENT_TIME = \"11:00:00\"" +
+                            "		" +
+                            "		UNION ALL" +
+                            "		" +
+                            "		SELECT \"12\" AS TIMECHK" +
+                            "				, COUNT(*) AS CHK" +
+                            "				, ROOM_ID" +
+                            "				, MASTER_ID" +
+                            "				, USERS" +
+                            "				, RENT_DATE" +
+                            "				, MAGAM_YN" +
+                            "				, EXTEND" +
+                            "		FROM MYTABLE" +
+                            "		WHERE RENT_TIME = \"12:00:00\"" +
+                            "		" +
+                            "		UNION ALL" +
+                            "		" +
+                            "		SELECT \"13\" AS TIMECHK" +
+                            "				, COUNT(*) AS CHK" +
+                            "				, ROOM_ID" +
+                            "				, MASTER_ID" +
+                            "				, USERS" +
+                            "				, RENT_DATE" +
+                            "				, MAGAM_YN" +
+                            "				, EXTEND" +
+                            "		FROM MYTABLE" +
+                            "		WHERE RENT_TIME = \"13:00:00\"" +
+                            "		" +
+                            "		UNION ALL" +
+                            "		" +
+                            "		SELECT \"14\" AS TIMECHK" +
+                            "				, COUNT(*) AS CHK" +
+                            "				, ROOM_ID" +
+                            "				, MASTER_ID" +
+                            "				, USERS" +
+                            "				, RENT_DATE" +
+                            "				, MAGAM_YN" +
+                            "				, EXTEND" +
+                            "		FROM MYTABLE" +
+                            "		WHERE RENT_TIME = \"14:00:00\"" +
+                            "		" +
+                            "		UNION ALL" +
+                            "		" +
+                            "		SELECT \"15\" AS TIMECHK" +
+                            "				, COUNT(*) AS CHK" +
+                            "				, ROOM_ID" +
+                            "				, MASTER_ID" +
+                            "				, USERS" +
+                            "				, RENT_DATE" +
+                            "				, MAGAM_YN" +
+                            "				, EXTEND" +
+                            "		FROM MYTABLE" +
+                            "		WHERE RENT_TIME = \"15:00:00\"" +
+                            "		" +
+                            "		UNION ALL" +
+                            "		" +
+                            "		SELECT \"16\" AS TIMECHK" +
+                            "				, COUNT(*) AS CHK" +
+                            "				, ROOM_ID" +
+                            "				, MASTER_ID" +
+                            "				, USERS" +
+                            "				, RENT_DATE" +
+                            "				, MAGAM_YN" +
+                            "				, EXTEND" +
+                            "		FROM MYTABLE" +
+                            "		WHERE RENT_TIME = \"16:00:00\"" +
+                            "		" +
+                            "		UNION ALL" +
+                            "		" +
+                            "		SELECT \"17\" AS TIMECHK" +
+                            "				, COUNT(*) AS CHK" +
+                            "				, ROOM_ID" +
+                            "				, MASTER_ID" +
+                            "				, USERS" +
+                            "				, RENT_DATE" +
+                            "				, MAGAM_YN" +
+                            "				, EXTEND" +
+                            "		FROM MYTABLE" +
+                            "		WHERE RENT_TIME = \"17:00:00\"" +
+                            "		" +
+                            "		UNION ALL" +
+                            "		" +
+                            "		SELECT \"18\" AS TIMECHK" +
+                            "				, COUNT(*) AS CHK" +
+                            "				, ROOM_ID" +
+                            "				, MASTER_ID" +
+                            "				, USERS" +
+                            "				, RENT_DATE" +
+                            "				, MAGAM_YN" +
+                            "				, EXTEND" +
+                            "		FROM MYTABLE" +
+                            "		WHERE RENT_TIME = \"18:00:00\"" +
+                            "		" +
+                            "		UNION ALL" +
+                            "		" +
+                            "		SELECT \"19\" AS TIMECHK" +
+                            "				, COUNT(*) AS CHK" +
+                            "				, ROOM_ID" +
+                            "				, MASTER_ID" +
+                            "				, USERS" +
+                            "				, RENT_DATE" +
+                            "				, MAGAM_YN" +
+                            "				, EXTEND" +
+                            "		FROM MYTABLE" +
+                            "		WHERE RENT_TIME = \"19:00:00\"		" +
+                            ") AS D");
+
+            #endregion
+            sqlObj.AddParam("room_id", id);
+            sqlObj.Go();
+            DataTable dt = sqlObj.ToDataTable();
+            dgvReserv.DataSource = dt;
         }
     }
 }
