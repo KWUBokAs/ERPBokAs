@@ -20,7 +20,8 @@ namespace WindowsFormsApp1.MeetRoom
         public bool used;
         public Point SeatPoint;
         public int RoomID;
-        
+
+        int Preventmulti = 0;
 
         public EventHandler FormRepair;
 
@@ -61,14 +62,17 @@ namespace WindowsFormsApp1.MeetRoom
             }
             else
             {
-                if (!used)
+                if (!used && Preventmulti == 0)
                 {
+                    Preventmulti++;
                     SeatReserve Sr = new SeatReserve(SeatNum);
                     Sr.Show();
-                    Sr.Reserve_Event += reserveBtn_Event; 
+                    Sr.Reserve_Event += reserveBtn_Event;
+                    Sr.Prevent += Prevent_Event;
                 }
-                else
+                else if(used && Preventmulti == 0)
                 {
+                    Preventmulti++;
                     SeatReserve2 Sr = new SeatReserve2();
                     BaseMember bm2 = BaseMember.GetInstance();
                     Sr.Seatnum = SeatNum;
@@ -76,6 +80,7 @@ namespace WindowsFormsApp1.MeetRoom
                     Sr.UID = bm2.ID;
                     Sr.ExitClick += exitBtn_Event;
                     Sr.Ban += exitBtn_Event;
+                    Sr.Prevent += Prevent_Event;
                     Sr.Show();
                 }
             }
@@ -103,6 +108,7 @@ namespace WindowsFormsApp1.MeetRoom
                 MessageBox.Show("이미 사용중인 좌석이 존재하여 추가로 이용은 불가능합니다.");
             }
             }
+            Preventmulti--;
             FormRepair(sender, e);
         }
         public void exitBtn_Event(object sender,EventArgs e)
@@ -114,6 +120,10 @@ namespace WindowsFormsApp1.MeetRoom
         {
             if (this.FormRepair != null)
                 FormRepair(sender, e);
+        }
+        public void Prevent_Event(object sender, EventArgs e)
+        {
+            Preventmulti--;
         }
     }
 }
