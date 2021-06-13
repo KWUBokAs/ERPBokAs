@@ -54,7 +54,7 @@ namespace WindowsFormsApp1
             if (panel3.Controls.Contains(MR))
                 panel3.Controls.Remove(MR);
             int index = listBox1.SelectedIndex;
-            //if (index >= 0 && index < listBox1.Items.Count) return;
+            if (index == -1){ return; }
             string selectItem = listBox1.Items[index].ToString();
             if (selectItem.Equals("■ 검색"))
             {
