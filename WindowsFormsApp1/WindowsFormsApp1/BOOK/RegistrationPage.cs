@@ -27,9 +27,11 @@ namespace WindowsFormsApp1.BOOK
     }
     public partial class RegistrationPage : UserControl
     {
-        public RegistrationPage()
+        Panel p;
+        public RegistrationPage(Panel _p)
         {
             InitializeComponent();
+            p = _p;
         }
 
         private void RegistrationPage_Load(object sender, EventArgs e)
@@ -124,6 +126,10 @@ namespace WindowsFormsApp1.BOOK
             insertSQL.Go();
 
             MessageBox.Show("ISBN : "+list.Find(p => p.key.Equals("ISBN")).value + " 을 등록했습니다", "등록");
+
+            //검색창이 켜진경우
+            if(p.Controls.IndexOfKey("SearchPage") != -1)
+                ((SearchPage)p.Controls.Find("SearchPage", false)[0]).RenewGridView();
         }
     }
 }
