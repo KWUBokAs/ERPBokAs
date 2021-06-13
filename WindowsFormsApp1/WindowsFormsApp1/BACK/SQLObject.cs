@@ -207,7 +207,7 @@ namespace WindowsFormsApp1.BACK {
         /// GoImage 함수는 Image를 리턴시킵니다.
         /// </summary>
         /// <returns>쿼리 후 가져온 이미지 리턴</returns>
-        public void GoImage() {
+        private void GoImage() {
             ReplaceParam();
             if (String.IsNullOrEmpty(query))
                 return;
@@ -230,7 +230,8 @@ namespace WindowsFormsApp1.BACK {
                         }
                         catch (Exception e) {
                             Console.WriteLine("Fail Error: " + e.Message);
-                            throw new ERPSQLException("Image Query Error");
+                            image = Properties.Resources.NoImage;
+                            //throw new ERPSQLException("Image Query Error");
                         }
                     }
                     table.Close();
@@ -258,7 +259,9 @@ namespace WindowsFormsApp1.BACK {
             Thread thread = new Thread(new ThreadStart(GoImage));
             thread.Start();
             thread.Join();
-            picbox.Image = this.image;
+            if(this.image != null) {
+                picbox.Image = image;
+            }
         }
 
     }

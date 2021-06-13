@@ -391,6 +391,7 @@
     <None Include="Resources\회의실 호버.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Check.png" />
     <Content Include="Resources\ic_popup_warning.png" />
     <Content Include="Resources\ic_saveImg.png" />
     <Content Include="Resources\ic_search_P.gif" />
