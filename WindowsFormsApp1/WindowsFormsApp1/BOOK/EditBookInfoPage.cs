@@ -173,8 +173,11 @@ namespace WindowsFormsApp1.BOOK
 
             foreach (var pair in list)
                 updateSQL.AddParam(pair.key, pair.value);
+
             updateSQL.AddParam("PREV_ISBN", ISBN);
-            //updateSQL.AddImageParam("BOOK_IMG", this.picAddImg.Image);
+            Console.WriteLine(111);
+            Console.WriteLine(this.picAddImg.Image);
+            updateSQL.AddImageParam("BOOK_IMG", this.picAddImg.Image);
 
             updateSQL.Go();
             MessageBox.Show("정보가 수정되었습니다","정보수정");
