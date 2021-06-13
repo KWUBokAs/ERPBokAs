@@ -437,13 +437,13 @@ namespace WindowsFormsApp1
         private void Form3_FormClosing(object sender, FormClosingEventArgs e)
         {
             BaseMember member = BaseMember.GetInstance();
-            member.Logout();
+            Logout();
         }
 
         private void Form3_FormClosed(object sender, FormClosedEventArgs e)
         {
             BaseMember member = BaseMember.GetInstance();
-            member.Logout();
+            Logout();
         }
         private void HeadLabelSync()
         {
