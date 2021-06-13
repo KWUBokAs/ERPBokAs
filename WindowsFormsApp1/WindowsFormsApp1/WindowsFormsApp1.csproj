@@ -163,7 +163,7 @@
       <DependentUpon>Meet.cs</DependentUpon>
     </Compile>
     <Compile Include="MeetRoom\MeetDtl.cs">
-      <SubType>UserControl</SubType>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="MeetRoom\MeetDtl.Designer.cs">
       <DependentUpon>MeetDtl.cs</DependentUpon>
@@ -295,6 +295,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MeetRoom\Meet.resx">
       <DependentUpon>Meet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MeetRoom\MeetDtl.resx">
+      <DependentUpon>MeetDtl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MeetRoom\SeatReserve.resx">
       <DependentUpon>SeatReserve.cs</DependentUpon>
