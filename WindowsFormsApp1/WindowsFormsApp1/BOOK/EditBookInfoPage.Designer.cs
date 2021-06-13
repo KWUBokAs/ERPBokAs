@@ -29,6 +29,7 @@ namespace WindowsFormsApp1.BOOK
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditBookInfoPage));
             this.nudPrice = new System.Windows.Forms.NumericUpDown();
             this.dtpPublishcationDate = new System.Windows.Forms.DateTimePicker();
             this.label14 = new System.Windows.Forms.Label();
@@ -340,6 +341,7 @@ namespace WindowsFormsApp1.BOOK
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnEdit);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "EditBookInfoPage";
             this.Text = "책 정보 수정";
             ((System.ComponentModel.ISupportInitialize)(this.nudPrice)).EndInit();

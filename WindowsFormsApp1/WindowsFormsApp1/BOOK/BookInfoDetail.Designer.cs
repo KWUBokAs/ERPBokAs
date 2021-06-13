@@ -29,6 +29,7 @@ namespace WindowsFormsApp1.BOOK
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BookInfoDetail));
             this.lblIndex = new System.Windows.Forms.Label();
             this.lblSummary = new System.Windows.Forms.Label();
             this.lblPrice = new System.Windows.Forms.Label();
@@ -276,6 +277,7 @@ namespace WindowsFormsApp1.BOOK
             this.Controls.Add(this.lblISBN);
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.picBookImg);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "BookInfoDetail";
             this.Text = "책 세부정보";
             ((System.ComponentModel.ISupportInitialize)(this.dgvBooks)).EndInit();

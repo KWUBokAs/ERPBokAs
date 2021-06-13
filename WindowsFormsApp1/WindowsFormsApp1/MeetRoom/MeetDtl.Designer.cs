@@ -178,6 +178,7 @@ namespace WindowsFormsApp1.MeetRoom {
             this.Controls.Add(this.tbID);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lbLoc);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MeetDtl";
             this.Text = "MeetDtl";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MeetDtl_FormClosed);

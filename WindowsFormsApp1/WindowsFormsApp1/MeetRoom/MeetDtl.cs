@@ -265,7 +265,7 @@ namespace WindowsFormsApp1.MeetRoom {
         }
 
         private void btnAdd_Click(object sender, EventArgs e) {
-            DataRow dtr= dt.Rows.Add();
+            DataRow dtr= dt.Rows.Add("","0");
             this.dgvIDs.Focus();
             this.dgvIDs.CurrentCell = this.dgvIDs.Rows[this.dgvIDs.RowCount - 1].Cells[0];
         }
@@ -284,7 +284,14 @@ namespace WindowsFormsApp1.MeetRoom {
         }
 
         private void dgvIDs_RowLeave(object sender, DataGridViewCellEventArgs e) {
-            if (!string.IsNullOrWhiteSpace(this.dgvIDs.CurrentCell.Value.ToString())) {
+            string val1 = "";
+            try {
+                val1 = this.dgvIDs.CurrentCell.Value.ToString();
+            }
+            catch {
+                val1 = "";
+            }
+            if (!string.IsNullOrWhiteSpace(val1)) {
                 string val = this.dgvIDs.CurrentCell.Value.ToString();
                 SQLObject sqlObj = new SQLObject();
                 sqlObj.setQuery("SELECT COUNT(*) AS CNT " +
@@ -310,15 +317,20 @@ namespace WindowsFormsApp1.MeetRoom {
             }
         }
         private void deleteBlank() {
-            try { 
-                foreach(DataRow ddr in dt.Rows) {
-                    if (string.IsNullOrWhiteSpace(ddr["ID"].ToString())) {
-                        dt.Rows.Remove(ddr);
-                    }
+            int cnt = dt.Rows.Count;
+            int i = 0;
+            while(i < cnt) {
+                if(dt.Rows[i]["ID"] == null) {
+                    dt.Rows.RemoveAt(i);
+                    cnt--;
+                    continue;
+                } else if(String.IsNullOrWhiteSpace(dt.Rows[i]["ID"].ToString())){
+                    dt.Rows.RemoveAt(i);
+                    cnt--;
+                    continue;
+                } else {
+                    i++;
                 }
-            }
-            catch(Exception ex) {
-
             }
         }
     }

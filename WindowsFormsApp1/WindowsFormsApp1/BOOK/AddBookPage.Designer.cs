@@ -29,6 +29,7 @@ namespace WindowsFormsApp1.BOOK
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddBookPage));
             this.txtLocation = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.txtCallnum = new System.Windows.Forms.TextBox();
@@ -134,6 +135,7 @@ namespace WindowsFormsApp1.BOOK
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnAdd);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AddBookPage";
             this.Text = "책 추가";
             this.groupBox2.ResumeLayout(false);

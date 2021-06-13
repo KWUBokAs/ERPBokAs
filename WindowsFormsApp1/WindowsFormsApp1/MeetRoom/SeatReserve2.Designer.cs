@@ -29,6 +29,7 @@ namespace WindowsFormsApp1.MeetRoom
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SeatReserve2));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -57,13 +58,14 @@ namespace WindowsFormsApp1.MeetRoom
             this.tableLayoutPanel1.Controls.Add(this.lblExtend, 1, 2);
             this.tableLayoutPanel1.Font = new System.Drawing.Font("휴먼모음T", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.tableLayoutPanel1.ForeColor = System.Drawing.Color.Black;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(91, 42);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(80, 34);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(503, 299);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(440, 239);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // label1
@@ -71,9 +73,9 @@ namespace WindowsFormsApp1.MeetRoom
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.SeaShell;
-            this.label1.Location = new System.Drawing.Point(35, 41);
+            this.label1.Location = new System.Drawing.Point(31, 33);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(69, 17);
+            this.label1.Size = new System.Drawing.Size(59, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "사용자 명";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -83,9 +85,9 @@ namespace WindowsFormsApp1.MeetRoom
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.SeaShell;
-            this.label2.Location = new System.Drawing.Point(17, 140);
+            this.label2.Location = new System.Drawing.Point(16, 112);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(104, 17);
+            this.label2.Size = new System.Drawing.Size(89, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "이용 종료 시간";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -95,9 +97,9 @@ namespace WindowsFormsApp1.MeetRoom
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.SeaShell;
-            this.label3.Location = new System.Drawing.Point(17, 240);
+            this.label3.Location = new System.Drawing.Point(16, 192);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(104, 17);
+            this.label3.Size = new System.Drawing.Size(89, 13);
             this.label3.TabIndex = 2;
             this.label3.Text = "연장 예약 여부";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -106,9 +108,9 @@ namespace WindowsFormsApp1.MeetRoom
             // 
             this.lblUserName.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblUserName.AutoSize = true;
-            this.lblUserName.Location = new System.Drawing.Point(297, 41);
+            this.lblUserName.Location = new System.Drawing.Point(261, 33);
             this.lblUserName.Name = "lblUserName";
-            this.lblUserName.Size = new System.Drawing.Size(47, 17);
+            this.lblUserName.Size = new System.Drawing.Size(40, 13);
             this.lblUserName.TabIndex = 3;
             this.lblUserName.Text = "홍길동";
             // 
@@ -116,9 +118,9 @@ namespace WindowsFormsApp1.MeetRoom
             // 
             this.lblEndTime.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblEndTime.AutoSize = true;
-            this.lblEndTime.Location = new System.Drawing.Point(278, 140);
+            this.lblEndTime.Location = new System.Drawing.Point(245, 112);
             this.lblEndTime.Name = "lblEndTime";
-            this.lblEndTime.Size = new System.Drawing.Size(86, 17);
+            this.lblEndTime.Size = new System.Drawing.Size(71, 13);
             this.lblEndTime.TabIndex = 4;
             this.lblEndTime.Text = "HH:MM:SS";
             // 
@@ -126,18 +128,19 @@ namespace WindowsFormsApp1.MeetRoom
             // 
             this.lblExtend.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblExtend.AutoSize = true;
-            this.lblExtend.Location = new System.Drawing.Point(303, 240);
+            this.lblExtend.Location = new System.Drawing.Point(266, 192);
             this.lblExtend.Name = "lblExtend";
-            this.lblExtend.Size = new System.Drawing.Size(35, 17);
+            this.lblExtend.Size = new System.Drawing.Size(29, 13);
             this.lblExtend.TabIndex = 5;
             this.lblExtend.Text = "Y/N";
             // 
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("휴먼모음T", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.button1.Location = new System.Drawing.Point(267, 372);
+            this.button1.Location = new System.Drawing.Point(234, 298);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(112, 39);
+            this.button1.Size = new System.Drawing.Size(98, 31);
             this.button1.TabIndex = 1;
             this.button1.Text = "확인";
             this.button1.UseVisualStyleBackColor = true;
@@ -146,9 +149,10 @@ namespace WindowsFormsApp1.MeetRoom
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("휴먼모음T", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.button2.Location = new System.Drawing.Point(430, 372);
+            this.button2.Location = new System.Drawing.Point(376, 298);
+            this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(87, 39);
+            this.button2.Size = new System.Drawing.Size(76, 31);
             this.button2.TabIndex = 2;
             this.button2.Text = "연장하기";
             this.button2.UseVisualStyleBackColor = true;
@@ -158,9 +162,10 @@ namespace WindowsFormsApp1.MeetRoom
             // button3
             // 
             this.button3.Font = new System.Drawing.Font("휴먼모음T", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.button3.Location = new System.Drawing.Point(111, 372);
+            this.button3.Location = new System.Drawing.Point(97, 298);
+            this.button3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(87, 39);
+            this.button3.Size = new System.Drawing.Size(76, 31);
             this.button3.TabIndex = 3;
             this.button3.Text = "퇴실";
             this.button3.UseVisualStyleBackColor = true;
@@ -171,9 +176,10 @@ namespace WindowsFormsApp1.MeetRoom
             // 
             this.button4.Font = new System.Drawing.Font("휴먼모음T", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.button4.ForeColor = System.Drawing.Color.Red;
-            this.button4.Location = new System.Drawing.Point(523, 372);
+            this.button4.Location = new System.Drawing.Point(458, 298);
+            this.button4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(149, 39);
+            this.button4.Size = new System.Drawing.Size(130, 31);
             this.button4.TabIndex = 4;
             this.button4.Text = "퇴실시키기";
             this.button4.UseVisualStyleBackColor = true;
@@ -182,14 +188,16 @@ namespace WindowsFormsApp1.MeetRoom
             // 
             // SeatReserve2
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(684, 434);
+            this.ClientSize = new System.Drawing.Size(598, 347);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.button4);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "SeatReserve2";
             this.Text = "SeatReserve2";
             this.Load += new System.EventHandler(this.SeatReserve2_Load);
