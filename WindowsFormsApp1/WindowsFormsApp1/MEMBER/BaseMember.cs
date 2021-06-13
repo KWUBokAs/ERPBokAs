@@ -31,12 +31,12 @@ namespace WindowsFormsApp1.MEMBER
         [Flags]
         public enum PERM : short
         {
-            ANONY_USR = 0,
-            NOMAL_USR = 1,
-            BOOK_ADMIN = 2,
-            READ_ADMIN = 4,
-            MEET_ADMIN = 8,
-            MEMBER_ADMIN = 16,
+            ANONY_USR = 0,//로그아웃 상태 || 비회원
+            NOMAL_USR = 1,//로그인 상태   || 일반회원
+            BOOK_ADMIN = 2,//서서 관리자
+            READ_ADMIN = 4,//열람실 관리자
+            MEET_ADMIN = 8,//회의실 관리자
+            MEMBER_ADMIN = 16,//회원 관리자자
             ALL_ADMIN = MEMBER_ADMIN| MEET_ADMIN| READ_ADMIN| BOOK_ADMIN | NOMAL_USR,
         };
         /// <summary>
@@ -58,16 +58,18 @@ namespace WindowsFormsApp1.MEMBER
             try
             {
                 SQLObject updateSQL = new BACK.SQLObject();
-                updateSQL.setQuery("UPDATE `USER` SET `LOGTIME`=@LOGTIME, `SUMMARY`=@SUMMARY " +
+                updateSQL.setQuery("UPDATE `USER` " +
+                                        "SET LOGTIME=@LOGTIME, " +
+                                        "SUMMARY=@SUMMARY " +
                                         "Where USER_ID=@USER_ID");
                 updateSQL.AddParam("USER_ID", id);
-                updateSQL.AddParam("LOGTIME", DateTime.Now.ToString("yyyy-MM-dd:HH:mm:ss"));
+                updateSQL.AddParam("LOGTIME", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                 updateSQL.AddParam("SUMMARY", summary);
                 updateSQL.Go();
             }
             catch
             {
-                MessageBox.Show("인터넷이 불안정합니다.");
+                MessageBox.Show("인터넷이 불안정합니다.", "DB 접속 오류");
             }
             ID = "Anonymous";
             Name = "Anonymous";
@@ -165,10 +167,10 @@ namespace WindowsFormsApp1.MEMBER
                 string temp = jarray[0].Value<string>("SUMMARY");
                 if (temp == "로그인중...")//로그인 중이면
                 {
-                    DateTime last = DateTime.Parse(jarray[0].Value<string>("LOGTIME"));
+                    DateTime last =DateTime.Parse(jarray[0].Value<string>("LOGTIME"));
                     DateTime now = DateTime.Now;
                     TimeSpan gap = now - last;
-                    if (gap.Minutes < TIMEGAP)
+                    if (gap.TotalMinutes < TIMEGAP)
                     {
                         return LOGINTYPE.ID_STAT_LOGIN;
                     }
@@ -180,9 +182,13 @@ namespace WindowsFormsApp1.MEMBER
                 try//로그인 시간 추가
                 {
                     SQLObject updateSQL = new BACK.SQLObject();
-                    updateSQL.setQuery("UPDATE `USER` SET `SUMMARY`=@SUMMARY " +
-                                        "Where USER_ID=@USER_ID");
-                    updateSQL.AddParam("USER_ID",id);
+                    updateSQL.setQuery("UPDATE `USER` " +
+                                            "SET " +
+                                            "`SUMMARY`=@SUMMARY, " +
+                                            "`LOGTIME`=@LOGTIME " +
+                                        "WHERE USER_ID=@USER_ID");
+                    updateSQL.AddParam("USER_ID", id);
+                    updateSQL.AddParam("LOGTIME", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                     updateSQL.AddParam("SUMMARY", "로그인중...");
                     updateSQL.Go();
                     //정상이여서 로그인 가능할 때
