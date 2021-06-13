@@ -52,6 +52,14 @@ namespace WindowsFormsApp1.MEMBER
             this.badmember = 'n';
             this.loginTime = "";
         }
+        public static BaseMember GetInstance()
+        {
+            if (baseMember == null)
+            {
+                baseMember = new BaseMember();
+            }
+            return baseMember;
+        }
         public void Logout()
         {
             if (ID == "Anonymous") return;
@@ -118,14 +126,7 @@ namespace WindowsFormsApp1.MEMBER
                 return false;
             }
         }
-        public static BaseMember GetInstance()
-        {
-            if(baseMember == null)
-            {
-                baseMember = new BaseMember();
-            }
-            return baseMember;
-        }
+        
         /// <summary>
         /// 로그인을 시도해서 시도한 user가 존재하는지 확인 할수 있다.
         /// 실제로 회원 id-pw가 존재하면 ReadData를 할 수 있는 상태로 세팅까지 해준다
