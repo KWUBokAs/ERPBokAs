@@ -22,6 +22,8 @@ namespace WindowsFormsApp1.MeetRoom
         public int RoomID;
         public string UserID;
 
+        public EventHandler FormRepair;
+
         BaseMember bm = BaseMember.GetInstance();
         SeatAct Sa = new SeatAct();
 
@@ -35,7 +37,6 @@ namespace WindowsFormsApp1.MeetRoom
             
             UserID = bm.ID;
 
-           
         }
 
         private void Sseat_Load(object sender, EventArgs e)
@@ -72,9 +73,11 @@ namespace WindowsFormsApp1.MeetRoom
                     Sr.Seatnum = SeatNum;
                     Sr.Roomnum = RoomID;
                     Sr.UID = UserID;
+                    Sr.ExitClick += exitBtn_Event;
                     Sr.Show();
                 }
             }
+            
             // used 를 판별해서 if 자리가 사용중이면 폼 1
             // 자리가 비어있으면 폼 2  폼에 띄울내용 사용중이면 남은 시간 출력하고 연장 카운트 띄우고
             // 처음엔 다 사용안함 그러다가 아이디로 예약 하기 만약에 로그인이 안되어있으면 로그인을 하고 사용해주세요 하기
@@ -96,7 +99,17 @@ namespace WindowsFormsApp1.MeetRoom
                 MessageBox.Show("이미 사용중인 좌석이 존재하여 추가로 이용은 불가능합니다.");
             }
             }
+            FormRepair(sender, e);
         }
-        
+        public void exitBtn_Event(object sender,EventArgs e)
+        {
+            pictureBox1.Image = imageList1.Images[1];
+            FormRepair(sender, e);
+        }
+        public void Repair_Event(object sender, EventArgs e)
+        {
+            if (this.FormRepair != null)
+                FormRepair(sender, e);
+        }
     }
 }

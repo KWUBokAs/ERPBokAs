@@ -131,5 +131,17 @@ namespace WindowsFormsApp1.MeetRoom
             else
                 return false;
         }
+        public void ExitSeat(string UI,int i)
+        {
+            SQLObject updateSQLS = new BACK.SQLObject();
+            updateSQLS.setQuery("UPDATE OPENROOM_RESERV " +
+                                "SET MAGAM_YN=@MAGAM_YN " +
+                                "WHERE USER_ID=@USER_ID " +
+                                "AND MAGAM_YN=@MAGAM");
+            updateSQLS.AddParam("MAGAM_YN", "1");
+            updateSQLS.AddParam("USER_ID", UI);
+            updateSQLS.AddParam("MAGAM",i.ToString());
+            updateSQLS.Go();
+        }
     }
 }

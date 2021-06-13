@@ -108,6 +108,7 @@ namespace WindowsFormsApp1
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnRN);
             this.Controls.Add(this.panel2);
+            this.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.Name = "OpenRoom";
             this.Size = new System.Drawing.Size(1007, 502);
             this.Load += new System.EventHandler(this.OpenRoom_Load);
