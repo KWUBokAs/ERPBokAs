@@ -13,6 +13,7 @@ namespace WindowsFormsApp1 {
         static void Main() {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            BACK.SqlCon.Load();
             Application.Run(new Form3());
         }
     }

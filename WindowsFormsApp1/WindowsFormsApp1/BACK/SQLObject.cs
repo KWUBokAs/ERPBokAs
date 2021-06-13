@@ -15,24 +15,85 @@ using System.Threading;
 using System.IO;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Security.Cryptography;
+using System.Reflection;
+using System.Resources;
 namespace WindowsFormsApp1.BACK {
+    public class Crypto {
+        public static readonly string key = "01234567890123456789012345678901";
+        public static readonly string iv = "0123456789012345";
+
+        //AES 암호화
+        public static string AESEncrypt(string input) {
+            try {
+                RijndaelManaged aes = new RijndaelManaged();
+                //aes.KeySize = 256; //AES256으로 사용시 
+                aes.KeySize = 128; //AES128로 사용시 
+                aes.BlockSize = 128;
+                aes.Mode = CipherMode.CBC;
+                aes.Padding = PaddingMode.PKCS7;
+                aes.Key = Encoding.UTF8.GetBytes(key);
+                aes.IV = Encoding.UTF8.GetBytes(iv);
+                var encrypt = aes.CreateEncryptor(aes.Key, aes.IV);
+                byte[] buf = null;
+                using (var ms = new MemoryStream()) {
+                    using (var cs = new CryptoStream(ms, encrypt, CryptoStreamMode.Write)) {
+                        byte[] xXml = Encoding.UTF8.GetBytes(input);
+                        cs.Write(xXml, 0, xXml.Length);
+                    }
+                    buf = ms.ToArray();
+                }
+                string Output = Convert.ToBase64String(buf);
+                return Output;
+            }
+            catch (Exception ex) {
+                Console.WriteLine(ex.Message);
+                return ex.Message;
+            }
+        }
+
+        //AES 복호화
+        public static string AESDecrypt(string input) {
+            try {
+                RijndaelManaged aes = new RijndaelManaged();
+                //aes.KeySize = 256; //AES256으로 사용시 
+                aes.KeySize = 128; //AES128로 사용시 
+                aes.BlockSize = 128;
+                aes.Mode = CipherMode.CBC;
+                aes.Padding = PaddingMode.PKCS7;
+                aes.Key = Encoding.UTF8.GetBytes(key);
+                aes.IV = Encoding.UTF8.GetBytes(iv);
+                var decrypt = aes.CreateDecryptor();
+                byte[] buf = null;
+                using (var ms = new MemoryStream()) {
+                    using (var cs = new CryptoStream(ms, decrypt, CryptoStreamMode.Write)) {
+                        byte[] xXml = Convert.FromBase64String(input);
+                        cs.Write(xXml, 0, xXml.Length);
+                    }
+                    buf = ms.ToArray();
+                }
+                string Output = Encoding.UTF8.GetString(buf);
+                return Output;
+            }
+            catch (Exception ex) {
+                Console.WriteLine(ex.Message);
+                return string.Empty;
+            }
+        }
+    }
     class ERPSQLException : Exception {
         public ERPSQLException() { }
         public ERPSQLException(string message) : base(message) { }
         public ERPSQLException(string message, Exception inner) : base(message, inner) { }
     }
-    class SqlCon {
-        private string serverName;
-        private string uid;
-        private string dataBase;
-        private string pwd;
-        private string port;
+    static class SqlCon {
+        private static string serverName;
+        private static string uid;
+        private static string dataBase;
+        private static string pwd;
+        private static string port;
 
-        public SqlCon() {
-            
-        }
-        internal string ToString() {
-            //"Server=mam675.synology.me;Port=3307;Database=kwUSS;Uid=kwUSS;Pwd=klas.kw.ac.kr;"
+        internal static string ToString() {
             string data = "";
             data += "Server=" + serverName+";";
             data += "Port=" + port + ";";
@@ -41,26 +102,47 @@ namespace WindowsFormsApp1.BACK {
             data += "Pwd=" + pwd + ";";
             return data;
         }
-        public void set(string server, string mport, string database, string muid, string mpwd) {
+        public static void set(string server, string mport, string database, string muid, string mpwd) {
             serverName = server;
-            this.dataBase = database;
-            this.port = mport;
-            this.uid = muid;
-            this.pwd = mpwd;
-            this.Save();
+            dataBase = database;
+            port = mport;
+            uid = muid;
+            pwd = mpwd;
         }
-        private void Save() {
-            JObject fileObject = new JObject();
-            fileObject.Add("Server", serverName);
-            fileObject.Add("Port", port);
-            fileObject.Add("DataBase", dataBase);
-            fileObject.Add("UID", uid);
-            fileObject.Add("Pwd", pwd);
-            Console.WriteLine(""+ Path.GetFullPath("Resources/Server.json"));
-            //File.WriteAllText(Path.GetFullPath,fileObject.ToString());
+        public static void Save() {
+            string val = serverName + ";\n";
+            val += dataBase + ";\n";
+            val += port + ";\n";
+            val += uid + ";\n";
+            val += pwd + ";\n";
+            string encrypte = Crypto.AESEncrypt(val);
+            File.WriteAllText("D://khTest.BokA", encrypte);
         }
-        private void Load() {
-
+        public static void Load() {
+            string dec;
+            
+            string resorce_data = Encoding.UTF8.GetString(Properties.Resources.kh);
+            //MessageBox.Show(resorce_data);
+            
+            
+            
+            string fullcode = Crypto.AESDecrypt(resorce_data);
+            //MessageBox.Show(fullcode);
+            fullcode = fullcode.Replace("\n", "");
+            serverName = fullcode.Substring(0, fullcode.IndexOf(";"));
+            fullcode = fullcode.Substring(fullcode.IndexOf(";")+1);
+            //MessageBox.Show(fullcode);
+            dataBase = fullcode.Substring(0, fullcode.IndexOf(";"));
+            fullcode = fullcode.Substring(fullcode.IndexOf(";") + 1);
+            //MessageBox.Show(fullcode);
+            port = fullcode.Substring(0, fullcode.IndexOf(";"));
+            fullcode = fullcode.Substring(fullcode.IndexOf(";") + 1);
+            //MessageBox.Show(fullcode);
+            uid = fullcode.Substring(0, fullcode.IndexOf(";"));
+            fullcode = fullcode.Substring(fullcode.IndexOf(";") + 1);
+            //MessageBox.Show(fullcode);
+            pwd = fullcode.Substring(0,fullcode.IndexOf(";"));
+            //MessageBox.Show(SqlCon.ToString());
         }
     }
     class SQLObject : IDisposable{
@@ -79,7 +161,7 @@ namespace WindowsFormsApp1.BACK {
 
         public DataTable resultTable;
         public Form loadingForm;
-        protected SqlCon data = new SqlCon();
+        //protected SqlCon data = new SqlCon();
         public bool isDoneQuery { get; protected set; }
         public SQLObject() {
             param = new Dictionary<string, string>();
@@ -87,7 +169,6 @@ namespace WindowsFormsApp1.BACK {
             parent = Form.ActiveForm;
             isStop = true;
             resultTable = new DataTable();
-            data.set("mam675.synology.me", "3307", "kwUSS", "kwUSS", "klas.kw.ac.kr");
         }
         public void setisStop(bool a) {
             this.isStop = a;
@@ -142,7 +223,7 @@ namespace WindowsFormsApp1.BACK {
             if (String.IsNullOrEmpty(query))
                 return;
             StopFormAndModal();
-            using (MySqlConnection con = new MySqlConnection(data.ToString())) {
+            using (MySqlConnection con = new MySqlConnection(SqlCon.ToString())) {
                 try {
                     resultTable.Clear();
                     con.Open();
@@ -220,7 +301,7 @@ namespace WindowsFormsApp1.BACK {
             if (String.IsNullOrEmpty(query))
                 return;
             StopFormAndModal();
-            using (MySqlConnection con = new MySqlConnection(data.ToString())) {
+            using (MySqlConnection con = new MySqlConnection(SqlCon.ToString())) {
                 try {
                     resultTable.Clear();
                     con.Open();

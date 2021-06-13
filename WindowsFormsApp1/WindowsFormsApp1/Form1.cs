@@ -19,20 +19,5 @@ namespace WindowsFormsApp1 {
 
         }
 
-        private void button1_Click(object sender, EventArgs e) {
-            //if (String.IsNullOrEmpty(this.richTextBox1.Text))
-            //    return;
-            //mysqlObj.setQuery(this.richTextBox1.Text);
-            //mysqlObj.Go();
-            //mysqlObj.Dispose();
-            mysqlObj.setQuery(this.richTextBox1.Text);
-            //this.pictureBox1.Image = mysqlObj.GoImage();
-            
-            //DataTable dataTable = JsonConvert.DeserializeObject<DataTable>(mysqlObj.jArray.ToString());
-            //dataTable.TableName = "Test Table";
-            //dataGridView1.DataSource = dataTable;
-            //this.label2.Text = "Done!";
-
-        }
     }
 }
