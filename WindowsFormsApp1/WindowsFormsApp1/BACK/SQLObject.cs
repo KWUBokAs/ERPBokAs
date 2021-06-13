@@ -230,7 +230,8 @@ namespace WindowsFormsApp1.BACK {
                         }
                         catch (Exception e) {
                             Console.WriteLine("Fail Error: " + e.Message);
-                            throw new ERPSQLException("Image Query Error");
+                            image = Properties.Resources.NoImage;
+                            //throw new ERPSQLException("Image Query Error");
                         }
                     }
                     table.Close();
