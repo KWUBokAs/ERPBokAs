@@ -182,7 +182,7 @@ namespace WindowsFormsApp1.BACK {
             FileStream fs = new FileStream(image.Tag.ToString(), FileMode.Open, FileAccess.Read);
             byte[] bImage = new byte[fs.Length];
             fs.Read(bImage, 0, (int)fs.Length);
-            param.Add(key, bImage.ToString());
+            param.Add(key, Encoding.Default.GetString(bImage));
         }
         public void setQuery(string value) {
             if (String.IsNullOrEmpty(value))
