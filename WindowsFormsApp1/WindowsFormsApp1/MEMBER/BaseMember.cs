@@ -78,10 +78,9 @@ namespace WindowsFormsApp1.MEMBER
                 updateSQL.AddParam("SUMMARY", summary);
                 updateSQL.Go();
             }
-            catch(Exception ex)
+            catch
             {
-                Console.WriteLine("오류 발생 : ID는 "+ID+" 이다. 무엇이 문제 인가?");
-                MessageBox.Show(ex.Message + " : 인터넷이 불안정합니다.", "DB 접속 오류");
+                MessageBox.Show("인터넷이 불안정합니다.", "DB 접속 오류");
             }
             ID = "Anonymous";
             Name = "Anonymous";
