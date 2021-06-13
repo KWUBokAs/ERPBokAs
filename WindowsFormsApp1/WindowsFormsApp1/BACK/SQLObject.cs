@@ -189,8 +189,8 @@ namespace WindowsFormsApp1.BACK {
             if (param.Count <= 0)
                 return;
             foreach(KeyValuePair<string,string> pair in param) {
-                query = query.Replace("#" + pair.Key + "#", "'"+pair.Value.Replace("'","\'")+"'");
-                query = query.Replace("@" + pair.Key, "'" + pair.Value.Replace("'", "\'") + "'");
+                query = query.Replace("#" + pair.Key + "#", "'"+pair.Value.Replace("'","\\'")+"'");
+                query = query.Replace("@" + pair.Key, "'" + pair.Value.Replace("'", "\\'") + "'");
             }
         }
         public void Dispose() {
