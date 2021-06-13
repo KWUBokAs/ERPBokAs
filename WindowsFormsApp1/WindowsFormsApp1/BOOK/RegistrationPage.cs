@@ -73,16 +73,15 @@ namespace WindowsFormsApp1.BOOK
 
             // 앞 뒤 공백은 삭제
             // Ex) "     A B    " => "A B"
-            Regex rmFBSpace = new Regex(@"^\s+|\s+$");
+            Regex rmFBSpace = new Regex(@"^[^\S\r\n]+|[^\S\r\n]+$");
             foreach (var pair in list)
                 pair.value = rmFBSpace.Replace(pair.value, "");
 
             // 가운데 공백은 단일 공백으로 만듬
             // Ex) "A       B" => "A B"
-            Regex multiSpaceToOne = new Regex(@"\s+");
+            Regex multiSpaceToOne = new Regex(@"[^\S\r\n]+");
             foreach (var pair in list)
-                pair.value = multiSpaceToOne.Replace(pair.value, "");
-
+                pair.value = multiSpaceToOne.Replace(pair.value, " ");
 
             // 필수항목 입력 검사
             if (list.Find(p => p.key.Equals("NAME")).value.Equals(""))
