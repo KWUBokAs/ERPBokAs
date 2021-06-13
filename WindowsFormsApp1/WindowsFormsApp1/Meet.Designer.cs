@@ -32,15 +32,22 @@ namespace WindowsFormsApp1
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.dgvList = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.lbRoomName = new System.Windows.Forms.Label();
-            this.pbRoomImg = new System.Windows.Forms.PictureBox();
-            this.lbstcMAX = new System.Windows.Forms.Label();
-            this.lbMEMs = new System.Windows.Forms.Label();
             this.lbINFO = new System.Windows.Forms.Label();
+            this.lbMEMs = new System.Windows.Forms.Label();
+            this.lbstcMAX = new System.Windows.Forms.Label();
+            this.lbRoomName = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.dtp = new System.Windows.Forms.DateTimePicker();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.label1 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pbRoomImg = new System.Windows.Forms.PictureBox();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbRoomImg)).BeginInit();
             this.SuspendLayout();
             // 
@@ -78,60 +85,17 @@ namespace WindowsFormsApp1
             // 
             // panel1
             // 
+            this.panel1.AutoScroll = true;
             this.panel1.Controls.Add(this.lbINFO);
             this.panel1.Controls.Add(this.lbMEMs);
             this.panel1.Controls.Add(this.lbstcMAX);
             this.panel1.Controls.Add(this.pbRoomImg);
             this.panel1.Controls.Add(this.lbRoomName);
-            this.panel1.Location = new System.Drawing.Point(189, 20);
+            this.panel1.Location = new System.Drawing.Point(177, 20);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(453, 362);
+            this.panel1.Size = new System.Drawing.Size(343, 362);
             this.panel1.TabIndex = 1;
             this.panel1.Visible = false;
-            // 
-            // panel2
-            // 
-            this.panel2.Location = new System.Drawing.Point(648, 19);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(200, 363);
-            this.panel2.TabIndex = 2;
-            this.panel2.Visible = false;
-            // 
-            // lbRoomName
-            // 
-            this.lbRoomName.AutoSize = true;
-            this.lbRoomName.Location = new System.Drawing.Point(3, 2);
-            this.lbRoomName.Name = "lbRoomName";
-            this.lbRoomName.Size = new System.Drawing.Size(38, 12);
-            this.lbRoomName.TabIndex = 0;
-            this.lbRoomName.Text = "label1";
-            // 
-            // pbRoomImg
-            // 
-            this.pbRoomImg.Location = new System.Drawing.Point(5, 33);
-            this.pbRoomImg.Name = "pbRoomImg";
-            this.pbRoomImg.Size = new System.Drawing.Size(333, 238);
-            this.pbRoomImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbRoomImg.TabIndex = 1;
-            this.pbRoomImg.TabStop = false;
-            // 
-            // lbstcMAX
-            // 
-            this.lbstcMAX.AutoSize = true;
-            this.lbstcMAX.Location = new System.Drawing.Point(3, 283);
-            this.lbstcMAX.Name = "lbstcMAX";
-            this.lbstcMAX.Size = new System.Drawing.Size(38, 12);
-            this.lbstcMAX.TabIndex = 2;
-            this.lbstcMAX.Text = "label1";
-            // 
-            // lbMEMs
-            // 
-            this.lbMEMs.AutoSize = true;
-            this.lbMEMs.Location = new System.Drawing.Point(231, 283);
-            this.lbMEMs.Name = "lbMEMs";
-            this.lbMEMs.Size = new System.Drawing.Size(38, 12);
-            this.lbMEMs.TabIndex = 3;
-            this.lbMEMs.Text = "label1";
             // 
             // lbINFO
             // 
@@ -142,6 +106,100 @@ namespace WindowsFormsApp1
             this.lbINFO.TabIndex = 4;
             this.lbINFO.Text = "label1";
             // 
+            // lbMEMs
+            // 
+            this.lbMEMs.AutoSize = true;
+            this.lbMEMs.Location = new System.Drawing.Point(231, 283);
+            this.lbMEMs.Name = "lbMEMs";
+            this.lbMEMs.Size = new System.Drawing.Size(38, 12);
+            this.lbMEMs.TabIndex = 3;
+            this.lbMEMs.Text = "label1";
+            // 
+            // lbstcMAX
+            // 
+            this.lbstcMAX.AutoSize = true;
+            this.lbstcMAX.Location = new System.Drawing.Point(3, 283);
+            this.lbstcMAX.Name = "lbstcMAX";
+            this.lbstcMAX.Size = new System.Drawing.Size(38, 12);
+            this.lbstcMAX.TabIndex = 2;
+            this.lbstcMAX.Text = "label1";
+            // 
+            // lbRoomName
+            // 
+            this.lbRoomName.AutoSize = true;
+            this.lbRoomName.Location = new System.Drawing.Point(3, 2);
+            this.lbRoomName.Name = "lbRoomName";
+            this.lbRoomName.Size = new System.Drawing.Size(38, 12);
+            this.lbRoomName.TabIndex = 0;
+            this.lbRoomName.Text = "label1";
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.pictureBox1);
+            this.panel2.Controls.Add(this.label1);
+            this.panel2.Controls.Add(this.dataGridView1);
+            this.panel2.Controls.Add(this.dtp);
+            this.panel2.Location = new System.Drawing.Point(526, 19);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(186, 363);
+            this.panel2.TabIndex = 2;
+            this.panel2.Visible = false;
+            // 
+            // dtp
+            // 
+            this.dtp.Dock = System.Windows.Forms.DockStyle.Top;
+            this.dtp.Location = new System.Drawing.Point(0, 0);
+            this.dtp.Name = "dtp";
+            this.dtp.Size = new System.Drawing.Size(186, 21);
+            this.dtp.TabIndex = 0;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AllowUserToResizeColumns = false;
+            this.dataGridView1.AllowUserToResizeRows = false;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dataGridView1.ColumnHeadersVisible = false;
+            this.dataGridView1.Location = new System.Drawing.Point(5, 30);
+            this.dataGridView1.MultiSelect = false;
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.RowTemplate.Height = 23;
+            this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.dataGridView1.Size = new System.Drawing.Size(175, 299);
+            this.dataGridView1.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(85, 341);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 12);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "사용 중 :";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.Image = global::WindowsFormsApp1.Properties.Resources.Check;
+            this.pictureBox1.Location = new System.Drawing.Point(144, 332);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(35, 29);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 3;
+            this.pictureBox1.TabStop = false;
+            // 
+            // pbRoomImg
+            // 
+            this.pbRoomImg.Location = new System.Drawing.Point(5, 33);
+            this.pbRoomImg.Name = "pbRoomImg";
+            this.pbRoomImg.Size = new System.Drawing.Size(333, 238);
+            this.pbRoomImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbRoomImg.TabIndex = 1;
+            this.pbRoomImg.TabStop = false;
+            // 
             // Meet
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -151,12 +209,16 @@ namespace WindowsFormsApp1
             this.Controls.Add(this.flowLayoutPanel1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Meet";
-            this.Size = new System.Drawing.Size(881, 402);
+            this.Size = new System.Drawing.Size(736, 402);
             this.Load += new System.EventHandler(this.Meet_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbRoomImg)).EndInit();
             this.ResumeLayout(false);
 
@@ -173,5 +235,9 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Label lbINFO;
         private System.Windows.Forms.Label lbMEMs;
         private System.Windows.Forms.Label lbstcMAX;
+        private System.Windows.Forms.DateTimePicker dtp;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label1;
     }
 }
