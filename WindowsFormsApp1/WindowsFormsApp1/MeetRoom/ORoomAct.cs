@@ -9,7 +9,8 @@ using Newtonsoft.Json.Linq;
 using System.Security.Cryptography;
 using WindowsFormsApp1.BACK;
 using System.Data;
-
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace WindowsFormsApp1.MeetRoom
 {
@@ -73,6 +74,15 @@ namespace WindowsFormsApp1.MeetRoom
             {
                 return "";
             }
+        }
+        public void AddImage(string RI,PictureBox pic)
+        {
+            IMGSQLObject iMGSQL = new IMGSQLObject();
+            iMGSQL.setQuery("SELECT ROOM_IMG as img " + 
+                            "FROM OPENROOM " +
+                            "WHERE ROOM_ID=@ROOM_ID");
+            iMGSQL.AddParam("ROOM_ID",RI);
+            iMGSQL.GoImage2(pic);
         }
     }
 }

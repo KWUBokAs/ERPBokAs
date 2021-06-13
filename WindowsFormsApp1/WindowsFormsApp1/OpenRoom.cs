@@ -40,7 +40,7 @@ namespace WindowsFormsApp1
 
             string a = RoomName + RoomNum.ToString();
             int s =o.ReadRoomCount(a);
-            
+            o.AddImage(a, pictureBox2);
             for(int i = 1 ; i <=o.ReadRoomCount(a); i++)
             {
                 Sseat seat = new Sseat(RoomNum,i);
@@ -49,6 +49,7 @@ namespace WindowsFormsApp1
                 seat.FormRepair += ReroadForm;
                 OR1.Add(seat);
             }
+            pictureBox2.SendToBack();
              RoomName = "OR00";
         }
 
@@ -58,11 +59,13 @@ namespace WindowsFormsApp1
             RoomNum++;
             btnRN.Text = "제" + RoomNum.ToString() + "열람실";
             panel2.Controls.Clear();
+            panel2.Controls.Add(pictureBox2);
             OpenRoom_Load(sender,e);
         }
         public void ReroadForm(object sender,EventArgs e)
         {
             panel2.Controls.Clear();
+            panel2.Controls.Add(pictureBox2);
             OpenRoom_Load(sender, e);
         }
     }
