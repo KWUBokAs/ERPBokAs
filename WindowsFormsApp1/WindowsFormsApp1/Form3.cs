@@ -46,20 +46,7 @@ namespace WindowsFormsApp1
 
         private string barcodePageOfTitle;
         public string BarcodePageTitle { get { return barcodePageOfTitle; } }
-        /*
-        ("■ 검색");
-            if (member.Permission == BaseMember.PERM.NOMAL_USR && member.CanRentBook)//일반유저이고 베드맴버가 아닐때 바코드 대여 가능
-            {
-                listBox1.Items.Add("");
-                listBox1.Items.Add("■ 바코드 대여");
-            }
-            if (member.IsBookAdmin)
-            {
-                listBox1.Items.Add("");
-                listBox1.Items.Add("■ 등록");
-                listBox1.Items.Add("");
-                listBox1.Items.Add("■ 바코드 반납");
-        */
+
         private void listBox1_Click(object sender, EventArgs e)
         {
             if (panel3.Controls.Contains(OR))
@@ -183,7 +170,10 @@ namespace WindowsFormsApp1
 
         private void Form3_Load(object sender, EventArgs e)
         {
+            Options options = Options.GetInstance();
             labTime.Text = System.DateTime.Now.ToString("yy-MM-dd  hh:mm");
+            this.ResetText();
+            this.Text = options.NM;
             SetlbMemberItem();
             SetBookMenuItem();
             HeadLabelSync();
