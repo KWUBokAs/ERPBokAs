@@ -55,9 +55,12 @@ namespace WindowsFormsApp1.BOOK
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnEdit = new System.Windows.Forms.Button();
+            this.ofdAddImg = new System.Windows.Forms.OpenFileDialog();
+            this.picAddImg = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.nudPrice)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picAddImg)).BeginInit();
             this.SuspendLayout();
             // 
             // nudPrice
@@ -67,7 +70,7 @@ namespace WindowsFormsApp1.BOOK
             0,
             0,
             0});
-            this.nudPrice.Location = new System.Drawing.Point(285, 69);
+            this.nudPrice.Location = new System.Drawing.Point(88, 144);
             this.nudPrice.Maximum = new decimal(new int[] {
             2147483647,
             0,
@@ -80,7 +83,7 @@ namespace WindowsFormsApp1.BOOK
             // dtpPublishcationDate
             // 
             this.dtpPublishcationDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpPublishcationDate.Location = new System.Drawing.Point(285, 44);
+            this.dtpPublishcationDate.Location = new System.Drawing.Point(88, 119);
             this.dtpPublishcationDate.Name = "dtpPublishcationDate";
             this.dtpPublishcationDate.Size = new System.Drawing.Size(107, 21);
             this.dtpPublishcationDate.TabIndex = 24;
@@ -88,7 +91,7 @@ namespace WindowsFormsApp1.BOOK
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(221, 47);
+            this.label14.Location = new System.Drawing.Point(24, 122);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(41, 12);
             this.label14.TabIndex = 23;
@@ -98,14 +101,14 @@ namespace WindowsFormsApp1.BOOK
             // 
             this.cmbTypes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTypes.FormattingEnabled = true;
-            this.cmbTypes.Location = new System.Drawing.Point(285, 94);
+            this.cmbTypes.Location = new System.Drawing.Point(285, 19);
             this.cmbTypes.Name = "cmbTypes";
             this.cmbTypes.Size = new System.Drawing.Size(107, 20);
             this.cmbTypes.TabIndex = 8;
             // 
             // txtIndex
             // 
-            this.txtIndex.Location = new System.Drawing.Point(26, 259);
+            this.txtIndex.Location = new System.Drawing.Point(26, 309);
             this.txtIndex.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtIndex.MaxLength = 65535;
             this.txtIndex.Multiline = true;
@@ -116,7 +119,7 @@ namespace WindowsFormsApp1.BOOK
             // 
             // txtSummary
             // 
-            this.txtSummary.Location = new System.Drawing.Point(26, 139);
+            this.txtSummary.Location = new System.Drawing.Point(26, 189);
             this.txtSummary.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtSummary.MaxLength = 65535;
             this.txtSummary.Multiline = true;
@@ -127,7 +130,7 @@ namespace WindowsFormsApp1.BOOK
             // 
             // txtOriginnm
             // 
-            this.txtOriginnm.Location = new System.Drawing.Point(285, 19);
+            this.txtOriginnm.Location = new System.Drawing.Point(88, 94);
             this.txtOriginnm.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtOriginnm.MaxLength = 255;
             this.txtOriginnm.Name = "txtOriginnm";
@@ -164,7 +167,7 @@ namespace WindowsFormsApp1.BOOK
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(24, 245);
+            this.label13.Location = new System.Drawing.Point(24, 295);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(29, 12);
             this.label13.TabIndex = 13;
@@ -173,7 +176,7 @@ namespace WindowsFormsApp1.BOOK
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(221, 72);
+            this.label12.Location = new System.Drawing.Point(24, 147);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(29, 12);
             this.label12.TabIndex = 12;
@@ -182,7 +185,7 @@ namespace WindowsFormsApp1.BOOK
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(24, 125);
+            this.label11.Location = new System.Drawing.Point(24, 175);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(29, 12);
             this.label11.TabIndex = 11;
@@ -191,7 +194,7 @@ namespace WindowsFormsApp1.BOOK
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(221, 22);
+            this.label10.Location = new System.Drawing.Point(24, 97);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(29, 12);
             this.label10.TabIndex = 10;
@@ -200,7 +203,7 @@ namespace WindowsFormsApp1.BOOK
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(221, 97);
+            this.label9.Location = new System.Drawing.Point(221, 22);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(53, 12);
             this.label9.TabIndex = 9;
@@ -209,7 +212,7 @@ namespace WindowsFormsApp1.BOOK
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(24, 97);
+            this.label8.Location = new System.Drawing.Point(221, 45);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(57, 12);
             this.label8.TabIndex = 8;
@@ -282,6 +285,7 @@ namespace WindowsFormsApp1.BOOK
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.picAddImg);
             this.groupBox2.Controls.Add(this.nudPrice);
             this.groupBox2.Controls.Add(this.dtpPublishcationDate);
             this.groupBox2.Controls.Add(this.label14);
@@ -301,11 +305,11 @@ namespace WindowsFormsApp1.BOOK
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Location = new System.Drawing.Point(12, 115);
+            this.groupBox2.Location = new System.Drawing.Point(12, 69);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox2.Size = new System.Drawing.Size(435, 377);
+            this.groupBox2.Size = new System.Drawing.Size(435, 423);
             this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "선택항목";
@@ -336,6 +340,25 @@ namespace WindowsFormsApp1.BOOK
             this.btnEdit.UseVisualStyleBackColor = true;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
+            // ofdAddImg
+            // 
+            this.ofdAddImg.FileName = "openFileDialog1";
+            this.ofdAddImg.Filter = "\"Images Files(*.jpg; *.jpeg; *.bmp; *.png)|*.jpg;*.jpeg;*.bmp;*.png\"";
+            this.ofdAddImg.Title = "책 이미지 추가";
+            // 
+            // picAddImg
+            // 
+            this.picAddImg.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.picAddImg.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picAddImg.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picAddImg.Location = new System.Drawing.Point(285, 44);
+            this.picAddImg.Name = "picAddImg";
+            this.picAddImg.Size = new System.Drawing.Size(107, 121);
+            this.picAddImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picAddImg.TabIndex = 11;
+            this.picAddImg.TabStop = false;
+            this.picAddImg.Click += new System.EventHandler(this.picAddImg_Click);
+            // 
             // EditBookInfoPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -351,6 +374,7 @@ namespace WindowsFormsApp1.BOOK
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picAddImg)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -383,5 +407,7 @@ namespace WindowsFormsApp1.BOOK
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnEdit;
+        private System.Windows.Forms.OpenFileDialog ofdAddImg;
+        private System.Windows.Forms.PictureBox picAddImg;
     }
 }

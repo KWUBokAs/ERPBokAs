@@ -18,6 +18,7 @@ namespace WindowsFormsApp1.BOOK
     // 더 나은 코드를 만드려면 좀 많이 뜯어 고쳐될듯
     public partial class EditBookInfoPage : Form
     {
+        OpenFileDialog ofd = new OpenFileDialog();
         public string ISBN { get; set; }
         class StringPair
         {
@@ -33,6 +34,9 @@ namespace WindowsFormsApp1.BOOK
         public EditBookInfoPage(string _ISBN)
         {
             InitializeComponent();
+
+            ofd.Filter = "Images Files(*.jpg; *.jpeg; *.bmp; *.png)|*.jpg;*.jpeg;*.bmp;*.png";
+            ofd.Title = "책 이미지 추가";
 
             string[] types = { "단행본", "e북", "오디오북", "논문" };
 
@@ -157,6 +161,7 @@ namespace WindowsFormsApp1.BOOK
                                     "WRITER=@WRITER, " +
                                     "TRANSRATOR=@TRANSRATOR, " +
                                     "PUBLISHER=@PUBLISHER, " +
+                                    "BOOK_IMG=@BOOK_IMG, " +
                                     "TYPE=@TYPE, " +
                                     "ORIGINNM=@ORIGINNM, " +
                                     "SUMMARY=@SUMMARY, " +
@@ -169,6 +174,7 @@ namespace WindowsFormsApp1.BOOK
             foreach (var pair in list)
                 updateSQL.AddParam(pair.key, pair.value);
             updateSQL.AddParam("PREV_ISBN", ISBN);
+            //updateSQL.AddImageParam("BOOK_IMG", this.picAddImg.Image);
 
             updateSQL.Go();
             MessageBox.Show("정보가 수정되었습니다","정보수정");
@@ -181,6 +187,20 @@ namespace WindowsFormsApp1.BOOK
             if (!(char.IsDigit(e.KeyChar) || e.KeyChar == Convert.ToChar(Keys.Back)))    //숫자와 백스페이스를 제외한 나머지를 바로 처리
             {
                 e.Handled = true;
+            }
+        }
+
+        private void picAddImg_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+
+            DialogResult dr = ofd.ShowDialog();
+
+            if (dr == DialogResult.OK)
+            {
+                string fileName = ofd.FileName;
+
+                this.picAddImg.Image = Image.FromFile(fileName);
             }
         }
     }
