@@ -23,13 +23,13 @@ namespace WindowsFormsApp1.MeetRoom
         public string UserID;
 
         BaseMember bm = BaseMember.GetInstance();
+        SeatAct Sa = new SeatAct();
 
         public Sseat(int RoomNum,int num)
         {
             InitializeComponent();
             SeatNum = num;
             RoomID = RoomNum; 
-            SeatAct Sa = new SeatAct();
             SeatPoint = Sa.ReadSeatPoint("OR00" + RoomNum.ToString(), num.ToString());
             used = Sa.ReadSeatUsed("OR00"+ RoomNum.ToString(), num.ToString());
             
@@ -81,13 +81,21 @@ namespace WindowsFormsApp1.MeetRoom
         }
         
         public void reserveBtn_Event(object sender,EventArgs e)
-        {
+        {   SeatRrvAct sr = new SeatRrvAct();
+            if (Sa.ReadSeatUsed("OR00" + RoomID.ToString(), SeatNum.ToString()))
+                MessageBox.Show("이 좌석은 이미 사용중입니다.");
+            else { 
+            if (sr.ReadSeatReserveUsed(UserID)) { 
             used = true;
-            SeatAct sa = new SeatAct();
-            sa.UpdateSeat("OR00" + RoomID.ToString(), SeatNum.ToString(),used);
-            sa.InsertSeatRsv("OR00" + RoomID.ToString(), SeatNum.ToString(),UserID);
+            Sa.UpdateSeat("OR00" + RoomID.ToString(), SeatNum.ToString(),used);
+            Sa.InsertSeatRsv("OR00" + RoomID.ToString(), SeatNum.ToString(),UserID);
             pictureBox1.Image = imageList1.Images[0];
-
+            }
+            else
+            {
+                MessageBox.Show("이미 사용중인 좌석이 존재하여 추가로 이용은 불가능합니다.");
+            }
+            }
         }
         
     }
