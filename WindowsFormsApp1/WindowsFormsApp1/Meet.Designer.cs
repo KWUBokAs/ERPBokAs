@@ -127,7 +127,7 @@ namespace WindowsFormsApp1
             // lbMEMs
             // 
             this.lbMEMs.AutoSize = true;
-            this.lbMEMs.Location = new System.Drawing.Point(81, 283);
+            this.lbMEMs.Location = new System.Drawing.Point(231, 283);
             this.lbMEMs.Name = "lbMEMs";
             this.lbMEMs.Size = new System.Drawing.Size(38, 12);
             this.lbMEMs.TabIndex = 3;

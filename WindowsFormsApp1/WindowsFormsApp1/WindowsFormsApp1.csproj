@@ -410,6 +410,7 @@
     <Content Include="Resources\ic_top_smile.png" />
     <Content Include="Resources\ic_top_unsmile.png" />
     <Content Include="Resources\loading.gif" />
+    <EmbeddedResource Include="Resources\NoImage.png" />
     <None Include="Resources\startImage.jpg" />
     <None Include="Resources\sheet_help.png" />
   </ItemGroup>
