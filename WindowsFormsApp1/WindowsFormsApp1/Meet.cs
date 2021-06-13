@@ -94,7 +94,7 @@ namespace WindowsFormsApp1
                 "FROM MEETINGROOM " +
                 "WHERE ROOM_ID = #room_id#");
             iMGSQL.AddParam("room_id", id);
-            this.pbRoomImg.Image = iMGSQL.GoImage();
+            iMGSQL.GoImage2(this.pbRoomImg);
         }
     }
 }

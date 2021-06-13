@@ -207,10 +207,10 @@ namespace WindowsFormsApp1.BACK {
         /// GoImage 함수는 Image를 리턴시킵니다.
         /// </summary>
         /// <returns>쿼리 후 가져온 이미지 리턴</returns>
-        public Image GoImage() {
+        public void GoImage() {
             ReplaceParam();
             if (String.IsNullOrEmpty(query))
-                return null;
+                return;
             StopFormAndModal();
             using (MySqlConnection con = new MySqlConnection(data.ToString())) {
                 try {
@@ -220,19 +220,22 @@ namespace WindowsFormsApp1.BACK {
                     MySqlCommand cmd = new MySqlCommand(query, con);
                     MySqlDataReader table = cmd.ExecuteReader();
                     Console.WriteLine("Read Complete");
+                    while (table.Read()) {
+                        Byte[] byteBlobImage = new Byte[0];
+                        try {
 
-                    Byte[] byteBlobImage = new Byte[0];
-                    try { 
-                        byteBlobImage = (Byte[])(table.GetValue(0));
-                        MemoryStream stmBLOBData = new MemoryStream(byteBlobImage);
-                        image = Image.FromStream(stmBLOBData);
+                            byteBlobImage = (Byte[])(table.GetValue(0));
+                            MemoryStream stmBLOBData = new MemoryStream(byteBlobImage);
+                            image = Image.FromStream(stmBLOBData);
+                        }
+                        catch (Exception e) {
+                            Console.WriteLine("Fail Error: " + e.Message);
+                            throw new ERPSQLException("Image Query Error");
+                        }
                     }
-                    catch(Exception e) {
-                        Console.WriteLine("Fail Error: " + e.Message);
-                        throw new ERPSQLException("Image Query Error");
-                    }
-
                     table.Close();
+                    isDoneQuery = true;
+
                 }
                 catch (Exception e) {
                     Console.WriteLine("Fail Error: " + e.Message);
@@ -243,12 +246,20 @@ namespace WindowsFormsApp1.BACK {
                     ModalEnd();
                 }
             }
-            return image;
         }
         //Go 대신 GoImage 사용 권장
         [Obsolete("더 이상 사용하지 않습니다. GoImage 함수를 대신 사용해주시길 바랍니다.",true)]
         public override void Go() {
             return;
         }
+
+        public void GoImage2(PictureBox picbox) {
+            picbox.Image = Properties.Resources.NoImage;
+            Thread thread = new Thread(new ThreadStart(GoImage));
+            thread.Start();
+            thread.Join();
+            picbox.Image = this.image;
+        }
+
     }
 }

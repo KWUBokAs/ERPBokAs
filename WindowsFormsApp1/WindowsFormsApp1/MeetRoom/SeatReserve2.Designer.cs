@@ -39,6 +39,7 @@ namespace WindowsFormsApp1.MeetRoom
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -145,7 +146,7 @@ namespace WindowsFormsApp1.MeetRoom
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("휴먼모음T", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.button2.Location = new System.Drawing.Point(486, 372);
+            this.button2.Location = new System.Drawing.Point(430, 372);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(87, 39);
             this.button2.TabIndex = 2;
@@ -166,6 +167,19 @@ namespace WindowsFormsApp1.MeetRoom
             this.button3.Visible = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
+            // button4
+            // 
+            this.button4.Font = new System.Drawing.Font("휴먼모음T", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.button4.ForeColor = System.Drawing.Color.Red;
+            this.button4.Location = new System.Drawing.Point(523, 372);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(149, 39);
+            this.button4.TabIndex = 4;
+            this.button4.Text = "퇴실시키기";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Visible = false;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
             // SeatReserve2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -175,6 +189,7 @@ namespace WindowsFormsApp1.MeetRoom
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Controls.Add(this.button4);
             this.Name = "SeatReserve2";
             this.Text = "SeatReserve2";
             this.Load += new System.EventHandler(this.SeatReserve2_Load);
@@ -196,5 +211,6 @@ namespace WindowsFormsApp1.MeetRoom
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
     }
 }

@@ -26,7 +26,7 @@ namespace WindowsFormsApp1 {
             //mysqlObj.Go();
             //mysqlObj.Dispose();
             mysqlObj.setQuery(this.richTextBox1.Text);
-            this.pictureBox1.Image = mysqlObj.GoImage();
+            //this.pictureBox1.Image = mysqlObj.GoImage();
             
             //DataTable dataTable = JsonConvert.DeserializeObject<DataTable>(mysqlObj.jArray.ToString());
             //dataTable.TableName = "Test Table";
