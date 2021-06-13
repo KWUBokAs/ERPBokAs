@@ -89,9 +89,10 @@ namespace WindowsFormsApp1.MeetRoom
             SQLObject insertSQL = new BACK.SQLObject();
             insertSQL.setQuery("INSERT INTO OPENROOM_RESERV " +
                                "(ROOM_ID, SEAT_ID, OPENRENT_ID, USER_ID, RENT_TIME, DEAD_TIME, RENT_DT, MAGAM_YN, EXTEND) " +
-                               "VALUES (@ROOM_ID,@SEAT_ID,'',@USER_ID,@RENT_TIME,@DEAD_TIME,@RENT_DT,'0','0')");
+                               "VALUES (@ROOM_ID,@SEAT_ID,@OPENRENT_ID ,@USER_ID,@RENT_TIME,@DEAD_TIME,@RENT_DT,'0','0')");
             insertSQL.AddParam("ROOM_ID", RI);
             insertSQL.AddParam("SEAT_ID", SI);
+            insertSQL.AddParam("OPENRENT_ID", DateTime.Now.ToString("HH_mm_ss")+UI.Substring(2,2));
             insertSQL.AddParam("USER_ID", UI);
             insertSQL.AddParam("RENT_TIME", DateTime.Now.ToString("HH:mm:ss"));
             insertSQL.AddParam("DEAD_TIME", Deadtime);
