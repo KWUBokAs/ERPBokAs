@@ -234,10 +234,12 @@ namespace WindowsFormsApp1.BACK {
 
                             byteBlobImage = (Byte[])(table.GetValue(0));
                             MemoryStream stmBLOBData = new MemoryStream(byteBlobImage);
-                            image = Image.FromStream(stmBLOBData);
+                            ImageConverter convert = new ImageConverter();
+                            //image = Image.FromStream(stmBLOBData);
+                            image = (Image)convert.ConvertFrom(byteBlobImage);
                         }
                         catch (Exception e) {
-                            Console.WriteLine("Fail Error: " + e.Message);
+                            Console.WriteLine("Fail Error: " + e.Message + e.StackTrace);
                             image = Properties.Resources.NoImage;
                             //throw new ERPSQLException("Image Query Error");
                         }

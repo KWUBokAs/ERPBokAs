@@ -153,7 +153,26 @@ namespace WindowsFormsApp1.BOOK
             }
 
             SQLObject updateSQL = new BACK.SQLObject();
-            updateSQL.setQuery("UPDATE " +
+            string mquery;
+            if(picAddImg.Image == null) {
+                mquery = "UPDATE " +
+                                    "BOOKINFO " +
+                                "SET " +
+                                    "ISBN=@ISBN, " +
+                                    "NAME=@NAME, " +
+                                    "WRITER=@WRITER, " +
+                                    "TRANSRATOR=@TRANSRATOR, " +
+                                    "PUBLISHER=@PUBLISHER, " +
+                                    "TYPE=@TYPE, " +
+                                    "ORIGINNM=@ORIGINNM, " +
+                                    "SUMMARY=@SUMMARY, " +
+                                    "PUBLICATION_DATE=@PUBLICATION_DATE, " +
+                                    "PRICE=@PRICE, " +
+                                    "INDEX_LIST=@INDEX_LIST " +
+                                "WHERE " +
+                                    "ISBN=@PREV_ISBN";
+            } else {
+                mquery = "UPDATE " +
                                     "BOOKINFO " +
                                 "SET " +
                                     "ISBN=@ISBN, " +
@@ -162,6 +181,7 @@ namespace WindowsFormsApp1.BOOK
                                     "TRANSRATOR=@TRANSRATOR, " +
                                     "PUBLISHER=@PUBLISHER, " +
                                     "BOOK_IMG=@BOOK_IMG, " +
+                                    "IMG_TYPE='2', " +
                                     "TYPE=@TYPE, " +
                                     "ORIGINNM=@ORIGINNM, " +
                                     "SUMMARY=@SUMMARY, " +
@@ -169,7 +189,9 @@ namespace WindowsFormsApp1.BOOK
                                     "PRICE=@PRICE, " +
                                     "INDEX_LIST=@INDEX_LIST " +
                                 "WHERE " +
-                                    "ISBN=@PREV_ISBN");
+                                    "ISBN=@PREV_ISBN";
+            }
+            updateSQL.setQuery(mquery);
 
             foreach (var pair in list)
                 updateSQL.AddParam(pair.key, pair.value);
@@ -177,7 +199,8 @@ namespace WindowsFormsApp1.BOOK
             updateSQL.AddParam("PREV_ISBN", ISBN);
             Console.WriteLine(111);
             Console.WriteLine(this.picAddImg.Image);
-            updateSQL.AddImageParam("BOOK_IMG", this.picAddImg.Image);
+            if(picAddImg.Image !=null)
+                updateSQL.AddImageParam("BOOK_IMG", this.picAddImg.Image);
 
             updateSQL.Go();
             MessageBox.Show("정보가 수정되었습니다","정보수정");

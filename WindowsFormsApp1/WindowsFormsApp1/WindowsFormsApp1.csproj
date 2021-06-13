@@ -162,6 +162,12 @@
     <Compile Include="MeetRoom\Meet.Designer.cs">
       <DependentUpon>Meet.cs</DependentUpon>
     </Compile>
+    <Compile Include="MeetRoom\MeetDtl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MeetRoom\MeetDtl.Designer.cs">
+      <DependentUpon>MeetDtl.cs</DependentUpon>
+    </Compile>
     <Compile Include="MeetRoom\SeatRrvAct.cs" />
     <Compile Include="MeetRoom\ORoomAct.cs" />
     <Compile Include="MeetRoom\SeatAct.cs" />
