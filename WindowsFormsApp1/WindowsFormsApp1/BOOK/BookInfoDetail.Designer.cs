@@ -217,6 +217,7 @@ namespace WindowsFormsApp1.BOOK
             this.picBookImg.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.picBookImg.Name = "picBookImg";
             this.picBookImg.Size = new System.Drawing.Size(220, 174);
+            this.picBookImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picBookImg.TabIndex = 13;
             this.picBookImg.TabStop = false;
             // 

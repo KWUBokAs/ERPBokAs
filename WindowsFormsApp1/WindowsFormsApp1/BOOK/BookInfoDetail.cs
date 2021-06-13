@@ -38,10 +38,7 @@ namespace WindowsFormsApp1.BOOK
             SQLObject selectSQL = new BACK.SQLObject();
             selectSQL.setQuery("SELECT " +
                                     "SUMMARY, " +
-                                    "INDEX_LIST, " +
-                                    "IMG_TYPE, " +
-                                    "IMG_URL, " +
-                                    "BOOK_IMG " +
+                                    "INDEX_LIST " +
                               "FROM " +
                                     "BOOKINFO " +
                               "WHERE " +
@@ -53,22 +50,16 @@ namespace WindowsFormsApp1.BOOK
             this.txtSummary.Text += jarray[0].Value<string>("SUMMARY").ToString();
             this.txtIndexList.Text += jarray[0].Value<string>("INDEX_LIST").ToString();
 
-            //int IMG_TYPE = jarray[0].Value<int>("IMG_TYPE");
-            //switch (IMG_TYPE)
-            //{
-            //    case 0:
-            //        // default img
-            //        break;
-            //    case 1:
-            //        // URL 방식
-            //        break;
-            //    case 2:
-            //        // BLOB 방식
-            //        break;
-            //    default:
-            //        // default img
-            //        break;
-            //}
+            IMGSQLObject imgSQL = new BACK.IMGSQLObject();
+            imgSQL.setQuery("SELECT " +
+                                    "BOOK_IMG " +
+                              "FROM " +
+                                    "BOOKINFO " +
+                              "WHERE " +
+                                    "ISBN=@ISBN ");
+            imgSQL.AddParam("ISBN", ISBN);
+
+            imgSQL.GoImage2(this.picBookImg);
 
             RenewDataGridView();
 
