@@ -124,6 +124,7 @@ namespace WindowsFormsApp1.MeetRoom
         public void Prevent_Event(object sender, EventArgs e)
         {
             Preventmulti--;
+            FormRepair(sender, e);
         }
     }
 }
