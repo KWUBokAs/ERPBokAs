@@ -324,6 +324,10 @@ namespace WindowsFormsApp1
                 listBox1.Items.Add("");
                 listBox1.Items.Add("■ 바코드 반납");
             }
+            for(int i=listBox1.Items.Count; i<3; i++)
+            {
+                listBox1.Items.Add("");
+            }
         }
         /// <summary>
         /// 회원상태에 따라 lbMember에 item을 만들어줌
