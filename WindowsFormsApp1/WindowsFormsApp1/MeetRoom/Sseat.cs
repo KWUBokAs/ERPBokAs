@@ -22,20 +22,21 @@ namespace WindowsFormsApp1.MeetRoom
         public int RoomID;
         public string UserID;
 
+        public EventHandler FormRepair;
+
         BaseMember bm = BaseMember.GetInstance();
+        SeatAct Sa = new SeatAct();
 
         public Sseat(int RoomNum,int num)
         {
             InitializeComponent();
             SeatNum = num;
             RoomID = RoomNum; 
-            SeatAct Sa = new SeatAct();
             SeatPoint = Sa.ReadSeatPoint("OR00" + RoomNum.ToString(), num.ToString());
             used = Sa.ReadSeatUsed("OR00"+ RoomNum.ToString(), num.ToString());
             
             UserID = bm.ID;
 
-           
         }
 
         private void Sseat_Load(object sender, EventArgs e)
@@ -72,23 +73,43 @@ namespace WindowsFormsApp1.MeetRoom
                     Sr.Seatnum = SeatNum;
                     Sr.Roomnum = RoomID;
                     Sr.UID = UserID;
+                    Sr.ExitClick += exitBtn_Event;
                     Sr.Show();
                 }
             }
+            
             // used 를 판별해서 if 자리가 사용중이면 폼 1
             // 자리가 비어있으면 폼 2  폼에 띄울내용 사용중이면 남은 시간 출력하고 연장 카운트 띄우고
             // 처음엔 다 사용안함 그러다가 아이디로 예약 하기 만약에 로그인이 안되어있으면 로그인을 하고 사용해주세요 하기
         }
         
         public void reserveBtn_Event(object sender,EventArgs e)
-        {
+        {   SeatRrvAct sr = new SeatRrvAct();
+            if (Sa.ReadSeatUsed("OR00" + RoomID.ToString(), SeatNum.ToString()))
+                MessageBox.Show("이 좌석은 이미 사용중입니다.");
+            else { 
+            if (sr.ReadSeatReserveUsed(UserID)) { 
             used = true;
-            SeatAct sa = new SeatAct();
-            sa.UpdateSeat("OR00" + RoomID.ToString(), SeatNum.ToString(),used);
-            sa.InsertSeatRsv("OR00" + RoomID.ToString(), SeatNum.ToString(),UserID);
+            Sa.UpdateSeat("OR00" + RoomID.ToString(), SeatNum.ToString(),used);
+            Sa.InsertSeatRsv("OR00" + RoomID.ToString(), SeatNum.ToString(),UserID);
             pictureBox1.Image = imageList1.Images[0];
-
+            }
+            else
+            {
+                MessageBox.Show("이미 사용중인 좌석이 존재하여 추가로 이용은 불가능합니다.");
+            }
+            }
+            FormRepair(sender, e);
         }
-        
+        public void exitBtn_Event(object sender,EventArgs e)
+        {
+            pictureBox1.Image = imageList1.Images[1];
+            FormRepair(sender, e);
+        }
+        public void Repair_Event(object sender, EventArgs e)
+        {
+            if (this.FormRepair != null)
+                FormRepair(sender, e);
+        }
     }
 }

@@ -114,5 +114,34 @@ namespace WindowsFormsApp1.MeetRoom
             updateSQL.AddParam("SEAT_ID", SI);
             updateSQL.Go();
         }
+        public bool ReadSeatReserveUsed(string UI)
+        {   // 자리 이용여부 읽어오기 RI = ROOM_ID / SI = SEAT_ID
+            SQLObject selectSQL = new BACK.SQLObject();
+            selectSQL.setQuery("SELECT COUNT(SEAT_ID) AS Used " +
+                               "FROM OPENROOM_RESERV " +
+                               "WHERE USER_ID= @USER_ID");
+            selectSQL.AddParam("USER_ID", UI);
+            selectSQL.Go();
+
+            JArray jarray = selectSQL.ToJArray();
+            int canuse = jarray[0].Value<int>("Used");
+
+            if (canuse == 0)
+                return true;
+            else
+                return false;
+        }
+        public void ExitSeat(string UI,int i)
+        {
+            SQLObject updateSQLS = new BACK.SQLObject();
+            updateSQLS.setQuery("UPDATE OPENROOM_RESERV " +
+                                "SET MAGAM_YN=@MAGAM_YN " +
+                                "WHERE USER_ID=@USER_ID " +
+                                "AND MAGAM_YN=@MAGAM");
+            updateSQLS.AddParam("MAGAM_YN", "1");
+            updateSQLS.AddParam("USER_ID", UI);
+            updateSQLS.AddParam("MAGAM",i.ToString());
+            updateSQLS.Go();
+        }
     }
 }

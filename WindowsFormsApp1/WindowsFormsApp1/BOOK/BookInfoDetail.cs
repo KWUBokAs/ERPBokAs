@@ -46,6 +46,7 @@ namespace WindowsFormsApp1.BOOK
             selectSQL.AddParam("ISBN", ISBN);
             selectSQL.Go();
             JArray jarray = selectSQL.ToJArray();
+            if (jarray.Count == 0) Close();
             this.txtSummary.Text += jarray[0].Value<string>("SUMMARY").ToString();
             this.txtIndexList.Text += jarray[0].Value<string>("INDEX_LIST").ToString();
 
@@ -140,6 +141,14 @@ namespace WindowsFormsApp1.BOOK
             }
 
             dgvBooks.DataSource = JsonConvert.DeserializeObject(jarray.ToString());
+            if(dgvBooks != null && dgvBooks.Columns.Count > 0)
+            {
+                dgvBooks.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dgvBooks.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dgvBooks.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dgvBooks.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dgvBooks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            }
         }
 
         bool IsRented(string CALLNUM)
@@ -344,7 +353,7 @@ namespace WindowsFormsApp1.BOOK
         private void btnAdd_Click(object sender, EventArgs e)
         {
             int addMode = 0;
-            AddBookPage abp = new AddBookPage(ISBN, addMode, "");
+            AddBookPage abp = new AddBookPage(ISBN, addMode, "", "책 추가");
             abp.FormClosed += AddBookPage_Closing;
             abp.ShowDialog();
         }
@@ -356,7 +365,7 @@ namespace WindowsFormsApp1.BOOK
                 return;
 
             string BOOK_ID =  this.dgvBooks.CurrentRow.Cells[1].Value.ToString();
-            AddBookPage abp = new AddBookPage(ISBN, editMode, BOOK_ID);
+            AddBookPage abp = new AddBookPage(ISBN, editMode, BOOK_ID, "책 수정");
             abp.FormClosed += AddBookPage_Closing;
             abp.ShowDialog();
         }

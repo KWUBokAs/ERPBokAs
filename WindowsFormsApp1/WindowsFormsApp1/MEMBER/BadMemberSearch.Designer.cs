@@ -131,6 +131,7 @@
             this.txtBookNum.Name = "txtBookNum";
             this.txtBookNum.Size = new System.Drawing.Size(157, 25);
             this.txtBookNum.TabIndex = 11;
+            this.txtBookNum.TextChanged += new System.EventHandler(this.txtBookNum_TextChanged);
             this.txtBookNum.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBookNum_KeyPress);
             this.txtBookNum.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtBookNum_KeyUp);
             // 
