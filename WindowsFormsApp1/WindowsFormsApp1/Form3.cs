@@ -170,10 +170,7 @@ namespace WindowsFormsApp1
 
         private void Form3_Load(object sender, EventArgs e)
         {
-            Options options = Options.GetInstance();
             labTime.Text = System.DateTime.Now.ToString("yy-MM-dd  hh:mm");
-            this.ResetText();
-            this.Text = options.NM;
             SetlbMemberItem();
             SetBookMenuItem();
             HeadLabelSync();
@@ -408,6 +405,9 @@ namespace WindowsFormsApp1
                 UpdateOverdueBook();
                 UpdateBadMember();
                 day = DateTime.Now.ToString("yy-MM-dd");
+                Options options = Options.GetInstance();
+                this.ResetText();
+                this.Text = options.NM;
                 timer1.Interval = 10000;
             }
             BaseMember member = BaseMember.GetInstance();
