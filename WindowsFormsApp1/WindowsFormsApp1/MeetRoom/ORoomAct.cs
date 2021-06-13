@@ -86,5 +86,6 @@ namespace WindowsFormsApp1.MeetRoom
             iMGSQL.AddParam("ROOM_ID",RI);
             iMGSQL.GoImage2(pic);
         }
+        
     }
 }
