@@ -58,11 +58,14 @@ namespace WindowsFormsApp1.MEMBER
             try
             {
                 SQLObject updateSQL = new BACK.SQLObject();
-                updateSQL.setQuery("UPDATE `USER` " +
-                                        "SET LOGTIME=@LOGTIME, " +
+                updateSQL.setQuery("UPDATE " +
+                                        "`USER` " +
+                                   "SET " +
+                                        "LOGTIME=@LOGTIME, " +
                                         "SUMMARY=@SUMMARY " +
-                                        "Where USER_ID=@USER_ID");
-                updateSQL.AddParam("USER_ID", id);
+                                   "WHERE " +
+                                        "USER_ID=@USER_ID");
+                updateSQL.AddParam("USER_ID", ID);
                 updateSQL.AddParam("LOGTIME", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                 updateSQL.AddParam("SUMMARY", summary);
                 updateSQL.Go();
@@ -91,7 +94,12 @@ namespace WindowsFormsApp1.MEMBER
             try
             {
                 SQLObject selectSQL = new BACK.SQLObject();
-                selectSQL.setQuery("SELECT NAME, CALLNUM, EMAIL, MANAGE_YN, BAD_YN from USER where USER_ID=@USER_ID");
+                selectSQL.setQuery("SELECT " +
+                                        "NAME, CALLNUM, EMAIL, MANAGE_YN, BAD_YN " +
+                                   "FROM " +
+                                        "USER " +
+                                   "WHERE " +
+                                        "USER_ID=@USER_ID");
                 selectSQL.AddParam("USER_ID", ID);
                 selectSQL.Go();
                 //selectsql
@@ -108,7 +116,6 @@ namespace WindowsFormsApp1.MEMBER
             {
                 return false;
             }
-
         }
         public static BaseMember GetInstance()
         {
@@ -421,7 +428,7 @@ namespace WindowsFormsApp1.MEMBER
         }
         public void ResetLoginTime()
         {
-            loginTime = loginTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            loginTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         }
         /// <summary>
         /// field
@@ -440,7 +447,7 @@ namespace WindowsFormsApp1.MEMBER
         public virtual void PrintData()
         {
             Console.WriteLine("회원 정보");
-            Console.WriteLine("ID\t\t: {0}", id);
+            Console.WriteLine("ID\t\t: {0}", ID);
             Console.WriteLine("NAME\t\t: {0}", name);
             Console.WriteLine("E-Mail\t\t: {0}", e_mail);
             Console.WriteLine("PHONE\t\t: {0}", phoneNumber);
