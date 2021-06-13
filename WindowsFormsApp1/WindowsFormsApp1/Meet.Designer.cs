@@ -38,7 +38,7 @@ namespace WindowsFormsApp1
             this.lbRoomName = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.dtp = new System.Windows.Forms.DateTimePicker();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvReserv = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pbRoomImg = new System.Windows.Forms.PictureBox();
@@ -46,7 +46,7 @@ namespace WindowsFormsApp1
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvReserv)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbRoomImg)).BeginInit();
             this.SuspendLayout();
@@ -137,7 +137,7 @@ namespace WindowsFormsApp1
             // 
             this.panel2.Controls.Add(this.pictureBox1);
             this.panel2.Controls.Add(this.label1);
-            this.panel2.Controls.Add(this.dataGridView1);
+            this.panel2.Controls.Add(this.dgvReserv);
             this.panel2.Controls.Add(this.dtp);
             this.panel2.Location = new System.Drawing.Point(526, 19);
             this.panel2.Name = "panel2";
@@ -153,22 +153,22 @@ namespace WindowsFormsApp1
             this.dtp.Size = new System.Drawing.Size(186, 21);
             this.dtp.TabIndex = 0;
             // 
-            // dataGridView1
+            // dgvReserv
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AllowUserToResizeColumns = false;
-            this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.dataGridView1.ColumnHeadersVisible = false;
-            this.dataGridView1.Location = new System.Drawing.Point(5, 30);
-            this.dataGridView1.MultiSelect = false;
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dataGridView1.Size = new System.Drawing.Size(175, 299);
-            this.dataGridView1.TabIndex = 1;
+            this.dgvReserv.AllowUserToAddRows = false;
+            this.dgvReserv.AllowUserToDeleteRows = false;
+            this.dgvReserv.AllowUserToResizeColumns = false;
+            this.dgvReserv.AllowUserToResizeRows = false;
+            this.dgvReserv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dgvReserv.ColumnHeadersVisible = false;
+            this.dgvReserv.Location = new System.Drawing.Point(5, 30);
+            this.dgvReserv.MultiSelect = false;
+            this.dgvReserv.Name = "dgvReserv";
+            this.dgvReserv.RowHeadersVisible = false;
+            this.dgvReserv.RowTemplate.Height = 23;
+            this.dgvReserv.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.dgvReserv.Size = new System.Drawing.Size(175, 299);
+            this.dgvReserv.TabIndex = 1;
             // 
             // label1
             // 
@@ -217,7 +217,7 @@ namespace WindowsFormsApp1
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvReserv)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbRoomImg)).EndInit();
             this.ResumeLayout(false);
@@ -236,7 +236,7 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Label lbMEMs;
         private System.Windows.Forms.Label lbstcMAX;
         private System.Windows.Forms.DateTimePicker dtp;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvReserv;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label1;
     }

@@ -13,6 +13,7 @@ using WindowsFormsApp1.BACK;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json.Linq;
+using WindowsFormsApp1.MeetRoom;
 
 
 namespace WindowsFormsApp1
@@ -138,13 +139,17 @@ namespace WindowsFormsApp1
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
+            
             HidePanel();
+            
             if (panel3.Controls.Contains(OR)) { 
-                panel3.Controls.Remove(OR);
+                panel3.Controls.Remove(OR); 
             }
-            else
+            else {
+                OR = new OpenRoom();
                 panel3.Controls.Add(OR);
-
+               
+            }
             if (panel3.Controls.Contains(MR))
             {
                 panel3.Controls.Remove(MR);
