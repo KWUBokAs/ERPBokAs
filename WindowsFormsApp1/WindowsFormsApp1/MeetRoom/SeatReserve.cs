@@ -13,6 +13,7 @@ namespace WindowsFormsApp1.MeetRoom
     public partial class SeatReserve : Form
     {
         public event EventHandler Reserve_Event;
+        public event EventHandler Prevent;
         public int SeatNum;
         public int end = 0;
         public SeatReserve(int n)
@@ -22,7 +23,7 @@ namespace WindowsFormsApp1.MeetRoom
 
             button1.Click += reserveBtn_Event;
             button1.DoubleClick += reserveBtn_Event;
-            
+            button2.Click += Prevent_Event;
         }
 
         private void SeatReserve_Load(object sender, EventArgs e)
@@ -39,6 +40,11 @@ namespace WindowsFormsApp1.MeetRoom
             if (this.Reserve_Event != null)
                 Reserve_Event(sender, e);
             Close();
+        }
+        public void Prevent_Event(object sender, EventArgs e)
+        {
+            if (this.Prevent != null)
+                Prevent(sender, e);
         }
     }
 }

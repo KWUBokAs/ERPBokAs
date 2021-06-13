@@ -154,6 +154,7 @@ namespace WindowsFormsApp1
             {
                 panel3.Controls.Remove(MR);
             }
+            this.Size = new Size(848, 468);
         }
 
         
@@ -171,6 +172,7 @@ namespace WindowsFormsApp1
             {
                 panel3.Controls.Remove(OR);
             }
+            this.Size = new Size(848, 468);
         }
 
         private void Form3_Load(object sender, EventArgs e)

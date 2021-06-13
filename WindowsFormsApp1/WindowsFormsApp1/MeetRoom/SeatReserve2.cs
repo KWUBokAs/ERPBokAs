@@ -17,6 +17,7 @@ namespace WindowsFormsApp1.MeetRoom
     {
         public EventHandler ExitClick;
         public EventHandler Ban;
+        public EventHandler Prevent;
         public int Roomnum;
         public int Seatnum;
         public string UID;
@@ -29,6 +30,8 @@ namespace WindowsFormsApp1.MeetRoom
         {
             InitializeComponent();
 
+            button1.Click += Prevent_Event;
+            button2.Click += Prevent_Event;
             button3.Click += Exit_Event;
             button3.DoubleClick += Exit_Event;
             button4.Click += Ban_Event;
@@ -86,6 +89,11 @@ namespace WindowsFormsApp1.MeetRoom
         {
             if (this.Ban != null)
                 Ban(sender, e);
+        }
+        public void Prevent_Event(object sender, EventArgs e)
+        {
+            if (this.Prevent != null)
+                Prevent(sender, e);
         }
     }
 }
