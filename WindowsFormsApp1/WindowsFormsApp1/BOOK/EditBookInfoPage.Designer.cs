@@ -67,7 +67,7 @@ namespace WindowsFormsApp1.BOOK
             0,
             0,
             0});
-            this.nudPrice.Location = new System.Drawing.Point(285, 118);
+            this.nudPrice.Location = new System.Drawing.Point(285, 69);
             this.nudPrice.Maximum = new decimal(new int[] {
             2147483647,
             0,
@@ -80,7 +80,7 @@ namespace WindowsFormsApp1.BOOK
             // dtpPublishcationDate
             // 
             this.dtpPublishcationDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpPublishcationDate.Location = new System.Drawing.Point(285, 69);
+            this.dtpPublishcationDate.Location = new System.Drawing.Point(285, 44);
             this.dtpPublishcationDate.Name = "dtpPublishcationDate";
             this.dtpPublishcationDate.Size = new System.Drawing.Size(107, 21);
             this.dtpPublishcationDate.TabIndex = 24;
@@ -88,7 +88,7 @@ namespace WindowsFormsApp1.BOOK
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(221, 72);
+            this.label14.Location = new System.Drawing.Point(221, 47);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(41, 12);
             this.label14.TabIndex = 23;
@@ -98,27 +98,31 @@ namespace WindowsFormsApp1.BOOK
             // 
             this.cmbTypes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTypes.FormattingEnabled = true;
-            this.cmbTypes.Location = new System.Drawing.Point(88, 120);
+            this.cmbTypes.Location = new System.Drawing.Point(285, 94);
             this.cmbTypes.Name = "cmbTypes";
             this.cmbTypes.Size = new System.Drawing.Size(107, 20);
             this.cmbTypes.TabIndex = 8;
             // 
             // txtIndex
             // 
-            this.txtIndex.Location = new System.Drawing.Point(285, 144);
+            this.txtIndex.Location = new System.Drawing.Point(26, 259);
             this.txtIndex.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtIndex.MaxLength = 65535;
+            this.txtIndex.Multiline = true;
             this.txtIndex.Name = "txtIndex";
-            this.txtIndex.Size = new System.Drawing.Size(107, 21);
+            this.txtIndex.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtIndex.Size = new System.Drawing.Size(366, 98);
             this.txtIndex.TabIndex = 22;
             // 
             // txtSummary
             // 
-            this.txtSummary.Location = new System.Drawing.Point(285, 44);
+            this.txtSummary.Location = new System.Drawing.Point(26, 139);
             this.txtSummary.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtSummary.MaxLength = 65535;
+            this.txtSummary.Multiline = true;
             this.txtSummary.Name = "txtSummary";
-            this.txtSummary.Size = new System.Drawing.Size(107, 21);
+            this.txtSummary.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtSummary.Size = new System.Drawing.Size(366, 98);
             this.txtSummary.TabIndex = 20;
             // 
             // txtOriginnm
@@ -160,7 +164,7 @@ namespace WindowsFormsApp1.BOOK
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(221, 147);
+            this.label13.Location = new System.Drawing.Point(24, 245);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(29, 12);
             this.label13.TabIndex = 13;
@@ -169,7 +173,7 @@ namespace WindowsFormsApp1.BOOK
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(221, 122);
+            this.label12.Location = new System.Drawing.Point(221, 72);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(29, 12);
             this.label12.TabIndex = 12;
@@ -178,7 +182,7 @@ namespace WindowsFormsApp1.BOOK
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(221, 47);
+            this.label11.Location = new System.Drawing.Point(24, 125);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(29, 12);
             this.label11.TabIndex = 11;
@@ -196,7 +200,7 @@ namespace WindowsFormsApp1.BOOK
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(24, 123);
+            this.label9.Location = new System.Drawing.Point(221, 97);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(53, 12);
             this.label9.TabIndex = 9;
@@ -301,7 +305,7 @@ namespace WindowsFormsApp1.BOOK
             this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox2.Size = new System.Drawing.Size(435, 186);
+            this.groupBox2.Size = new System.Drawing.Size(435, 377);
             this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "선택항목";
@@ -336,7 +340,7 @@ namespace WindowsFormsApp1.BOOK
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(572, 333);
+            this.ClientSize = new System.Drawing.Size(572, 503);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnEdit);
