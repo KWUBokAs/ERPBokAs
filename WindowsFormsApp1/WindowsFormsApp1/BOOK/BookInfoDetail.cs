@@ -38,7 +38,10 @@ namespace WindowsFormsApp1.BOOK
             SQLObject selectSQL = new BACK.SQLObject();
             selectSQL.setQuery("SELECT " +
                                     "SUMMARY, " +
-                                    "INDEX_LIST " +
+                                    "INDEX_LIST, " +
+                                    "IMG_TYPE, " +
+                                    "IMG_URL, " +
+                                    "BOOK_IMG " +
                               "FROM " +
                                     "BOOKINFO " +
                               "WHERE " +
@@ -49,6 +52,23 @@ namespace WindowsFormsApp1.BOOK
             if (jarray.Count == 0) Close();
             this.txtSummary.Text += jarray[0].Value<string>("SUMMARY").ToString();
             this.txtIndexList.Text += jarray[0].Value<string>("INDEX_LIST").ToString();
+
+            //int IMG_TYPE = jarray[0].Value<int>("IMG_TYPE");
+            //switch (IMG_TYPE)
+            //{
+            //    case 0:
+            //        // default img
+            //        break;
+            //    case 1:
+            //        // URL 방식
+            //        break;
+            //    case 2:
+            //        // BLOB 방식
+            //        break;
+            //    default:
+            //        // default img
+            //        break;
+            //}
 
             RenewDataGridView();
 
@@ -187,7 +207,7 @@ namespace WindowsFormsApp1.BOOK
             if (RENTYN.Equals("1"))
                 updateSQL.AddParam("USER_ID", USER_ID);
             else
-                updateSQL.AddParam("USER_ID", null);
+                updateSQL.AddParam("USER_ID", "");
             updateSQL.Go();
         }
 
@@ -215,7 +235,8 @@ namespace WindowsFormsApp1.BOOK
         void ReturnBOOKRENT()
         {
             string BOOK_ID = this.dgvBooks.CurrentRow.Cells[1].Value.ToString();
-            string USER_ID = this.dgvBooks.CurrentRow.Cells[5].Value.ToString();
+            string USER_ID = this.dgvBooks.CurrentRow.Cells[4].Value.ToString();
+            Console.WriteLine(USER_ID);
             SQLObject insertSQL = new SQLObject();
             insertSQL.setQuery("UPDATE " +
                                     "BOOKRENTS " +
