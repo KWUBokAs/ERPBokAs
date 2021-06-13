@@ -67,6 +67,7 @@
             this.txtPassward.Name = "txtPassward";
             this.txtPassward.Size = new System.Drawing.Size(254, 25);
             this.txtPassward.TabIndex = 1;
+            this.txtPassward.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPassward_KeyPress);
             this.txtPassward.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtPassward_KeyUp);
             // 
             // btnLogin

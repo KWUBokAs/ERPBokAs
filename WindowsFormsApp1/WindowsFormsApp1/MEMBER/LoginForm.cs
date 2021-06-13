@@ -20,8 +20,8 @@ namespace WindowsFormsApp1.MEMBER
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            if (txtId.Text.Length > 13) txtId.Text = "";//너무 길다
             CheckLogin();
-            
         }
         private void InitTest()
         {
@@ -106,6 +106,12 @@ namespace WindowsFormsApp1.MEMBER
             this.AcceptButton = btnLogin;
             txtPassward.PasswordChar = '*';
             txtId.Focus();
+        }
+
+        private void txtPassward_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == ' ')
+                e.KeyChar = Convert.ToChar(0);
         }
     }
 }

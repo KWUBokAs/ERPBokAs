@@ -17,16 +17,14 @@ namespace WindowsFormsApp1.MEMBER
     public partial class BadMemberSearch : UserControl
     {
         const int NUMBER_USERID = 0, NUMBER_BOOKID = 1, NUMBER_RENT = 2, NUMBER_RETURN = 3, NUMBER_LATEFEE = 4;
-        const int booknumLenth = 7;
+        const int booknumLenth = 6;
         private int latefee = 0;//총합
-        private string id;
         private Form3 parent;
         public BadMemberSearch(Form3 form)
         {
             parent = form;
             InitializeComponent();
             //parent.ListBtnBadSearch_Event += SetGrideView;
-            id = "";
         }
 
         private void BadMemberSearch_Load(object sender, EventArgs e)
@@ -83,7 +81,7 @@ namespace WindowsFormsApp1.MEMBER
             }
             catch
             {
-                MessageBox.Show("DB접속이 불안정합니다.");
+                MessageBox.Show("DB접속이 불안정합니다.", "DB 접속 오류");
             }
             
         }
@@ -102,6 +100,13 @@ namespace WindowsFormsApp1.MEMBER
             {
                 btnSearch_Click(sender, e);
             }
+        }
+
+        private void txtBookNum_TextChanged(object sender, EventArgs e)
+        {
+            string BOOK_ID = ((TextBox)sender).Text;
+            if (BOOK_ID.Length < booknumLenth) return;
+            SetGrideView();
         }
 
         /// <summary>
@@ -127,7 +132,7 @@ namespace WindowsFormsApp1.MEMBER
             }
             catch
             {
-                MessageBox.Show("DB접속이 불안정합니다.");
+                MessageBox.Show("DB접속이 불안정합니다.", "DB 접속 오류");
             }
             try
             {
@@ -138,18 +143,24 @@ namespace WindowsFormsApp1.MEMBER
                                             "USER_ID = @USER_ID");
                 updateSQL.AddParam("USER_ID", id);
                 updateSQL.Go();
-                MessageBox.Show(id + "(님)은 일반회원 입니다.");
+                MessageBox.Show(id + "(님)은 일반회원 입니다.", "연체 도서 반납");
                 txtId.Text = "";
             }
             catch
             {
-                MessageBox.Show("DB접속이 불안정합니다.");
+                MessageBox.Show("DB접속이 불안정합니다.", "DB 접속 오류");
             }
         }
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            if (txtBookNum.Text.Length >= booknumLenth) txtBookNum.Text = txtBookNum.Text.Substring(0, booknumLenth - 1);
-            if (txtId.Text.Length<4 && txtBookNum.Text.Length < booknumLenth-1)//아무것도 입력하지 않았을때
+            if (txtBookNum.Text.Length > booknumLenth) txtBookNum.Text = txtBookNum.Text.Substring(0, booknumLenth);
+            if (txtId.Text.Length > 13)//너무 길면 막음 / 인젝션 위험
+            {
+                txtId.Text = "";
+                txtBookNum.Focus();
+                return;
+            }
+            if (txtId.Text.Length<4 && txtBookNum.Text.Length < booknumLenth)//아무것도 입력하지 않았을때
             {
                 txtBookNum.Focus();
                 return;
@@ -161,7 +172,7 @@ namespace WindowsFormsApp1.MEMBER
         {
             if (dgvBadTable == null || dgvBadTable.Rows == null || dgvBadTable.Rows.Count == 0)//선택할 것이 없을 때
             {
-                MessageBox.Show("항목을 선택한 후 진행해 주세요.");
+                MessageBox.Show("항목을 선택한 후 진행해 주세요.", "연체 도서 반납");
                 return;
             }
             DataGridViewRow row = null;
@@ -195,7 +206,7 @@ namespace WindowsFormsApp1.MEMBER
             }
             catch
             {
-                MessageBox.Show("DB접속이 불안정합니다.");
+                MessageBox.Show("DB접속이 불안정합니다.", "DB 접속 오류");
                 return;
             }
             SetGrideView();
@@ -203,7 +214,7 @@ namespace WindowsFormsApp1.MEMBER
 
         private void txtBookNum_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (txtBookNum.Text.Length < booknumLenth - 1)
+            if (txtBookNum.Text.Length < booknumLenth)
             {
                 if (!(char.IsDigit(e.KeyChar) || e.KeyChar == Convert.ToChar(Keys.Back)))
                 {

@@ -13,7 +13,8 @@ using Newtonsoft.Json.Schema;
 using System.Windows.Forms;
 using System.Threading;
 using System.IO;
-
+using System.Drawing;
+using System.Drawing.Imaging;
 namespace WindowsFormsApp1.BACK {
     class ERPSQLException : Exception {
         public ERPSQLException() { }
@@ -68,7 +69,7 @@ namespace WindowsFormsApp1.BACK {
         /// Use In Query #param#
         /// </summary>
         protected Dictionary<String, String> param;
-        private JArray jArray;
+        protected JArray jArray;
         
         public string query { get; protected set; }
 
@@ -78,8 +79,8 @@ namespace WindowsFormsApp1.BACK {
 
         public DataTable resultTable;
         public Form loadingForm;
-        SqlCon data = new SqlCon();
-        public bool isDoneQuery { get; private set; }
+        protected SqlCon data = new SqlCon();
+        public bool isDoneQuery { get; protected set; }
         public SQLObject() {
             param = new Dictionary<string, string>();
             jArray = new JArray();
@@ -188,12 +189,66 @@ namespace WindowsFormsApp1.BACK {
             if (param.Count <= 0)
                 return;
             foreach(KeyValuePair<string,string> pair in param) {
-                query = query.Replace("#" + pair.Key + "#", "'"+pair.Value+"'");
-                query = query.Replace("@" + pair.Key, "'" + pair.Value + "'");
+                query = query.Replace("#" + pair.Key + "#", "'"+pair.Value.Replace("'","\'")+"'");
+                query = query.Replace("@" + pair.Key, "'" + pair.Value.Replace("'", "\'") + "'");
             }
         }
         public void Dispose() {
             //강제 소멸
+        }
+    }
+    /// <summary>
+    /// 이미지는 쿼리당 하나!
+    /// </summary>
+    class IMGSQLObject : SQLObject {
+        public Image image { get; private set; }
+        /// <summary>
+        /// Go 대신 GoImage 함수를 사용해주시길 바랍니다.
+        /// GoImage 함수는 Image를 리턴시킵니다.
+        /// </summary>
+        /// <returns>쿼리 후 가져온 이미지 리턴</returns>
+        public Image GoImage() {
+            ReplaceParam();
+            if (String.IsNullOrEmpty(query))
+                return null;
+            StopFormAndModal();
+            using (MySqlConnection con = new MySqlConnection(data.ToString())) {
+                try {
+                    resultTable.Clear();
+                    con.Open();
+                    Console.WriteLine("QUERY: " + query);
+                    MySqlCommand cmd = new MySqlCommand(query, con);
+                    MySqlDataReader table = cmd.ExecuteReader();
+                    Console.WriteLine("Read Complete");
+
+                    Byte[] byteBlobImage = new Byte[0];
+                    try { 
+                        byteBlobImage = (Byte[])(table.GetValue(0));
+                        MemoryStream stmBLOBData = new MemoryStream(byteBlobImage);
+                        image = Image.FromStream(stmBLOBData);
+                    }
+                    catch(Exception e) {
+                        Console.WriteLine("Fail Error: " + e.Message);
+                        throw new ERPSQLException("Image Query Error");
+                    }
+
+                    table.Close();
+                }
+                catch (Exception e) {
+                    Console.WriteLine("Fail Error: " + e.Message);
+                    image = null;
+                    throw new ERPSQLException("Query Error");
+                }
+                finally {
+                    ModalEnd();
+                }
+            }
+            return image;
+        }
+        //Go 대신 GoImage 사용 권장
+        [Obsolete("더 이상 사용하지 않습니다. GoImage 함수를 대신 사용해주시길 바랍니다.",true)]
+        public override void Go() {
+            return;
         }
     }
 }

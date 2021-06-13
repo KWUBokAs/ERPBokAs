@@ -42,8 +42,7 @@ namespace WindowsFormsApp1.MEMBER
         private void ChangeUserData_Event(object sender, EventArgs e)
         {
             BaseMember member = BaseMember.GetInstance();
-            if (member.RentBookCount == rentNum) return;
-            else if (userid == member.ID) return;
+            if (userid == member.ID && member.RentBookCount == rentNum) return;//user이름이 변경되지 않고, 책을 개수도 변하지 않은 경우
             userid = member.ID;
             SetDataGrideView();
         }
@@ -114,7 +113,7 @@ namespace WindowsFormsApp1.MEMBER
             if(overdueNum > 0)
             {
                 MessageBox.Show("대출연장이 불가능합니다.(사유:연체)\n" +
-                        "사서에게 문의해주십시오.");
+                        "사서에게 문의해주십시오.", "도서 연장");
                 return;
             }
             DataGridViewRow row = null;
@@ -139,13 +138,13 @@ namespace WindowsFormsApp1.MEMBER
                     MessageBox.Show("대출연장이 불가능합니다.\n" +
                         "아래 사항을 확인하시기 바랍니다.\n" +
                         "1.연장횟수 초과 "+ options.EC +"회\n" +
-                        "2.DB 접속실패");
+                        "2.DB 접속실패", "도서 연장");
                 }
             }
             else
             {
                 MessageBox.Show("대출연장이 불가능합니다.\n" +
-                                "사유 : 너무 이른기간 연장시도("+ expendDate + "일 이전)");
+                                "사유 : 너무 이른기간 연장시도("+ expendDate + "일 이전)", "도서 연장");
             }
         }
         /// <summary>
@@ -184,7 +183,7 @@ namespace WindowsFormsApp1.MEMBER
 
                 if (jarray.Count == 0)
                 {
-                    MessageBox.Show("연체되었습니다.\n사서에게 문의해주세요.");
+                    MessageBox.Show("연체되었습니다.\n사서에게 문의해주세요.", "도서 연장");
                     return false;
                 }
 
@@ -232,10 +231,11 @@ namespace WindowsFormsApp1.MEMBER
                 insertSQL.AddParam("OVERDUE_YN", "0");
                 insertSQL.AddParam("RENEW_CNT", rent_cnt.ToString());
                 insertSQL.Go();
+                MessageBox.Show(BOOK_ID + "의 반납기간이 연장 되었습니다.", "도서 연장");
             }
             catch
             {
-                MessageBox.Show("DB접속 오류");
+                MessageBox.Show("DB접속 오류", "DB 접속 오류");
                 return false;
             }
             return true;
