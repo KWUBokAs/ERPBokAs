@@ -46,7 +46,7 @@ namespace WindowsFormsApp1
                 Sseat seat = new Sseat(RoomNum,i);
                 panel2.Controls.Add(seat);
                 seat.Location = seat.GetPoint();
-                
+                seat.FormRepair += ReroadForm;
                 OR1.Add(seat);
             }
              RoomName = "OR00";
@@ -59,6 +59,11 @@ namespace WindowsFormsApp1
             btnRN.Text = "제" + RoomNum.ToString() + "열람실";
             panel2.Controls.Clear();
             OpenRoom_Load(sender,e);
+        }
+        public void ReroadForm(object sender,EventArgs e)
+        {
+            panel2.Controls.Clear();
+            OpenRoom_Load(sender, e);
         }
     }
 }
