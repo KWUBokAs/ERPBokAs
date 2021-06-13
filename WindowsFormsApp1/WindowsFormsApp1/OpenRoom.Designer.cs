@@ -30,9 +30,9 @@ namespace WindowsFormsApp1
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.btnRN = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -51,17 +51,8 @@ namespace WindowsFormsApp1
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 475);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(986, 31);
+            this.panel1.Size = new System.Drawing.Size(965, 31);
             this.panel1.TabIndex = 0;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Location = new System.Drawing.Point(0, -6);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(983, 478);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 4;
-            this.pictureBox2.TabStop = false;
             // 
             // label2
             // 
@@ -81,8 +72,18 @@ namespace WindowsFormsApp1
             this.label1.TabIndex = 0;
             this.label1.Text = "열람실 이용 정보 :";
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Location = new System.Drawing.Point(0, -6);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(983, 478);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 4;
+            this.pictureBox2.TabStop = false;
+            // 
             // btnRN
             // 
+            this.btnRN.Font = new System.Drawing.Font("NanumSquare", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.btnRN.Location = new System.Drawing.Point(-1, -3);
             this.btnRN.Name = "btnRN";
             this.btnRN.Size = new System.Drawing.Size(125, 56);
@@ -110,7 +111,7 @@ namespace WindowsFormsApp1
             this.panel2.Controls.Add(this.pictureBox2);
             this.panel2.Location = new System.Drawing.Point(0, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(983, 472);
+            this.panel2.Size = new System.Drawing.Size(962, 476);
             this.panel2.TabIndex = 3;
             // 
             // OpenRoom
@@ -124,7 +125,7 @@ namespace WindowsFormsApp1
             this.Controls.Add(this.panel2);
             this.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.Name = "OpenRoom";
-            this.Size = new System.Drawing.Size(986, 502);
+            this.Size = new System.Drawing.Size(965, 502);
             this.Load += new System.EventHandler(this.OpenRoom_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

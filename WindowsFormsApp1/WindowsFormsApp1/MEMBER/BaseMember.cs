@@ -52,6 +52,14 @@ namespace WindowsFormsApp1.MEMBER
             this.badmember = 'n';
             this.loginTime = "";
         }
+        public static BaseMember GetInstance()
+        {
+            if (baseMember == null)
+            {
+                baseMember = new BaseMember();
+            }
+            return baseMember;
+        }
         public void Logout()
         {
             if (ID == "Anonymous") return;
@@ -70,10 +78,9 @@ namespace WindowsFormsApp1.MEMBER
                 updateSQL.AddParam("SUMMARY", summary);
                 updateSQL.Go();
             }
-            catch(Exception ex)
+            catch
             {
-                Console.WriteLine("오류 발생 : ID는 "+ID+" 이다. 무엇이 문제 인가?");
-                MessageBox.Show(ex.Message + " : 인터넷이 불안정합니다.", "DB 접속 오류");
+                MessageBox.Show("인터넷이 불안정합니다.", "DB 접속 오류");
             }
             ID = "Anonymous";
             Name = "Anonymous";
@@ -118,14 +125,7 @@ namespace WindowsFormsApp1.MEMBER
                 return false;
             }
         }
-        public static BaseMember GetInstance()
-        {
-            if(baseMember == null)
-            {
-                baseMember = new BaseMember();
-            }
-            return baseMember;
-        }
+        
         /// <summary>
         /// 로그인을 시도해서 시도한 user가 존재하는지 확인 할수 있다.
         /// 실제로 회원 id-pw가 존재하면 ReadData를 할 수 있는 상태로 세팅까지 해준다

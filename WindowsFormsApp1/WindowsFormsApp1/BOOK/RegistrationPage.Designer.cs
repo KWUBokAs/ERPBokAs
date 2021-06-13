@@ -51,7 +51,6 @@ namespace WindowsFormsApp1.BOOK
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -141,7 +140,6 @@ namespace WindowsFormsApp1.BOOK
             this.groupBox2.Controls.Add(this.label11);
             this.groupBox2.Controls.Add(this.label10);
             this.groupBox2.Controls.Add(this.label9);
-            this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.label5);
@@ -300,15 +298,6 @@ namespace WindowsFormsApp1.BOOK
             this.label9.TabIndex = 9;
             this.label9.Text = "자료유형";
             // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(24, 97);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(57, 12);
-            this.label8.TabIndex = 8;
-            this.label8.Text = "책 이미지";
-            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -367,7 +356,6 @@ namespace WindowsFormsApp1.BOOK
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;

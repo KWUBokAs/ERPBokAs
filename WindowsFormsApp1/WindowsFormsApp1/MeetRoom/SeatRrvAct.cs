@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json.Linq;
 using System.Security.Cryptography;
+using System.Windows.Forms;
 
 namespace WindowsFormsApp1.MeetRoom
 {
@@ -20,9 +21,11 @@ namespace WindowsFormsApp1.MeetRoom
             findID.setQuery("SELECT USER_ID " + 
                             "FROM OPENROOM_RESERV " +
                             "WHERE ROOM_ID=@ROOM_ID AND " +
-                            "SEAT_ID=@SEAT_ID ");
+                            "SEAT_ID=@SEAT_ID AND " +
+                            "MAGAM_YN=@MAGAM_YN");
             findID.AddParam("ROOM_ID", RI);
             findID.AddParam("SEAT_ID", SI);
+            findID.AddParam("MAGAM_YN","0");
             findID.Go();
 
             JArray Namearray = findID.ToJArray();
@@ -48,9 +51,11 @@ namespace WindowsFormsApp1.MeetRoom
             selectSQL.setQuery("SELECT DEAD_TIME " +
                             "FROM OPENROOM_RESERV " +
                             "WHERE ROOM_ID=@ROOM_ID AND " +
-                            "SEAT_ID=@SEAT_ID ");
+                            "SEAT_ID=@SEAT_ID AND " +
+                            "MAGAM_YN=@MAGAM_YN");
             selectSQL.AddParam("ROOM_ID", RI);
             selectSQL.AddParam("SEAT_ID", SI);
+            selectSQL.AddParam("MAGAM_YN", "0");
             selectSQL.Go();
 
             JArray jarray = selectSQL.ToJArray();
@@ -64,9 +69,11 @@ namespace WindowsFormsApp1.MeetRoom
             selectSQL.setQuery("SELECT EXTEND " +
                             "FROM OPENROOM_RESERV " +
                             "WHERE ROOM_ID=@ROOM_ID AND " +
-                            "SEAT_ID=@SEAT_ID ");
+                            "SEAT_ID=@SEAT_ID AND " +
+                            "MAGAM_YN=@MAGAM_YN");
             selectSQL.AddParam("ROOM_ID", RI);
             selectSQL.AddParam("SEAT_ID", SI);
+            selectSQL.AddParam("MAGAM_YN", "0");
             selectSQL.Go();
 
             JArray jarray = selectSQL.ToJArray();
@@ -80,9 +87,11 @@ namespace WindowsFormsApp1.MeetRoom
             selectSQL.setQuery("SELECT USER_ID " +
                             "FROM OPENROOM_RESERV " +
                             "WHERE ROOM_ID=@ROOM_ID AND " +
-                            "SEAT_ID=@SEAT_ID ");
+                            "SEAT_ID=@SEAT_ID AND " +
+                            "MAGAM_YN=@MAGAM_YN");
             selectSQL.AddParam("ROOM_ID", RI);
             selectSQL.AddParam("SEAT_ID", SI);
+            selectSQL.AddParam("MAGAM_YN", "0");
             selectSQL.Go();
 
             JArray jarray = selectSQL.ToJArray();
@@ -93,26 +102,42 @@ namespace WindowsFormsApp1.MeetRoom
         public void UpExtend(string RI, string SI)
         {
             SQLObject selectSQL = new BACK.SQLObject();
-            selectSQL.setQuery("SELECT EXTEND " +
+            selectSQL.setQuery("SELECT EXTEND, DEAD_TIME " +
                             "FROM OPENROOM_RESERV " +
                             "WHERE ROOM_ID=@ROOM_ID AND " +
-                            "SEAT_ID=@SEAT_ID ");
+                            "SEAT_ID=@SEAT_ID AND " +
+                            "MAGAM_YN=@MAGAM_YN");
             selectSQL.AddParam("ROOM_ID", RI);
             selectSQL.AddParam("SEAT_ID", SI);
+            selectSQL.AddParam("MAGAM_YN", "0");
             selectSQL.Go();
+            //DateTime.Now.AddHours(1);
+            //JArray jarray = selectSQL.ToJArray();
+            //int extend = jarray[0].Value<int>("EXTEND");
 
-            JArray jarray = selectSQL.ToJArray();
-            int extend = jarray[0].Value<int>("EXTEND");
+            DataTable DT = selectSQL.ToDataTable();
 
-            SQLObject updateSQL = new BACK.SQLObject();
-            updateSQL.setQuery("UPDATE OPENROOM_RESERV " +
-                                "SET EXTEND=@EXTEND " +
-                                "WHERE ROOM_ID=@ROOM_ID " +
-                                "AND SEAT_ID=@SEAT_ID");
-            updateSQL.AddParam("EXTEND", (extend + 1).ToString());
-            updateSQL.AddParam("ROOM_ID", RI);
-            updateSQL.AddParam("SEAT_ID", SI);
-            updateSQL.Go();
+            int extend = Int32.Parse(DT.Rows[0]["EXTEND"].ToString());
+            string Deadtime = DT.Rows[0]["DEAD_TIME"].ToString();
+
+            if (extend <= 3)
+            {
+                SQLObject updateSQL = new BACK.SQLObject();
+                updateSQL.setQuery("UPDATE OPENROOM_RESERV " +
+                                    "SET EXTEND=@EXTEND, " +
+                                    "DEAD_TIME=@DEAD_TIME " +
+                                    "WHERE ROOM_ID=@ROOM_ID " +
+                                    "AND SEAT_ID=@SEAT_ID " +
+                                    "AND MAGAM_YN=@MAGAM_YN");
+                updateSQL.AddParam("EXTEND", (extend + 1).ToString());
+                updateSQL.AddParam("DEAD_TIME",DateTime.Parse(Deadtime).AddHours(1).ToString("HH:mm:ss"));
+                updateSQL.AddParam("ROOM_ID", RI);
+                updateSQL.AddParam("SEAT_ID", SI);
+                updateSQL.AddParam("MAGAM_YN","0");
+                updateSQL.Go();
+            }
+            else
+                MessageBox.Show("연장은 최대 4회까지만 가능합니다.");
         }
         public bool ReadSeatReserveUsed(string UI)
         {   // 자리 이용여부 읽어오기 RI = ROOM_ID / SI = SEAT_ID
