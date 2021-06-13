@@ -55,7 +55,7 @@ namespace WindowsFormsApp1
             if (panel3.Controls.Contains(MR))
                 panel3.Controls.Remove(MR);
             int index = listBox1.SelectedIndex;
-            //if (index >= 0 && index < listBox1.Items.Count) return;
+            if (index == -1){ return; }
             string selectItem = listBox1.Items[index].ToString();
             if (selectItem.Equals("■ 검색"))
             {
@@ -80,7 +80,7 @@ namespace WindowsFormsApp1
                 {
                     this.panel3.Controls.Find("RegistrationPage", false)[0].Visible = true;
                 }
-                else this.panel3.Controls.Add(new RegistrationPage());
+                else this.panel3.Controls.Add(new RegistrationPage(this.panel3));
                 this.Size = new Size(848, 580);
             }
             else if (selectItem.Equals("■ 바코드 반납"))
@@ -217,7 +217,7 @@ namespace WindowsFormsApp1
                 {
                     SetlbMemberItem();
                     SetBookMenuItem();
-                    //DeletePanel();
+                    DeletePanel();
                     HeadLabelSync();
                 }
             }
@@ -329,6 +329,10 @@ namespace WindowsFormsApp1
                 listBox1.Items.Add("");
                 listBox1.Items.Add("■ 바코드 반납");
             }
+            for(int i=listBox1.Items.Count; i<3; i++)
+            {
+                listBox1.Items.Add("");
+            }
         }
         /// <summary>
         /// 회원상태에 따라 lbMember에 item을 만들어줌
@@ -438,13 +442,13 @@ namespace WindowsFormsApp1
         private void Form3_FormClosing(object sender, FormClosingEventArgs e)
         {
             BaseMember member = BaseMember.GetInstance();
-            member.Logout();
+            Logout();
         }
 
         private void Form3_FormClosed(object sender, FormClosedEventArgs e)
         {
             BaseMember member = BaseMember.GetInstance();
-            member.Logout();
+            Logout();
         }
         private void HeadLabelSync()
         {

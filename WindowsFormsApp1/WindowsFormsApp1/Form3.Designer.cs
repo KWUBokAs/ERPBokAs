@@ -66,24 +66,26 @@ namespace WindowsFormsApp1
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel3.Controls.Add(this.lbMember);
             this.panel3.Controls.Add(this.listBox1);
-            this.panel3.Location = new System.Drawing.Point(153, 30);
+            this.panel3.Location = new System.Drawing.Point(134, 24);
+            this.panel3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(797, 508);
+            this.panel3.Size = new System.Drawing.Size(698, 407);
             this.panel3.TabIndex = 4;
             // 
             // lbMember
             // 
             this.lbMember.FormattingEnabled = true;
-            this.lbMember.ItemHeight = 15;
+            this.lbMember.ItemHeight = 12;
             this.lbMember.Items.AddRange(new object[] {
             "■ 로그인",
             "",
             "■ 이용현황",
             "",
             "■ 정보수정"});
-            this.lbMember.Location = new System.Drawing.Point(-1, 378);
+            this.lbMember.Location = new System.Drawing.Point(-1, 302);
+            this.lbMember.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lbMember.Name = "lbMember";
-            this.lbMember.Size = new System.Drawing.Size(148, 109);
+            this.lbMember.Size = new System.Drawing.Size(130, 88);
             this.lbMember.TabIndex = 1;
             this.lbMember.Visible = false;
             this.lbMember.Click += new System.EventHandler(this.lbMember_Click);
@@ -92,14 +94,13 @@ namespace WindowsFormsApp1
             // 
             this.listBox1.BackColor = System.Drawing.SystemColors.Window;
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 15;
+            this.listBox1.ItemHeight = 12;
             this.listBox1.Items.AddRange(new object[] {
-            "■ 검색",
-            "",
-            "■ 등록"});
+            "■ 검색"});
             this.listBox1.Location = new System.Drawing.Point(-1, -1);
+            this.listBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(148, 49);
+            this.listBox1.Size = new System.Drawing.Size(130, 64);
             this.listBox1.TabIndex = 0;
             this.listBox1.Visible = false;
             this.listBox1.Click += new System.EventHandler(this.listBox1_Click);
@@ -113,38 +114,39 @@ namespace WindowsFormsApp1
             this.panel1.Controls.Add(this.labTime);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(950, 30);
+            this.panel1.Size = new System.Drawing.Size(831, 24);
             this.panel1.TabIndex = 5;
             // 
             // labPerm
             // 
             this.labPerm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labPerm.AutoSize = true;
-            this.labPerm.Font = new System.Drawing.Font("Gulim", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.labPerm.Location = new System.Drawing.Point(710, 5);
+            this.labPerm.Font = new System.Drawing.Font("굴림", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.labPerm.Location = new System.Drawing.Point(620, 4);
             this.labPerm.Name = "labPerm";
-            this.labPerm.Size = new System.Drawing.Size(61, 19);
+            this.labPerm.Size = new System.Drawing.Size(51, 15);
             this.labPerm.TabIndex = 2;
             this.labPerm.Text = "label3";
             // 
             // labLoginState
             // 
             this.labLoginState.AutoSize = true;
-            this.labLoginState.Font = new System.Drawing.Font("Gulim", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.labLoginState.Location = new System.Drawing.Point(310, 6);
+            this.labLoginState.Font = new System.Drawing.Font("굴림", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.labLoginState.Location = new System.Drawing.Point(271, 5);
             this.labLoginState.Name = "labLoginState";
-            this.labLoginState.Size = new System.Drawing.Size(61, 19);
+            this.labLoginState.Size = new System.Drawing.Size(51, 15);
             this.labLoginState.TabIndex = 1;
             this.labLoginState.Text = "label2";
             // 
             // labTime
             // 
             this.labTime.AutoSize = true;
-            this.labTime.Font = new System.Drawing.Font("Dotum", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.labTime.Location = new System.Drawing.Point(11, 5);
+            this.labTime.Font = new System.Drawing.Font("돋움", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.labTime.Location = new System.Drawing.Point(10, 4);
             this.labTime.Name = "labTime";
-            this.labTime.Size = new System.Drawing.Size(63, 20);
+            this.labTime.Size = new System.Drawing.Size(55, 16);
             this.labTime.TabIndex = 0;
             this.labTime.Text = "label1";
             // 
@@ -161,9 +163,10 @@ namespace WindowsFormsApp1
             this.panel2.Controls.Add(this.pictureBox3);
             this.panel2.Controls.Add(this.pictureBox2);
             this.panel2.Controls.Add(this.pictureBox1);
-            this.panel2.Location = new System.Drawing.Point(0, 30);
+            this.panel2.Location = new System.Drawing.Point(0, 24);
+            this.panel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(158, 509);
+            this.panel2.Size = new System.Drawing.Size(138, 408);
             this.panel2.TabIndex = 6;
             // 
             // panel4
@@ -171,19 +174,20 @@ namespace WindowsFormsApp1
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel4.Controls.Add(this.label2);
             this.panel4.Controls.Add(this.label1);
-            this.panel4.Location = new System.Drawing.Point(0, 378);
+            this.panel4.Location = new System.Drawing.Point(0, 302);
+            this.panel4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(153, 127);
+            this.panel4.Size = new System.Drawing.Size(134, 102);
             this.panel4.TabIndex = 5;
             this.panel4.Click += new System.EventHandler(this.MemberPanel_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("NanumSquare", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label2.Location = new System.Drawing.Point(34, 68);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label2.Location = new System.Drawing.Point(30, 54);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(90, 31);
+            this.label2.Size = new System.Drawing.Size(67, 26);
             this.label2.TabIndex = 0;
             this.label2.Text = "정   보";
             this.label2.Click += new System.EventHandler(this.MemberPanel_Click);
@@ -191,10 +195,10 @@ namespace WindowsFormsApp1
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("NanumSquare", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label1.Location = new System.Drawing.Point(34, 25);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label1.Location = new System.Drawing.Point(30, 20);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(90, 31);
+            this.label1.Size = new System.Drawing.Size(67, 26);
             this.label1.TabIndex = 0;
             this.label1.Text = "회   원";
             this.label1.Click += new System.EventHandler(this.MemberPanel_Click);
@@ -203,10 +207,10 @@ namespace WindowsFormsApp1
             // 
             this.label6.AutoSize = true;
             this.label6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label6.Font = new System.Drawing.Font("MoeumT R", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label6.Location = new System.Drawing.Point(116, 357);
+            this.label6.Font = new System.Drawing.Font("휴먼모음T", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label6.Location = new System.Drawing.Point(102, 286);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(41, 21);
+            this.label6.Size = new System.Drawing.Size(34, 18);
             this.label6.TabIndex = 4;
             this.label6.Text = "회의";
             // 
@@ -214,10 +218,10 @@ namespace WindowsFormsApp1
             // 
             this.label5.AutoSize = true;
             this.label5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label5.Font = new System.Drawing.Font("MoeumT R", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label5.Location = new System.Drawing.Point(116, 231);
+            this.label5.Font = new System.Drawing.Font("휴먼모음T", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label5.Location = new System.Drawing.Point(102, 185);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(41, 21);
+            this.label5.Size = new System.Drawing.Size(34, 18);
             this.label5.TabIndex = 3;
             this.label5.Text = "열람";
             // 
@@ -225,10 +229,10 @@ namespace WindowsFormsApp1
             // 
             this.label4.AutoSize = true;
             this.label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label4.Font = new System.Drawing.Font("MoeumT R", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label4.Location = new System.Drawing.Point(116, 105);
+            this.label4.Font = new System.Drawing.Font("휴먼모음T", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label4.Location = new System.Drawing.Point(102, 84);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(41, 21);
+            this.label4.Size = new System.Drawing.Size(34, 18);
             this.label4.TabIndex = 1;
             this.label4.Text = "도서";
             // 
@@ -237,9 +241,10 @@ namespace WindowsFormsApp1
             this.pictureBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox3.Dock = System.Windows.Forms.DockStyle.Top;
             this.pictureBox3.Image = global::WindowsFormsApp1.Properties.Resources.회의실;
-            this.pictureBox3.Location = new System.Drawing.Point(0, 252);
+            this.pictureBox3.Location = new System.Drawing.Point(0, 202);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(156, 126);
+            this.pictureBox3.Size = new System.Drawing.Size(136, 101);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox3.TabIndex = 2;
             this.pictureBox3.TabStop = false;
@@ -252,9 +257,10 @@ namespace WindowsFormsApp1
             this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Top;
             this.pictureBox2.Image = global::WindowsFormsApp1.Properties.Resources.열람실;
-            this.pictureBox2.Location = new System.Drawing.Point(0, 126);
+            this.pictureBox2.Location = new System.Drawing.Point(0, 101);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(156, 126);
+            this.pictureBox2.Size = new System.Drawing.Size(136, 101);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 1;
             this.pictureBox2.TabStop = false;
@@ -270,8 +276,9 @@ namespace WindowsFormsApp1
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.pictureBox1.Image = global::WindowsFormsApp1.Properties.Resources.책;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(156, 126);
+            this.pictureBox1.Size = new System.Drawing.Size(136, 101);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -286,13 +293,14 @@ namespace WindowsFormsApp1
             // 
             // Form3
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
-            this.ClientSize = new System.Drawing.Size(950, 538);
+            this.ClientSize = new System.Drawing.Size(831, 430);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form3";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "도서관 ERP";

@@ -178,6 +178,12 @@ namespace WindowsFormsApp1.BACK {
         public void AddParam(string key, string value) {
             param.Add(key, value);
         }
+        public void AddImageParam(string key, Image image) {
+            FileStream fs = new FileStream(image.Tag.ToString(), FileMode.Open, FileAccess.Read);
+            byte[] bImage = new byte[fs.Length];
+            fs.Read(bImage, 0, (int)fs.Length);
+            param.Add(key, Encoding.Default.GetString(bImage));
+        }
         public void setQuery(string value) {
             if (String.IsNullOrEmpty(value))
                 return;
@@ -189,8 +195,8 @@ namespace WindowsFormsApp1.BACK {
             if (param.Count <= 0)
                 return;
             foreach(KeyValuePair<string,string> pair in param) {
-                query = query.Replace("#" + pair.Key + "#", "'"+pair.Value.Replace("'","\'")+"'");
-                query = query.Replace("@" + pair.Key, "'" + pair.Value.Replace("'", "\'") + "'");
+                query = query.Replace("#" + pair.Key + "#", "'"+pair.Value.Replace("'","\\'")+"'");
+                query = query.Replace("@" + pair.Key, "'" + pair.Value.Replace("'", "\\'") + "'");
             }
         }
         public void Dispose() {
