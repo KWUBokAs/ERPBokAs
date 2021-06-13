@@ -79,7 +79,7 @@ namespace WindowsFormsApp1
                 {
                     this.panel3.Controls.Find("RegistrationPage", false)[0].Visible = true;
                 }
-                else this.panel3.Controls.Add(new RegistrationPage());
+                else this.panel3.Controls.Add(new RegistrationPage(this.panel3));
                 this.Size = new Size(848, 580);
             }
             else if (selectItem.Equals("■ 바코드 반납"))
@@ -212,7 +212,7 @@ namespace WindowsFormsApp1
                 {
                     SetlbMemberItem();
                     SetBookMenuItem();
-                    //DeletePanel();
+                    DeletePanel();
                     HeadLabelSync();
                 }
             }
@@ -437,13 +437,13 @@ namespace WindowsFormsApp1
         private void Form3_FormClosing(object sender, FormClosingEventArgs e)
         {
             BaseMember member = BaseMember.GetInstance();
-            member.Logout();
+            Logout();
         }
 
         private void Form3_FormClosed(object sender, FormClosedEventArgs e)
         {
             BaseMember member = BaseMember.GetInstance();
-            member.Logout();
+            Logout();
         }
         private void HeadLabelSync()
         {
