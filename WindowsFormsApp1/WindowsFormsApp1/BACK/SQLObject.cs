@@ -120,8 +120,18 @@ namespace WindowsFormsApp1.BACK {
         }
         public static void Load() {
             string dec;
+            string connection = Properties.Resources.connection;
+            connection = connection.Replace("connection=", "");
+            string resorce_data;
+            if (connection.Equals("kw")) {
+                resorce_data = Encoding.UTF8.GetString(Properties.Resources.kw);
+            } else if (connection.Equals("kh")) {
+                resorce_data = Encoding.UTF8.GetString(Properties.Resources.kh);
+            } else {
+                resorce_data = Encoding.UTF8.GetString(Properties.Resources.kw);
+            }
             
-            string resorce_data = Encoding.UTF8.GetString(Properties.Resources.kh);
+            
             //MessageBox.Show(resorce_data);
             
             
