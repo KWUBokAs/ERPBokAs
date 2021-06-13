@@ -80,9 +80,11 @@ namespace WindowsFormsApp1.MeetRoom
             selectSQL.setQuery("SELECT USER_ID " +
                             "FROM OPENROOM_RESERV " +
                             "WHERE ROOM_ID=@ROOM_ID AND " +
-                            "SEAT_ID=@SEAT_ID ");
+                            "SEAT_ID=@SEAT_ID AND " +
+                            "MAGAM_YN=@MAGAM_YN");
             selectSQL.AddParam("ROOM_ID", RI);
             selectSQL.AddParam("SEAT_ID", SI);
+            selectSQL.AddParam("MAGAM_YN", "0");
             selectSQL.Go();
 
             JArray jarray = selectSQL.ToJArray();

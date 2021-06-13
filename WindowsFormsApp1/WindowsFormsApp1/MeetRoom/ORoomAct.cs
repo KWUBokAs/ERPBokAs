@@ -35,8 +35,10 @@ namespace WindowsFormsApp1.MeetRoom
             SQLObject selectSQL = new BACK.SQLObject();
             selectSQL.setQuery("SELECT DEAD_TIME AS DT " +
                                "FROM OPENROOM_RESERV " +
-                               "WHERE USER_ID=@USER_ID");
+                               "WHERE USER_ID=@USER_ID " +
+                               "AND MAGAM_YN=@MAGAM_YN");
             selectSQL.AddParam("USER_ID", UI);
+            selectSQL.AddParam("MAGAM_YN", "0");
             selectSQL.Go();
             try { 
             JArray jarray = selectSQL.ToJArray();
