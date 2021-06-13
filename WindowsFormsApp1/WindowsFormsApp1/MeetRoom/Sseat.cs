@@ -20,11 +20,11 @@ namespace WindowsFormsApp1.MeetRoom
         public bool used;
         public Point SeatPoint;
         public int RoomID;
-        public string UserID;
+        
 
         public EventHandler FormRepair;
 
-        BaseMember bm = BaseMember.GetInstance();
+       
         SeatAct Sa = new SeatAct();
 
         public Sseat(int RoomNum,int num)
@@ -35,7 +35,7 @@ namespace WindowsFormsApp1.MeetRoom
             SeatPoint = Sa.ReadSeatPoint("OR00" + RoomNum.ToString(), num.ToString());
             used = Sa.ReadSeatUsed("OR00"+ RoomNum.ToString(), num.ToString());
             
-            UserID = bm.ID;
+           
 
         }
 
@@ -70,10 +70,12 @@ namespace WindowsFormsApp1.MeetRoom
                 else
                 {
                     SeatReserve2 Sr = new SeatReserve2();
+                    BaseMember bm2 = BaseMember.GetInstance();
                     Sr.Seatnum = SeatNum;
                     Sr.Roomnum = RoomID;
-                    Sr.UID = UserID;
+                    Sr.UID = bm2.ID;
                     Sr.ExitClick += exitBtn_Event;
+                    Sr.Ban += exitBtn_Event;
                     Sr.Show();
                 }
             }
@@ -87,11 +89,13 @@ namespace WindowsFormsApp1.MeetRoom
         {   SeatRrvAct sr = new SeatRrvAct();
             if (Sa.ReadSeatUsed("OR00" + RoomID.ToString(), SeatNum.ToString()))
                 MessageBox.Show("이 좌석은 이미 사용중입니다.");
-            else { 
-            if (sr.ReadSeatReserveUsed(UserID)) { 
+            else {
+                BaseMember bm3 = BaseMember.GetInstance();
+                if (sr.ReadSeatReserveUsed(bm3.ID)) { 
             used = true;
+            BaseMember bm = BaseMember.GetInstance();
             Sa.UpdateSeat("OR00" + RoomID.ToString(), SeatNum.ToString(),used);
-            Sa.InsertSeatRsv("OR00" + RoomID.ToString(), SeatNum.ToString(),UserID);
+            Sa.InsertSeatRsv("OR00" + RoomID.ToString(), SeatNum.ToString(),bm.ID);
             pictureBox1.Image = imageList1.Images[0];
             }
             else
