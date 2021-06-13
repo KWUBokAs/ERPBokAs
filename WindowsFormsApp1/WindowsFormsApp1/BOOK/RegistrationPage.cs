@@ -66,7 +66,7 @@ namespace WindowsFormsApp1.BOOK
             list.Add(new StringPair("TYPE", this.cmbTypes.SelectedIndex.ToString()));   // int2
             list.Add(new StringPair("ORIGINNM", this.txtOriginnm.Text));    // text
             list.Add(new StringPair("SUMMARY", this.txtSummary.Text));  // text
-            list.Add(new StringPair("PUBLICATION_DATE", this.dtpPublishcationDate.Text + " :00:00:00"));  // date
+            list.Add(new StringPair("PUBLICATION_DATE", this.dtpPublishcationDate.Text + " 00:00:00"));  // date
             list.Add(new StringPair("PRICE", this.nudPrice.Value.ToString()));  // int11
             list.Add(new StringPair("INDEX_LIST", this.txtIndex.Text)); // text
 
