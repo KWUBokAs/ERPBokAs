@@ -212,7 +212,7 @@ namespace WindowsFormsApp1
                 {
                     SetlbMemberItem();
                     SetBookMenuItem();
-                    //DeletePanel();
+                    DeletePanel();
                     HeadLabelSync();
                 }
             }
