@@ -50,6 +50,17 @@ namespace WindowsFormsApp1.BOOK
             this.txtSummary.Text += jarray[0].Value<string>("SUMMARY").ToString();
             this.txtIndexList.Text += jarray[0].Value<string>("INDEX_LIST").ToString();
 
+            IMGSQLObject imgSQL = new BACK.IMGSQLObject();
+            imgSQL.setQuery("SELECT " +
+                                    "BOOK_IMG " +
+                              "FROM " +
+                                    "BOOKINFO " +
+                              "WHERE " +
+                                    "ISBN=@ISBN ");
+            imgSQL.AddParam("ISBN", ISBN);
+
+            imgSQL.GoImage2(this.picBookImg);
+
             RenewDataGridView();
 
             if (!member.IsLogin || member.IsBadMember)
@@ -187,7 +198,7 @@ namespace WindowsFormsApp1.BOOK
             if (RENTYN.Equals("1"))
                 updateSQL.AddParam("USER_ID", USER_ID);
             else
-                updateSQL.AddParam("USER_ID", null);
+                updateSQL.AddParam("USER_ID", "");
             updateSQL.Go();
         }
 
@@ -215,7 +226,8 @@ namespace WindowsFormsApp1.BOOK
         void ReturnBOOKRENT()
         {
             string BOOK_ID = this.dgvBooks.CurrentRow.Cells[1].Value.ToString();
-            string USER_ID = this.dgvBooks.CurrentRow.Cells[5].Value.ToString();
+            string USER_ID = this.dgvBooks.CurrentRow.Cells[4].Value.ToString();
+            Console.WriteLine(USER_ID);
             SQLObject insertSQL = new SQLObject();
             insertSQL.setQuery("UPDATE " +
                                     "BOOKRENTS " +
