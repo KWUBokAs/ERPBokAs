@@ -54,7 +54,7 @@ namespace WindowsFormsApp1
             if (panel3.Controls.Contains(MR))
                 panel3.Controls.Remove(MR);
             int index = listBox1.SelectedIndex;
-            //if (index >= 0 && index < listBox1.Items.Count) return;
+            if (index == -1){ return; }
             string selectItem = listBox1.Items[index].ToString();
             if (selectItem.Equals("■ 검색"))
             {
@@ -323,6 +323,10 @@ namespace WindowsFormsApp1
                 listBox1.Items.Add("■ 등록");
                 listBox1.Items.Add("");
                 listBox1.Items.Add("■ 바코드 반납");
+            }
+            for(int i=listBox1.Items.Count; i<3; i++)
+            {
+                listBox1.Items.Add("");
             }
         }
         /// <summary>
