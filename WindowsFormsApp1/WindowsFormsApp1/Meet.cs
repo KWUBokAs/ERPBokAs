@@ -102,7 +102,7 @@ namespace WindowsFormsApp1
                 MessageBox.Show("오류가 발견되었습니다!", "오류가 발생하였습니다.", MessageBoxButtons.OK);
             }
         }
-        private void LoadDateList() {
+        private void LoadDateList(string id) {
             SQLObject sqlObj = new SQLObject();
             sqlObj.setQuery("SELECT " +
                 "" +
