@@ -46,6 +46,7 @@ namespace WindowsFormsApp1.BOOK
             selectSQL.AddParam("ISBN", ISBN);
             selectSQL.Go();
             JArray jarray = selectSQL.ToJArray();
+            if (jarray.Count == 0) Close();
             this.txtSummary.Text += jarray[0].Value<string>("SUMMARY").ToString();
             this.txtIndexList.Text += jarray[0].Value<string>("INDEX_LIST").ToString();
 
