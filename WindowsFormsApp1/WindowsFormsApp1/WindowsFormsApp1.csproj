@@ -156,10 +156,10 @@
     <Compile Include="BOOK\EditBookInfoPage.Designer.cs">
       <DependentUpon>EditBookInfoPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Meet.cs">
+    <Compile Include="MeetRoom\Meet.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Meet.Designer.cs">
+    <Compile Include="MeetRoom\Meet.Designer.cs">
       <DependentUpon>Meet.cs</DependentUpon>
     </Compile>
     <Compile Include="MeetRoom\SeatRrvAct.cs" />
@@ -287,7 +287,7 @@
     <EmbeddedResource Include="BOOK\AddBookPage.resx">
       <DependentUpon>AddBookPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Meet.resx">
+    <EmbeddedResource Include="MeetRoom\Meet.resx">
       <DependentUpon>Meet.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MeetRoom\SeatReserve.resx">

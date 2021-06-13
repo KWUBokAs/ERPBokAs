@@ -9,14 +9,17 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFormsApp1.BACK;
 using System.Threading;
+using WindowsFormsApp1.MEMBER;
 
-namespace WindowsFormsApp1
+namespace WindowsFormsApp1.MeetRoom
 {
     public partial class Meet : UserControl
     {
-        
+        string id = "MR001";
+        string today;
         public Meet()
         {
+            today = DateTime.Now.Date.ToString();
             InitializeComponent();
         }
 
@@ -34,8 +37,8 @@ namespace WindowsFormsApp1
             this.dgvList.ColumnHeadersVisible = false;
             this.dgvList.RowTemplate.Height = 30;
             this.dgvList.Columns[1].Visible = false;
-            
 
+            this.dtp.Value = DateTime.Now.Date;
         }
 
         private void Meet_Load(object sender, EventArgs e) {
@@ -69,7 +72,7 @@ namespace WindowsFormsApp1
         private void dgvList_CellClick(object sender, DataGridViewCellEventArgs e) {
             try { 
                 Console.WriteLine("is Clicked Cell");
-                string id = this.dgvList.Rows[e.RowIndex].Cells[1].Value.ToString();
+                id = this.dgvList.Rows[e.RowIndex].Cells[1].Value.ToString();
                 lbRoomName.Text = this.dgvList.Rows[e.RowIndex].Cells[0].Value.ToString();
                 SQLObject roomData = new SQLObject();
                 roomData.setQuery("SELECT ROOM_ID as ID " +
@@ -98,14 +101,14 @@ namespace WindowsFormsApp1
                 iMGSQL.GoImage2(this.pbRoomImg);
                 panel2.Visible = true;
                 dtp.Value = DateTime.Now;
-                LoadDateList(id);
+                LoadDateList();
             }
             catch (Exception ex) {
                 Console.WriteLine(ex.Message);
                 MessageBox.Show("오류가 발견되었습니다!", "오류가 발생하였습니다.", MessageBoxButtons.OK);
             }
         }
-        private void LoadDateList(string id) {
+        private void LoadDateList() {
             SQLObject sqlObj = new SQLObject();
             #region QueryRegion
             sqlObj.setQuery("WITH MYTABLE AS (" +
@@ -119,10 +122,11 @@ namespace WindowsFormsApp1
                             "			  , EXTEND" +
                             "		FROM MEETING_RESERV" +
                             "		WHERE ROOM_ID = #room_id#" +
+                            "       AND RENT_DATE = #rent_dt#" +
                             ")" +
                             "" +
                             "SELECT * FROM (" +
-                            "		SELECT \"9\" AS TIMECHK" +
+                            "		SELECT \"9:00 ~ 10:00\" AS TIMECHK" +
                             "				, COUNT(*) AS CHK" +
                             "				, ROOM_ID" +
                             "				, MASTER_ID" +
@@ -135,7 +139,7 @@ namespace WindowsFormsApp1
                             "		" +
                             "		UNION ALL" +
                             "		" +
-                            "		SELECT \"10\" AS TIMECHK" +
+                            "		SELECT \"10:00 ~ 11:00\" AS TIMECHK" +
                             "				, COUNT(*) AS CHK" +
                             "				, ROOM_ID" +
                             "				, MASTER_ID" +
@@ -148,7 +152,7 @@ namespace WindowsFormsApp1
                             "		" +
                             "		UNION ALL" +
                             "		" +
-                            "		SELECT \"11\" AS TIMECHK" +
+                            "		SELECT \"11:00 ~ 12:00\" AS TIMECHK" +
                             "				, COUNT(*) AS CHK" +
                             "				, ROOM_ID" +
                             "				, MASTER_ID" +
@@ -161,7 +165,7 @@ namespace WindowsFormsApp1
                             "		" +
                             "		UNION ALL" +
                             "		" +
-                            "		SELECT \"12\" AS TIMECHK" +
+                            "		SELECT \"12:00 ~ 13:00\" AS TIMECHK" +
                             "				, COUNT(*) AS CHK" +
                             "				, ROOM_ID" +
                             "				, MASTER_ID" +
@@ -174,7 +178,7 @@ namespace WindowsFormsApp1
                             "		" +
                             "		UNION ALL" +
                             "		" +
-                            "		SELECT \"13\" AS TIMECHK" +
+                            "		SELECT \"13:00 ~ 14:00\" AS TIMECHK" +
                             "				, COUNT(*) AS CHK" +
                             "				, ROOM_ID" +
                             "				, MASTER_ID" +
@@ -187,7 +191,7 @@ namespace WindowsFormsApp1
                             "		" +
                             "		UNION ALL" +
                             "		" +
-                            "		SELECT \"14\" AS TIMECHK" +
+                            "		SELECT \"14:00 ~ 15:00\" AS TIMECHK" +
                             "				, COUNT(*) AS CHK" +
                             "				, ROOM_ID" +
                             "				, MASTER_ID" +
@@ -200,7 +204,7 @@ namespace WindowsFormsApp1
                             "		" +
                             "		UNION ALL" +
                             "		" +
-                            "		SELECT \"15\" AS TIMECHK" +
+                            "		SELECT \"15:00 ~ 16:00\" AS TIMECHK" +
                             "				, COUNT(*) AS CHK" +
                             "				, ROOM_ID" +
                             "				, MASTER_ID" +
@@ -213,7 +217,7 @@ namespace WindowsFormsApp1
                             "		" +
                             "		UNION ALL" +
                             "		" +
-                            "		SELECT \"16\" AS TIMECHK" +
+                            "		SELECT \"16:00 ~ 17:00\" AS TIMECHK" +
                             "				, COUNT(*) AS CHK" +
                             "				, ROOM_ID" +
                             "				, MASTER_ID" +
@@ -226,7 +230,7 @@ namespace WindowsFormsApp1
                             "		" +
                             "		UNION ALL" +
                             "		" +
-                            "		SELECT \"17\" AS TIMECHK" +
+                            "		SELECT \"17:00 ~ 18:00\" AS TIMECHK" +
                             "				, COUNT(*) AS CHK" +
                             "				, ROOM_ID" +
                             "				, MASTER_ID" +
@@ -239,7 +243,7 @@ namespace WindowsFormsApp1
                             "		" +
                             "		UNION ALL" +
                             "		" +
-                            "		SELECT \"18\" AS TIMECHK" +
+                            "		SELECT \"18:00 ~ 19:00\" AS TIMECHK" +
                             "				, COUNT(*) AS CHK" +
                             "				, ROOM_ID" +
                             "				, MASTER_ID" +
@@ -252,7 +256,7 @@ namespace WindowsFormsApp1
                             "		" +
                             "		UNION ALL" +
                             "		" +
-                            "		SELECT \"19\" AS TIMECHK" +
+                            "		SELECT \"19:00 ~ 20:00\" AS TIMECHK" +
                             "				, COUNT(*) AS CHK" +
                             "				, ROOM_ID" +
                             "				, MASTER_ID" +
@@ -266,9 +270,54 @@ namespace WindowsFormsApp1
 
             #endregion
             sqlObj.AddParam("room_id", id);
+            sqlObj.AddParam("rent_dt", today);
             sqlObj.Go();
             DataTable dt = sqlObj.ToDataTable();
-            dgvReserv.DataSource = dt;
+
+            dt.Columns.Add("CHKIMG", typeof(Image));
+
+            foreach(DataRow dr in dt.Rows) {
+                Console.WriteLine("dr: "+dr["CHK"].ToString());
+                if (dr["CHK"].ToString().Equals("1")) {
+                    dr["CHKIMG"] = Properties.Resources.Check;
+                } else {
+                    dr["CHKIMG"] = null;
+                }
+            }
+
+            this.dgvReserv.DataSource = dt;
+            this.dgvReserv.Columns["ROOM_ID"].Visible = false;
+            this.dgvReserv.Columns["MASTER_ID"].Visible = false;
+            this.dgvReserv.Columns["USERS"].Visible = false;
+            this.dgvReserv.Columns["RENT_DATE"].Visible = false;
+            this.dgvReserv.Columns["MAGAM_YN"].Visible = false;
+            this.dgvReserv.Columns["EXTEND"].Visible = false;
+            this.dgvReserv.Columns["CHK"].Visible = false;
+            this.dgvReserv.Columns["CHKIMG"].DefaultCellStyle.NullValue = null;
+            this.dgvReserv.RowTemplate.Height = 30;
+            this.dgvReserv.Columns["CHKIMG"].Width = 70;
+            (this.dgvReserv.Columns["CHKIMG"] as DataGridViewImageColumn).ImageLayout = DataGridViewImageCellLayout.Zoom;
+        }
+
+        private void dtp_ValueChanged(object sender, EventArgs e) {
+            Console.WriteLine("버튼이 바뀐다고!");
+            today = this.dtp.Value.Date.ToString();
+            LoadDateList();
+        }
+
+        private void dgvReserv_CellClick(object sender, DataGridViewCellEventArgs e) {
+            BaseMember member = BaseMember.GetInstance();
+            DataRow dr = (this.dgvReserv.Rows[e.RowIndex].DataBoundItem as DataRowView).Row;
+
+            if (dr["CHK"].ToString().Equals("1")) {
+                //예약중이므로 관리자 or 본인
+                if(member.IsMeetingRoomAdmin || dr["MASTER_ID"].ToString().Equals(member.ID)) {
+                    //팝업
+                }
+            } else {
+                //예약 안된 상태
+                //팝업으로 예약 뜸
+            }
         }
     }
 }
