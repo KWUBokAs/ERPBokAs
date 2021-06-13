@@ -153,9 +153,9 @@ namespace WindowsFormsApp1.BOOK
             }
 
             SQLObject updateSQL = new BACK.SQLObject();
-            string mquery;
-            if(picAddImg.Image == null) {
-                mquery = "UPDATE " +
+            
+            
+            updateSQL.setQuery("UPDATE " +
                                     "BOOKINFO " +
                                 "SET " +
                                     "ISBN=@ISBN, " +
@@ -170,37 +170,12 @@ namespace WindowsFormsApp1.BOOK
                                     "PRICE=@PRICE, " +
                                     "INDEX_LIST=@INDEX_LIST " +
                                 "WHERE " +
-                                    "ISBN=@PREV_ISBN";
-            } else {
-                mquery = "UPDATE " +
-                                    "BOOKINFO " +
-                                "SET " +
-                                    "ISBN=@ISBN, " +
-                                    "NAME=@NAME, " +
-                                    "WRITER=@WRITER, " +
-                                    "TRANSRATOR=@TRANSRATOR, " +
-                                    "PUBLISHER=@PUBLISHER, " +
-                                    "BOOK_IMG=@BOOK_IMG, " +
-                                    "IMG_TYPE='2', " +
-                                    "TYPE=@TYPE, " +
-                                    "ORIGINNM=@ORIGINNM, " +
-                                    "SUMMARY=@SUMMARY, " +
-                                    "PUBLICATION_DATE=@PUBLICATION_DATE, " +
-                                    "PRICE=@PRICE, " +
-                                    "INDEX_LIST=@INDEX_LIST " +
-                                "WHERE " +
-                                    "ISBN=@PREV_ISBN";
-            }
-            updateSQL.setQuery(mquery);
+                                    "ISBN=@PREV_ISBN");
 
             foreach (var pair in list)
                 updateSQL.AddParam(pair.key, pair.value);
 
             updateSQL.AddParam("PREV_ISBN", ISBN);
-            Console.WriteLine(111);
-            Console.WriteLine(this.picAddImg.Image);
-            if(picAddImg.Image !=null)
-                updateSQL.AddImageParam("BOOK_IMG", this.picAddImg.Image);
 
             updateSQL.Go();
             MessageBox.Show("정보가 수정되었습니다","정보수정");
@@ -213,20 +188,6 @@ namespace WindowsFormsApp1.BOOK
             if (!(char.IsDigit(e.KeyChar) || e.KeyChar == Convert.ToChar(Keys.Back)))    //숫자와 백스페이스를 제외한 나머지를 바로 처리
             {
                 e.Handled = true;
-            }
-        }
-
-        private void picAddImg_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog ofd = new OpenFileDialog();
-
-            DialogResult dr = ofd.ShowDialog();
-
-            if (dr == DialogResult.OK)
-            {
-                string fileName = ofd.FileName;
-
-                this.picAddImg.Image = Image.FromFile(fileName);
             }
         }
     }
